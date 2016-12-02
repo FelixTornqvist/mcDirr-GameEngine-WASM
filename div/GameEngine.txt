@@ -1,0 +1,11 @@
+GameEngine(
+  void  gameLoop()(
+    while(running)(
+      getInputs();
+      for(Sprite sprite : sprites)
+        sprite.tick(passedTime);
+      for(Sprite sprite : sprites)
+        sprite.draw();
+    )
+  )
+)
