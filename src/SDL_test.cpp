@@ -8,7 +8,7 @@ using namespace std;
 
 #define FPS 60
 
-int main(int argvc, char* argv[]) {
+int oldmain(int argvc, char* argv[]) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	IMG_Init(0);
 	TTF_Init();
