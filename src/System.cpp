@@ -1,8 +1,22 @@
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
+
+#include <string>
 #include "System.h"
 
 namespace mcDirr {
 
-	System::System() {}
+	void System::initialize(std::string winName, int wWidth, int wHeight) {
+		SDL_Init(SDL_INIT_EVERYTHING);
+		IMG_Init(0);
+		TTF_Init();
+		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
+
+		win = SDL_CreateWindow(winName.c_str(), 100, 100, wWidth, wHeight, 0);
+		ren = SDL_CreateRenderer(win, -1, 0);
+	}
 
 	void System::collectInputs() {
 		SDL_Event eve;
@@ -45,7 +59,14 @@ namespace mcDirr {
 		return 0;
 	}
 
-	System::~System() {}
+	void System::Quit() {
+		SDL_DestroyRenderer(ren);
+		SDL_DestroyWindow(win);
+		Mix_Quit();
+		TTF_Quit();
+		IMG_Quit();
+		SDL_Quit();
+	}
 
 	System sys;
 }

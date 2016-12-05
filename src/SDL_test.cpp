@@ -46,7 +46,10 @@ int oldmain(int argvc, char* argv[]) {
 	SDL_Surface* gubbe2Surface = IMG_Load("media/ebbug.png");
 	SDL_Texture* gubbe2 = SDL_CreateTextureFromSurface(ren, gubbe2Surface);
 	int w2, h2, x2 = 0, y2 = 0;
-	SDL_QueryTexture(gubbe2, NULL, NULL, &w2, &h2);
+	w2 = gubbe2Surface->w;
+	h2 = gubbe2Surface->h;
+//	SDL_QueryTexture(gubbe2, NULL, NULL, &w2, &h2);
+
 	SDL_FreeSurface(gubbe2Surface);
 
 	SDL_Surface* bg = SDL_LoadBMP("media/bg.bmp");

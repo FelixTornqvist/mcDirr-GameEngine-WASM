@@ -12,12 +12,7 @@
 namespace mcDirr {
 
 	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
-		SDL_Init(SDL_INIT_EVERYTHING);
-		IMG_Init(0);
-		TTF_Init();
-		win = SDL_CreateWindow(windowName.c_str(), 100, 100, W_WIDTH, W_HEIGHT, 0);
-		ren = SDL_CreateRenderer(win, -1, 0);
-		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
+		sys.initialize(windowName, W_WIDTH, W_HEIGHT);
 	}
 
 	void GameEngine::add(Sprite* sprite) {
@@ -42,10 +37,10 @@ namespace mcDirr {
 			for(Sprite* curr : sprites)
 				curr->tick(nextTick - lastTick);
 
-			SDL_RenderClear(ren);
+			SDL_RenderClear(sys.getRen());
 			for(Sprite* curr : sprites)
 				curr->draw();
-			SDL_RenderPresent(ren);
+			SDL_RenderPresent(sys.getRen());
 
 			running = !sys.isQuitRequested();
 			delay(nextTick);
@@ -64,11 +59,6 @@ namespace mcDirr {
 		for(Sprite* sprite : sprites)
 			delete sprite;
 
-		SDL_DestroyRenderer(ren);
-		SDL_DestroyWindow(win);
-		Mix_Quit();
-		TTF_Quit();
-		IMG_Quit();
-		SDL_Quit();
+		sys.Quit();
 	}
 }
