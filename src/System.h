@@ -1,8 +1,13 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include <string>
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
+#else
 #include <SDL.h>
+#endif
+
+#include <string>
 
 namespace mcDirr {
 	class System {
