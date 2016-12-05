@@ -23,8 +23,6 @@ namespace mcDirr {
 		bool running = false;
 
 		std::list<Sprite*> sprites;
-		SDL_Window* win;
-		SDL_Renderer* ren;
 
 		void const delay(Uint32 nextTick);
 	};

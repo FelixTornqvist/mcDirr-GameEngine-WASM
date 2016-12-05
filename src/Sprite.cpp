@@ -8,11 +8,9 @@ namespace mcDirr {
 	}
 
 	void Sprite::tick(int timeDiff) {
-		std::cout << '\t' << this->msg << " tick" << timeDiff << std::endl;
 	}
 
 	void const Sprite::draw() {
-		std::cout << '\t' << this->msg << " draw" << std::endl;
 	}
 
 	Sprite::~Sprite() {
