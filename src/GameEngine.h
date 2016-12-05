@@ -1,10 +1,14 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include <list>
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
 
+#else
 #include <SDL.h>
+#endif
 
+#include <list>
 #include "Sprite.h"
 
 namespace mcDirr {

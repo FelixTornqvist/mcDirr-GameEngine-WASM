@@ -13,9 +13,10 @@ int main(int argc, char** argv) {
 	cout << "hello world!" << endl;
 	GameEngine* ge = new GameEngine("mcDirr - The gaem", FPS);
 	Sprite* s1 = new TexturedSprite("media/ebbug.png");
-	Sprite* s2 = new TexturedSprite("media/gubbe.png");
+	Sprite* s2 = new TexturedSprite("media/gubbe.BMP");
 
 	ge->add(s1);
+
 
 	ge->run();
 

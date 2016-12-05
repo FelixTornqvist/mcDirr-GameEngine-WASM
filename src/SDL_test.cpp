@@ -1,9 +1,18 @@
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
+#include <SDL2_ttf/SDL_ttf.h>
+#include <SDL2_mixer/SDL_mixer.h>
+
+#else
 #include <SDL.h>
-#include <iostream>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <string>
 #include <SDL_mixer.h>
+#endif
+
+#include <iostream>
+#include <string>
 using namespace std;
 
 #define FPS 60

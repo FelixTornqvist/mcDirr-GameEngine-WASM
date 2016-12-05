@@ -1,10 +1,13 @@
 #ifndef TEXTUREDSPRITE_H
 #define TEXTUREDSPRITE_H
 
-#include <string>
-
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
+#else
 #include <SDL.h>
+#endif
 
+#include <string>
 #include "Sprite.h"
 
 namespace mcDirr {
