@@ -11,14 +11,15 @@ using namespace mcDirr;
 int main(int argc, char** argv) {
 	//test code
 	cout << "hello world!" << endl;
-	GameEngine* ge = new GameEngine("mcDirr - The gaem", FPS);
+	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
 	Sprite* s1 = new TexturedSprite("media/ebbug.png");
-	Sprite* s2 = new TexturedSprite("media/gubbe.BMP");
+	Sprite* s2 = new TexturedSprite("media/gubbe.bmp");
 
-	ge->add(s1);
+	ge.add(s1);
+	ge.add(s2);
 
 
-	ge->run();
+	ge.run();
 
 	return 0;
 }
