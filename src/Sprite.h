@@ -1,20 +1,30 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef Sprite_H
+#define Sprite_H
+
+#ifdef __APPLE__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
+
 #include <string>
+#include "Sprite.h"
 
 namespace mcDirr {
-	class Sprite {
+	class Sprite{
 		public:
-			Sprite(std::string mess);
-			virtual void tick(int timeDiff);
-			virtual void const draw();
+			Sprite(const std::string imagePath);
+
+			void const draw();
+			void tick(int timediff);
 
 			virtual ~Sprite();
 
 		protected:
 
 		private:
-			std::string msg;
+			SDL_Texture* texture;
 	};
 }
-#endif // SPRITE_H
+
+#endif // Sprite_H
