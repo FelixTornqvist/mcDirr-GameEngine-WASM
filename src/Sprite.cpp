@@ -14,18 +14,18 @@
 #include "System.hpp"
 
 namespace mcDirr {
-    Sprite::Sprite(SDL_Texture* t) :
+    Sprite::Sprite(SDL_Texture* t, int x, int y) :
     texture(t) {
         int width;
         int height;
         SDL_QueryTexture(t, NULL, NULL, &width, &height);
-        dest = {10, 10, width, height};
-        
+        dest = {x, y, width, height};
+
         dest.y++;
-        
+
 	}
 
-	void const Sprite::draw(){
+	void Sprite::draw() const{
         SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 	}
 
