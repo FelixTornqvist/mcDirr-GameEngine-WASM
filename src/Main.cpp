@@ -11,6 +11,7 @@
 #include <math.h>
 
 #include "sprite/Sprite.hpp"
+#include "sprite/AnimatedSprite.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
 
@@ -35,29 +36,36 @@ class CustSprite : public Sprite {
 		}
 
 		void draw() const override {
-			SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, curr/10 ,NULL , SDL_FLIP_NONE);
+			SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, curr/10,NULL, SDL_FLIP_NONE);
 		}
 };
 
-int main(int argc, char** argv) {
-	//test code
-	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
 
-	SDL_Surface* surface = IMG_Load("media/ebbug.png");
+
+SDL_Texture* loadTexture(string path) {
+	SDL_Surface* surface = IMG_Load(path.c_str());
 	if (surface == nullptr)
 		throw std::runtime_error(std::string("could not load texture:") + SDL_GetError());
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
 	SDL_FreeSurface(surface);
 
+	return texture;
+}
 
 
-	Sprite* s1 = new CustSprite(texture, 100, 100, 40, 1);
+
+int main(int argc, char** argv) {
+	//test code
+	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
+
+	SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
+
+	Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	Sprite* s2 = new CustSprite(texture, 300, 250, 10, -1);
-//	Sprite* s2 = new Sprite("media/gubbe.bmp");
 
-	ge.add(s1);
+
 	ge.add(s2);
-
+	ge.add(s1);
 
 	ge.run();
 
