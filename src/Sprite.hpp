@@ -8,22 +8,26 @@
 #endif
 
 #include <string>
-#include "Sprite.h"
+#include "Sprite.hpp"
 
 namespace mcDirr {
 	class Sprite{
 		public:
-			Sprite(const std::string imagePath);
+        Sprite(SDL_Texture* _texure);
 
-			void const draw();
-			void tick(int timediff);
+        void const draw();
+        void tick(int timediff);
 
-			virtual ~Sprite();
+        virtual ~Sprite();
 
 		protected:
+        
+        
 
 		private:
 			SDL_Texture* texture;
+            SDL_Rect dest;
+        
 	};
 }
 

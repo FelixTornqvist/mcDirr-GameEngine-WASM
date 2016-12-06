@@ -1,6 +1,3 @@
-#include "Sprite.h"
-#include "System.h"
-
 #ifdef __APPLE__
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
@@ -10,22 +7,26 @@
 #include <SDL_image.h>
 #endif
 
-
 #include <string>
 #include <stdexcept>
 
+#include "Sprite.hpp"
+#include "System.hpp"
+
 namespace mcDirr {
-	Sprite::Sprite(const std::string filePath){
-		SDL_Surface* surface = IMG_Load(filePath.c_str());
-		if(surface == nullptr)
-			throw std::runtime_error(std::string("could not load texture:") + SDL_GetError());
-		texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-		SDL_FreeSurface(surface);
+    Sprite::Sprite(SDL_Texture* t) :
+    texture(t) {
+        int width;
+        int height;
+        SDL_QueryTexture(t, NULL, NULL, &width, &height);
+        dest = {10, 10, width, height};
+        
+        dest.y++;
+        
 	}
 
 	void const Sprite::draw(){
-		SDL_Rect r = {10, 10, 400, 400};
-		SDL_RenderCopy(sys.getRen(), texture, NULL, &r);
+        SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 	}
 
 	void Sprite::tick(int timediff){
