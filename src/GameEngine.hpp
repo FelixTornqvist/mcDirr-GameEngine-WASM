@@ -9,7 +9,8 @@
 #endif
 
 #include <list>
-#include "Sprite.h"
+
+#include "Sprite.hpp"
 
 namespace mcDirr {
 	class GameEngine {

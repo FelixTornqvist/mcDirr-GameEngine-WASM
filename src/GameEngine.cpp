@@ -12,13 +12,15 @@
 #endif
 
 
-#include "GameEngine.h"
-#include "System.h"
+#include "GameEngine.hpp"
+#include "System.hpp"
 
 #define W_WIDTH 1000
 #define W_HEIGHT 800
 
 namespace mcDirr {
+    
+    // helloooo
 
 	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
 		sys.initialize(windowName, W_WIDTH, W_HEIGHT);
