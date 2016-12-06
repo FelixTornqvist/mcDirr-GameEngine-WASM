@@ -8,7 +8,6 @@
 #endif
 
 #include <string>
-#include "Sprite.hpp"
 
 namespace mcDirr {
 	class Sprite{
