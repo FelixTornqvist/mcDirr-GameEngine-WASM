@@ -12,6 +12,7 @@
 
 #include "sprite/Sprite.hpp"
 #include "sprite/AnimatedSprite.hpp"
+#include "sprite/VisualSprite.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
 
@@ -62,8 +63,9 @@ int main(int argc, char** argv) {
 
 	Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	Sprite* s2 = new CustSprite(texture, 300, 250, 10, -1);
+	Sprite* s3 = new VisualSprite(texture, 200, 200);
 
-
+	ge.add(s3);
 	ge.add(s2);
 	ge.add(s1);
 
