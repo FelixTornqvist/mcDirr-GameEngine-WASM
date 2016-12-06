@@ -26,7 +26,7 @@ class CustSprite : public Sprite {
 		float curr = 0;
 		int radius;
 		int clockwise;
-		int test;
+		int test3;
 
 		void tick(int time) override {
 			curr += time;
