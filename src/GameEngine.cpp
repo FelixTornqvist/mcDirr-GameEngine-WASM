@@ -49,6 +49,7 @@ namespace mcDirr {
 			SDL_RenderClear(sys.getRen());
 			for(Sprite* curr : sprites)
 				curr->draw();
+
 			SDL_RenderPresent(sys.getRen());
 
 			running = !sys.isQuitRequested();
