@@ -13,21 +13,21 @@
 namespace mcDirr {
 	class Sprite{
 		public:
-        Sprite(SDL_Texture* _texure);
+        Sprite(SDL_Texture* _texure, int, int);
 
-        void const draw();
-        void tick(int timediff);
+        virtual void draw() const;
+        virtual void tick(int timediff);
 
         virtual ~Sprite();
 
 		protected:
-        
-        
+            SDL_Rect dest;
+			SDL_Texture* texture;
+
+
 
 		private:
-			SDL_Texture* texture;
-            SDL_Rect dest;
-        
+
 	};
 }
 
