@@ -8,24 +8,26 @@
 #include <SDL.h>
 #endif
 
-#include "Sprite.hpp"
+#include "../FramedSprite.hpp"
 
 namespace mcDirr {
-	class AnimatedSprite : public Sprite {
+	class AnimatedSprite : public FramedSprite {
 		public:
 			AnimatedSprite(SDL_Texture* t, int x, int y, int sheetDivisions, int millisPerFrame);
 
 			void tick(int passedTime) override;
-			void draw() const override;
+			void setStartFrame(int frame);
+			void setEndFrame(int frame);
 
 			virtual ~AnimatedSprite();
 
 		protected:
 
 		private:
-			int spriteSheetDivs;
+			int startFrame, endFrame;
 			int millisPerFrame, currentCount = 0;
-			SDL_Rect srcRect;
+
+			void checkCurrentCount();
 	};
 }
 #endif // ANIMATEDSPRITE_H
