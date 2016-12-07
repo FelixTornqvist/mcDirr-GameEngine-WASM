@@ -1,14 +1,20 @@
-//
-//  PhysicalSprite.hpp
-//  mcDirr
-//
-//  Created by Per Andersen on 06/12/16.
-//  Copyright © 2016 dsv. All rights reserved.
-//
-
 #ifndef PhysicalSprite_hpp
 #define PhysicalSprite_hpp
 
-#include <stdio.h>
+#include "Sprite.hpp"
 
-#endif /* PhysicalSprite_hpp */
+
+namespace mcDirr {
+    
+    class PhysicalSprite : public Sprite {
+    
+    public:
+         PhysicalSprite(SDL_Texture* texure, int, int);
+      
+    protected:
+        float currentTime;
+        
+    };
+}
+
+#endif
