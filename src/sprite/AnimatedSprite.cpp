@@ -18,17 +18,17 @@ namespace mcDirr {
 
 	void AnimatedSprite::checkCurrentCount() {
 		currentCount %= getFramesAmt() * millisPerFrame;
-
 		int endTime = endFrame * millisPerFrame;
 		int startTime = startFrame * millisPerFrame;
-		bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
 
 		if (endFrame < startFrame) {
+			bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
 			if (betweenStartAndStop)
 				currentCount = startTime;
 
 		} else {
-			if (!betweenStartAndStop)
+			bool outsideStartAndStop = (currentCount > endTime) || (currentCount < startTime);
+			if (outsideStartAndStop)
 				currentCount = startTime;
 		}
 	}
