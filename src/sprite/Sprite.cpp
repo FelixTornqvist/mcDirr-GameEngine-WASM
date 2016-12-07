@@ -11,7 +11,7 @@
 #include <stdexcept>
 
 #include "Sprite.hpp"
-#include "System.hpp"
+#include "../System.hpp"
 
 namespace mcDirr {
     Sprite::Sprite(SDL_Texture* t, int x, int y) :

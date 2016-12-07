@@ -3,22 +3,14 @@
 
 
 namespace mcDirr {
-    
-    class Loader {
-      
-        
-        
-        
-    };
+
+	class Loader {
+
+
+
+
+	};
 }
-
-
-
-
-
-
-
-
 
 
 #endif

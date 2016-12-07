@@ -8,12 +8,11 @@
 #endif
 
 #include <string>
-#include "Sprite.hpp"
 
 namespace mcDirr {
 	class Sprite{
 		public:
-        Sprite(SDL_Texture* _texure, int, int);
+        Sprite(SDL_Texture*, int, int);
 
         virtual void draw() const;
         virtual void tick(int timediff);
@@ -23,8 +22,6 @@ namespace mcDirr {
 		protected:
             SDL_Rect dest;
 			SDL_Texture* texture;
-
-
 
 		private:
 
