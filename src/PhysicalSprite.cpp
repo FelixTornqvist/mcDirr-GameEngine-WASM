@@ -15,12 +15,12 @@ using namespace mcDirr;
 PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y): Sprite(t, x, y)
 { currentTime = 0;}
 
-        
-void PhysicalSprite::draw() const override {
+
+void PhysicalSprite::draw() const {
     SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, currentTime, NULL, SDL_FLIP_NONE);
 }
 
-void PhysicalSprite::tick(int time) override {
+void PhysicalSprite::tick(int time) {
     currentTime += time;
     dest.x ++;
     dest.y ++;
