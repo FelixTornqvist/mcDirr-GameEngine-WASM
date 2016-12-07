@@ -19,7 +19,7 @@
 #define W_HEIGHT 800
 
 namespace mcDirr {
-    
+
     // helloooo
 
 	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
@@ -48,6 +48,7 @@ namespace mcDirr {
 			for(Sprite* curr : sprites)
 				curr->tick(nextTick - lastTick);
 
+			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			SDL_RenderClear(sys.getRen());
 			for(Sprite* curr : sprites)
 				curr->draw();

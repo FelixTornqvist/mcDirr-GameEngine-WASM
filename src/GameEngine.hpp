@@ -10,7 +10,7 @@
 
 #include <list>
 
-#include "Sprite.hpp"
+#include "sprite/Sprite.hpp"
 
 namespace mcDirr {
 	class GameEngine {

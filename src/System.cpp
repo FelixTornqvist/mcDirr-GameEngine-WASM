@@ -43,6 +43,10 @@ namespace mcDirr {
 					break;
 				case SDL_KEYDOWN:
 					//key: eve.key.keysym.sym
+
+					//TODO: remove vv
+					if (eve.key.keysym.sym == SDLK_ESCAPE)
+						quitRequested = true;
 					break;
 			}
 		}
