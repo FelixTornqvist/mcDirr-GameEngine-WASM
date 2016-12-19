@@ -68,9 +68,15 @@ int main(int argc, char** argv) {
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
 	PhysicalSprite* s3 = new PhysicalSprite(catTexture, 200, 200);
+	PhysicalSprite* s4 = new PhysicalSprite(catTexture, 500, 200);
+	PhysicalSprite* s5 = new PhysicalSprite(catTexture, 400, 200);
+	PhysicalSprite* s6 = new PhysicalSprite(catTexture, 300, 200);
 	
 
 	ge.add(s3);
+	ge.add(s5);
+	ge.add(s4);
+	ge.add(s6);
 	//ge.add(s1);
 	//ge.add(s2);
 

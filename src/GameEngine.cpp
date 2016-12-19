@@ -60,12 +60,14 @@ namespace mcDirr {
 				curr->tick(nextTick - lastTick);
 			}
 
-			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end(); it++) {
+			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
 				(*it)->tick(nextTick - lastTick);
 				if (!(*it)->isAlive()) {
 					std::cout << "hej2" << std::endl;
 					it = physicalSprites.erase(it);
 				}
+				else
+					it++;
 			}
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			SDL_RenderClear(sys.getRen());
