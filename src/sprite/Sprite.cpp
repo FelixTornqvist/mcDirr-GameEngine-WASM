@@ -20,9 +20,6 @@ namespace mcDirr {
         int height;
         SDL_QueryTexture(t, NULL, NULL, &width, &height);
         dest = {x, y, width, height};
-
-        dest.y++;
-
 	}
 
 	void Sprite::draw() const{

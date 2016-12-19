@@ -21,24 +21,27 @@
 using namespace std;
 using namespace mcDirr;
 
-class CustSprite : public Sprite {
+class CustSprite : public AnimatedSprite {
 	public:
-		CustSprite(SDL_Texture* t, int x, int y, int rad, int cw): Sprite(t,x,y), radius(rad), clockwise(cw) {
+		CustSprite(SDL_Texture* t, int x, int y, int rad, int cw): AnimatedSprite(t,x,y, 4, 500), radius(rad), clockwise(cw) {
+			setStartFrame(getFramesAmt() - 2);
+			setEndFrame(4);
 		}
 		float curr = 0;
 		int radius;
 		int clockwise;
 
 		void tick(int time) override {
+			AnimatedSprite::tick(time);
 			curr += time;
 			cout << curr << endl;
 			dest.x = cos(curr / 500 * clockwise) * radius  + dest.x;
 			dest.y = sin(curr / 500* clockwise) * radius + dest.y;
 		}
 
-		void draw() const override {
-			SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, curr/10,NULL, SDL_FLIP_NONE);
-		}
+//		void draw() const override {
+//			SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, curr/10,NULL, SDL_FLIP_NONE);
+//		}
 };
 
 
@@ -62,12 +65,12 @@ int main(int argc, char** argv) {
 	SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 
 	Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
-	Sprite* s2 = new CustSprite(texture, 300, 250, 10, -1);
+	Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
 	Sprite* s3 = new VisualSprite(texture, 200, 200);
 
 	ge.add(s3);
-	ge.add(s2);
 	ge.add(s1);
+	ge.add(s2);
 
 	ge.run();
 
