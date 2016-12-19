@@ -11,13 +11,16 @@
 #include <list>
 
 #include "sprite/Sprite.hpp"
+#include "PhysicalSprite.hpp"
 
 namespace mcDirr {
 	class GameEngine {
 	public:
 		GameEngine(std::string windowName, int _fps);
 		void add(Sprite* sprite);
+		void add(PhysicalSprite* pSprite);
 		void remove(Sprite* sprite);
+		void remove(PhysicalSprite* sprite);
 		void run();
 		virtual ~GameEngine();
 
@@ -28,6 +31,7 @@ namespace mcDirr {
 		bool running = false;
 
 		std::list<Sprite*> sprites;
+		std::list<PhysicalSprite*> physicalSprites;
 
 		void const delay(Uint32 nextTick);
 	};

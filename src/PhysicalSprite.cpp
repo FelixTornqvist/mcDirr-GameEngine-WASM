@@ -7,6 +7,7 @@
 
 #include "PhysicalSprite.hpp"
 #include "System.hpp"
+#include <iostream>
 
 
 
@@ -17,13 +18,18 @@ PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y): Sprite(t, x, y)
 
 
 void PhysicalSprite::draw() const {
-    SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, currentTime, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 }
 
 void PhysicalSprite::tick(int time) {
-    currentTime += time;
-    dest.x ++;
-    dest.y ++;
+	if (sys.isKeyDown(SDLK_s)) {
+		std::cout << "yes?" << std::endl;
+		alive = false;
+	}
+}
+
+bool PhysicalSprite::isAlive() const{
+	return alive;
 }
 
 //Sprite::~Sprite() {

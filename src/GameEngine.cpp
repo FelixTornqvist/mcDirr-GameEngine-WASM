@@ -14,6 +14,8 @@
 
 #include "GameEngine.hpp"
 #include "System.hpp"
+#include <iostream>
+#include <vector>
 
 #define W_WIDTH 1000
 #define W_HEIGHT 800
@@ -29,10 +31,19 @@ namespace mcDirr {
 	void GameEngine::add(Sprite* sprite) {
 		sprites.push_back(sprite);
 	}
+	
+	void GameEngine::add(PhysicalSprite* pSprite) {
+		physicalSprites.push_back(pSprite);
+	}
 
 	void GameEngine::remove(Sprite* sprite) {
 		sprites.remove(sprite);
 		delete sprite;
+	}
+
+	void GameEngine::remove(PhysicalSprite* pSprite) {
+		physicalSprites.remove(pSprite);
+		delete pSprite;
 	}
 
 	void GameEngine::run() {
@@ -45,11 +56,22 @@ namespace mcDirr {
 			nextTick = SDL_GetTicks() + MILLIS_PER_LOOP;
 			sys.collectInputs();
 
-			for(Sprite* curr : sprites)
+			for (Sprite* curr : sprites) {
 				curr->tick(nextTick - lastTick);
+			}
 
+			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end(); it++) {
+				(*it)->tick(nextTick - lastTick);
+				if (!(*it)->isAlive()) {
+					std::cout << "hej2" << std::endl;
+					remove((*it));
+				}
+			}
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			SDL_RenderClear(sys.getRen());
+			for (PhysicalSprite* curr : physicalSprites)
+				curr->draw();
+
 			for(Sprite* curr : sprites)
 				curr->draw();
 
