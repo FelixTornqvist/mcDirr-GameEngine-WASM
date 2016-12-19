@@ -55,22 +55,22 @@ namespace mcDirr {
 		}
 	}
 
-	bool const System::isQuitRequested() {
+	bool System::isQuitRequested() const{
 		return quitRequested;
 	}
 
-	bool const System::isKeyDown(Uint8 key) {
+	bool System::isKeyDown(Uint8 key) {
 		return keys[key];
 	}
-	bool const System::isMouseButtonDown(Uint8 button) {
+	bool System::isMouseButtonDown(Uint8 button) {
 		return mouseButtons[button];
 	}
 
-	Sint32 const System::getMouseX() {
+	Sint32 System::getMouseX() const{
 		return mouseX;
 	}
 
-	Sint32 const System::getMouseY() {
+	Sint32 System::getMouseY() const{
 		return mouseY;
 	}
 
