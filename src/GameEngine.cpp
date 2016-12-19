@@ -64,7 +64,7 @@ namespace mcDirr {
 				(*it)->tick(nextTick - lastTick);
 				if (!(*it)->isAlive()) {
 					std::cout << "hej2" << std::endl;
-					remove((*it));
+					it = physicalSprites.erase(it);
 				}
 			}
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
