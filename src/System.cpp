@@ -12,6 +12,7 @@
 #endif
 
 #include <string>
+#include <iostream>
 #include "System.hpp"
 
 namespace mcDirr {
@@ -42,11 +43,15 @@ namespace mcDirr {
 					//mouse-motion: eve.motion.xrel eve.motion.yrel
 					break;
 				case SDL_KEYDOWN:
-					//key: eve.key.keysym.sym
-
+					keys[eve.key.keysym.sym] = true;
 					//TODO: remove vv
+					std::cout << keys[SDLK_a] << std::endl;
+					std::cout << keys[SDLK_s] << std::endl;
 					if (eve.key.keysym.sym == SDLK_ESCAPE)
 						quitRequested = true;
+					break;
+				case SDL_KEYUP:
+					keys[eve.key.keysym.sym] = false;
 					break;
 			}
 		}
@@ -57,12 +62,12 @@ namespace mcDirr {
 	}
 
 	bool const System::isKeyDown(Uint8 key) {
-		return false;
+		return keys[key];
 	}
 	bool const System::isMouseButtonDown(Uint8 button) {
 		return false;
 	}
-
+	
 	Sint32 const System::relMouseX() {
 		return 0;
 	}

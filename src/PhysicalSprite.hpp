@@ -12,9 +12,11 @@ namespace mcDirr {
          PhysicalSprite(SDL_Texture* texure, int, int);
          void draw() const override;
          void tick(int passedMillis) override;
-
+		 bool isAlive() const;
     protected:
         float currentTime;
+	private:
+		bool alive;
 
     };
 }

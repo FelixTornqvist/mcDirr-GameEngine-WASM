@@ -8,6 +8,7 @@
 #endif
 
 #include <string>
+#include <unordered_map>
 
 namespace mcDirr {
 	class System {
@@ -45,6 +46,8 @@ namespace mcDirr {
 			SDL_Window* win;
 
 			bool quitRequested = false;
+
+			std::unordered_map<Uint8, bool> keys;
 			// datastructures to hold pressed keys, mouse-buttons and mouse-movements
 	};
 

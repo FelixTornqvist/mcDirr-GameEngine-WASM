@@ -34,7 +34,7 @@ class CustSprite : public AnimatedSprite {
 		void tick(int time) override {
 			AnimatedSprite::tick(time);
 			curr += time;
-			cout << curr << endl;
+			//cout << curr << endl;
 			dest.x = cos(curr / 500 * clockwise) * radius  + dest.x;
 			dest.y = sin(curr / 500* clockwise) * radius + dest.y;
 		}
@@ -63,14 +63,16 @@ int main(int argc, char** argv) {
 	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
 
 	SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
+	SDL_Texture* catTexture = loadTexture("media/cat.bmp");
 
-	Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
-	Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	Sprite* s3 = new VisualSprite(texture, 200, 200);
+	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
+	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
+	PhysicalSprite* s3 = new PhysicalSprite(catTexture, 200, 200);
+	
 
 	ge.add(s3);
-	ge.add(s1);
-	ge.add(s2);
+	//ge.add(s1);
+	//ge.add(s2);
 
 	ge.run();
 
