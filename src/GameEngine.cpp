@@ -31,7 +31,7 @@ namespace mcDirr {
 	void GameEngine::add(Sprite* sprite) {
 		sprites.push_back(sprite);
 	}
-	
+
 	void GameEngine::add(PhysicalSprite* pSprite) {
 		physicalSprites.push_back(pSprite);
 	}
@@ -79,7 +79,7 @@ namespace mcDirr {
 
 			SDL_RenderPresent(sys.getRen());
 
-			running = !sys.isQuitRequested();
+			running = !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
 			delay(nextTick);
 			lastTick = nextTick;
 		}

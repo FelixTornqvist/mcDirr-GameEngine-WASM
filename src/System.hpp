@@ -34,8 +34,8 @@ namespace mcDirr {
 			bool const isMouseButtonDown(Uint8 button);
 
 			/**mouse movements relative to the last time updateInputs() was called*/
-			Sint32 const relMouseX();
-			Sint32 const relMouseY();
+			Sint32 const getMouseX();
+			Sint32 const getMouseY();
 
 			void Quit();
 
@@ -46,8 +46,9 @@ namespace mcDirr {
 			SDL_Window* win;
 
 			bool quitRequested = false;
-
 			std::unordered_map<Uint8, bool> keys;
+			std::unordered_map<Uint8, bool> mouseButtons;
+			Sint32 mouseX, mouseY;
 			// datastructures to hold pressed keys, mouse-buttons and mouse-movements
 	};
 

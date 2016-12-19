@@ -36,19 +36,17 @@ namespace mcDirr {
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					//mouse-button: eve.button.button
+					mouseButtons[eve.button.button] = true;
 					break;
 				case SDL_MOUSEBUTTONUP:
+					mouseButtons[eve.button.button] = false;
 					break;
 				case SDL_MOUSEMOTION:
-					//mouse-motion: eve.motion.xrel eve.motion.yrel
+					mouseX = eve.motion.x;
+					mouseY = eve.motion.y;
 					break;
 				case SDL_KEYDOWN:
 					keys[eve.key.keysym.sym] = true;
-					//TODO: remove vv
-					std::cout << keys[SDLK_a] << std::endl;
-					std::cout << keys[SDLK_s] << std::endl;
-					if (eve.key.keysym.sym == SDLK_ESCAPE)
-						quitRequested = true;
 					break;
 				case SDL_KEYUP:
 					keys[eve.key.keysym.sym] = false;
@@ -65,15 +63,15 @@ namespace mcDirr {
 		return keys[key];
 	}
 	bool const System::isMouseButtonDown(Uint8 button) {
-		return false;
-	}
-	
-	Sint32 const System::relMouseX() {
-		return 0;
+		return mouseButtons[button];
 	}
 
-	Sint32 const System::relMouseY() {
-		return 0;
+	Sint32 const System::getMouseX() {
+		return mouseX;
+	}
+
+	Sint32 const System::getMouseY() {
+		return mouseY;
 	}
 
 	void System::Quit() {
