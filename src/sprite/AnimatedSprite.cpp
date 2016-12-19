@@ -3,34 +3,46 @@
 
 namespace mcDirr {
 	AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame):
-		Sprite(t, x, y), spriteSheetDivs(divs), millisPerFrame(_millisPerFrame) {
-		int width;
-		int height;
-		SDL_QueryTexture(t, NULL, NULL, &width, &height);
-		srcRect = {0, 0, width / divs, height / divs};
-
-		dest.w /= divs;
-		dest.h /= divs;
+		FramedSprite(t, x, y, divs), millisPerFrame(_millisPerFrame) {
+		startFrame = 0;
+		endFrame = getFramesAmt();
 	}
 
 	void AnimatedSprite::tick(int timeDiff) {
 		currentCount += timeDiff;
-
-		int frames = spriteSheetDivs * spriteSheetDivs;
-		if (currentCount >= frames * millisPerFrame) {
-			currentCount = 0;
-		}
+		checkCurrentCount();
 
 		int currentFrame = currentCount / millisPerFrame;
-		int x = currentFrame % spriteSheetDivs;
-		int y = currentFrame / spriteSheetDivs;
-		srcRect.x = x * srcRect.w;
-		srcRect.y = y * srcRect.h;
+		setCurrentFrame(currentFrame);
 	}
 
-	void AnimatedSprite::draw() const {
-		SDL_RenderCopy(sys.getRen(), texture, &srcRect, &dest);
+	void AnimatedSprite::checkCurrentCount() {
+		currentCount %= getFramesAmt() * millisPerFrame;
+		int endTime = endFrame * millisPerFrame;
+		int startTime = startFrame * millisPerFrame;
+
+		if (endFrame < startFrame) {
+			bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
+			if (betweenStartAndStop)
+				currentCount = startTime;
+
+		} else {
+			bool outsideStartAndStop = (currentCount > endTime) || (currentCount < startTime);
+			if (outsideStartAndStop)
+				currentCount = startTime;
+		}
 	}
+
+	void AnimatedSprite::setStartFrame(int frame) {
+		startFrame = frame;
+		checkCurrentCount();
+	}
+
+	void AnimatedSprite::setEndFrame(int frame) {
+		endFrame = frame;
+		checkCurrentCount();
+	}
+
 
 	AnimatedSprite::~AnimatedSprite() {
 		//dtor

@@ -1,5 +1,5 @@
-#ifndef Sprite_H
-#define Sprite_H
+#ifndef SPRITE_H
+#define SPRITE_H
 
 #ifdef __APPLE__
 #include <SDL2/SDL.h>
