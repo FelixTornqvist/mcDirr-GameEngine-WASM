@@ -14,6 +14,8 @@ namespace mcDirr {
 			void tick(int passedMillis) override;
 			bool isAlive() const;
 			void checkCollision(PhysicalSprite* other);
+			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
+			SDL_Surface* getSurface() const;
 
 		protected:
 			PhysicalSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed, bool affectedByGravity);
@@ -21,6 +23,7 @@ namespace mcDirr {
 			float currentTime;
 
 		private:
+			SDL_Surface* surface;
 			double ttSpeed;
 			bool alive;
 			bool affectedByGravity;

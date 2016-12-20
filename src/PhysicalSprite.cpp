@@ -18,9 +18,8 @@ PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, 
 	return new PhysicalSprite(surface, x, y, s, affectedByGravity);
 }
 
-
-
-PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double temporaryTestSpeed, bool abg) : Sprite(loader.loadTexture(surface), x, y) {
+PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double temporaryTestSpeed, bool abg) : Sprite(loader.loadTexture(surf), x, y) {
+	surface = surf;
 	currentTime = 0;
 	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = true;
@@ -71,17 +70,12 @@ void PhysicalSprite::tick(int time) {
 	solidLeft = false;
 }
 
-// void PhysicalSprite::checkCollision(PhysicalSprite* other) {
-// 	if ( SDL_HasIntersection(getRect(), other->getRect())) {
-
-// 		std::cout << "box collision!" << std::endl;
-// 	}
-// }
-
 void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	SDL_Rect* result = new SDL_Rect;
 
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
+		SDL_Rect* tempRect = result;
+
 		if (getRect()->y < other->getRect()->y) {
 			yVelocity = 0;
 			solidBelow = true;
@@ -105,13 +99,7 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 			other->solidLeft = true;
 		}
 		
-		int tempX = result->x;
-		int tempY = result->y;
- 
- 		int xDiff = tempX - dest.x;
- 		int yDiff = tempY - dest.y;
- 		// låt stå.
-
+		pixelCollision(tempRect, other->getSurface());
 	}
 
 	delete result;
@@ -119,6 +107,27 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 
 bool PhysicalSprite::isAlive() const {
 	return alive;
+}
+
+SDL_Surface* PhysicalSprite::getSurface() const {
+	return surface;
+}
+
+
+bool PhysicalSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
+	// std::cout << "Hello" << std::endl;
+
+	int tempX = tempRect->x;
+	int tempY = tempRect->y;
+ 
+ 	int xDiff = tempX - dest.x;
+ 	int yDiff = tempY - dest.y;
+
+
+
+
+
+ 	return false;
 }
 
 //Sprite::~Sprite() {
