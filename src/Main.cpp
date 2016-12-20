@@ -65,6 +65,7 @@ int main(int argc, char** argv) {
 	PhysicalSprite* s5 = PhysicalSprite::getInstance(catTexture, 600, 200, 0);
 	PhysicalSprite* s6 = PhysicalSprite::getInstance(catTexture, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
 
+	std::cout << "hej" << endl;
 
 	ge.add(testText);
 	ge.add(s3);
