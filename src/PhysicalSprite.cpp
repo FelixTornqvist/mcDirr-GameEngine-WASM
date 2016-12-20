@@ -13,8 +13,11 @@
 
 using namespace mcDirr;
 
-PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y): Sprite(t, x, y)
-{ currentTime = 0;}
+PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed): Sprite(t, x, y)
+{ 
+	currentTime = 0;
+	ttSpeed = temporaryTestSpeed;
+}
 
 
 void PhysicalSprite::draw() const {
@@ -22,9 +25,21 @@ void PhysicalSprite::draw() const {
 }
 
 void PhysicalSprite::tick(int time) {
-	if (sys.isKeyDown(SDLK_s)) {
+	if (sys.isKeyDown(SDLK_q)) {
 		std::cout << "yes?" << std::endl;
 		alive = false;
+	}
+	if (sys.isKeyDown(SDLK_d)) {
+		dest.x += ttSpeed;
+	}
+	if (sys.isKeyDown(SDLK_a)) {
+		dest.x -= ttSpeed;
+	}
+	if (sys.isKeyDown(SDLK_w)) {
+		dest.y -= ttSpeed;
+	}
+	if (sys.isKeyDown(SDLK_s)) {
+		dest.y += ttSpeed;
 	}
 }
 

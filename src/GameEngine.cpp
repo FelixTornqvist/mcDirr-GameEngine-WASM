@@ -16,6 +16,7 @@
 #include "System.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
 
 #define W_WIDTH 1000
 #define W_HEIGHT 800
@@ -62,8 +63,14 @@ namespace mcDirr {
 
 			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
 				(*it)->tick(nextTick - lastTick);
+				
+				for (PhysicalSprite* curr : physicalSprites) {
+					if (((*it) != curr) && (SDL_HasIntersection((*it)->getRect(), curr->getRect()))) {
+						std::cout << "kollision" << std::endl;
+					}	
+				} 
+				
 				if (!(*it)->isAlive()) {
-					std::cout << "hej2" << std::endl;
 					it = physicalSprites.erase(it);
 				}
 				else
