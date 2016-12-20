@@ -13,7 +13,7 @@
 namespace mcDirr {
 	class AnimatedSprite : public FramedSprite {
 		public:
-			AnimatedSprite(SDL_Texture* t, int x, int y, int sheetDivisions, int millisPerFrame);
+			static AnimatedSprite* getInstance(SDL_Texture*, int, int, int, int);
 
 			void tick(int passedTime) override;
 			void setStartFrame(int frame);
@@ -22,7 +22,11 @@ namespace mcDirr {
 			virtual ~AnimatedSprite();
 
 		protected:
-
+			AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame) :
+				FramedSprite(t, x, y, divs), millisPerFrame(_millisPerFrame) {
+				startFrame = 0;
+				endFrame = getFramesAmt();
+			}
 		private:
 			int startFrame, endFrame;
 			int millisPerFrame, currentCount = 0;

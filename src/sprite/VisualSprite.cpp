@@ -2,8 +2,8 @@
 #include "../System.hpp"
 
 namespace mcDirr {
-	VisualSprite::VisualSprite(SDL_Texture* t, int x, int y) :
-		Sprite(t, x, y){
+	VisualSprite* VisualSprite::getInstance(SDL_Texture* t, int x, int y) {
+		return new VisualSprite(t, x, y);
 	}
 
 	void VisualSprite::tick(int timeDiff) {
