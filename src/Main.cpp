@@ -66,6 +66,7 @@ int main(int argc, char** argv) {
 	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0);
 	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
 
+	std::cout << "hej" << endl;
 
 	ge.add(s1);
 	ge.add(s2);
