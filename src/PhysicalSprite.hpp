@@ -16,10 +16,14 @@ namespace mcDirr {
 			void checkCollision(PhysicalSprite* other);
 		protected:
 			PhysicalSprite(SDL_Texture* t, int x, int y, double temporaryTestSpeed);
+			void gravity();
 			float currentTime;
 		private:
 			double ttSpeed;
 			bool alive;
+			bool affectedByGravity;
+			bool solidGround;
+			double fallingSpeed;
 
 	};
 }
