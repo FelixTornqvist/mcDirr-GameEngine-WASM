@@ -10,7 +10,7 @@
 
 #include <list>
 
-#include "sprite/Sprite.hpp"
+#include "Sprite.hpp"
 #include "PhysicalSprite.hpp"
 
 namespace mcDirr {
