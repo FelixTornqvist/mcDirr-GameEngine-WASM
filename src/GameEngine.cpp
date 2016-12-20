@@ -34,18 +34,25 @@ namespace mcDirr {
 		Uint32 nextTick;
 
 		running = true;
+		sys.listenForTyping(true);
 		while(running) {
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			nextTick = SDL_GetTicks() + MILLIS_PER_LOOP;
 			sys.collectInputs();
 
-			levels[currentLevel]->tick(nextTick - lastTick);
+			currentLevel->tick(nextTick - lastTick);
 
 			SDL_RenderClear(sys.getRen());
-			levels[currentLevel]->draw();
+			currentLevel->draw();
 			SDL_RenderPresent(sys.getRen());
 
-			running = !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
+			if(currentLevel->isComplete()) {
+				currentLevel = currentLevel->getNextLevel();
+				if(currentLevel == nullptr)
+					running = false;
+			}
+
+			running &= !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
 			delay(nextTick);
 			lastTick = nextTick;
 		}
@@ -57,13 +64,16 @@ namespace mcDirr {
 			SDL_Delay(delay);
 	}
 
-	void GameEngine::add(Level* lvl) {
-		levels.push_back(lvl);
+	void GameEngine::setFirstLevel(Level* lvl) {
+		if(firstLevel != nullptr) {
+			firstLevel = lvl;
+			currentLevel = lvl;
+		}
+
 	}
 
 	GameEngine::~GameEngine() {
-		for(Level* level : levels)
-			delete level;
+		delete firstLevel;
 
 		sys.Quit();
 	}
