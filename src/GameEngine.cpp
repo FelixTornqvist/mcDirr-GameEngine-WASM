@@ -24,37 +24,8 @@
 
 namespace mcDirr {
 
-	// helloooo
-
 	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
 		sys.initialize(windowName, W_WIDTH, W_HEIGHT);
-	}
-
-	void GameEngine::add(Sprite* sprite) {
-		sprites.push_back(sprite);
-	}
-
-	void GameEngine::add(PhysicalSprite* pSprite) {
-		physicalSprites.push_back(pSprite);
-	}
-
-	void GameEngine::remove(Sprite* sprite) {
-		sprites.remove(sprite);
-		delete sprite;
-	}
-
-	void GameEngine::remove(PhysicalSprite* pSprite) {
-		physicalSprites.remove(pSprite);
-		delete pSprite;
-	}
-
-	void GameEngine::collisionChecks(std::list<PhysicalSprite*>::iterator it) {
-		for (std::list<PhysicalSprite*>::iterator curr = it; curr != physicalSprites.end(); curr++) {
-
-			if ((it != curr)) {
-				(*it)->checkCollision(*curr);
-			}
-		}
 	}
 
 	void GameEngine::run() {
@@ -64,30 +35,14 @@ namespace mcDirr {
 
 		running = true;
 		while(running) {
+			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			nextTick = SDL_GetTicks() + MILLIS_PER_LOOP;
 			sys.collectInputs();
 
-			for (Sprite* curr : sprites) {
-				curr->tick(nextTick - lastTick);
-			}
+			levels[currentLevel]->tick(nextTick - lastTick);
 
-			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
-				(*it)->tick(nextTick - lastTick);
-				collisionChecks(it);
-
-				if (!(*it)->isAlive()) {
-					it = physicalSprites.erase(it);
-				} else
-					it++;
-			}
-			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
 			SDL_RenderClear(sys.getRen());
-			for (PhysicalSprite* curr : physicalSprites)
-				curr->draw();
-
-			for(Sprite* curr : sprites)
-				curr->draw();
-
+			levels[currentLevel]->draw();
 			SDL_RenderPresent(sys.getRen());
 
 			running = !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
@@ -102,10 +57,13 @@ namespace mcDirr {
 			SDL_Delay(delay);
 	}
 
+	void GameEngine::add(Level* lvl) {
+		levels.push_back(lvl);
+	}
 
 	GameEngine::~GameEngine() {
-		for(Sprite* sprite : sprites)
-			delete sprite;
+		for(Level* level : levels)
+			delete level;
 
 		sys.Quit();
 	}
