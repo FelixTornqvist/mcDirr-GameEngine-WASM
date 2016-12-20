@@ -6,6 +6,12 @@ namespace mcDirr {
 		return new AnimatedSprite(t, x, y, divs, _millisPerFrame);
 	}
 
+	AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame) :
+		FramedSprite(t, x, y, divs), millisPerFrame(_millisPerFrame) {
+		startFrame = 0;
+		endFrame = getFramesAmt();
+	}
+
 	void AnimatedSprite::tick(int timeDiff) {
 		currentCount += timeDiff;
 		checkCurrentCount();

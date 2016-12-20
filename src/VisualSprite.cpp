@@ -6,6 +6,10 @@ namespace mcDirr {
 		return new VisualSprite(t, x, y);
 	}
 
+	VisualSprite::VisualSprite(SDL_Texture* t, int x, int y) :
+		Sprite(t, x, y) {
+	}
+
 	void VisualSprite::tick(int timeDiff) {
 		if (sys.isKeyDown(SDLK_d)) {
 			dest.x += 20;

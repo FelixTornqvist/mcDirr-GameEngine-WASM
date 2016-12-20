@@ -1,9 +1,11 @@
 #ifdef __APPLE__
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include <SDL2_mixer/SDL_mixer.h>
 #else
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #endif
 
 #include <string>
@@ -29,10 +31,16 @@ namespace mcDirr {
 	SDL_Surface* Loader::loadSurface(std::string path) {
 		SDL_Surface* surface = IMG_Load(path.c_str());
 		if (surface == nullptr)
-			throw std::runtime_error(std::string("could not load texture:") + SDL_GetError());
+			throw std::runtime_error(std::string("Could not load texture: ") + SDL_GetError());
 		return surface;
 	}
 
+	Mix_Chunk* Loader::loadWAV(std::string path) {
+		Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
+		if (sound == nullptr)
+			throw std::runtime_error(std::string("Could not load WAV file: ") + SDL_GetError());
+		return sound;
+	}
 
 	Loader loader;
 }
