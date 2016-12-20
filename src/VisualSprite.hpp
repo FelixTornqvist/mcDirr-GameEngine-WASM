@@ -21,9 +21,7 @@ namespace mcDirr {
 		virtual ~VisualSprite();
 
 	protected:
-		VisualSprite::VisualSprite(SDL_Texture* t, int x, int y) :
-			Sprite(t, x, y) {
-		}
+		VisualSprite(SDL_Texture* t, int x, int y);
 	private:
 		SDL_Rect srcRect;
 	};

@@ -22,17 +22,7 @@ namespace mcDirr {
 			virtual ~FramedSprite();
 
 		protected:
-			FramedSprite::FramedSprite(SDL_Texture* tex, int x, int y, int divs) :
-				Sprite(tex, x, y), spriteSheetDivs(divs) {
-				int width;
-				int height;
-				SDL_QueryTexture(tex, NULL, NULL, &width, &height);
-				srcRect = { 0, 0, width / divs, height / divs };
-
-				dest.w /= divs;
-				dest.h /= divs;
-				frames = divs * divs;
-			}
+			FramedSprite(SDL_Texture* tex, int x, int y, int divs);
 		private:
 			int frames;
 			int spriteSheetDivs;

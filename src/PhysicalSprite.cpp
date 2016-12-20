@@ -13,8 +13,14 @@
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, int z) {
-	return new PhysicalSprite(t, x, y, z);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, double s) {
+	return new PhysicalSprite(t, x, y, s);
+}
+
+PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, double temporaryTestSpeed) : Sprite(t, x, y) {
+	currentTime = 0;
+	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
+	alive = (true);
 }
 
 void PhysicalSprite::draw() const {
