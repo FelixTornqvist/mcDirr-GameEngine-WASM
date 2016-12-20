@@ -14,12 +14,8 @@
 #include "System.hpp"
 
 namespace mcDirr {
-    Sprite::Sprite(SDL_Texture* t, int x, int y) :
-    texture(t) {
-        int width;
-        int height;
-        SDL_QueryTexture(t, NULL, NULL, &width, &height);
-        dest = {x, y, width, height};
+	Sprite* Sprite::getInstance(SDL_Texture* t, int x, int y) {
+		return new Sprite(t, x, y);
 	}
 
 	SDL_Rect* Sprite::getRect() {

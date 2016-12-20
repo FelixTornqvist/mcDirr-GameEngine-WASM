@@ -2,7 +2,11 @@
 #include "AnimatedSprite.hpp"
 
 namespace mcDirr {
-	AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame):
+	AnimatedSprite* AnimatedSprite::getInstance(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame) {
+		return new AnimatedSprite(t, x, y, divs, _millisPerFrame);
+	}
+
+	AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame) :
 		FramedSprite(t, x, y, divs), millisPerFrame(_millisPerFrame) {
 		startFrame = 0;
 		endFrame = getFramesAmt();
