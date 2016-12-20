@@ -25,17 +25,17 @@ namespace mcDirr {
 			/**reads all of the current inputs and saves them for later calculations for "this tick" */
 			void collectInputs();
 
-			bool const isQuitRequested();
+			bool isQuitRequested() const;
 
 			/**Example: isKeyDown(SDLK_A); to check if the 'A'-key is down*/
-			bool const isKeyDown(Uint8 key);
+			bool isKeyDown(Uint8 key);
 
 			/**Example: isMouseButtonDown(SDL_BUTTON_LEFT); to check if the left mouse button is down*/
-			bool const isMouseButtonDown(Uint8 button);
+			bool isMouseButtonDown(Uint8 button);
 
 			/**mouse movements relative to the last time updateInputs() was called*/
-			Sint32 const relMouseX();
-			Sint32 const relMouseY();
+			Sint32 getMouseX() const;
+			Sint32 getMouseY() const;
 
 			void Quit();
 
@@ -46,8 +46,9 @@ namespace mcDirr {
 			SDL_Window* win;
 
 			bool quitRequested = false;
-
 			std::unordered_map<Uint8, bool> keys;
+			std::unordered_map<Uint8, bool> mouseButtons;
+			Sint32 mouseX, mouseY;
 			// datastructures to hold pressed keys, mouse-buttons and mouse-movements
 	};
 

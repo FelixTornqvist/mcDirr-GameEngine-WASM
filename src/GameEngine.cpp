@@ -16,6 +16,7 @@
 #include "System.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
 
 #define W_WIDTH 1000
 #define W_HEIGHT 800
@@ -31,7 +32,7 @@ namespace mcDirr {
 	void GameEngine::add(Sprite* sprite) {
 		sprites.push_back(sprite);
 	}
-	
+
 	void GameEngine::add(PhysicalSprite* pSprite) {
 		physicalSprites.push_back(pSprite);
 	}
@@ -62,8 +63,16 @@ namespace mcDirr {
 
 			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
 				(*it)->tick(nextTick - lastTick);
+				
+				for (PhysicalSprite* curr : physicalSprites) {
+					if (((*it) != curr) && (SDL_HasIntersection((*it)->getRect(), curr->getRect()))) { // loop needs to be improved & collision on pixel level needs to be implemented
+						std::cout << "kollision" << std::endl; // create collision handling function in physical sprites? Example:
+						// (*it)->collision(curr); 
+						// curr->collision((*it));	call both PhysicalSprites with the other PhysicalSprite it collided with so that implementations of Physical sprite can decide what to do depending on what it collided with. 
+					}	
+				} 
+				
 				if (!(*it)->isAlive()) {
-					std::cout << "hej2" << std::endl;
 					it = physicalSprites.erase(it);
 				}
 				else
@@ -79,7 +88,7 @@ namespace mcDirr {
 
 			SDL_RenderPresent(sys.getRen());
 
-			running = !sys.isQuitRequested();
+			running = !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
 			delay(nextTick);
 			lastTick = nextTick;
 		}
