@@ -22,7 +22,10 @@ namespace mcDirr {
 			double ttSpeed;
 			bool alive;
 			bool affectedByGravity;
-			bool solidGround;
+			bool solidBelow;
+			bool solidAbove;
+			bool solidLeft;
+			bool solidRight;
 			double yVelocity;
 
 	};
