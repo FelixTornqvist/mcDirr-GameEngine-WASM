@@ -5,6 +5,7 @@
 #else
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #endif
 
 #include <iostream>
@@ -13,8 +14,9 @@
 #include "Sprite.hpp"
 #include "AnimatedSprite.hpp"
 #include "VisualSprite.hpp"
-#include "GameEngine.hpp"
 #include "PhysicalSprite.hpp"
+#include "Level.hpp"
+#include "GameEngine.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
 
@@ -61,17 +63,41 @@ int main(int argc, char** argv) {
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0); // last int is for speed. 0 cant be moved.
-	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0);
-	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0);
-	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
+	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0, false); // last int is for speed. 0 cant be moved.
+	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0, true);
+	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
+	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.5, true); // can be moved. Remove last int later. only to test collision.
 
-	std::cout << "hej" << endl;
+	PhysicalSprite* s5 = PhysicalSprite::getInstance(surf, 200, 600, 0, false);
+	PhysicalSprite* s6 = PhysicalSprite::getInstance(surf, 300, 600, 0, false);
+	PhysicalSprite* s7 = PhysicalSprite::getInstance(surf, 400, 600, 0, false);
+	PhysicalSprite* s8 = PhysicalSprite::getInstance(surf, 500, 600, 0, false);
+	PhysicalSprite* s9 = PhysicalSprite::getInstance(surf, 600, 600, 0, false);
+	PhysicalSprite* s10 = PhysicalSprite::getInstance(surf, 700, 600, 0, false);
+	PhysicalSprite* s11 = PhysicalSprite::getInstance(surf, 800, 600, 0, false);
+	PhysicalSprite* s12 = PhysicalSprite::getInstance(surf, 900, 600, 0, false);
+	PhysicalSprite* s13 = PhysicalSprite::getInstance(surf, 100, 600, 0, false);
+	PhysicalSprite* s14 = PhysicalSprite::getInstance(surf, 0, 600, 0, false);
 
-	ge.add(s1);
-	// ge.add(s2);
-	// ge.add(s3);
-	ge.add(s4);
+	Level* lvl1 = Level::getInstance();
+
+	lvl1->add(s1);
+	lvl1->add(s2);
+	lvl1->add(s3);
+	lvl1->add(s4);
+
+	lvl1->add(s5);
+	lvl1->add(s6);
+	lvl1->add(s7);
+	lvl1->add(s8);
+	lvl1->add(s9);
+	lvl1->add(s10);
+	lvl1->add(s11);
+	lvl1->add(s12);
+	lvl1->add(s13);
+	lvl1->add(s14);
+
+	ge.add(lvl1);
 
 	ge.run();
 

@@ -8,21 +8,16 @@
 #include <SDL.h>
 #endif
 
-#include <list>
 #include <vector>
 
-#include "Sprite.hpp"
-#include "PhysicalSprite.hpp"
+#include "Level.hpp"
 
 namespace mcDirr {
 	class GameEngine {
 	public:
 		GameEngine(std::string windowName, int _fps);
-		void add(Sprite* sprite);
-		void add(PhysicalSprite* pSprite);
-		void remove(Sprite* sprite);
-		void remove(PhysicalSprite* sprite);
 		void run();
+		void add(Level* lvl);
 		virtual ~GameEngine();
 
 	protected:
@@ -30,11 +25,9 @@ namespace mcDirr {
 	private:
 		int fps;
 		bool running = false;
+		std::vector<Level*> levels;
+		int currentLevel = 0;
 
-		std::list<Sprite*> sprites;
-		std::list<PhysicalSprite*> physicalSprites;
-
-		void collisionChecks(std::list<PhysicalSprite*>::iterator);
 		void delay(Uint32 nextTick) const;
 	};
 }
