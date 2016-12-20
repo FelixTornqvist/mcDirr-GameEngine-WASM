@@ -25,7 +25,10 @@ PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double tempor
 	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = true;
 	affectedByGravity = abg;
-	solidGround = false;
+	solidBelow = false;
+	solidAbove = false;
+	solidRight = false;
+	solidLeft = false;
 	yVelocity = 0;
 }
 
@@ -40,7 +43,7 @@ void PhysicalSprite::gravity() {
 }
 
 void PhysicalSprite::tick(int time) {
-	if (affectedByGravity && !solidGround) { // if object should be affected by gravity and if its not standing on something solid
+	if (affectedByGravity && !solidBelow) { // if object should be affected by gravity and if its not standing on something solid
 		gravity();
 	}
 	if (sys.isKeyDown(SDLK_q)) {
@@ -50,18 +53,22 @@ void PhysicalSprite::tick(int time) {
 	if (sys.isKeyDown(SDLK_r)) {
 		yVelocity -= 5;
 	}
-	if (sys.isKeyDown(SDLK_d)) {
+	if (sys.isKeyDown(SDLK_d) && !solidRight) {
 		dest.x += ttSpeed * time;
 	}
-	if (sys.isKeyDown(SDLK_a)) {
+	if (sys.isKeyDown(SDLK_a) && !solidLeft) {
 		dest.x -= ttSpeed * time;
 	}
-	if (sys.isKeyDown(SDLK_w)) {
+	if (sys.isKeyDown(SDLK_w) && !solidAbove) {
 		dest.y -= ttSpeed * time;
 	}
-	if (sys.isKeyDown(SDLK_s)) {
+	if (sys.isKeyDown(SDLK_s) && !solidBelow) {
 		dest.y += ttSpeed * time;
 	}
+	solidAbove = false;
+	solidBelow = false;
+	solidRight = false;
+	solidLeft = false;
 }
 
 // void PhysicalSprite::checkCollision(PhysicalSprite* other) {
@@ -75,8 +82,29 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	SDL_Rect* result = new SDL_Rect;
 
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
-		yVelocity = 0;
-		other->yVelocity = 0;
+		if (getRect()->y < other->getRect()->y) {
+			yVelocity = 0;
+			solidBelow = true;
+			other->yVelocity = 0;
+			other->solidAbove = true;
+		}
+		if (getRect()->y > other->getRect()->y) {
+			yVelocity = 0;
+			solidAbove = true;
+			other->yVelocity = 0;
+			other->solidBelow = true;
+		}
+
+		if (getRect()->x > other->getRect()->x) {
+			solidLeft = true;
+			other->solidRight = true;
+		}
+
+		if (getRect()->x < other->getRect()->x) {
+			solidRight = true;
+			other->solidLeft = true;
+		}
+		
 		int tempX = result->x;
 		int tempY = result->y;
  
