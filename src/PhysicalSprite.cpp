@@ -18,7 +18,7 @@ PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, int z)
 }
 
 void PhysicalSprite::draw() const {
-    SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 }
 
 void PhysicalSprite::tick(int time) {
@@ -27,20 +27,26 @@ void PhysicalSprite::tick(int time) {
 		alive = false;
 	}
 	if (sys.isKeyDown(SDLK_d)) {
-		dest.x += ttSpeed;
+		dest.x += ttSpeed * time;
 	}
 	if (sys.isKeyDown(SDLK_a)) {
-		dest.x -= ttSpeed;
+		dest.x -= ttSpeed * time;
 	}
 	if (sys.isKeyDown(SDLK_w)) {
-		dest.y -= ttSpeed;
+		dest.y -= ttSpeed * time;
 	}
 	if (sys.isKeyDown(SDLK_s)) {
-		dest.y += ttSpeed;
+		dest.y += ttSpeed * time;
 	}
 }
 
-bool PhysicalSprite::isAlive() const{
+void PhysicalSprite::checkCollision(PhysicalSprite* other) {
+	if ( SDL_HasIntersection(getRect(), other->getRect())) {
+		std::cout << "box collision!" << std::endl;
+	}
+}
+
+bool PhysicalSprite::isAlive() const {
 	return alive;
 }
 

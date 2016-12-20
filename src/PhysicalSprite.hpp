@@ -1,7 +1,7 @@
 #ifndef PhysicalSprite_hpp
 #define PhysicalSprite_hpp
 
-#include "sprite/Sprite.hpp"
+#include "Sprite.hpp"
 
 
 namespace mcDirr {
@@ -13,6 +13,7 @@ namespace mcDirr {
          void draw() const override;
          void tick(int passedMillis) override;
 		 bool isAlive() const;
+		 void checkCollision(PhysicalSprite* other);
     protected:
 		PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed) : Sprite(t, x, y)
 		{
@@ -22,7 +23,7 @@ namespace mcDirr {
 		}
         float currentTime;
 	private:
-		int ttSpeed;
+		double ttSpeed;
 		bool alive;
 
     };
