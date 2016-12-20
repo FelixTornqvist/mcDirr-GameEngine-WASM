@@ -7,17 +7,20 @@
 
 #include "PhysicalSprite.hpp"
 #include "System.hpp"
+#include "Loader.hpp"
 #include <iostream>
 
 
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, double s) {
-	return new PhysicalSprite(t, x, y, s);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s) {
+	return new PhysicalSprite(surface, x, y, s);
 }
 
-PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, double temporaryTestSpeed) : Sprite(t, x, y) {
+
+
+PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double temporaryTestSpeed) : Sprite(loader.loadTexture(surface), x, y) {
 	currentTime = 0;
 	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = (true);
@@ -60,11 +63,9 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 		uint tempX = result->x;
 		uint tempY = result->y;
  
- 		int xDiff = tempX - dest.x;
- 		int yDiff = tempY - dest.y;
-
- 		
-
+ 		uint xDiff = tempX - dest.x;
+ 		uint yDiff = tempY - dest.y;
+ 		// låt stå.
 
 	}
 
