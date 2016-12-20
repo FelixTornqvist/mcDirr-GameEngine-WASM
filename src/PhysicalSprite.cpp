@@ -75,6 +75,8 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	SDL_Rect* result = new SDL_Rect;
 
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
+		yVelocity = 0;
+		other->yVelocity = 0;
 		int tempX = result->x;
 		int tempY = result->y;
  
