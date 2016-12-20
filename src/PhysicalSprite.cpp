@@ -43,10 +43,29 @@ void PhysicalSprite::tick(int time) {
 	}
 }
 
+// void PhysicalSprite::checkCollision(PhysicalSprite* other) {
+// 	if ( SDL_HasIntersection(getRect(), other->getRect())) {
+
+// 		std::cout << "box collision!" << std::endl;
+// 	}
+// }
+
 void PhysicalSprite::checkCollision(PhysicalSprite* other) {
-	if ( SDL_HasIntersection(getRect(), other->getRect())) {
-		std::cout << "box collision!" << std::endl;
+	SDL_Rect* result = new SDL_Rect;
+
+	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
+		uint tempX = result->x;
+		uint tempY = result->y;
+ 
+ 		int xDiff = tempX - dest.x;
+ 		int yDiff = tempY - dest.y;
+
+ 		
+
+
 	}
+
+	delete result;
 }
 
 bool PhysicalSprite::isAlive() const {
