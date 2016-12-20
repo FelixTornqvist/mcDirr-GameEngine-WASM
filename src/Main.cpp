@@ -14,8 +14,9 @@
 #include "Sprite.hpp"
 #include "AnimatedSprite.hpp"
 #include "VisualSprite.hpp"
-#include "GameEngine.hpp"
 #include "PhysicalSprite.hpp"
+#include "Level.hpp"
+#include "GameEngine.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
 
@@ -78,21 +79,25 @@ int main(int argc, char** argv) {
 	PhysicalSprite* s13 = PhysicalSprite::getInstance(surf, 100, 600, 0, false);
 	PhysicalSprite* s14 = PhysicalSprite::getInstance(surf, 0, 600, 0, false);
 
-	ge.add(s1);
-	ge.add(s2);
-	ge.add(s3);
-	ge.add(s4);
+	Level* lvl1 = Level::getInstance();
 
-	ge.add(s5);
-	ge.add(s6);
-	ge.add(s7);
-	ge.add(s8);
-	ge.add(s9);
-	ge.add(s10);
-	ge.add(s11);
-	ge.add(s12);
-	ge.add(s13);
-	ge.add(s14);
+	lvl1->add(s1);
+	lvl1->add(s2);
+	lvl1->add(s3);
+	lvl1->add(s4);
+
+	lvl1->add(s5);
+	lvl1->add(s6);
+	lvl1->add(s7);
+	lvl1->add(s8);
+	lvl1->add(s9);
+	lvl1->add(s10);
+	lvl1->add(s11);
+	lvl1->add(s12);
+	lvl1->add(s13);
+	lvl1->add(s14);
+
+	ge.add(lvl1);
 
 	ge.run();
 
