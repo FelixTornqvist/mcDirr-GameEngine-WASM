@@ -23,7 +23,7 @@ namespace mcDirr {
 			bool alive;
 			bool affectedByGravity;
 			bool solidGround;
-			double fallingSpeed;
+			double yVelocity;
 
 	};
 }

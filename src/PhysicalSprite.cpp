@@ -26,7 +26,7 @@ PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double tempor
 	alive = true;
 	affectedByGravity = true;
 	solidGround = false;
-	fallingSpeed = 0;
+	yVelocity = 0;
 }
 
 void PhysicalSprite::draw() const {
@@ -34,9 +34,9 @@ void PhysicalSprite::draw() const {
 }
 
 void PhysicalSprite::gravity() {
-	std::cout << "" << fallingSpeed << std::endl;
-	fallingSpeed += (9.82 / 20);
-	dest.y += fallingSpeed;
+	std::cout << "" << yVelocity << std::endl;
+	yVelocity += (9.82 / 20);
+	dest.y += yVelocity;
 }
 
 void PhysicalSprite::tick(int time) {
@@ -46,6 +46,9 @@ void PhysicalSprite::tick(int time) {
 	if (sys.isKeyDown(SDLK_q)) {
 		std::cout << "yes?" << std::endl;
 		alive = false;
+	}
+	if (sys.isKeyDown(SDLK_r)) {
+		yVelocity -= 5;
 	}
 	if (sys.isKeyDown(SDLK_d)) {
 		dest.x += ttSpeed * time;
@@ -72,11 +75,11 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	SDL_Rect* result = new SDL_Rect;
 
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
-		uint tempX = result->x;
-		uint tempY = result->y;
+		int tempX = result->x;
+		int tempY = result->y;
  
- 		uint xDiff = tempX - dest.x;
- 		uint yDiff = tempY - dest.y;
+ 		int xDiff = tempX - dest.x;
+ 		int yDiff = tempY - dest.y;
  		// låt stå.
 
 	}
