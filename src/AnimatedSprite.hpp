@@ -8,7 +8,7 @@
 #include <SDL.h>
 #endif
 
-#include "../FramedSprite.hpp"
+#include "FramedSprite.hpp"
 
 namespace mcDirr {
 	class AnimatedSprite : public FramedSprite {
