@@ -9,7 +9,7 @@ namespace mcDirr {
     class PhysicalSprite : public Sprite {
 
     public:
-         PhysicalSprite(SDL_Texture* texure, int, int, int);
+         PhysicalSprite(SDL_Texture* texure, int, int, double);
          void draw() const override;
          void tick(int passedMillis) override;
 		 bool isAlive() const;
@@ -17,7 +17,7 @@ namespace mcDirr {
     protected:
         float currentTime;
 	private:
-		int ttSpeed;
+		double ttSpeed;
 		bool alive;
 
     };
