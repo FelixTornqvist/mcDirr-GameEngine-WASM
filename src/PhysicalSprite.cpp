@@ -13,13 +13,9 @@
 
 using namespace mcDirr;
 
-PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed): Sprite(t, x, y)
-{ 
-	currentTime = 0;
-	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested 
-	alive = (true);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, int z) {
+	return new PhysicalSprite(t, x, y, z);
 }
-
 
 void PhysicalSprite::draw() const {
     SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);

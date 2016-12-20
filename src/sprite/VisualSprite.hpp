@@ -13,7 +13,7 @@
 namespace mcDirr {
 	class VisualSprite : public Sprite {
 	public:
-		VisualSprite(SDL_Texture* t, int x, int y);
+		static VisualSprite* getInstance(SDL_Texture*, int, int);
 
 		void tick(int passedTime) override;
 		void draw() const override;
@@ -21,7 +21,9 @@ namespace mcDirr {
 		virtual ~VisualSprite();
 
 	protected:
-
+		VisualSprite::VisualSprite(SDL_Texture* t, int x, int y) :
+			Sprite(t, x, y) {
+		}
 	private:
 		SDL_Rect srcRect;
 	};
