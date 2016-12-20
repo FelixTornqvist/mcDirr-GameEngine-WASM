@@ -17,6 +17,7 @@ PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSp
 { 
 	currentTime = 0;
 	ttSpeed = temporaryTestSpeed;
+	alive = (true);
 }
 
 
