@@ -10,11 +10,13 @@
 #include <iostream>
 #include <math.h>
 
-#include "sprite/Sprite.hpp"
-#include "sprite/AnimatedSprite.hpp"
-#include "sprite/VisualSprite.hpp"
+#include "Sprite.hpp"
+#include "AnimatedSprite.hpp"
+#include "VisualSprite.hpp"
 #include "GameEngine.hpp"
+#include "PhysicalSprite.hpp"
 #include "System.hpp"
+#include "Loader.hpp"
 
 #define FPS 60
 
@@ -44,41 +46,26 @@ class CustSprite : public AnimatedSprite {
 //		}
 };
 
-
-
-SDL_Texture* loadTexture(string path) {
-	SDL_Surface* surface = IMG_Load(path.c_str());
-	if (surface == nullptr)
-		throw std::runtime_error(std::string("could not load texture:") + SDL_GetError());
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-	SDL_FreeSurface(surface);
-
-	return texture;
-}
-
-
-
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
 
-	SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
-	SDL_Texture* catTexture = loadTexture("media/cat.bmp");
+	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
+	// SDL_Texture* colors = loadTexture("media/colors.png");
+	SDL_Texture * catTexture = loader.loadTexture("media/cat.bmp");
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	PhysicalSprite* s3 = PhysicalSprite::getInstance(catTexture, 200, 200, 0); // last int is for speed. 0 cant be moved.
-	PhysicalSprite* s4 = PhysicalSprite::getInstance(catTexture, 400, 200, 0);
-	PhysicalSprite* s5 = PhysicalSprite::getInstance(catTexture, 600, 200, 0);
-	PhysicalSprite* s6 = PhysicalSprite::getInstance(catTexture, 800, 200, 10); // can be moved. Remove last int later. only to test collision. 
-	
+	PhysicalSprite* s3 = new PhysicalSprite(catTexture, 200, 200, 0); // last int is for speed. 0 cant be moved.
+	PhysicalSprite* s4 = new PhysicalSprite(catTexture, 400, 200, 0);
+	PhysicalSprite* s5 = new PhysicalSprite(catTexture, 600, 200, 0);
+	PhysicalSprite* s6 = new PhysicalSprite(catTexture, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
+
 
 	ge.add(s3);
 	ge.add(s5);
 	ge.add(s4);
 	ge.add(s6);
-	//ge.add(s1);
-	//ge.add(s2);
 
 	ge.run();
 

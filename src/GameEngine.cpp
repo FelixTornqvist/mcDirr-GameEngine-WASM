@@ -5,15 +5,16 @@
 #include <SDL2_mixer/SDL_mixer.h>
 
 #else
-    #include <SDL.h>
-    #include <SDL_image.h>
-    #include <SDL_ttf.h>
-    #include <SDL_mixer.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #endif
 
 
 #include "GameEngine.hpp"
 #include "System.hpp"
+
 #include <iostream>
 #include <vector>
 #include <list>
@@ -23,7 +24,7 @@
 
 namespace mcDirr {
 
-    // helloooo
+	// helloooo
 
 	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
 		sys.initialize(windowName, W_WIDTH, W_HEIGHT);
@@ -47,6 +48,15 @@ namespace mcDirr {
 		delete pSprite;
 	}
 
+	void GameEngine::collisionChecks(std::list<PhysicalSprite*>::iterator it) {
+		for (std::list<PhysicalSprite*>::iterator curr = it; curr != physicalSprites.end(); curr++) {
+
+			if ((it != curr)) {
+				(*it)->checkCollision(*curr);
+			}
+		}
+	}
+
 	void GameEngine::run() {
 		const Uint32 MILLIS_PER_LOOP = 1000 / fps;
 		Uint32 lastTick = SDL_GetTicks();
@@ -63,19 +73,11 @@ namespace mcDirr {
 
 			for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
 				(*it)->tick(nextTick - lastTick);
-				
-				for (PhysicalSprite* curr : physicalSprites) {
-					if (((*it) != curr) && (SDL_HasIntersection((*it)->getRect(), curr->getRect()))) { // loop needs to be improved & collision on pixel level needs to be implemented
-						std::cout << "kollision" << std::endl; // create collision handling function in physical sprites? Example:
-						// (*it)->collision(curr); 
-						// curr->collision((*it));	call both PhysicalSprites with the other PhysicalSprite it collided with so that implementations of Physical sprite can decide what to do depending on what it collided with. 
-					}	
-				} 
-				
+				collisionChecks(it);
+
 				if (!(*it)->isAlive()) {
 					it = physicalSprites.erase(it);
-				}
-				else
+				} else
 					it++;
 			}
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);	//TODO: temporary
@@ -94,7 +96,7 @@ namespace mcDirr {
 		}
 	}
 
-	void const GameEngine::delay(Uint32 nextTick) {
+	void GameEngine::delay(Uint32 nextTick) const {
 		int delay = nextTick - SDL_GetTicks();
 		if (delay > 0)
 			SDL_Delay(delay);

@@ -1,5 +1,5 @@
 #include "VisualSprite.hpp"
-#include "../System.hpp"
+#include "System.hpp"
 
 namespace mcDirr {
 	VisualSprite* VisualSprite::getInstance(SDL_Texture* t, int x, int y) {

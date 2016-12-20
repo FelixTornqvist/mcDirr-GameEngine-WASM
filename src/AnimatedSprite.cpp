@@ -1,4 +1,4 @@
-#include "../System.hpp"
+#include "System.hpp"
 #include "AnimatedSprite.hpp"
 
 namespace mcDirr {

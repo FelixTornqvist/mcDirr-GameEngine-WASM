@@ -9,8 +9,9 @@
 #endif
 
 #include <list>
+#include <vector>
 
-#include "sprite/Sprite.hpp"
+#include "Sprite.hpp"
 #include "PhysicalSprite.hpp"
 
 namespace mcDirr {
@@ -33,7 +34,8 @@ namespace mcDirr {
 		std::list<Sprite*> sprites;
 		std::list<PhysicalSprite*> physicalSprites;
 
-		void const delay(Uint32 nextTick);
+		void collisionChecks(std::list<PhysicalSprite*>::iterator);
+		void delay(Uint32 nextTick) const;
 	};
 }
 #endif // FRAME_H
