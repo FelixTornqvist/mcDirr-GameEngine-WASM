@@ -13,7 +13,7 @@
 namespace mcDirr {
 	class FramedSprite : public Sprite {
 		public:
-			FramedSprite(SDL_Texture* tex, int x, int y, int divs);
+			static FramedSprite* getInstance(SDL_Texture*, int, int, int);
 
 			void draw() const override;
 			void setCurrentFrame(int frame);
@@ -22,7 +22,7 @@ namespace mcDirr {
 			virtual ~FramedSprite();
 
 		protected:
-
+			FramedSprite(SDL_Texture* tex, int x, int y, int divs);
 		private:
 			int frames;
 			int spriteSheetDivs;

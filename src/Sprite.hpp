@@ -12,14 +12,21 @@
 namespace mcDirr {
 	class Sprite{
 		public:
-        Sprite(SDL_Texture*, int, int);
+			static Sprite* getInstance(SDL_Texture*, int, int);
+			virtual void draw() const;
+			virtual void tick(int timediff);
 
-        virtual void draw() const;
-        virtual void tick(int timediff);
-
-        virtual ~Sprite();
-		SDL_Rect* getRect();
+	        virtual ~Sprite();
+			SDL_Rect* getRect();
 		protected:
+			Sprite(SDL_Texture* t, int x, int y) :
+				texture(t) {
+				int width;
+				int height;
+				SDL_QueryTexture(t, NULL, NULL, &width, &height);
+				dest = { x, y, width, height };
+			}
+
             SDL_Rect dest;
 			SDL_Texture* texture;
 
