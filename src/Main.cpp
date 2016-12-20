@@ -63,6 +63,27 @@ int main(int argc, char** argv) {
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
+
+	PhysicalSprite* s15 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
+	PhysicalSprite* s16 = PhysicalSprite::getInstance(surf, 800, 200, 0.5, true);
+
+	PhysicalSprite* s17 = PhysicalSprite::getInstance(surf, 400, 600, 0, false);
+	PhysicalSprite* s18 = PhysicalSprite::getInstance(surf, 500, 600, 0, false);
+	PhysicalSprite* s19 = PhysicalSprite::getInstance(surf, 600, 600, 0, false);
+	PhysicalSprite* s20 = PhysicalSprite::getInstance(surf, 700, 600, 0, false);
+	PhysicalSprite* s21 = PhysicalSprite::getInstance(surf, 800, 600, 0, false);
+
+	Level* lvl2 = Level::getInstance(nullptr);
+
+	lvl2->add(s15);
+	lvl2->add(s16);
+	lvl2->add(s17);
+	lvl2->add(s18);
+	lvl2->add(s19);
+	lvl2->add(s20);
+	lvl2->add(s21);
+
+
 	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0, false); // last int is for speed. 0 cant be moved.
 	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0, true);
 	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
@@ -79,7 +100,7 @@ int main(int argc, char** argv) {
 	PhysicalSprite* s13 = PhysicalSprite::getInstance(surf, 100, 600, 0, false);
 	PhysicalSprite* s14 = PhysicalSprite::getInstance(surf, 0, 600, 0, false);
 
-	Level* lvl1 = Level::getInstance();
+	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s1);
 	lvl1->add(s2);
@@ -97,7 +118,7 @@ int main(int argc, char** argv) {
 	lvl1->add(s13);
 	lvl1->add(s14);
 
-	ge.add(lvl1);
+	ge.setFirstLevel(lvl1);
 
 	ge.run();
 
