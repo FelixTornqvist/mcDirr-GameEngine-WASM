@@ -67,10 +67,10 @@ int main(int argc, char** argv) {
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	PhysicalSprite* s3 = new PhysicalSprite(catTexture, 200, 200, 0);
+	PhysicalSprite* s3 = new PhysicalSprite(catTexture, 200, 200, 0); // last int is for speed. 0 cant be moved.
 	PhysicalSprite* s4 = new PhysicalSprite(catTexture, 400, 200, 0);
 	PhysicalSprite* s5 = new PhysicalSprite(catTexture, 600, 200, 0);
-	PhysicalSprite* s6 = new PhysicalSprite(catTexture, 800, 200, 10);
+	PhysicalSprite* s6 = new PhysicalSprite(catTexture, 800, 200, 10); // can be moved. Remove last int later. only to test collision. 
 	
 
 	ge.add(s3);

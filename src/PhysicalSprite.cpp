@@ -16,7 +16,7 @@ using namespace mcDirr;
 PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed): Sprite(t, x, y)
 { 
 	currentTime = 0;
-	ttSpeed = temporaryTestSpeed;
+	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested 
 	alive = (true);
 }
 
