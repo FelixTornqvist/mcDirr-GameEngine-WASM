@@ -1,7 +1,7 @@
 #ifndef PhysicalSprite_hpp
 #define PhysicalSprite_hpp
 
-#include "sprite/Sprite.hpp"
+#include "Sprite.hpp"
 
 
 namespace mcDirr {
