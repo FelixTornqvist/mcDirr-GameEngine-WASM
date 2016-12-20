@@ -56,14 +56,17 @@ int main(int argc, char** argv) {
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
 
-	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
-	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	PhysicalSprite* s3 = PhysicalSprite::getInstance(catTexture, 200, 200, 0); // last int is for speed. 0 cant be moved.
+	TTF_Font* font = loader.loadFont("media/Ubuntu-B.ttf", 24);
+	Sprite* testText = Sprite::getInstance(loader.loadTexture(TTF_RenderText_Solid(font, "Hello World!", {0,0,0})) , 10 , 10);
+
+
+	PhysicalSprite* s3 = PhysicalSprite::getInstance(catTexture, 200, 200, 0);
 	PhysicalSprite* s4 = PhysicalSprite::getInstance(catTexture, 400, 200, 0);
 	PhysicalSprite* s5 = PhysicalSprite::getInstance(catTexture, 600, 200, 0);
 	PhysicalSprite* s6 = PhysicalSprite::getInstance(catTexture, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
 
 
+	ge.add(testText);
 	ge.add(s3);
 	ge.add(s5);
 	ge.add(s4);
