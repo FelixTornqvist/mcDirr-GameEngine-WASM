@@ -35,6 +35,13 @@ namespace mcDirr {
 		return surface;
 	}
 
+	TTF_Font* Loader::loadFont(std::string path, int ptSize) {
+		TTF_Font* font = TTF_OpenFont(path.c_str(), ptSize);
+		if (font == nullptr)
+			throw std::runtime_error(std::string("Could not load font: ") + SDL_GetError());
+		return font;
+	}
+
 	Mix_Chunk* Loader::loadWAV(std::string path) {
 		Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
 		if (sound == nullptr)
