@@ -22,6 +22,10 @@ namespace mcDirr {
         dest = {x, y, width, height};
 	}
 
+	SDL_Rect* Sprite::getRect() {
+		return &dest;
+	}
+
 	void Sprite::draw() const{
         SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 	}
