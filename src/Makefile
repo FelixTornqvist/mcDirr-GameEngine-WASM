@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o PhysicalSprite.o System.o VisualSprite.o Loader.o
+OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o PhysicalSprite.o System.o VisualSprite.o Loader.o Level.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -38,6 +38,9 @@ VisualSprite.o : VisualSprite.hpp VisualSprite.cpp Sprite.hpp System.hpp
 
 Loader.o : Loader.hpp Loader.cpp System.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Loader.cpp
+
+Level.o : Level.hpp Level.cpp PhysicalSprite.hpp Sprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) Level.cpp
 
 
 clean:
