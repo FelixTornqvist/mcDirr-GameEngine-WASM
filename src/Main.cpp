@@ -52,22 +52,25 @@ int main(int argc, char** argv) {
 
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
-	SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
+	SDL_Surface * surf = IMG_Load("media/cat.bmp");
+
+
+	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
-	PhysicalSprite* s3 = PhysicalSprite::getInstance(catTexture, 200, 200, 0); // last int is for speed. 0 cant be moved.
-	PhysicalSprite* s4 = PhysicalSprite::getInstance(catTexture, 400, 200, 0);
-	PhysicalSprite* s5 = PhysicalSprite::getInstance(catTexture, 600, 200, 0);
-	PhysicalSprite* s6 = PhysicalSprite::getInstance(catTexture, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
+	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0); // last int is for speed. 0 cant be moved.
+	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0);
+	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0);
+	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.5); // can be moved. Remove last int later. only to test collision.
 
 
+	ge.add(s1);
+	ge.add(s2);
 	ge.add(s3);
-	ge.add(s5);
 	ge.add(s4);
-	ge.add(s6);
 
 	ge.run();
 
