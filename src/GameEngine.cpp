@@ -51,10 +51,8 @@ namespace mcDirr {
 	void GameEngine::collisionChecks(std::list<PhysicalSprite*>::iterator it) {
 		for (std::list<PhysicalSprite*>::iterator curr = it; curr != physicalSprites.end(); curr++) {
 
-			if ((it != curr) && ( SDL_HasIntersection((*it)->getRect(), (*curr)->getRect())) ) { // loop needs to be improved & collision on pixel level needs to be implemented
-				std::cout << "kollision" << std::endl; // create collision handling function in physical sprites? Example:
-				// (*it)->collision(curr);
-				// curr->collision((*it));	call both PhysicalSprites with the other PhysicalSprite it collided with so that implementations of Physical sprite can decide what to do depending on what it collided with.
+			if ((it != curr)) {
+				(*it)->checkCollision(*curr);
 			}
 		}
 	}

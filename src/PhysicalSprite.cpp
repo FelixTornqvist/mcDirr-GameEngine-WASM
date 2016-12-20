@@ -13,16 +13,15 @@
 
 using namespace mcDirr;
 
-PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed): Sprite(t, x, y)
-{ 
+PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, int temporaryTestSpeed): Sprite(t, x, y) {
 	currentTime = 0;
-	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested 
+	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = (true);
 }
 
 
 void PhysicalSprite::draw() const {
-    SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 }
 
 void PhysicalSprite::tick(int time) {
@@ -44,7 +43,13 @@ void PhysicalSprite::tick(int time) {
 	}
 }
 
-bool PhysicalSprite::isAlive() const{
+void PhysicalSprite::checkCollision(PhysicalSprite* other) {
+	if ( SDL_HasIntersection(getRect(), other->getRect())) {
+		std::cout << "box collision!" << std::endl;
+	}
+}
+
+bool PhysicalSprite::isAlive() const {
 	return alive;
 }
 

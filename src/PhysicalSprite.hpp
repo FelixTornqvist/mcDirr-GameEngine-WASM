@@ -13,6 +13,7 @@ namespace mcDirr {
          void draw() const override;
          void tick(int passedMillis) override;
 		 bool isAlive() const;
+		 void checkCollision(PhysicalSprite* other);
     protected:
         float currentTime;
 	private:
