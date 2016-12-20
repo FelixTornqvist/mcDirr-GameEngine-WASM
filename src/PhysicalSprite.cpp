@@ -14,17 +14,17 @@
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s) {
-	return new PhysicalSprite(surface, x, y, s);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool affectedByGravity) {
+	return new PhysicalSprite(surface, x, y, s, affectedByGravity);
 }
 
 
 
-PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double temporaryTestSpeed) : Sprite(loader.loadTexture(surface), x, y) {
+PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double temporaryTestSpeed, bool abg) : Sprite(loader.loadTexture(surface), x, y) {
 	currentTime = 0;
 	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = true;
-	affectedByGravity = true;
+	affectedByGravity = abg;
 	solidGround = false;
 	yVelocity = 0;
 }
