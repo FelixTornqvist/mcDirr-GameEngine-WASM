@@ -47,6 +47,10 @@ namespace mcDirr {
 					break;
 				case SDL_KEYDOWN:
 					keys[eve.key.keysym.sym] = true;
+					if(collectTyping) {
+						typed += eve.key.keysym.sym;
+						std::cout << typed << std::endl;
+					}
 					break;
 				case SDL_KEYUP:
 					keys[eve.key.keysym.sym] = false;
@@ -55,7 +59,7 @@ namespace mcDirr {
 		}
 	}
 
-	bool System::isQuitRequested() const{
+	bool System::isQuitRequested() const {
 		return quitRequested;
 	}
 
@@ -66,12 +70,22 @@ namespace mcDirr {
 		return mouseButtons[button];
 	}
 
-	Sint32 System::getMouseX() const{
+	Sint32 System::getMouseX() const {
 		return mouseX;
 	}
 
-	Sint32 System::getMouseY() const{
+	Sint32 System::getMouseY() const {
 		return mouseY;
+	}
+
+	std::string System::getTypedString() const {
+		return typed;
+	}
+
+	void System::listenForTyping(bool listen) {
+		collectTyping = listen;
+		if(!listen)
+			typed.clear();
 	}
 
 	void System::Quit() {
