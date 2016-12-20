@@ -9,14 +9,13 @@ namespace mcDirr {
 	class PhysicalSprite : public Sprite {
 
 		public:
-			static PhysicalSprite* getInstance(SDL_Texture* texure, int, int, double);
+			static PhysicalSprite* getInstance(SDL_Surface* surface, int, int, double);
 			void draw() const override;
 			void tick(int passedMillis) override;
 			bool isAlive() const;
 			void checkCollision(PhysicalSprite* other);
 		protected:
-			PhysicalSprite(SDL_Texture* t, int x, int y, double temporaryTestSpeed);
-			void gravity();
+			PhysicalSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed);
 			float currentTime;
 		private:
 			double ttSpeed;

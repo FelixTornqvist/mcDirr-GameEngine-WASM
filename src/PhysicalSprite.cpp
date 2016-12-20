@@ -7,17 +7,20 @@
 
 #include "PhysicalSprite.hpp"
 #include "System.hpp"
+#include "Loader.hpp"
 #include <iostream>
 
 
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Texture* t, int x, int y, double s) {
-	return new PhysicalSprite(t, x, y, s);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s) {
+	return new PhysicalSprite(surface, x, y, s);
 }
 
-PhysicalSprite::PhysicalSprite(SDL_Texture* t, int x, int y, double temporaryTestSpeed) : Sprite(t, x, y) {
+
+
+PhysicalSprite::PhysicalSprite(SDL_Surface* surface, int x, int y, double temporaryTestSpeed) : Sprite(loader.loadTexture(surface), x, y) {
 	currentTime = 0;
 	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
 	alive = true;
@@ -58,12 +61,27 @@ void PhysicalSprite::tick(int time) {
 	}
 }
 
+// void PhysicalSprite::checkCollision(PhysicalSprite* other) {
+// 	if ( SDL_HasIntersection(getRect(), other->getRect())) {
 
+// 		std::cout << "box collision!" << std::endl;
+// 	}
+// }
 
 void PhysicalSprite::checkCollision(PhysicalSprite* other) {
-	if ( SDL_HasIntersection(getRect(), other->getRect())) {
-		std::cout << "box collision!" << std::endl;
+	SDL_Rect* result = new SDL_Rect;
+
+	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
+		uint tempX = result->x;
+		uint tempY = result->y;
+ 
+ 		uint xDiff = tempX - dest.x;
+ 		uint yDiff = tempY - dest.y;
+ 		// låt stå.
+
 	}
+
+	delete result;
 }
 
 bool PhysicalSprite::isAlive() const {
