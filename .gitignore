@@ -27,6 +27,8 @@
 *.exe
 *.out
 *.app
+/src/Game
+
 
 codeBlocks_workspace/
 .xcodeproj/
