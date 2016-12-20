@@ -65,6 +65,7 @@ int main(int argc, char** argv) {
 
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
+	SDL_Texture * catTexture = loadTexture("media/cat.bmp");
 
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
