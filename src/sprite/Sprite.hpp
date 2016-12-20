@@ -18,7 +18,7 @@ namespace mcDirr {
         virtual void tick(int timediff);
 
         virtual ~Sprite();
-
+		SDL_Rect* getRect();
 		protected:
             SDL_Rect dest;
 			SDL_Texture* texture;
