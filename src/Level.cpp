@@ -1,13 +1,17 @@
+#include <iostream>
+
 #include "Level.hpp"
+#include "System.hpp"
 
 
 namespace mcDirr {
 
-	Level* Level::getInstance() {
-		return new Level();
+	Level* Level::getInstance(Level* nextLvl) {
+		return new Level(nextLvl);
 	}
 
-	Level::Level() {
+	Level::Level(Level* nextLvl) {
+		nextLevel = nextLvl;
 	}
 
 	void Level::tick(int timeDiff) {
@@ -23,6 +27,13 @@ namespace mcDirr {
 				it = physicalSprites.erase(it);
 			} else
 				it++;
+		}
+
+		if(sys.getTypedString().back() == 'l') {
+			sys.listenForTyping(false);
+			std::cout << "next Level!" << std::endl;
+			complete = true;
+			sys.listenForTyping(true);
 		}
 	}
 
@@ -61,7 +72,16 @@ namespace mcDirr {
 		delete pSprite;
 	}
 
+	bool Level::isComplete() {
+		return complete;
+	}
+
+	Level* Level::getNextLevel() {
+		return nextLevel;
+	}
+
 	Level::~Level() {
+		delete nextLevel;
 		for(Sprite* sprite : sprites)
 			delete sprite;
 	}

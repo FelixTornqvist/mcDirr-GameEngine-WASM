@@ -17,7 +17,7 @@ namespace mcDirr {
 	public:
 		GameEngine(std::string windowName, int _fps);
 		void run();
-		void add(Level* lvl);
+		void setFirstLevel(Level* lvl);
 		virtual ~GameEngine();
 
 	protected:
@@ -25,8 +25,8 @@ namespace mcDirr {
 	private:
 		int fps;
 		bool running = false;
-		std::vector<Level*> levels;
-		int currentLevel = 0;
+		Level* currentLevel;
+		Level* firstLevel;
 
 		void delay(Uint32 nextTick) const;
 	};

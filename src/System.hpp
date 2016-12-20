@@ -37,6 +37,9 @@ namespace mcDirr {
 			Sint32 getMouseX() const;
 			Sint32 getMouseY() const;
 
+			std::string getTypedString() const;
+			void listenForTyping(bool listen);
+
 			void Quit();
 
 		protected:
@@ -49,7 +52,9 @@ namespace mcDirr {
 			std::unordered_map<Uint8, bool> keys;
 			std::unordered_map<Uint8, bool> mouseButtons;
 			Sint32 mouseX, mouseY;
-			// datastructures to hold pressed keys, mouse-buttons and mouse-movements
+
+			bool collectTyping = false;
+			std::string typed;
 	};
 
 	extern System sys;

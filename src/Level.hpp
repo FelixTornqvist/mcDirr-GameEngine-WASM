@@ -9,7 +9,7 @@
 namespace mcDirr {
 	class Level {
 		public:
-			static Level* getInstance();
+			static Level* getInstance(Level* nextLvl);
 
 			void tick(int timeDiff);
 			void draw();
@@ -18,13 +18,18 @@ namespace mcDirr {
 			void add(PhysicalSprite* pSprite);
 			void remove(Sprite* sprite);
 			void remove(PhysicalSprite* sprite);
+			bool isComplete();
+			Level* getNextLevel();
 
 			virtual ~Level();
 
 		protected:
-			Level();
+			Level(Level* nextLvl);
 
 		private:
+			bool complete = false;
+			Level* nextLevel;
+
 			std::list<Sprite*> sprites;
 			std::list<PhysicalSprite*> physicalSprites;
 
