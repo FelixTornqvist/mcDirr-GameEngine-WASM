@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
-	SDL_Surface * surf = IMG_Load("media/cat.bmp");
+	SDL_Surface * surf = IMG_Load("media/cute.gif");
 
 
 	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
@@ -69,8 +69,8 @@ int main(int argc, char** argv) {
 	std::cout << "hej" << endl;
 
 	ge.add(s1);
-	ge.add(s2);
-	ge.add(s3);
+	// ge.add(s2);
+	// ge.add(s3);
 	ge.add(s4);
 
 	ge.run();
