@@ -29,8 +29,7 @@ PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness
 	solid = sld;
 
 	yVel = xVel = 0;
-//	yAccel = 9.82 / 5;
-	yAccel = 0;
+	yAccel = 9.82 / 5;
 	xAccel = 0;
 }
 
@@ -43,8 +42,8 @@ void PhysicalSprite::doPhysics(int millisPassed) {
 	xVel += xAccel * secsPassed;
 	yVel += yAccel * secsPassed;
 
-	xVel *= friction;
-	yVel *= friction;
+//	xVel *= friction;
+//	yVel *= friction;
 //	std::cout << yVel << std::endl;
 
 	dest.x += xVel * millisPassed;
