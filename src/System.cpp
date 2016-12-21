@@ -49,7 +49,7 @@ namespace mcDirr {
 					keys[eve.key.keysym.sym] = true;
 					if(collectTyping) {
 						typed += eve.key.keysym.sym;
-						std::cout << typed << std::endl;
+//						std::cout << typed << std::endl;
 					}
 					break;
 				case SDL_KEYUP:
