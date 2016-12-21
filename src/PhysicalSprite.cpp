@@ -100,7 +100,11 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 				}
 
 			} else if (!solid) {
-//				bounceBack(oX, other->dest.w, myX, dest.w);
+				if (oX > myX) {
+					myX = oX - other->dest.w;
+				} else {
+					myX = oX + dest.w;
+				}
 			}
 
 		} else {
@@ -113,7 +117,11 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 				}
 
 			} else if (!solid) {
-//				bounceBack(oY, other->dest.h, myY, dest.h);
+				if (oY > myY) {
+					myY = oY - other->dest.h;
+				} else {
+					myY = oY + dest.h;
+				}
 			}
 		}
 
