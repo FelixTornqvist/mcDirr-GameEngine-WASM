@@ -83,10 +83,10 @@ int main(int argc, char** argv) {
 	lvl2->add(s21);
 
 
-	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0, false); // last int is for speed. 0 cant be moved.
+	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 400, 200, 0, false); // last int is for speed. 0 cant be moved.
 	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0, true);
 	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
-	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.5, true); // can be moved. Remove last int later. only to test collision.
+	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 600, 200, 0.1, true); // can be moved. Remove last int later. only to test collision.
 
 	PhysicalSprite* s5 = PhysicalSprite::getInstance(surf, 200, 600, 0, false);
 	PhysicalSprite* s6 = PhysicalSprite::getInstance(surf, 300, 600, 0, false);

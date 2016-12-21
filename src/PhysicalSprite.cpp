@@ -86,7 +86,7 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
 		SDL_Rect* tempRect = result;
 		if (pixelIterator(tempRect, other)) {
-			std::cout << "collision!" << std::endl;
+			// std::cout << "collision!" << std::endl;
 		} else {
 			std::cout << "-" << std::endl;
 		}
@@ -136,6 +136,10 @@ bool PhysicalSprite::pixelIterator(SDL_Rect* tempRect, PhysicalSprite* other) {
  	int thisYDiff = tempY - dest.y;
  	int otherXDiff = tempX - other->dest.x;
  	int otherYDiff = tempY - other->dest.y;
+ 	std::cout << "thisXdiff " << thisXDiff << ", thisrYDiff " << thisYDiff << std::endl;
+ 	std::cout << "otherXdiff " << otherXDiff << ", OtherYDiff " << otherYDiff << std::endl;
+
+
 
  	Uint32* thisPixels = static_cast <Uint32*> (thisSurf->pixels);
  	Uint32* otherPixels = static_cast <Uint32*> (otherSurf->pixels);
@@ -146,7 +150,7 @@ bool PhysicalSprite::pixelIterator(SDL_Rect* tempRect, PhysicalSprite* other) {
  	for (int i = 0; i <= tempRect->w; i++) {
  		for (int j = 0; j <= tempRect->h; j++) {
 
- 			Uint32 otherPixel = otherPixels[((otherYDiff + j) + otherSurf->w) + (otherXDiff + i)];
+ 			Uint32 otherPixel = otherPixels[((otherYDiff + j) * otherSurf->w) + (otherXDiff + i)];
  			Uint32 thisPixel = thisPixels[((thisYDiff + j) * thisSurf->w) + (thisXDiff + i)];
 
  			// std::cout << "thisPixel " << thisPixel << ", OtherPixel " << otherPixel << std::endl;
@@ -154,10 +158,10 @@ bool PhysicalSprite::pixelIterator(SDL_Rect* tempRect, PhysicalSprite* other) {
  			thisAlpha = (thisPixel >> 24) & 0xFF;
  			otherAlpha = (otherPixel >> 24) & 0xFF;
 
- 			std::cout << "Alphas: " << thisAlpha << ", " << otherAlpha << std::endl;
+ 			// std::cout << "Alphas: " << thisAlpha << ", " << otherAlpha << std::endl;
 
  			if (thisAlpha > 0 && otherAlpha > 0) {
- 				// std::cout << "Collision " << thisAlpha << ", " << otherAlpha << std::endl;
+ 				std::cout << "Collision " << thisAlpha << ", " << otherAlpha << std::endl;
  				SDL_UnlockSurface(otherSurf);
 				SDL_UnlockSurface(thisSurf);
  				return true; 
