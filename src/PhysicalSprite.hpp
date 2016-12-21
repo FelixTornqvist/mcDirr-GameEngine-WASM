@@ -28,7 +28,7 @@ namespace mcDirr {
 			bool alive;
 			bool solid;
 
-			double bounciness;
+			double bounciness, friction = 0.1;
 			double yAccel, xAccel;
 			double yVel, xVel;
 

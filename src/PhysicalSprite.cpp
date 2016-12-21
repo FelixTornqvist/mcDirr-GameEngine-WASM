@@ -29,7 +29,8 @@ PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness
 	solid = sld;
 
 	yVel = xVel = 0;
-	yAccel = 9.82 / 5;
+//	yAccel = 9.82 / 5;
+	yAccel = 0;
 	xAccel = 0;
 }
 
@@ -41,6 +42,9 @@ void PhysicalSprite::doPhysics(int millisPassed) {
 	double secsPassed = millisPassed / 1000.0;
 	xVel += xAccel * secsPassed;
 	yVel += yAccel * secsPassed;
+
+	xVel *= friction;
+	yVel *= friction;
 	std::cout << yVel << std::endl;
 
 	dest.x += xVel * millisPassed;
@@ -51,11 +55,13 @@ void PhysicalSprite::tick(int time) {
 	if (!solid) {
 		// ~ temporary for controls: ~
 		if (sys.isKeyDown(SDLK_w))
-			yVel = -1;
+			yVel = -0.5;
+		else if (sys.isKeyDown(SDLK_s))
+			yVel = 0.5;
 		if (sys.isKeyDown(SDLK_a))
-			xVel = -1;
+			xVel = -0.5;
 		else if (sys.isKeyDown(SDLK_d))
-			xVel = 1;
+			xVel = 0.5;
 		// ~ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ~
 
 		doPhysics(time);
@@ -73,52 +79,56 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	// needed for pixel-by-pixel bounce-back (later on)
 	if (SDL_IntersectRect(getRect(), other->getRect(), &intersection)) {
 
-//		if (pixelCollision(&intersection, other->getSurface())) {
-//		}
 		int& oX = other->dest.x;
 		int& oY = other->dest.y;
 		int& myX = dest.x;
 		int& myY = dest.y;
 
-		int xDiff = std::abs( oX - myX );
-		int yDiff = std::abs( oX - myY );
+		double xDiff;
+		if (myX < oX)
+			xDiff = oX + other->dest.w - myX;
+		else
+			xDiff = oX - myX;
 
-		if( xDiff > yDiff ) {
+		double yDiff;
+		if (myY < oY)
+			yDiff = oY + other->dest.h - myY;
+		else
+			yDiff = oY - myY;
+
+		if(yDiff > xDiff) {
 
 			if (!other->solid) {
-				if( oX > myX ) {
-					oX = myX + dest.w;
-				} else {
+				if (myX > oX) {
 					oX = myX - other->dest.w;
+				} else {
+					oX = myX + dest.w;
 				}
-			} else {
+
+			} else if (!solid) {
+//				bounceBack(oX, other->dest.w, myX, dest.w);
 			}
 
 		} else {
 
 			if (!other->solid) {
-				if( oY > myY ) {
-					oY = myY + dest.h;
-				} else {
+				if (myY > oY) {
 					oY = myY - other->dest.h;
+				} else {
+					oY = myY + dest.h;
 				}
-			} else {
 
+			} else if (!solid) {
+//				bounceBack(oY, other->dest.h, myY, dest.h);
 			}
 		}
+
+		collided = true;
 	}
 
 	if (collided) {
-		yVel *= -bounciness;
-		xVel *= -bounciness;
-	}
-}
-
-inline void PhysicalSprite::bounceBack(int& myAxis, int& myPadding, int& othrsAxis, int& othrsPadding) {
-	if( othrsAxis > myAxis ) {
-		othrsAxis = myAxis + myPadding;
-	} else {
-		othrsAxis = myAxis - othrsPadding;
+		yVel = 0;
+		xVel = 0;
 	}
 }
 
