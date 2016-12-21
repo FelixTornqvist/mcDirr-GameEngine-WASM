@@ -20,7 +20,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 
-#define FPS 10
+#define FPS 50
 
 using namespace std;
 using namespace mcDirr;
@@ -101,22 +101,22 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-
-//	lvl1->add(s5);
-//	lvl1->add(s6);
-//	lvl1->add(s7);
-//	lvl1->add(s8);
-//	lvl1->add(s9);
-//	lvl1->add(s10);
-//	lvl1->add(s11);
-//	lvl1->add(s12);
-//	lvl1->add(s13);
-//	lvl1->add(s14);
-
 	lvl1->add(s1);
 	lvl1->add(s2);
-//	lvl1->add(s3);
-//	lvl1->add(s4);
+	lvl1->add(s3);
+	lvl1->add(s4);
+
+	lvl1->add(s5);
+	lvl1->add(s6);
+	lvl1->add(s7);
+	lvl1->add(s8);
+	lvl1->add(s9);
+	lvl1->add(s10);
+	lvl1->add(s11);
+	lvl1->add(s12);
+	lvl1->add(s13);
+	lvl1->add(s14);
+
 	ge.setFirstLevel(lvl1);
 
 	ge.run();
