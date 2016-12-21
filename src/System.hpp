@@ -54,7 +54,7 @@ namespace mcDirr {
 			Sint32 mouseX, mouseY;
 
 			bool collectTyping = false;
-			std::string typed;
+			std::string typed = " ";
 	};
 
 	extern System sys;
