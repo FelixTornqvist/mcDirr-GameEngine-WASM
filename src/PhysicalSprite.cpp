@@ -8,109 +8,118 @@
 #include "PhysicalSprite.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
+
 #include <iostream>
+#include <cmath>
 
 
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool affectedByGravity) {
-	return new PhysicalSprite(surface, x, y, s, affectedByGravity);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool solid) {
+	return new PhysicalSprite(surface, x, y, s, solid);
 }
 
-PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double temporaryTestSpeed, bool abg) : Sprite(loader.loadTexture(surf), x, y) {
+PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness, bool sld) : Sprite(loader.loadTexture(surf), x, y) {
 	surface = surf;
 	currentTime = 0;
-	ttSpeed = temporaryTestSpeed; // temporary just so that collision could be tested
+
+	bounciness = bouciness;
 	alive = true;
-	affectedByGravity = abg;
-	solidBelow = false;
-	solidAbove = false;
-	solidRight = false;
-	solidLeft = false;
-	yVelocity = 0;
+	solid = sld;
+
+	yVel = xVel = 0;
+	yAccel = 9.82 / 5;
+	xAccel = 0;
 }
 
 void PhysicalSprite::draw() const {
 	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 }
 
-void PhysicalSprite::gravity() {
-	std::cout << "" << yVelocity << std::endl;
-	yVelocity += (9.82 / 20);
-	dest.y += yVelocity;
+void PhysicalSprite::doPhysics(int millisPassed) {
+	double secsPassed = millisPassed / 1000.0;
+	xVel += xAccel * secsPassed;
+	yVel += yAccel * secsPassed;
+	std::cout << yVel << std::endl;
+
+	dest.x += xVel * millisPassed;
+	dest.y += yVel * millisPassed;
 }
 
 void PhysicalSprite::tick(int time) {
-	if (affectedByGravity && !solidBelow) { // if object should be affected by gravity and if its not standing on something solid
-		gravity();
+	if (!solid) {
+		// ~ temporary for controls: ~
+		if (sys.isKeyDown(SDLK_w))
+			yVel = -1;
+		if (sys.isKeyDown(SDLK_a))
+			xVel = -1;
+		else if (sys.isKeyDown(SDLK_d))
+			xVel = 1;
+		// ~ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ~
+
+		doPhysics(time);
 	}
 	if (sys.isKeyDown(SDLK_q)) {
-		std::cout << "yes?" << std::endl;
+		std::cout << "I've been killed by Q" << std::endl;
 		alive = false;
 	}
-	if (sys.isKeyDown(SDLK_r)) {
-		yVelocity -= 5;
-	}
-	if (sys.isKeyDown(SDLK_d) && !solidRight) {
-		dest.x += ttSpeed * time;
-	}
-	if (sys.isKeyDown(SDLK_a) && !solidLeft) {
-		dest.x -= ttSpeed * time;
-	}
-	if (sys.isKeyDown(SDLK_w) && !solidAbove) {
-		dest.y -= ttSpeed * time;
-	}
-	if (sys.isKeyDown(SDLK_s) && !solidBelow) {
-		dest.y += ttSpeed * time;
-	}
-	solidAbove = false;
-	solidBelow = false;
-	solidRight = false;
-	solidLeft = false;
 }
 
 void PhysicalSprite::checkCollision(PhysicalSprite* other) {
-	SDL_Rect* result = new SDL_Rect;
+	SDL_Rect intersection;
+	bool collided = false;
 
-	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
-		SDL_Rect* tempRect = result;
+	// needed for pixel-by-pixel bounce-back (later on)
+	if (SDL_IntersectRect(getRect(), other->getRect(), &intersection)) {
 
-		if (getRect()->y < other->getRect()->y) {
-			yVelocity = 0;
-			solidBelow = true;
-			other->yVelocity = 0;
-			other->solidAbove = true;
-		}
-		if (getRect()->y > other->getRect()->y) {
-			yVelocity = 0;
-			solidAbove = true;
-			other->yVelocity = 0;
-			other->solidBelow = true;
-		}
+//		if (pixelCollision(&intersection, other->getSurface())) {
+//		}
+		int& oX = other->dest.x;
+		int& oY = other->dest.y;
+		int& myX = dest.x;
+		int& myY = dest.y;
 
-		if (getRect()->x > other->getRect()->x) {
-			solidLeft = true;
-			other->solidRight = true;
-		}
+		int xDiff = std::abs( oX - myX );
+		int yDiff = std::abs( oX - myY );
 
-		if (getRect()->x < other->getRect()->x) {
-			solidRight = true;
-			other->solidLeft = true;
+		if( xDiff > yDiff ) {
+
+			if (!other->solid) {
+				if( oX > myX ) {
+					oX = myX + dest.w;
+				} else {
+					oX = myX - other->dest.w;
+				}
+			} else {
+			}
+
+		} else {
+
+			if (!other->solid) {
+				if( oY > myY ) {
+					oY = myY + dest.h;
+				} else {
+					oY = myY - other->dest.h;
+				}
+			} else {
+
+			}
 		}
-		
-		pixelCollision(tempRect, other->getSurface());
 	}
 
-	delete result;
+	if (collided) {
+		yVel *= -bounciness;
+		xVel *= -bounciness;
+	}
 }
 
-bool PhysicalSprite::isAlive() const {
-	return alive;
-}
-
-SDL_Surface* PhysicalSprite::getSurface() const {
-	return surface;
+inline void PhysicalSprite::bounceBack(int& myAxis, int& myPadding, int& othrsAxis, int& othrsPadding) {
+	if( othrsAxis > myAxis ) {
+		othrsAxis = myAxis + myPadding;
+	} else {
+		othrsAxis = myAxis - othrsPadding;
+	}
 }
 
 
@@ -119,15 +128,23 @@ bool PhysicalSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) 
 
 	int tempX = tempRect->x;
 	int tempY = tempRect->y;
- 
- 	int xDiff = tempX - dest.x;
- 	int yDiff = tempY - dest.y;
+
+	int xDiff = tempX - dest.x;
+	int yDiff = tempY - dest.y;
 
 
 
 
 
- 	return false;
+	return false;
+}
+
+bool PhysicalSprite::isAlive() const {
+	return alive;
+}
+
+SDL_Surface* PhysicalSprite::getSurface() const {
+	return surface;
 }
 
 //Sprite::~Sprite() {
