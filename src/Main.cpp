@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
-	SDL_Surface * surf = IMG_Load("media/cat.bmp");
+	SDL_Surface * surf = IMG_Load("media/cute.gif");
 
 	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
@@ -102,20 +102,20 @@ int main(int argc, char** argv) {
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s1);
-	lvl1->add(s2);
-	lvl1->add(s3);
+	// lvl1->add(s2);
+	// lvl1->add(s3);
 	lvl1->add(s4);
 
-	lvl1->add(s5);
-	lvl1->add(s6);
-	lvl1->add(s7);
-	lvl1->add(s8);
-	lvl1->add(s9);
-	lvl1->add(s10);
-	lvl1->add(s11);
-	lvl1->add(s12);
-	lvl1->add(s13);
-	lvl1->add(s14);
+	// lvl1->add(s5);
+	// lvl1->add(s6);
+	// lvl1->add(s7);
+	// lvl1->add(s8);
+	// lvl1->add(s9);
+	// lvl1->add(s10);
+	// lvl1->add(s11);
+	// lvl1->add(s12);
+	// lvl1->add(s13);
+	// lvl1->add(s14);
 
 	ge.setFirstLevel(lvl1);
 

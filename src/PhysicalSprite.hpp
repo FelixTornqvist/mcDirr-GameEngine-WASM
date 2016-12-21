@@ -14,7 +14,7 @@ namespace mcDirr {
 			void tick(int passedMillis) override;
 			bool isAlive() const;
 			void checkCollision(PhysicalSprite* other);
-			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
+			bool pixelIterator(SDL_Rect* tempRect, PhysicalSprite* otherRect);
 			SDL_Surface* getSurface() const;
 
 		protected:
