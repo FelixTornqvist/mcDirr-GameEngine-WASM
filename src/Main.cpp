@@ -20,7 +20,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 
-#define FPS 50
+#define FPS 60
 
 using namespace std;
 using namespace mcDirr;
