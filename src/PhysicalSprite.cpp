@@ -165,6 +165,8 @@ bool PhysicalSprite::pixelIterator(SDL_Rect* tempRect, PhysicalSprite* other) {
  				SDL_UnlockSurface(otherSurf);
 				SDL_UnlockSurface(thisSurf);
  				return true;
+ 			} else {
+ 				std::cout << " - " << std::endl;
  			}
  		}
  	}

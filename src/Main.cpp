@@ -55,6 +55,8 @@ int main(int argc, char** argv) {
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
 	SDL_Surface * surf = loader.loadSurface("media/ball.png");
+	SDL_Surface * catSurf = loader.loadSurface("media/cat.bmp");
+
 
 	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
@@ -63,14 +65,14 @@ int main(int argc, char** argv) {
 	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
 	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
 
-	PhysicalSprite* s15 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
-	PhysicalSprite* s16 = PhysicalSprite::getInstance(surf, 800, 200, 0.5, true);
+	PhysicalSprite* s15 = PhysicalSprite::getInstance(catSurf, 600, 200, 0, true);
+	PhysicalSprite* s16 = PhysicalSprite::getInstance(catSurf, 800, 200, 0.5, true);
 
-	PhysicalSprite* s17 = PhysicalSprite::getInstance(surf, 400, 600, 0, false);
-	PhysicalSprite* s18 = PhysicalSprite::getInstance(surf, 500, 600, 0, false);
-	PhysicalSprite* s19 = PhysicalSprite::getInstance(surf, 600, 600, 0, false);
-	PhysicalSprite* s20 = PhysicalSprite::getInstance(surf, 700, 600, 0, false);
-	PhysicalSprite* s21 = PhysicalSprite::getInstance(surf, 800, 600, 0, false);
+	PhysicalSprite* s17 = PhysicalSprite::getInstance(catSurf, 400, 600, 0, false);
+	PhysicalSprite* s18 = PhysicalSprite::getInstance(catSurf, 500, 600, 0, false);
+	PhysicalSprite* s19 = PhysicalSprite::getInstance(catSurf, 600, 600, 0, false);
+	PhysicalSprite* s20 = PhysicalSprite::getInstance(catSurf, 700, 600, 0, false);
+	PhysicalSprite* s21 = PhysicalSprite::getInstance(catSurf, 800, 600, 0, false);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
@@ -84,38 +86,38 @@ int main(int argc, char** argv) {
 
 
 	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 400, 200, 0, false); // last int is for speed. 0 cant be moved.
-	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0, true);
-	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0, true);
+	PhysicalSprite* s2 = PhysicalSprite::getInstance(catSurf, 400, 200, 0, true);
+	PhysicalSprite* s3 = PhysicalSprite::getInstance(catSurf, 600, 200, 0, true);
 	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 600, 200, 0.1, true); // can be moved. Remove last int later. only to test collision.
 
-	PhysicalSprite* s5 = PhysicalSprite::getInstance(surf, 200, 600, 0, false);
-	PhysicalSprite* s6 = PhysicalSprite::getInstance(surf, 300, 600, 0, false);
-	PhysicalSprite* s7 = PhysicalSprite::getInstance(surf, 400, 600, 0, false);
-	PhysicalSprite* s8 = PhysicalSprite::getInstance(surf, 500, 600, 0, false);
-	PhysicalSprite* s9 = PhysicalSprite::getInstance(surf, 600, 600, 0, false);
-	PhysicalSprite* s10 = PhysicalSprite::getInstance(surf, 700, 600, 0, false);
-	PhysicalSprite* s11 = PhysicalSprite::getInstance(surf, 800, 600, 0, false);
-	PhysicalSprite* s12 = PhysicalSprite::getInstance(surf, 900, 600, 0, false);
-	PhysicalSprite* s13 = PhysicalSprite::getInstance(surf, 100, 600, 0, false);
-	PhysicalSprite* s14 = PhysicalSprite::getInstance(surf, 0, 600, 0, false);
+	PhysicalSprite* s5 = PhysicalSprite::getInstance(catSurf, 200, 600, 0, false);
+	PhysicalSprite* s6 = PhysicalSprite::getInstance(catSurf, 300, 600, 0, false);
+	PhysicalSprite* s7 = PhysicalSprite::getInstance(catSurf, 400, 600, 0, false);
+	PhysicalSprite* s8 = PhysicalSprite::getInstance(catSurf, 500, 600, 0, false);
+	PhysicalSprite* s9 = PhysicalSprite::getInstance(catSurf, 600, 600, 0, false);
+	PhysicalSprite* s10 = PhysicalSprite::getInstance(catSurf, 700, 600, 0, false);
+	PhysicalSprite* s11 = PhysicalSprite::getInstance(catSurf, 800, 600, 0, false);
+	PhysicalSprite* s12 = PhysicalSprite::getInstance(catSurf, 900, 600, 0, false);
+	PhysicalSprite* s13 = PhysicalSprite::getInstance(catSurf, 100, 600, 0, false);
+	PhysicalSprite* s14 = PhysicalSprite::getInstance(catSurf, 0, 600, 0, false);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s1);
-	// lvl1->add(s2);
-	// lvl1->add(s3);
+	lvl1->add(s2);
+	lvl1->add(s3);
 	lvl1->add(s4);
 
-	// lvl1->add(s5);
-	// lvl1->add(s6);
-	// lvl1->add(s7);
-	// lvl1->add(s8);
-	// lvl1->add(s9);
-	// lvl1->add(s10);
-	// lvl1->add(s11);
-	// lvl1->add(s12);
-	// lvl1->add(s13);
-	// lvl1->add(s14);
+	lvl1->add(s5);
+	lvl1->add(s6);
+	lvl1->add(s7);
+	lvl1->add(s8);
+	lvl1->add(s9);
+	lvl1->add(s10);
+	lvl1->add(s11);
+	lvl1->add(s12);
+	lvl1->add(s13);
+	lvl1->add(s14);
 
 	ge.setFirstLevel(lvl1);
 
