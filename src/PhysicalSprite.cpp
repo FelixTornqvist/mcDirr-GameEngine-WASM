@@ -45,7 +45,7 @@ void PhysicalSprite::doPhysics(int millisPassed) {
 
 	xVel *= friction;
 	yVel *= friction;
-	std::cout << yVel << std::endl;
+//	std::cout << yVel << std::endl;
 
 	dest.x += xVel * millisPassed;
 	dest.y += yVel * millisPassed;
@@ -84,19 +84,13 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 		int& myX = dest.x;
 		int& myY = dest.y;
 
-		double xDiff;
-		if (myX < oX)
-			xDiff = oX + other->dest.w - myX;
-		else
-			xDiff = oX - myX;
+//		if (intersection.h < intersection.w)
+//			std::cout << "move the y axis  " ;
+//		else
+//			std::cout << "move the x axis  " ;
+//		std::cout << intersection.h << " x < y " << intersection.w << std::endl;
 
-		double yDiff;
-		if (myY < oY)
-			yDiff = oY + other->dest.h - myY;
-		else
-			yDiff = oY - myY;
-
-		if(yDiff > xDiff) {
+		if (intersection.h > intersection.w) {
 
 			if (!other->solid) {
 				if (myX > oX) {
