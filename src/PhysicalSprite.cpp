@@ -85,7 +85,11 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 
 	if (SDL_IntersectRect(getRect(), other->getRect(), (result))) {
 		SDL_Rect* tempRect = result;
-		pixelIterator(tempRect, other);
+		if (pixelIterator(tempRect, other)) {
+			std::cout << "collision!" << std::endl;
+		} else {
+			std::cout << "-" << std::endl;
+		}
 
 
 		if (getRect()->y < other->getRect()->y) {
@@ -141,28 +145,26 @@ bool PhysicalSprite::pixelIterator(SDL_Rect* tempRect, PhysicalSprite* other) {
 
  	for (int i = 0; i <= tempRect->w; i++) {
  		for (int j = 0; j <= tempRect->h; j++) {
- 			std::cout << "Hello" << std::endl;
 
- 			Uint32 thisPixel = thisPixels[((thisYDiff + i) * thisSurf->w) + (thisXDiff + j)];
- 			Uint32 otherPixel = otherPixels[((otherYDiff + i) + otherSurf->w) + (otherXDiff + j)];
+ 			Uint32 otherPixel = otherPixels[((otherYDiff + j) + otherSurf->w) + (otherXDiff + i)];
+ 			Uint32 thisPixel = thisPixels[((thisYDiff + j) * thisSurf->w) + (thisXDiff + i)];
 
- 			 std::cout << "thisPixel " << thisPixel << ", OtherPixel " << otherPixel << std::endl;
-
+ 			// std::cout << "thisPixel " << thisPixel << ", OtherPixel " << otherPixel << std::endl;
  			
  			thisAlpha = (thisPixel >> 24) & 0xFF;
  			otherAlpha = (otherPixel >> 24) & 0xFF;
 
  			std::cout << "Alphas: " << thisAlpha << ", " << otherAlpha << std::endl;
 
- 			if (thisAlpha > 0 & otherAlpha > 0) {
- 				std::cout << "Collision " << thisAlpha << ", " << otherAlpha << std::endl;
+ 			if (thisAlpha > 0 && otherAlpha > 0) {
+ 				// std::cout << "Collision " << thisAlpha << ", " << otherAlpha << std::endl;
  				SDL_UnlockSurface(otherSurf);
 				SDL_UnlockSurface(thisSurf);
  				return true; 
  			}
-
  		}
  	}
+
 	SDL_UnlockSurface(otherSurf);
 	SDL_UnlockSurface(thisSurf);
  	
