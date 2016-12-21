@@ -20,7 +20,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 
-#define FPS 60
+#define FPS 10
 
 using namespace std;
 using namespace mcDirr;
@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
 	PhysicalSprite* s1 = PhysicalSprite::getInstance(surf, 200, 200, 0, true); // last int is for speed. 0 cant be moved.
 	PhysicalSprite* s2 = PhysicalSprite::getInstance(surf, 400, 200, 0, false);
 	PhysicalSprite* s3 = PhysicalSprite::getInstance(surf, 600, 200, 0, false);
-	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0.9, false); // can be moved. Remove last int later. only to test collision.
+	PhysicalSprite* s4 = PhysicalSprite::getInstance(surf, 800, 200, 0, false); // can be moved. Remove last int later. only to test collision.
 
 	PhysicalSprite* s5 = PhysicalSprite::getInstance(surf, 200, 600, 0, true);
 	PhysicalSprite* s6 = PhysicalSprite::getInstance(surf, 300, 600, 0, true);
@@ -101,10 +101,6 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-	lvl1->add(s1);
-	lvl1->add(s2);
-	lvl1->add(s3);
-	lvl1->add(s4);
 
 	lvl1->add(s5);
 	lvl1->add(s6);
@@ -117,6 +113,10 @@ int main(int argc, char** argv) {
 	lvl1->add(s13);
 	lvl1->add(s14);
 
+	lvl1->add(s1);
+	lvl1->add(s2);
+//	lvl1->add(s3);
+//	lvl1->add(s4);
 	ge.setFirstLevel(lvl1);
 
 	ge.run();
