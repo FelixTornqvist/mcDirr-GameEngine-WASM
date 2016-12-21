@@ -19,21 +19,18 @@ namespace mcDirr {
 
 		protected:
 			PhysicalSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed, bool affectedByGravity);
-			void gravity();
+			void doPhysics(int millisPassed);
+			inline void bounceBack(int& myAxis, int& myPadding, int& othrsAxis, int& othrsPadding);
 			float currentTime;
 
 		private:
 			SDL_Surface* surface;
-			double ttSpeed;
 			bool alive;
-			bool affectedByGravity;
+			bool solid;
 
-			bool solidBelow;
-			bool solidAbove;
-			bool solidLeft;
-			bool solidRight;
-
-			double yVelocity;
+			double bounciness;
+			double yAccel, xAccel;
+			double yVel, xVel;
 
 	};
 }
