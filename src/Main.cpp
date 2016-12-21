@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 
 	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
 	// SDL_Texture* colors = loadTexture("media/colors.png");
-	SDL_Surface * surf = IMG_Load("media/ebbug.png");
+	SDL_Surface * surf = loader.loadSurface("media/ball.png");
 
 	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
