@@ -19,12 +19,12 @@ namespace mcDirr {
 			curr->tick(timeDiff);
 		}
 
-		for (std::list<PhysicalSprite*>::iterator it = physicalSprites.begin(); it != physicalSprites.end();) {
+		for (std::list<PhysicalSprite*>::iterator it = mobileSprites.begin(); it != mobileSprites.end();) {
 			(*it)->tick(timeDiff);
-			collisionChecks(it);
+			collisionChecks((*it));
 
 			if (!(*it)->isAlive()) {
-				it = physicalSprites.erase(it);
+				it = mobileSprites.erase(it);
 			} else
 				it++;
 		}
@@ -38,19 +38,24 @@ namespace mcDirr {
 	}
 
 	void Level::draw() {
-		for (PhysicalSprite* curr : physicalSprites)
+		for (PhysicalSprite* curr : immobileSprites)
+			curr->draw();
+
+		for (PhysicalSprite* curr : mobileSprites)
 			curr->draw();
 
 		for(Sprite* curr : sprites)
 			curr->draw();
 	}
 
-	void Level::collisionChecks(std::list<PhysicalSprite*>::iterator it) {
-		for (std::list<PhysicalSprite*>::iterator curr = it; curr != physicalSprites.end(); curr++) {
+	void Level::collisionChecks(PhysicalSprite* mobile) {
+		for (std::list<PhysicalSprite*>::iterator immobile = immobileSprites.begin(); immobile != immobileSprites.end();) {
+			mobile->checkCollision(*immobile);
 
-			if ((it != curr)) {
-				(*it)->checkCollision(*curr);
-			}
+			if (!(*immobile)->isAlive())
+				immobile = mobileSprites.erase(immobile);
+			else
+				immobile++;
 		}
 	}
 
@@ -59,7 +64,10 @@ namespace mcDirr {
 	}
 
 	void Level::add(PhysicalSprite* pSprite) {
-		physicalSprites.push_back(pSprite);
+		if(pSprite->isMobile())
+			mobileSprites.push_back(pSprite);
+		else
+			immobileSprites.push_back(pSprite);
 	}
 
 	void Level::remove(Sprite* sprite) {
@@ -68,8 +76,14 @@ namespace mcDirr {
 	}
 
 	void Level::remove(PhysicalSprite* pSprite) {
-		physicalSprites.remove(pSprite);
-		delete pSprite;
+		if(pSprite->isMobile()){
+			mobileSprites.remove(pSprite);
+			delete pSprite;
+		} else {
+			immobileSprites.remove(pSprite);
+			delete pSprite;
+		}
+
 	}
 
 	bool Level::isComplete() {

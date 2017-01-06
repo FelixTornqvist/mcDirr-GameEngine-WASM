@@ -31,9 +31,9 @@ namespace mcDirr {
 			Level* nextLevel;
 
 			std::list<Sprite*> sprites;
-			std::list<PhysicalSprite*> physicalSprites;
+			std::list<PhysicalSprite*> mobileSprites, immobileSprites;
 
-			void collisionChecks(std::list<PhysicalSprite*>::iterator);
+			void collisionChecks(PhysicalSprite* movableSprite);
 	};
 }
 

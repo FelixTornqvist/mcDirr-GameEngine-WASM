@@ -12,9 +12,10 @@ namespace mcDirr {
 			static PhysicalSprite* getInstance(SDL_Surface* surface, int, int, double, bool);
 			void draw() const override;
 			void tick(int passedMillis) override;
-			bool isAlive() const;
 			void checkCollision(PhysicalSprite* other);
 			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
+			bool isAlive() const;
+			bool isMobile() const;
 			SDL_Surface* getSurface() const;
 
 		protected:
@@ -26,7 +27,7 @@ namespace mcDirr {
 		private:
 			SDL_Surface* surface;
 			bool alive;
-			bool solid;
+			bool mobile;
 
 			double bounciness, friction = 0.1;
 			double yAccel, xAccel;

@@ -16,17 +16,17 @@
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool solid) {
-	return new PhysicalSprite(surface, x, y, s, solid);
+PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool mobile) {
+	return new PhysicalSprite(surface, x, y, s, mobile);
 }
 
-PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness, bool sld) : Sprite(loader.loadTexture(surf), x, y) {
+PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl) : Sprite(loader.loadTexture(surf), x, y) {
 	surface = surf;
 	currentTime = 0;
 
 	bounciness = bouciness;
 	alive = true;
-	solid = sld;
+	mobile = mbl;
 
 	yVel = xVel = 0;
 	yAccel = 9.82 / 5;
@@ -51,7 +51,7 @@ void PhysicalSprite::doPhysics(int millisPassed) {
 }
 
 void PhysicalSprite::tick(int time) {
-	if (!solid) {
+	if (mobile) {
 		// ~ temporary for controls: ~
 		if (sys.isKeyDown(SDLK_w))
 			yVel = -0.5;
@@ -75,7 +75,6 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 	SDL_Rect intersection;
 	bool collided = false;
 
-	// needed for pixel-by-pixel bounce-back (later on)
 	if (SDL_IntersectRect(getRect(), other->getRect(), &intersection)) {
 
 		int& oX = other->dest.x;
@@ -83,53 +82,23 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 		int& myX = dest.x;
 		int& myY = dest.y;
 
-//		if (intersection.h < intersection.w)
-//			std::cout << "move the y axis  " ;
-//		else
-//			std::cout << "move the x axis  " ;
-//		std::cout << intersection.h << " x < y " << intersection.w << std::endl;
-
 		if (intersection.h > intersection.w) {
-
-			if (!other->solid) {
-				if (myX > oX) {
-					oX = myX - other->dest.w;
-				} else {
-					oX = myX + dest.w;
-				}
-
-			} else if (!solid) {
-				if (oX > myX) {
-					myX = oX - other->dest.w;
-				} else {
-					myX = oX + dest.w;
-				}
+			if (oX > myX) {
+				myX = oX - other->dest.w;
+			} else {
+				myX = oX + dest.w;
 			}
-
+			xVel = 0;
 		} else {
-
-			if (!other->solid) {
-				if (myY > oY) {
-					oY = myY - other->dest.h;
-				} else {
-					oY = myY + dest.h;
-				}
-
-			} else if (!solid) {
-				if (oY > myY) {
-					myY = oY - other->dest.h;
-				} else {
-					myY = oY + dest.h;
-				}
+			if (oY > myY) {
+				myY = oY - other->dest.h;
+			} else {
+				myY = oY + dest.h;
 			}
+			yVel = 0;
+			xVel = 0;
+
 		}
-
-		collided = true;
-	}
-
-	if (collided) {
-		yVel = 0;
-		xVel = 0;
 	}
 }
 
@@ -152,6 +121,10 @@ bool PhysicalSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) 
 
 bool PhysicalSprite::isAlive() const {
 	return alive;
+}
+
+bool PhysicalSprite::isMobile() const {
+	return mobile;
 }
 
 SDL_Surface* PhysicalSprite::getSurface() const {
