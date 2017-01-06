@@ -4,7 +4,7 @@
 #include <list>
 
 #include "Sprite.hpp"
-#include "PhysicalSprite.hpp"
+#include "MobileSprite.hpp"
 
 namespace mcDirr {
 	class Level {
@@ -15,9 +15,9 @@ namespace mcDirr {
 			void draw();
 
 			void add(Sprite* sprite);
-			void add(PhysicalSprite* pSprite);
+			void add(MobileSprite* pSprite);
 			void remove(Sprite* sprite);
-			void remove(PhysicalSprite* sprite);
+			void remove(MobileSprite* sprite);
 			bool isComplete();
 			Level* getNextLevel();
 
@@ -31,9 +31,9 @@ namespace mcDirr {
 			Level* nextLevel;
 
 			std::list<Sprite*> sprites;
-			std::list<PhysicalSprite*> mobileSprites, immobileSprites;
+			std::list<MobileSprite*> mobileSprites, immobileSprites;
 
-			void collisionChecks(PhysicalSprite* movableSprite);
+			void collisionChecks(MobileSprite* movableSprite);
 	};
 }
 

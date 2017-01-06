@@ -15,6 +15,7 @@ namespace mcDirr {
 		public:
 			static FramedSprite* getInstance(SDL_Texture*, int, int, int);
 
+			void tick(int millisPassed) {}
 			void draw() const override;
 			void setCurrentFrame(int frame);
 			int getFramesAmt() const;

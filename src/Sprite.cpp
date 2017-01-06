@@ -14,9 +14,6 @@
 #include "System.hpp"
 
 namespace mcDirr {
-	Sprite* Sprite::getInstance(SDL_Texture* t, int x, int y) {
-		return new Sprite(t, x, y);
-	}
 
 	SDL_Rect* Sprite::getRect() {
 		return &dest;
@@ -24,10 +21,6 @@ namespace mcDirr {
 
 	void Sprite::draw() const{
         SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
-	}
-
-	void Sprite::tick(int timediff){
-
 	}
 
 	Sprite::~Sprite() {

@@ -5,7 +5,7 @@
 #include <SDL.h>
 #endif
 
-#include "PhysicalSprite.hpp"
+#include "MobileSprite.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
 
@@ -16,11 +16,11 @@
 
 using namespace mcDirr;
 
-PhysicalSprite* PhysicalSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool mobile) {
-	return new PhysicalSprite(surface, x, y, s, mobile);
+MobileSprite* MobileSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool mobile) {
+	return new MobileSprite(surface, x, y, s, mobile);
 }
 
-PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl) : Sprite(loader.loadTexture(surf), x, y) {
+MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl) : Sprite(loader.loadTexture(surf), x, y) {
 	surface = surf;
 	currentTime = 0;
 
@@ -33,11 +33,11 @@ PhysicalSprite::PhysicalSprite(SDL_Surface* surf, int x, int y, double bouciness
 	xAccel = 0;
 }
 
-void PhysicalSprite::draw() const {
+void MobileSprite::draw() const {
 	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 }
 
-void PhysicalSprite::doPhysics(int millisPassed) {
+void MobileSprite::doPhysics(int millisPassed) {
 	double secsPassed = millisPassed / 1000.0;
 	xVel += xAccel * secsPassed;
 	yVel += yAccel * secsPassed;
@@ -50,7 +50,7 @@ void PhysicalSprite::doPhysics(int millisPassed) {
 	dest.y += yVel * millisPassed;
 }
 
-void PhysicalSprite::tick(int time) {
+void MobileSprite::tick(int time) {
 	if (mobile) {
 		// ~ temporary for controls: ~
 		if (sys.isKeyDown(SDLK_w))
@@ -71,7 +71,7 @@ void PhysicalSprite::tick(int time) {
 	}
 }
 
-void PhysicalSprite::checkCollision(PhysicalSprite* other) {
+void MobileSprite::checkCollision(MobileSprite* other) {
 	SDL_Rect intersection;
 	bool collided = false;
 
@@ -103,7 +103,7 @@ void PhysicalSprite::checkCollision(PhysicalSprite* other) {
 }
 
 
-bool PhysicalSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
+bool MobileSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
 	// std::cout << "Hello" << std::endl;
 
 	int tempX = tempRect->x;
@@ -119,15 +119,15 @@ bool PhysicalSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) 
 	return false;
 }
 
-bool PhysicalSprite::isAlive() const {
+bool MobileSprite::isAlive() const {
 	return alive;
 }
 
-bool PhysicalSprite::isMobile() const {
+bool MobileSprite::isMobile() const {
 	return mobile;
 }
 
-SDL_Surface* PhysicalSprite::getSurface() const {
+SDL_Surface* MobileSprite::getSurface() const {
 	return surface;
 }
 

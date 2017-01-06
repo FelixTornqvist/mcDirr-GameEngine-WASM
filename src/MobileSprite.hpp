@@ -6,20 +6,20 @@
 
 namespace mcDirr {
 
-	class PhysicalSprite : public Sprite {
+	class MobileSprite : public Sprite {
 
 		public:
-			static PhysicalSprite* getInstance(SDL_Surface* surface, int, int, double, bool);
+			static MobileSprite* getInstance(SDL_Surface* surface, int, int, double, bool);
 			void draw() const override;
 			void tick(int passedMillis) override;
-			void checkCollision(PhysicalSprite* other);
+			void checkCollision(MobileSprite* other);
 			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
 			bool isAlive() const;
 			bool isMobile() const;
 			SDL_Surface* getSurface() const;
 
 		protected:
-			PhysicalSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed, bool affectedByGravity);
+			MobileSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed, bool affectedByGravity);
 			void doPhysics(int millisPassed);
 			inline void bounceBack(int& myAxis, int& myPadding, int& othrsAxis, int& othrsPadding);
 			float currentTime;

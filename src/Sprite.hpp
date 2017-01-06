@@ -12,9 +12,8 @@
 namespace mcDirr {
 	class Sprite{
 		public:
-			static Sprite* getInstance(SDL_Texture*, int, int);
-			virtual void draw() const;
-			virtual void tick(int timediff);
+			virtual void draw() const = 0;
+			virtual void tick(int timediff) = 0;
 
 	        virtual ~Sprite();
 			SDL_Rect* getRect();
