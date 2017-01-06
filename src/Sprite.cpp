@@ -15,12 +15,24 @@
 
 namespace mcDirr {
 
-	SDL_Rect* Sprite::getRect() {
-		return &dest;
+	Sprite::Sprite(SDL_Texture* t, int x, int y) :
+		texture(t) {
+		int width;
+		int height;
+		SDL_QueryTexture(t, NULL, NULL, &width, &height);
+		dest = { x, y, width, height };
 	}
 
-	void Sprite::draw() const{
-        SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+	SDL_Rect Sprite::getDestRect() const {
+		return dest;
+	}
+
+	SDL_Texture* Sprite::getTexture() const {
+		return texture;
+	}
+
+	void Sprite::draw() const {
+		SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 	}
 
 	Sprite::~Sprite() {

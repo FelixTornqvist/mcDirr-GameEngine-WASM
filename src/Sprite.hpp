@@ -16,18 +16,14 @@ namespace mcDirr {
 			virtual void tick(int timediff) = 0;
 
 	        virtual ~Sprite();
-			SDL_Rect* getRect();
-		protected:
-			Sprite(SDL_Texture* t, int x, int y) :
-				texture(t) {
-				int width;
-				int height;
-				SDL_QueryTexture(t, NULL, NULL, &width, &height);
-				dest = { x, y, width, height };
-			}
+			SDL_Rect getDestRect() const;
+			SDL_Texture* getTexture() const;
 
+		protected:
+			Sprite(SDL_Texture* t, int x, int y);
             SDL_Rect dest;
 			SDL_Texture* texture;
+
 
 		private:
 

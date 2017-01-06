@@ -75,7 +75,7 @@ void MobileSprite::checkCollision(MobileSprite* other) {
 	SDL_Rect intersection;
 	bool collided = false;
 
-	if (SDL_IntersectRect(getRect(), other->getRect(), &intersection)) {
+	if (SDL_IntersectRect(&dest, &other->dest, &intersection)) {
 
 		int& oX = other->dest.x;
 		int& oY = other->dest.y;
@@ -84,16 +84,16 @@ void MobileSprite::checkCollision(MobileSprite* other) {
 
 		if (intersection.h > intersection.w) {
 			if (oX > myX) {
-				myX = oX - other->dest.w;
+				myX = oX - dest.w;
 			} else {
-				myX = oX + dest.w;
+				myX = oX + other->dest.w;
 			}
 			xVel = 0;
 		} else {
 			if (oY > myY) {
-				myY = oY - other->dest.h;
+				myY = oY - dest.h;
 			} else {
-				myY = oY + dest.h;
+				myY = oY + other->dest.h;
 			}
 			yVel = 0;
 			xVel = 0;

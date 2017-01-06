@@ -13,6 +13,7 @@
 
 #include "Sprite.hpp"
 #include "AnimatedSprite.hpp"
+#include "AnimatedMobileSprite.hpp"
 #include "VisualSprite.hpp"
 #include "MobileSprite.hpp"
 #include "Level.hpp"
@@ -86,7 +87,11 @@ int main(int argc, char** argv) {
 	MobileSprite* s1 = MobileSprite::getInstance(surf, 200, 200, 0, false); // last int is for speed. 0 cant be moved.
 	MobileSprite* s2 = MobileSprite::getInstance(surf, 400, 200, 0, true);
 	MobileSprite* s3 = MobileSprite::getInstance(surf, 600, 200, 0, true);
-	AnimatedSprite* s4 = AnimatedSprite::getInstance(loader.loadTexture("media/gubbe spritesheet.png"), 200, 200, 2, 500); // can be moved. Remove last int later. only to test collision.
+
+	std::cout << "creation:" << std::endl;
+	MobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
+//	MobileSprite* s4 = MobileSprite::getInstance(loader.loadSurface("media/ebbug.png"), 600, 200, 0, true);
+	std::cout << "done!" << std::endl;
 
 	MobileSprite* s5 = MobileSprite::getInstance(surf, 200, 600, 0, false);
 	MobileSprite* s6 = MobileSprite::getInstance(surf, 300, 600, 0, false);

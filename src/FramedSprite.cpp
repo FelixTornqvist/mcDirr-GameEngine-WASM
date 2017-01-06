@@ -32,6 +32,10 @@ namespace mcDirr {
 		return frames;
 	}
 
+	SDL_Rect FramedSprite::getSrcRect() const {
+		return srcRect;
+	}
+
 	void FramedSprite::draw() const {
 		SDL_RenderCopy(sys.getRen(), texture, &srcRect, &dest);
 	}

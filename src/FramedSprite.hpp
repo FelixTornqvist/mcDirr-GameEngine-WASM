@@ -19,6 +19,7 @@ namespace mcDirr {
 			void draw() const override;
 			void setCurrentFrame(int frame);
 			int getFramesAmt() const;
+			SDL_Rect getSrcRect() const;
 
 			virtual ~FramedSprite();
 
