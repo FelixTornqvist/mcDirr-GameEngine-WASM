@@ -89,8 +89,8 @@ int main(int argc, char** argv) {
 	MobileSprite* s3 = MobileSprite::getInstance(surf, 600, 200, 0, true);
 
 	std::cout << "creation:" << std::endl;
-	MobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
-//	MobileSprite* s4 = MobileSprite::getInstance(loader.loadSurface("media/ebbug.png"), 600, 200, 0, true);
+	MobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet2.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
+//	MobileSprite* s4 = MobileSprite::getInstance(loader.loadSurface("media/gubbe2.png"), 600, 200, 0, true);
 	std::cout << "done!" << std::endl;
 
 	MobileSprite* s5 = MobileSprite::getInstance(surf, 200, 600, 0, false);

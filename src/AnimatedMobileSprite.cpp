@@ -2,6 +2,8 @@
 #include "Loader.hpp"
 #include "System.hpp"
 
+#include <iostream>
+
 
 namespace mcDirr {
 
@@ -19,6 +21,8 @@ namespace mcDirr {
 		AnimatedSprite::tick(millisPassed);
 		AnimatedSprite::dest.x = MobileSprite::dest.x;
 		AnimatedSprite::dest.y = MobileSprite::dest.y;
+
+		std::cout << "ani:" << AnimatedSprite::dest.y << "mobi:" << MobileSprite::dest.y << std::endl;
 	}
 
 	AnimatedMobileSprite::~AnimatedMobileSprite() {
