@@ -5,6 +5,7 @@
 
 #include "Sprite.hpp"
 #include "MobileSprite.hpp"
+#include "AnimatedMobileSprite.hpp"
 
 namespace mcDirr {
 	class Level {
@@ -16,6 +17,7 @@ namespace mcDirr {
 
 			void add(Sprite* sprite);
 			void add(MobileSprite* pSprite);
+			void add(AnimatedMobileSprite* aSprite);
 			void remove(Sprite* sprite);
 			void remove(MobileSprite* sprite);
 			bool isComplete();

@@ -11,7 +11,8 @@ namespace mcDirr {
 			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl, int divs, int millisPerFrame);
 
 			void draw() const;
-			void tick(int millisPassed);
+			void tick(int millisPassed) override;
+			void checkCollision(MobileSprite* other) override;
 
 			virtual ~AnimatedMobileSprite();
 

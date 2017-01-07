@@ -88,10 +88,10 @@ int main(int argc, char** argv) {
 	MobileSprite* s2 = MobileSprite::getInstance(surf, 400, 200, 0, true);
 	MobileSprite* s3 = MobileSprite::getInstance(surf, 600, 200, 0, true);
 
-	std::cout << "creation:" << std::endl;
-	MobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet2.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
+	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
+	s4->setStartFrame(0);
+	s4->setEndFrame(3);
 //	MobileSprite* s4 = MobileSprite::getInstance(loader.loadSurface("media/gubbe2.png"), 600, 200, 0, true);
-	std::cout << "done!" << std::endl;
 
 	MobileSprite* s5 = MobileSprite::getInstance(surf, 200, 600, 0, false);
 	MobileSprite* s6 = MobileSprite::getInstance(surf, 300, 600, 0, false);
@@ -106,10 +106,10 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
+	lvl1->add(s4);
 	lvl1->add(s1);
 	lvl1->add(s2);
 	lvl1->add(s3);
-	lvl1->add(s4);
 
 	lvl1->add(s5);
 	lvl1->add(s6);

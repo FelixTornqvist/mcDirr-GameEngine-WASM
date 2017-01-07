@@ -12,7 +12,7 @@ namespace mcDirr {
 			static MobileSprite* getInstance(SDL_Surface* surface, int, int, double, bool);
 			void draw() const override;
 			void tick(int passedMillis) override;
-			void checkCollision(MobileSprite* other);
+			void virtual checkCollision(MobileSprite* other);
 			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
 			bool isAlive() const;
 			bool isMobile() const;

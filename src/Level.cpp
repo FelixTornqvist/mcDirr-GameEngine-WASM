@@ -70,6 +70,15 @@ namespace mcDirr {
 			immobileSprites.push_back(pSprite);
 	}
 
+	void Level::add(AnimatedMobileSprite* aSprite) {
+
+		std::cout << "added:" << std::endl;
+		if(aSprite->isMobile())
+			mobileSprites.push_back(aSprite);
+		else
+			immobileSprites.push_back(aSprite);
+	}
+
 	void Level::remove(Sprite* sprite) {
 		sprites.remove(sprite);
 		delete sprite;
