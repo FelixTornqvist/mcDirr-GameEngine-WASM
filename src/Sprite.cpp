@@ -23,8 +23,8 @@ namespace mcDirr {
 		dest = { x, y, width, height };
 	}
 
-	SDL_Rect Sprite::getDestRect() const {
-		return dest;
+	SDL_Rect* Sprite::getDestRect() {
+		return &dest;
 	}
 
 	SDL_Texture* Sprite::getTexture() const {

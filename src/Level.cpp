@@ -38,7 +38,7 @@ namespace mcDirr {
 	}
 
 	void Level::draw() {
-		for (MobileSprite* curr : immobileSprites)
+		for (ImmobileSprite* curr : immobileSprites)
 			curr->draw();
 
 		for (MobileSprite* curr : mobileSprites)
@@ -49,11 +49,11 @@ namespace mcDirr {
 	}
 
 	void Level::collisionChecks(MobileSprite* mobile) {
-		for (std::list<MobileSprite*>::iterator immobile = immobileSprites.begin(); immobile != immobileSprites.end();) {
+		for (std::list<ImmobileSprite*>::iterator immobile = immobileSprites.begin(); immobile != immobileSprites.end();) {
 			mobile->checkCollision(*immobile);
 
 			if (!(*immobile)->isAlive())
-				immobile = mobileSprites.erase(immobile);
+				immobile = immobileSprites.erase(immobile);
 			else
 				immobile++;
 		}
@@ -63,36 +63,36 @@ namespace mcDirr {
 		sprites.push_back(sprite);
 	}
 
-	void Level::add(MobileSprite* pSprite) {
-		if(pSprite->isMobile())
-			mobileSprites.push_back(pSprite);
-		else
-			immobileSprites.push_back(pSprite);
+	void Level::add(MobileSprite* sprite) {
+		mobileSprites.push_back(sprite);
 	}
 
-	void Level::add(AnimatedMobileSprite* aSprite) {
-
-		std::cout << "added:" << std::endl;
-		if(aSprite->isMobile())
-			mobileSprites.push_back(aSprite);
-		else
-			immobileSprites.push_back(aSprite);
+	void Level::add(ImmobileSprite* sprite) {
+		immobileSprites.push_back(sprite);
 	}
+
+	void Level::add(AnimatedMobileSprite* sprite) {
+		mobileSprites.push_back(sprite);
+	}
+
 
 	void Level::remove(Sprite* sprite) {
 		sprites.remove(sprite);
 		delete sprite;
 	}
 
-	void Level::remove(MobileSprite* pSprite) {
-		if(pSprite->isMobile()){
-			mobileSprites.remove(pSprite);
-			delete pSprite;
-		} else {
-			immobileSprites.remove(pSprite);
-			delete pSprite;
-		}
+	void Level::remove(MobileSprite* sprite) {
+		mobileSprites.remove(sprite);
+		delete sprite;
+	}
 
+	void Level::remove(ImmobileSprite* sprite) {
+		immobileSprites.remove(sprite);
+		delete sprite;
+	}
+	void Level::remove(AnimatedMobileSprite* sprite){
+		mobileSprites.remove(sprite);
+		delete sprite;
 	}
 
 	bool Level::isComplete() {

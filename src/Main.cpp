@@ -26,52 +26,23 @@
 using namespace std;
 using namespace mcDirr;
 
-class CustSprite : public AnimatedSprite {
-	public:
-		CustSprite(SDL_Texture* t, int x, int y, int rad, int cw): AnimatedSprite(t,x,y, 4, 500), radius(rad), clockwise(cw) {
-			setStartFrame(getFramesAmt() - 2);
-			setEndFrame(4);
-		}
-		float curr = 0;
-		int radius;
-		int clockwise;
-
-		void tick(int time) override {
-			AnimatedSprite::tick(time);
-			curr += time;
-			//cout << curr << endl;
-			dest.x = cos(curr / 500 * clockwise) * radius  + dest.x;
-			dest.y = sin(curr / 500* clockwise) * radius + dest.y;
-		}
-
-//		void draw() const override {
-//			SDL_RenderCopyEx(sys.getRen(), texture, NULL, &dest, curr/10,NULL, SDL_FLIP_NONE);
-//		}
-};
-
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
+	SDL_Surface * catSurf = loader.loadSurface("media/cat.bmp");
+	SDL_Texture* cat = loader.loadTexture(catSurf);
 
-	//SDL_Texture* texture = loadTexture("media/test-spritesheet.png");
-	// SDL_Texture* colors = loadTexture("media/colors.png");
-	SDL_Surface * surf = IMG_Load("media/cat.bmp");
-
-	// SDL_Texture* catTexture = loader.loadTexture("media/cat.bmp");
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
 
-	//Sprite* s1 = new AnimatedSprite(texture, 10, 10, 4, 1000);
-	//Sprite* s2 = new CustSprite(texture, 300, 250, 0, -1);
+	MobileSprite* s15 = MobileSprite::getInstance(catSurf, 600, 200, 0);
+	MobileSprite* s16 = MobileSprite::getInstance(catSurf, 800, 200, 0.5);
 
-	MobileSprite* s15 = MobileSprite::getInstance(surf, 600, 200, 0, true);
-	MobileSprite* s16 = MobileSprite::getInstance(surf, 800, 200, 0.5, true);
-
-	MobileSprite* s17 = MobileSprite::getInstance(surf, 400, 600, 0, false);
-	MobileSprite* s18 = MobileSprite::getInstance(surf, 500, 600, 0, false);
-	MobileSprite* s19 = MobileSprite::getInstance(surf, 600, 600, 0, false);
-	MobileSprite* s20 = MobileSprite::getInstance(surf, 700, 600, 0, false);
-	MobileSprite* s21 = MobileSprite::getInstance(surf, 800, 600, 0, false);
+	ImmobileSprite* s17 = ImmobileSprite::getInstance(cat, 400, 600);
+	ImmobileSprite* s18 = ImmobileSprite::getInstance(cat, 500, 600);
+	ImmobileSprite* s19 = ImmobileSprite::getInstance(cat, 600, 600);
+	ImmobileSprite* s20 = ImmobileSprite::getInstance(cat, 700, 600);
+	ImmobileSprite* s21 = ImmobileSprite::getInstance(cat, 800, 600);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
@@ -84,25 +55,24 @@ int main(int argc, char** argv) {
 	lvl2->add(s21);
 
 
-	MobileSprite* s1 = MobileSprite::getInstance(surf, 200, 200, 0, false); // last int is for speed. 0 cant be moved.
-	MobileSprite* s2 = MobileSprite::getInstance(surf, 400, 200, 0, true);
-	MobileSprite* s3 = MobileSprite::getInstance(surf, 600, 200, 0, true);
+	ImmobileSprite* s1 = ImmobileSprite::getInstance(cat, 200, 200);
+	MobileSprite* s2 = MobileSprite::getInstance(catSurf, 400, 200, 0);
+	MobileSprite* s3 = MobileSprite::getInstance(catSurf, 600, 200, 0);
 
-	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, true, 2, 500); // can be moved. Remove last int later. only to test collision.
+	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, 2, 500); // can be moved. Remove last int later. only to test collision.
 	s4->setStartFrame(0);
 	s4->setEndFrame(3);
-//	MobileSprite* s4 = MobileSprite::getInstance(loader.loadSurface("media/gubbe2.png"), 600, 200, 0, true);
 
-	MobileSprite* s5 = MobileSprite::getInstance(surf, 200, 600, 0, false);
-	MobileSprite* s6 = MobileSprite::getInstance(surf, 300, 600, 0, false);
-	MobileSprite* s7 = MobileSprite::getInstance(surf, 400, 600, 0, false);
-	MobileSprite* s8 = MobileSprite::getInstance(surf, 500, 600, 0, false);
-	MobileSprite* s9 = MobileSprite::getInstance(surf, 600, 600, 0, false);
-	MobileSprite* s10 = MobileSprite::getInstance(surf, 700, 600, 0, false);
-	MobileSprite* s11 = MobileSprite::getInstance(surf, 800, 600, 0, false);
-	MobileSprite* s12 = MobileSprite::getInstance(surf, 900, 600, 0, false);
-	MobileSprite* s13 = MobileSprite::getInstance(surf, 100, 600, 0, false);
-	MobileSprite* s14 = MobileSprite::getInstance(surf, 0, 600, 0, false);
+	ImmobileSprite* s5 = ImmobileSprite::getInstance(cat, 200, 600);
+	ImmobileSprite* s6 = ImmobileSprite::getInstance(cat, 300, 600);
+	ImmobileSprite* s7 = ImmobileSprite::getInstance(cat, 400, 600);
+	ImmobileSprite* s8 = ImmobileSprite::getInstance(cat, 500, 600);
+	ImmobileSprite* s9 = ImmobileSprite::getInstance(cat, 600, 600);
+	ImmobileSprite* s10 = ImmobileSprite::getInstance(cat, 700, 600);
+	ImmobileSprite* s11 = ImmobileSprite::getInstance(cat, 800, 600);
+	ImmobileSprite* s12 = ImmobileSprite::getInstance(cat, 900, 600);
+	ImmobileSprite* s13 = ImmobileSprite::getInstance(cat, 100, 600);
+	ImmobileSprite* s14 = ImmobileSprite::getInstance(cat, 0, 600);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 

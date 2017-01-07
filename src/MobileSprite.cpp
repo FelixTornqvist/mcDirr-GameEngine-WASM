@@ -16,17 +16,16 @@
 
 using namespace mcDirr;
 
-MobileSprite* MobileSprite::getInstance(SDL_Surface* surface, int x, int y, double s, bool mobile) {
-	return new MobileSprite(surface, x, y, s, mobile);
+MobileSprite* MobileSprite::getInstance(SDL_Surface* surface, int x, int y, double s) {
+	return new MobileSprite(surface, x, y, s);
 }
 
-MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl) : Sprite(loader.loadTexture(surf), x, y) {
+MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, double bouciness) : Sprite(loader.loadTexture(surf), x, y) {
 	surface = surf;
 	currentTime = 0;
 
 	bounciness = bouciness;
 	alive = true;
-	mobile = mbl;
 
 	yVel = xVel = 0;
 	yAccel = 9.82 / 5;
@@ -51,49 +50,48 @@ void MobileSprite::doPhysics(int millisPassed) {
 }
 
 void MobileSprite::tick(int time) {
-	if (mobile) {
-		// ~ temporary for controls: ~
-		if (sys.isKeyDown(SDLK_w))
-			yVel = -0.5;
-		else if (sys.isKeyDown(SDLK_s))
-			yVel = 0.5;
-		if (sys.isKeyDown(SDLK_a))
-			xVel = -0.5;
-		else if (sys.isKeyDown(SDLK_d))
-			xVel = 0.5;
-		// ~ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ~
+	// ~ temporary for controls: ~
+	if (sys.isKeyDown(SDLK_w))
+		yVel = -0.5;
+	else if (sys.isKeyDown(SDLK_s))
+		yVel = 0.5;
+	if (sys.isKeyDown(SDLK_a))
+		xVel = -0.5;
+	else if (sys.isKeyDown(SDLK_d))
+		xVel = 0.5;
+	// ~ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ~
 
-		doPhysics(time);
-	}
+	doPhysics(time);
+
 	if (sys.isKeyDown(SDLK_q)) {
 		std::cout << "I've been killed by Q" << std::endl;
 		alive = false;
 	}
 }
 
-void MobileSprite::checkCollision(MobileSprite* other) {
+void MobileSprite::checkCollision(ImmobileSprite* other) {
 	SDL_Rect intersection;
-	bool collided = false;
+	SDL_Rect& oDest = (* other->getDestRect());
 
-	if (SDL_IntersectRect(&dest, &other->dest, &intersection)) {
+	if (SDL_IntersectRect(&dest, &oDest, &intersection)) {
 
-		int& oX = other->dest.x;
-		int& oY = other->dest.y;
+		int& oX = oDest.x;
+		int& oY = oDest.y;
 		int& myX = dest.x;
 		int& myY = dest.y;
 
 		if (intersection.h > intersection.w) {
 			if (oX > myX) {
-				myX = oX - dest.w;
+				myX = oX - oDest.w;
 			} else {
-				myX = oX + other->dest.w;
+				myX = oX + other->getDestRect()->w;
 			}
 			xVel = 0;
 		} else {
 			if (oY > myY) {
 				myY = oY - dest.h;
 			} else {
-				myY = oY + other->dest.h;
+				myY = oY + oDest.h;
 			}
 			yVel = 0;
 			xVel = 0;
@@ -121,10 +119,6 @@ bool MobileSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
 
 bool MobileSprite::isAlive() const {
 	return alive;
-}
-
-bool MobileSprite::isMobile() const {
-	return mobile;
 }
 
 SDL_Surface* MobileSprite::getSurface() const {

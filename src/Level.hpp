@@ -16,10 +16,15 @@ namespace mcDirr {
 			void draw();
 
 			void add(Sprite* sprite);
-			void add(MobileSprite* pSprite);
-			void add(AnimatedMobileSprite* aSprite);
+			void add(MobileSprite* sprite);
+			void add(ImmobileSprite* sprite);
+			void add(AnimatedMobileSprite* sprite);
+
 			void remove(Sprite* sprite);
 			void remove(MobileSprite* sprite);
+			void remove(ImmobileSprite* sprite);
+			void remove(AnimatedMobileSprite* sprite);
+
 			bool isComplete();
 			Level* getNextLevel();
 
@@ -33,7 +38,8 @@ namespace mcDirr {
 			Level* nextLevel;
 
 			std::list<Sprite*> sprites;
-			std::list<MobileSprite*> mobileSprites, immobileSprites;
+			std::list<MobileSprite*> mobileSprites;
+			std::list<ImmobileSprite*> immobileSprites;
 
 			void collisionChecks(MobileSprite* movableSprite);
 	};

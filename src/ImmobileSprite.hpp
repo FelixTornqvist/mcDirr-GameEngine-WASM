@@ -6,12 +6,18 @@
 namespace mcDirr {
 	class ImmobileSprite : public Sprite {
 		public:
-			ImmobileSprite(SDL_Texture* t, int x, int y);
+			static ImmobileSprite* getInstance(SDL_Texture* t, int x, int y);
+
+			void tick(int timeDiff) override {};
+
+			bool isAlive();
 			virtual ~ImmobileSprite();
 
 		protected:
+			ImmobileSprite(SDL_Texture* t, int x, int y);
 
 		private:
+			bool alive;
 	};
 }
 

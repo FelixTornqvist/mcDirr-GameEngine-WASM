@@ -7,21 +7,19 @@
 #include <SDL.h>
 #endif
 
-#include <string>
-
 namespace mcDirr {
-	class Sprite{
+	class Sprite {
 		public:
-			virtual void draw() const = 0;
+			virtual void draw() const;
 			virtual void tick(int timediff) = 0;
 
-	        virtual ~Sprite();
-			SDL_Rect getDestRect() const;
+			virtual ~Sprite();
+			SDL_Rect* getDestRect();
 			SDL_Texture* getTexture() const;
 
 		protected:
 			Sprite(SDL_Texture* t, int x, int y);
-            SDL_Rect dest;
+			SDL_Rect dest;
 			SDL_Texture* texture;
 
 

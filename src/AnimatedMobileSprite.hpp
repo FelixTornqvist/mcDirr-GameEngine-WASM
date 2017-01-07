@@ -8,11 +8,11 @@
 namespace mcDirr {
 	class AnimatedMobileSprite : public AnimatedSprite, public MobileSprite{
 		public:
-			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, double bouciness, bool mbl, int divs, int millisPerFrame);
+			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, double bouciness, int divs, int millisPerFrame);
 
 			void draw() const;
 			void tick(int millisPassed) override;
-			void checkCollision(MobileSprite* other) override;
+			void checkCollision(ImmobileSprite* other) override;
 
 			virtual ~AnimatedMobileSprite();
 
