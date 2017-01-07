@@ -26,7 +26,6 @@ namespace mcDirr {
 		private:
 			int startFrame, endFrame;
 			int millisPerFrame, currentCount = 0;
-
 			void checkCurrentCount();
 	};
 }

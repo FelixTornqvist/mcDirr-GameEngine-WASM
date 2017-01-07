@@ -1,7 +1,6 @@
 #include "FramedSprite.hpp"
 #include "System.hpp"
 
-
 namespace mcDirr {
 	FramedSprite* FramedSprite::getInstance(SDL_Texture* t, int x, int y, int z) {
 		return new FramedSprite(t, x, y, z);

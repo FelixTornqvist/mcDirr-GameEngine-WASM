@@ -9,13 +9,22 @@ namespace mcDirr {
 	AnimatedSprite::AnimatedSprite(SDL_Texture* t, int x, int y, int divs, int _millisPerFrame) :
 		FramedSprite(t, x, y, divs), millisPerFrame(_millisPerFrame) {
 		startFrame = 0;
-		endFrame = getFramesAmt();
+		endFrame = divs;
 	}
 
 	void AnimatedSprite::tick(int timeDiff) {
 		currentCount += timeDiff;
-		checkCurrentCount();
 
+		if (sys.isKeyDown(SDLK_a)) {	//  frames 2 and 3
+			setStartFrame(2);
+			setEndFrame(4); 
+		} else if (sys.isKeyDown(SDLK_d)) {     // frames 0 and 1 
+			setStartFrame(0);
+			setEndFrame(2);
+		} else {
+			checkCurrentCount();
+		}
+		
 		int currentFrame = currentCount / millisPerFrame;
 		setCurrentFrame(currentFrame);
 	}

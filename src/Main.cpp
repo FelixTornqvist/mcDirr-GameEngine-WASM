@@ -59,9 +59,7 @@ int main(int argc, char** argv) {
 	MobileSprite* s2 = MobileSprite::getInstance(catSurf, 400, 200, 0);
 	MobileSprite* s3 = MobileSprite::getInstance(catSurf, 600, 200, 0);
 
-	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, 2, 500); // can be moved. Remove last int later. only to test collision.
-	s4->setStartFrame(0);
-	s4->setEndFrame(3);
+	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, 2, 1050); // can be moved. Remove last int later. only to test collision.
 
 	ImmobileSprite* s5 = ImmobileSprite::getInstance(cat, 200, 600);
 	ImmobileSprite* s6 = ImmobileSprite::getInstance(cat, 300, 600);
