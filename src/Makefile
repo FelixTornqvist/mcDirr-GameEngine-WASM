@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o PhysicalSprite.o System.o VisualSprite.o Loader.o Level.o
+OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Loader.o Level.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -24,9 +24,6 @@ FramedSprite.o : FramedSprite.hpp FramedSprite.cpp Sprite.hpp
 AnimatedSprite.o : AnimatedSprite.hpp AnimatedSprite.cpp FramedSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) AnimatedSprite.cpp
 
-PhysicalSprite.o : PhysicalSprite.hpp Sprite.o
-	$(CC) $(CFLAGS) $(COMPILERFLAG) PhysicalSprite.cpp
-
 Sprite.o : Sprite.hpp Sprite.cpp Sprite.hpp System.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Sprite.cpp
 
@@ -36,10 +33,19 @@ System.o : System.hpp System.cpp
 VisualSprite.o : VisualSprite.hpp VisualSprite.cpp Sprite.hpp System.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) VisualSprite.cpp
 
+MobileSprite.o : MobileSprite.hpp MobileSprite.cpp Sprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) MobileSprite.cpp
+
+AnimatedMobileSprite.o : AnimatedMobileSprite.hpp AnimatedMobileSprite.cpp AnimatedSprite.hpp MobileSprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) AnimatedMobileSprite.cpp
+
+ImmobileSprite.o : ImmobileSprite.hpp ImmobileSprite.cpp Sprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) ImmobileSprite.cpp
+
 Loader.o : Loader.hpp Loader.cpp System.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Loader.cpp
 
-Level.o : Level.hpp Level.cpp PhysicalSprite.hpp Sprite.hpp
+Level.o : Level.hpp Level.cpp Sprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Level.cpp
 
 
