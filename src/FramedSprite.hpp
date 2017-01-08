@@ -11,9 +11,9 @@
 #include "Sprite.hpp"
 
 namespace mcDirr {
-	class FramedSprite : public Sprite {
+	class FramedSprite : virtual public Sprite {
 		public:
-			static FramedSprite* getInstance(SDL_Texture*, int, int, int);
+			static FramedSprite* getInstance(SDL_Surface*, int, int, int);
 
 			void tick(int millisPassed) {}
 			void draw() const override;
@@ -24,7 +24,7 @@ namespace mcDirr {
 			virtual ~FramedSprite();
 
 		protected:
-			FramedSprite(SDL_Texture* tex, int x, int y, int divs);
+			FramedSprite(SDL_Surface* surf, int x, int y, int divs);
 		private:
 			int frames;
 			int spriteSheetDivs;

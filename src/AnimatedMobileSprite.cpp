@@ -5,8 +5,7 @@
 namespace mcDirr {
 
 	AnimatedMobileSprite::AnimatedMobileSprite(SDL_Surface* surf, int x, int y, double bouciness, int divs, int millisPerFrame) :
-		MobileSprite(surf,x,y,bouciness), AnimatedSprite(loader.loadTexture(surf),x,y,divs,millisPerFrame)  {
-		MobileSprite::dest = AnimatedSprite::dest;
+		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), MobileSprite(surf,x,y,bouciness), AnimatedSprite(surf,x,y,divs,millisPerFrame)  {
 	}
 
 	void AnimatedMobileSprite::draw() const{
@@ -14,16 +13,8 @@ namespace mcDirr {
 	}
 
 	void AnimatedMobileSprite::tick(int millisPassed) {
-
 		MobileSprite::tick(millisPassed);
 		AnimatedSprite::tick(millisPassed);
-	}
-
-	void AnimatedMobileSprite::checkCollision(ImmobileSprite* other){
-		MobileSprite::checkCollision(other);
-
-		AnimatedSprite::dest.x = MobileSprite::dest.x;
-		AnimatedSprite::dest.y = MobileSprite::dest.y;
 	}
 
 	AnimatedMobileSprite::~AnimatedMobileSprite() {

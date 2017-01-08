@@ -29,14 +29,13 @@ using namespace mcDirr;
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
-	SDL_Surface * catSurf = loader.loadSurface("media/cat.bmp");
-	SDL_Texture* cat = loader.loadTexture(catSurf);
+	SDL_Surface* cat = loader.loadSurface("media/cat.bmp");
 
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
 
-	MobileSprite* s15 = MobileSprite::getInstance(catSurf, 600, 200, 0);
-	MobileSprite* s16 = MobileSprite::getInstance(catSurf, 800, 200, 0.5);
+	MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200, 0);
+	MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200, 0.5);
 
 	ImmobileSprite* s17 = ImmobileSprite::getInstance(cat, 400, 600);
 	ImmobileSprite* s18 = ImmobileSprite::getInstance(cat, 500, 600);
@@ -56,8 +55,8 @@ int main(int argc, char** argv) {
 
 
 	ImmobileSprite* s1 = ImmobileSprite::getInstance(cat, 200, 200);
-	MobileSprite* s2 = MobileSprite::getInstance(catSurf, 400, 200, 0);
-	MobileSprite* s3 = MobileSprite::getInstance(catSurf, 600, 200, 0);
+	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200, 0);
+	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200, 0);
 
 	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, 2, 1050); // can be moved. Remove last int later. only to test collision.
 

@@ -7,7 +7,7 @@
 
 namespace mcDirr {
 
-	class MobileSprite : public Sprite {
+	class MobileSprite : virtual public Sprite {
 
 		public:
 			static MobileSprite* getInstance(SDL_Surface* surface, int, int, double);

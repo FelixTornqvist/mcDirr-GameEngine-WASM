@@ -20,7 +20,7 @@ MobileSprite* MobileSprite::getInstance(SDL_Surface* surface, int x, int y, doub
 	return new MobileSprite(surface, x, y, s);
 }
 
-MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, double bouciness) : Sprite(loader.loadTexture(surf), x, y) {
+MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, double bouciness) : Sprite(surf, x, y) {
 	surface = surf;
 	currentTime = 0;
 
@@ -82,9 +82,9 @@ void MobileSprite::checkCollision(ImmobileSprite* other) {
 
 		if (intersection.h > intersection.w) {
 			if (oX > myX) {
-				myX = oX - oDest.w;
+				myX = oX - dest.w;
 			} else {
-				myX = oX + other->getDestRect()->w;
+				myX = oX + oDest.w;
 			}
 			xVel = 0;
 		} else {

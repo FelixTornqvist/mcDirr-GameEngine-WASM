@@ -18,7 +18,7 @@ namespace mcDirr {
 			SDL_Texture* getTexture() const;
 
 		protected:
-			Sprite(SDL_Texture* t, int x, int y);
+			Sprite(SDL_Surface* surf, int x, int y);
 			SDL_Rect dest;
 			SDL_Texture* texture;
 

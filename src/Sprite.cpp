@@ -12,14 +12,15 @@
 
 #include "Sprite.hpp"
 #include "System.hpp"
+#include "Loader.hpp"
 
 namespace mcDirr {
 
-	Sprite::Sprite(SDL_Texture* t, int x, int y) :
-		texture(t) {
+	Sprite::Sprite(SDL_Surface* surf, int x, int y) :
+		texture(loader.loadTexture(surf)) {
 		int width;
 		int height;
-		SDL_QueryTexture(t, NULL, NULL, &width, &height);
+		SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 		dest = { x, y, width, height };
 	}
 

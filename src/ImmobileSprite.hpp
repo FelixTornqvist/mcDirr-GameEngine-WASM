@@ -6,7 +6,7 @@
 namespace mcDirr {
 	class ImmobileSprite : public Sprite {
 		public:
-			static ImmobileSprite* getInstance(SDL_Texture* t, int x, int y);
+			static ImmobileSprite* getInstance(SDL_Surface* s, int x, int y);
 
 			void tick(int timeDiff) override {};
 
@@ -14,7 +14,7 @@ namespace mcDirr {
 			virtual ~ImmobileSprite();
 
 		protected:
-			ImmobileSprite(SDL_Texture* t, int x, int y);
+			ImmobileSprite(SDL_Surface* s, int x, int y);
 
 		private:
 			bool alive;
