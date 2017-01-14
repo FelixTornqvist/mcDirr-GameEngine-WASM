@@ -1,16 +1,7 @@
-#ifdef __APPLE__
-#include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
-#include <SDL2_ttf/SDL_ttf.h>
-#include <SDL2_mixer/SDL_mixer.h>
-
-#else
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
-#endif
-
 #include <string>
 #include <iostream>
 #include "System.hpp"
@@ -49,7 +40,6 @@ namespace mcDirr {
 					keys[eve.key.keysym.sym] = true;
 					if(collectTyping) {
 						typed += eve.key.keysym.sym;
-//						std::cout << typed << std::endl;
 					}
 					break;
 				case SDL_KEYUP:

@@ -1,18 +1,10 @@
-#ifdef __APPLE__
-#include <SDL2/SDL.h>
-
-#else
 #include <SDL.h>
-#endif
-
 #include "MobileSprite.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
 
 #include <iostream>
 #include <cmath>
-
-
 
 using namespace mcDirr;
 

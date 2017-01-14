@@ -14,8 +14,8 @@ namespace mcDirr {
 		endFrame = divs;
 	}
 
-    void AnimatedSprite::tick(int timeDiff) {
-        currentCount += timeDiff;
+	void AnimatedSprite::tick(int timeDiff) {
+		currentCount += timeDiff;
 
 		if (sys.isKeyDown(SDLK_a)) {	//  frames 2 and 3
 			setStartFrame(2);
@@ -31,35 +31,35 @@ namespace mcDirr {
 		setCurrentFrame(currentFrame);
 	}
 
-    void AnimatedSprite::checkCurrentCount() {
-        currentCount %= getFramesAmt() * millisPerFrame;
-        int endTime = endFrame * millisPerFrame;
-        int startTime = startFrame * millisPerFrame;
+	void AnimatedSprite::checkCurrentCount() {
+		currentCount %= getFramesAmt() * millisPerFrame;
+		int endTime = endFrame * millisPerFrame;
+		int startTime = startFrame * millisPerFrame;
 
-        if (endFrame < startFrame) {
-            bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
-            if (betweenStartAndStop)
-                currentCount = startTime;
+		if (endFrame < startFrame) {
+			bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
+			if (betweenStartAndStop)
+				currentCount = startTime;
 
-        } else {
-            bool outsideStartAndStop = (currentCount > endTime) || (currentCount < startTime);
-            if (outsideStartAndStop)
-                currentCount = startTime;
-        }
-    }
+		} else {
+			bool outsideStartAndStop = (currentCount > endTime) || (currentCount < startTime);
+			if (outsideStartAndStop)
+				currentCount = startTime;
+		}
+	}
 
-    void AnimatedSprite::setStartFrame(int frame) {
-        startFrame = frame;
-        checkCurrentCount();
-    }
+	void AnimatedSprite::setStartFrame(int frame) {
+		startFrame = frame;
+		checkCurrentCount();
+	}
 
-    void AnimatedSprite::setEndFrame(int frame) {
-        endFrame = frame;
-        checkCurrentCount();
-    }
+	void AnimatedSprite::setEndFrame(int frame) {
+		endFrame = frame;
+		checkCurrentCount();
+	}
 
 
-    AnimatedSprite::~AnimatedSprite() {
-        //dtor
-    }
+	AnimatedSprite::~AnimatedSprite() {
+		//dtor
+	}
 }

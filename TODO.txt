@@ -1,0 +1,11 @@
+To do:
+förbjuda värdesemantik för sprites
+minnesläckage
+ta bort alla plattformsvillkor i headers
+
+
+senare
+
+kortkommandon
+mata in text
+pixelkollision

@@ -1,12 +1,5 @@
-#ifdef __APPLE__
-#include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
-
-#else
 #include <SDL.h>
 #include <SDL_image.h>
-#endif
-
 #include <string>
 #include <stdexcept>
 
@@ -24,19 +17,19 @@ namespace mcDirr {
 		dest = { x, y, width, height };
 	}
 
-    SDL_Rect* Sprite::getDestRect() {
-        return &dest;
-    }
+	SDL_Rect* Sprite::getDestRect() {
+		return &dest;
+	}
 
-    SDL_Texture* Sprite::getTexture() const {
-        return texture;
-    }
+	SDL_Texture* Sprite::getTexture() const {
+		return texture;
+	}
 
-    void Sprite::draw() const {
-        SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
-    }
+	void Sprite::draw() const {
+		SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+	}
 
-    Sprite::~Sprite() {
-        SDL_DestroyTexture(texture);
-    }
+	Sprite::~Sprite() {
+		SDL_DestroyTexture(texture);
+	}
 }

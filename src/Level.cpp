@@ -49,7 +49,8 @@ namespace mcDirr {
 	}
 
 	void Level::collisionChecks(MobileSprite* mobile) {
-		for (std::list<ImmobileSprite*>::iterator immobile = immobileSprites.begin(); immobile != immobileSprites.end();) {
+		for (std::list<ImmobileSprite*>::iterator immobile = immobileSprites.begin(); 
+				immobile != immobileSprites.end();) {
 			mobile->checkCollision(*immobile);
 
 			if (!(*immobile)->isAlive())
