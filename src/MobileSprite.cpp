@@ -33,10 +33,6 @@ void MobileSprite::doPhysics(int millisPassed) {
 	xVel += xAccel * secsPassed;
 	yVel += yAccel * secsPassed;
 
-//	xVel *= friction;
-//	yVel *= friction;
-//	std::cout << yVel << std::endl;
-
 	dest.x += xVel * millisPassed;
 	dest.y += yVel * millisPassed;
 }
@@ -92,20 +88,13 @@ void MobileSprite::checkCollision(ImmobileSprite* other) {
 	}
 }
 
-
+/* to be implemented */
 bool MobileSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
-	// std::cout << "Hello" << std::endl;
-
 	int tempX = tempRect->x;
 	int tempY = tempRect->y;
 
 	int xDiff = tempX - dest.x;
 	int yDiff = tempY - dest.y;
-
-
-
-
-
 	return false;
 }
 
@@ -116,7 +105,3 @@ bool MobileSprite::isAlive() const {
 SDL_Surface* MobileSprite::getSurface() const {
 	return surface;
 }
-
-//Sprite::~Sprite() {
-//    SDL_DestroyTexture(texture);
-//}

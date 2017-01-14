@@ -17,7 +17,7 @@ namespace mcDirr {
 			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
 			bool isAlive() const;
 			SDL_Surface* getSurface() const;
-
+			~MobileSprite() { delete surface; }
 
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed);
