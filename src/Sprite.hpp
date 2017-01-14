@@ -12,7 +12,6 @@ namespace mcDirr {
 			virtual ~Sprite();
 			SDL_Rect* getDestRect();
 			SDL_Texture* getTexture() const;
-
 		protected:
 			Sprite(SDL_Surface* surf, int x, int y);
 			SDL_Rect dest;
@@ -20,6 +19,9 @@ namespace mcDirr {
 
 
 		private:
+			const Sprite& operator=(const Sprite& rhs) = delete;
+			Sprite(const Sprite& other) = delete;
+
 
 	};
 }

@@ -18,6 +18,7 @@ namespace mcDirr {
 			bool isAlive() const;
 			SDL_Surface* getSurface() const;
 
+
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, double temporaryTestSpeed);
 			void doPhysics(int millisPassed);
@@ -31,7 +32,6 @@ namespace mcDirr {
 			double bounciness, friction = 0.1;
 			double yAccel, xAccel;
 			double yVel, xVel;
-
 	};
 }
 

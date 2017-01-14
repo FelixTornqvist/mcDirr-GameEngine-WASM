@@ -1,7 +1,7 @@
 To do:
-förbjuda värdesemantik för sprites
+förbjuda värdesemantik för sprites Check
 minnesläckage
-ta bort alla plattformsvillkor i headers
+ta bort alla plattformsvillkor i headers Check
 
 
 senare
@@ -9,3 +9,6 @@ senare
 kortkommandon
 mata in text
 pixelkollision
+olika studs
+
+mer tydligt "spel" ist för i main

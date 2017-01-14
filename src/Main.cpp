@@ -29,7 +29,6 @@ int main(int argc, char** argv) {
 
 	MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200, 0);
 	MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200, 0.5);
-
 	ImmobileSprite* s17 = ImmobileSprite::getInstance(cat, 400, 600);
 	ImmobileSprite* s18 = ImmobileSprite::getInstance(cat, 500, 600);
 	ImmobileSprite* s19 = ImmobileSprite::getInstance(cat, 600, 600);

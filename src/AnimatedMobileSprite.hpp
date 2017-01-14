@@ -14,10 +14,6 @@ namespace mcDirr {
 			void tick(int millisPassed) override;
 
 			virtual ~AnimatedMobileSprite();
-
-		protected:
-
-		private:
 	};
 }
 
