@@ -15,13 +15,13 @@ namespace mcDirr {
 		public:
 			static FramedSprite* getInstance(SDL_Surface*, int, int, int);
 
-			void tick(int millisPassed) {}
-			void draw() const override;
-			void setCurrentFrame(int frame);
-			int getFramesAmt() const;
-			SDL_Rect getSrcRect() const;
+            void tick(int millisPassed) {}
+            void draw() const override;
+            void setCurrentFrame(int frame);
+            int getFramesAmt() const;
+            SDL_Rect getSrcRect() const;
 
-			virtual ~FramedSprite();
+            virtual ~FramedSprite();
 
 		protected:
 			FramedSprite(SDL_Surface* surf, int x, int y, int divs);

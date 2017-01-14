@@ -15,11 +15,11 @@ namespace mcDirr {
 		public:
 			static AnimatedSprite* getInstance(SDL_Surface*, int, int, int, int);
 
-			void tick(int passedTime) override;
-			void setStartFrame(int frame);
-			void setEndFrame(int frame);
+            void tick(int passedTime) override;
+            void setStartFrame(int frame);
+            void setEndFrame(int frame);
 
-			virtual ~AnimatedSprite();
+            virtual ~AnimatedSprite();
 
 		protected:
 			AnimatedSprite(SDL_Surface* s, int x, int y, int divs, int _millisPerFrame);

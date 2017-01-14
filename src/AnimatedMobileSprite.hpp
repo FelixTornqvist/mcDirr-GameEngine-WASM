@@ -13,12 +13,12 @@ namespace mcDirr {
 			void draw() const;
 			void tick(int millisPassed) override;
 
-			virtual ~AnimatedMobileSprite();
+            virtual ~AnimatedMobileSprite();
 
-		protected:
+        protected:
 
-		private:
-	};
+        private:
+    };
 }
 
 #endif // ANIMATEDMOBILESPRITE_HPP

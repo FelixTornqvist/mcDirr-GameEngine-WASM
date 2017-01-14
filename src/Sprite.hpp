@@ -8,14 +8,14 @@
 #endif
 
 namespace mcDirr {
-	class Sprite {
-		public:
-			virtual void draw() const;
-			virtual void tick(int timediff) = 0;
+    class Sprite {
+        public:
+            virtual void draw() const;
+            virtual void tick(int timediff) = 0;
 
-			virtual ~Sprite();
-			SDL_Rect* getDestRect();
-			SDL_Texture* getTexture() const;
+            virtual ~Sprite();
+            SDL_Rect* getDestRect();
+            SDL_Texture* getTexture() const;
 
 		protected:
 			Sprite(SDL_Surface* surf, int x, int y);
@@ -23,9 +23,9 @@ namespace mcDirr {
 			SDL_Texture* texture;
 
 
-		private:
+        private:
 
-	};
+    };
 }
 
 #endif // Sprite_H
