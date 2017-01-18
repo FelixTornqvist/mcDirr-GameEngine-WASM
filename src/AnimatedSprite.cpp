@@ -20,15 +20,21 @@ namespace mcDirr {
 		if (sys.isKeyDown(SDLK_a)) {	//  frames 2 and 3
 			setStartFrame(2);
 			setEndFrame(4);
+			facingRight = false;
 		} else if (sys.isKeyDown(SDLK_d)) {     // frames 0 and 1
 			setStartFrame(0);
 			setEndFrame(2);
+			facingRight = true;
 		} else {
 			checkCurrentCount();
 		}
 
 		int currentFrame = currentCount / millisPerFrame;
 		setCurrentFrame(currentFrame);
+	}
+
+	bool AnimatedSprite::getFacingRight() const {
+		return facingRight;
 	}
 
 	void AnimatedSprite::checkCurrentCount() {

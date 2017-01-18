@@ -14,13 +14,14 @@ namespace mcDirr {
 			void setEndFrame(int frame);
 
 			virtual ~AnimatedSprite();
-
+			bool getFacingRight() const;
 		protected:
 			AnimatedSprite(SDL_Surface* s, int x, int y, int divs, int _millisPerFrame);
 		private:
 			int startFrame, endFrame;
 			int millisPerFrame, currentCount = 0;
 			void checkCurrentCount();
+			bool facingRight;
 	};
 }
 #endif // ANIMATEDSPRITE_H
