@@ -28,7 +28,7 @@ namespace mcDirr {
 		sys.listenForTyping(true);
 		while(running) {
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);   //TODO: temporary
-			nextTick = SDL_GetTicks() + MILLIS_PER_LOOP;
+			nextTick = lastTick + MILLIS_PER_LOOP;
 			sys.collectInputs();
 
 			currentLevel->tick(nextTick - lastTick);
