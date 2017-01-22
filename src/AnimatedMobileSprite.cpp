@@ -17,12 +17,12 @@ namespace mcDirr {
 		AnimatedSprite::tick(millisPassed);
 
 		if (xVel < 0) {	//  frames 2 and 3
-			setStartFrame(2);
-			setEndFrame(3);
+			setStartFrame(0);
+			setEndFrame(59);
 			facingRight = false;
 		} else if (xVel > 0) {     // frames 0 and 1
-			setStartFrame(0);
-			setEndFrame(1);
+			setStartFrame(61);
+			setEndFrame(118);
 			facingRight = true;
 		}
 	}
