@@ -24,6 +24,7 @@ namespace mcDirr {
 			void doPhysics(int millisPassed);
 			inline void bounceBack(int& myAxis, int& myPadding, int& othrsAxis, int& othrsPadding);
 			float currentTime;
+			double yVel, xVel;
 
 		private:
 			SDL_Surface* surface;
@@ -31,7 +32,6 @@ namespace mcDirr {
 
 			double bounciness, friction = 0.1;
 			double yAccel, xAccel;
-			double yVel, xVel;
 	};
 }
 

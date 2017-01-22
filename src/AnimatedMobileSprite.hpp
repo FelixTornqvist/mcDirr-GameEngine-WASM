@@ -12,8 +12,12 @@ namespace mcDirr {
 
 			void draw() const;
 			void tick(int millisPassed) override;
+			bool isFacingRight() const;
 
 			virtual ~AnimatedMobileSprite();
+
+		private:
+			bool facingRight;
 	};
 }
 

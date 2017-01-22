@@ -15,53 +15,40 @@ namespace mcDirr {
 	}
 
 	void AnimatedSprite::tick(int timeDiff) {
-		currentCount += timeDiff;
+		currentCount += revAnimation ? -timeDiff : timeDiff;
+		checkCurrentCount();
 
-		if (sys.isKeyDown(SDLK_a)) {	//  frames 2 and 3
-			setStartFrame(2);
-			setEndFrame(4);
-			facingRight = false;
-		} else if (sys.isKeyDown(SDLK_d)) {     // frames 0 and 1
-			setStartFrame(0);
-			setEndFrame(2);
-			facingRight = true;
-		} else {
-			checkCurrentCount();
-		}
 
 		int currentFrame = currentCount / millisPerFrame;
 		setCurrentFrame(currentFrame);
 	}
 
-	bool AnimatedSprite::getFacingRight() const {
-		return facingRight;
-	}
-
 	void AnimatedSprite::checkCurrentCount() {
-		currentCount %= getFramesAmt() * millisPerFrame;
+		// times for when the start- and end-frame begin to show.
 		int endTime = endFrame * millisPerFrame;
 		int startTime = startFrame * millisPerFrame;
 
-		if (endFrame < startFrame) {
-			bool betweenStartAndStop = (currentCount > endTime) && (currentCount < startTime);
-			if (betweenStartAndStop)
-				currentCount = startTime;
+		// startTime + millisPerFrame - 1 is the time when the start-frame ends.
+		// startTime + millisPerFrame would be when the next frame after the start-frame would begin.
 
-		} else {
-			bool outsideStartAndStop = (currentCount > endTime) || (currentCount < startTime);
-			if (outsideStartAndStop)
-				currentCount = startTime;
+		bool outsideRev = currentCount > startTime + millisPerFrame - 1 || currentCount < endTime;
+		bool outsideFwd = currentCount > endTime + millisPerFrame - 1 || currentCount < startTime;
+
+		if (revAnimation && outsideRev) {
+			currentCount = startTime + millisPerFrame - 1;
+		} else if (!revAnimation && outsideFwd) {
+			currentCount = startTime;
 		}
 	}
 
 	void AnimatedSprite::setStartFrame(int frame) {
 		startFrame = frame;
-		checkCurrentCount();
+		revAnimation = endFrame < startFrame;
 	}
 
 	void AnimatedSprite::setEndFrame(int frame) {
 		endFrame = frame;
-		checkCurrentCount();
+		revAnimation = endFrame < startFrame;
 	}
 
 
