@@ -8,7 +8,7 @@
 namespace mcDirr {
 	class AnimatedMobileSprite : public MobileSprite, public AnimatedSprite{
 		public:
-			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, double bouciness, int divs, int millisPerFrame);
+			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame);
 
 			void draw() const;
 			void tick(int millisPassed) override;

@@ -40,8 +40,6 @@ namespace mcDirr {
 			std::list<Sprite*> sprites;
 			std::list<MobileSprite*> mobileSprites;
 			std::list<ImmobileSprite*> immobileSprites;
-
-			void collisionChecks(MobileSprite* movableSprite);
 	};
 }
 

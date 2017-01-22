@@ -27,13 +27,13 @@ int main(int argc, char** argv) {
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
 
-	MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200, 0);
-	MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200, 0.5);
-	ImmobileSprite* s17 = ImmobileSprite::getInstance(cat, 400, 600);
-	ImmobileSprite* s18 = ImmobileSprite::getInstance(cat, 500, 600);
-	ImmobileSprite* s19 = ImmobileSprite::getInstance(cat, 600, 600);
-	ImmobileSprite* s20 = ImmobileSprite::getInstance(cat, 700, 600);
-	ImmobileSprite* s21 = ImmobileSprite::getInstance(cat, 800, 600);
+	MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200);
+	MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200);
+	ImmobileSprite* s17 = ImmobileSprite::getInstance(cat, 400, 600, 0.5);
+	ImmobileSprite* s18 = ImmobileSprite::getInstance(cat, 500, 600, 0.5);
+	ImmobileSprite* s19 = ImmobileSprite::getInstance(cat, 600, 600, 0.5);
+	ImmobileSprite* s20 = ImmobileSprite::getInstance(cat, 700, 600, 0.5);
+	ImmobileSprite* s21 = ImmobileSprite::getInstance(cat, 800, 600, 0.5);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
@@ -46,22 +46,22 @@ int main(int argc, char** argv) {
 	lvl2->add(s21);
 
 
-	ImmobileSprite* s1 = ImmobileSprite::getInstance(cat, 200, 200);
-	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200, 0);
-	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200, 0);
+	ImmobileSprite* s1 = ImmobileSprite::getInstance(cat, 200, 200, 0.5);
+	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
+	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
-	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 0, 2, 1050);
+	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/gubbe spritesheet.png"), 200, 0, 2, 1050);
 
-	ImmobileSprite* s5 = ImmobileSprite::getInstance(cat, 200, 600);
-	ImmobileSprite* s6 = ImmobileSprite::getInstance(cat, 300, 600);
-	ImmobileSprite* s7 = ImmobileSprite::getInstance(cat, 400, 600);
-	ImmobileSprite* s8 = ImmobileSprite::getInstance(cat, 500, 600);
-	ImmobileSprite* s9 = ImmobileSprite::getInstance(cat, 600, 600);
-	ImmobileSprite* s10 = ImmobileSprite::getInstance(cat, 700, 600);
-	ImmobileSprite* s11 = ImmobileSprite::getInstance(cat, 800, 600);
-	ImmobileSprite* s12 = ImmobileSprite::getInstance(cat, 900, 600);
-	ImmobileSprite* s13 = ImmobileSprite::getInstance(cat, 100, 600);
-	ImmobileSprite* s14 = ImmobileSprite::getInstance(cat, 0, 600);
+	ImmobileSprite* s5 = ImmobileSprite::getInstance(cat, 200, 600, 0.5);
+	ImmobileSprite* s6 = ImmobileSprite::getInstance(cat, 300, 600, 0.5);
+	ImmobileSprite* s7 = ImmobileSprite::getInstance(cat, 400, 600, 0.5);
+	ImmobileSprite* s8 = ImmobileSprite::getInstance(loader.loadSurface("media/greencat.png"), 500, 600, 1.1);
+	ImmobileSprite* s9 = ImmobileSprite::getInstance(cat, 600, 600, 0.5);
+	ImmobileSprite* s10 = ImmobileSprite::getInstance(cat, 700, 600, 0.5);
+	ImmobileSprite* s11 = ImmobileSprite::getInstance(cat, 800, 600, 0.5);
+	ImmobileSprite* s12 = ImmobileSprite::getInstance(cat, 900, 600, 0.5);
+	ImmobileSprite* s13 = ImmobileSprite::getInstance(cat, 100, 600, 0.5);
+	ImmobileSprite* s14 = ImmobileSprite::getInstance(cat, 0, 600, 0.5);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 

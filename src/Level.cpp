@@ -21,7 +21,7 @@ namespace mcDirr {
 
 		for (std::list<MobileSprite*>::iterator it = mobileSprites.begin(); it != mobileSprites.end();) {
 			(*it)->tick(timeDiff);
-			collisionChecks((*it));
+			(*it)->checkCollisions(immobileSprites);
 
 			if (!(*it)->isAlive()) {
 				it = mobileSprites.erase(it);
@@ -46,18 +46,6 @@ namespace mcDirr {
 
 		for(Sprite* curr : sprites)
 			curr->draw();
-	}
-
-	void Level::collisionChecks(MobileSprite* mobile) {
-		for (std::list<ImmobileSprite*>::iterator immobile = immobileSprites.begin(); 
-				immobile != immobileSprites.end();) {
-			mobile->checkCollision(*immobile);
-
-			if (!(*immobile)->isAlive())
-				immobile = immobileSprites.erase(immobile);
-			else
-				immobile++;
-		}
 	}
 
 	void Level::add(Sprite* sprite) {
