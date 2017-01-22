@@ -15,13 +15,15 @@
 #include "Loader.hpp"
 
 #define FPS 60
+#define W_WIDTH 1024
+#define W_HEIGHT 768
 
 using namespace std;
 using namespace mcDirr;
 
 int main(int argc, char** argv) {
 	//test code
-	GameEngine ge = GameEngine("mcDirr - The gaem", FPS);
+	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	SDL_Surface* cat = loader.loadSurface("media/cat.bmp");
 
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");

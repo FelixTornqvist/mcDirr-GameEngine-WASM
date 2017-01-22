@@ -10,13 +10,10 @@
 #include <vector>
 #include <list>
 
-#define W_WIDTH 1000
-#define W_HEIGHT 800
-
 namespace mcDirr {
 
-	GameEngine::GameEngine(std::string windowName, int _fps): fps(_fps) {
-		sys.initialize(windowName, W_WIDTH, W_HEIGHT);
+	GameEngine::GameEngine(std::string windowName, int wWidth, int wHeight, int _fps): fps(_fps) {
+		sys.initialize(windowName, wWidth, wHeight);
 	}
 
 	void GameEngine::run() {

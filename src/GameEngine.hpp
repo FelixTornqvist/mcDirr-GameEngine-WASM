@@ -9,7 +9,7 @@
 namespace mcDirr {
 	class GameEngine {
 		public:
-			GameEngine(std::string windowName, int _fps);
+			GameEngine(std::string windowName, int w, int h, int _fps);
 			void run();
 			void setFirstLevel(Level* lvl);
 			virtual ~GameEngine();
