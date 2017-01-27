@@ -16,14 +16,22 @@ namespace mcDirr {
 		MobileSprite::tick(millisPassed);
 		AnimatedSprite::tick(millisPassed);
 
-		if (xVel < 0) {	//  frames 2 and 3
-			setStartFrame(0);
+		if (xVel < 0) {
+			setStartFrame(2);
 			setEndFrame(59);
 			facingRight = false;
-		} else if (xVel > 0) {     // frames 0 and 1
+		} else if (xVel > 0) {
 			setStartFrame(61);
 			setEndFrame(118);
 			facingRight = true;
+		} else {
+			if (!facingRight) {
+				setStartFrame(0);
+				setEndFrame(0);
+			} else {
+				setStartFrame(1);
+				setEndFrame(1);
+			}
 		}
 	}
 
