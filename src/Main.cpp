@@ -85,6 +85,8 @@ int main(int argc, char** argv) {
 
 	ge.setFirstLevel(lvl1);
 
+	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipLevel);
+
 	ge.run();
 
 	return 0;

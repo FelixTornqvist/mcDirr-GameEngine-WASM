@@ -38,6 +38,8 @@ namespace mcDirr {
 					break;
 				case SDL_KEYDOWN:
 					keys[eve.key.keysym.sym] = true;
+					if (funcMapping.count(eve.key.keysym.sym))
+						funcMapping[eve.key.keysym.sym]();
 					if(collectTyping) {
 						typed += eve.key.keysym.sym;
 					}

@@ -12,6 +12,7 @@ namespace mcDirr {
 			GameEngine(std::string windowName, int w, int h, int _fps);
 			void run();
 			void setFirstLevel(Level* lvl);
+			void skipLevel();
 			virtual ~GameEngine();
 
 		protected:

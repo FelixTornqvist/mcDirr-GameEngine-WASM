@@ -22,11 +22,9 @@ namespace mcDirr {
 		Uint32 nextTick;
 
 		running = true;
-		sys.listenForTyping(true);
 		while(running) {
 			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);   //TODO: temporary
 			nextTick = lastTick + MILLIS_PER_LOOP;
-			sys.collectInputs();
 
 			currentLevel->tick(nextTick - lastTick);
 
@@ -35,15 +33,20 @@ namespace mcDirr {
 			SDL_RenderPresent(sys.getRen());
 
 			if(currentLevel->isComplete()) {
-				currentLevel = currentLevel->getNextLevel();
-				if(currentLevel == nullptr)
-					running = false;
+				skipLevel();
 			}
 
+			sys.collectInputs();
 			running &= !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
 			delay(nextTick);
 			lastTick = nextTick;
 		}
+	}
+
+	void GameEngine::skipLevel() {
+		currentLevel = currentLevel->getNextLevel();
+		if(currentLevel == nullptr)
+			running = false;
 	}
 
 	void GameEngine::delay(Uint32 nextTick) const {

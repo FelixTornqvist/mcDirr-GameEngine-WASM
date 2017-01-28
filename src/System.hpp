@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <string>
 #include <unordered_map>
+#include <functional>
 
 namespace mcDirr {
 	class System {
@@ -34,6 +35,9 @@ namespace mcDirr {
 			std::string getTypedString() const;
 			void listenForTyping(bool listen);
 
+			template<class AnyClass>
+			void addKeyFunction(Uint8 key, AnyClass *object, void (AnyClass::*func)() );
+
 			void Quit();
 
 		protected:
@@ -47,9 +51,18 @@ namespace mcDirr {
 			std::unordered_map<Uint8, bool> mouseButtons;
 			Sint32 mouseX, mouseY;
 
+			std::unordered_map<Uint8, std::function<void()>> funcMapping;
+
 			bool collectTyping = false;
 			std::string typed = " ";
 	};
+
+	/* implementation needed in header file because of the use of template*/
+	template<class AnyClass>
+	void System::addKeyFunction(Uint8 key, AnyClass *object, void (AnyClass::*func)() ) {
+		funcMapping[key] = std::bind(func, object);
+		//to call the function: (object->*func)();
+	}
 
 	extern System sys;
 }

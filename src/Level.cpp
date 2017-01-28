@@ -28,13 +28,6 @@ namespace mcDirr {
 			} else
 				it++;
 		}
-
-		if(sys.getTypedString().back() == 'l') {
-			sys.listenForTyping(false);
-			std::cout << "next Level!" << std::endl;
-			complete = true;
-			sys.listenForTyping(true);
-		}
 	}
 
 	void Level::draw() {
