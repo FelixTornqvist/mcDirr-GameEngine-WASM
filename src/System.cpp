@@ -80,6 +80,10 @@ namespace mcDirr {
 			typed.clear();
 	}
 
+	void System::addKeyFunction(Uint8 key, void (*funk)()) {
+		funcMapping[key] = funk;
+	}
+
 	void System::Quit() {
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);

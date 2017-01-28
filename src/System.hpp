@@ -36,7 +36,11 @@ namespace mcDirr {
 			void listenForTyping(bool listen);
 
 			template<class AnyClass>
+			/** member functions*/
 			void addKeyFunction(Uint8 key, AnyClass *object, void (AnyClass::*func)() );
+
+			/** free functions*/
+			void addKeyFunction(Uint8 key, void (*func)() );
 
 			void Quit();
 
@@ -61,7 +65,6 @@ namespace mcDirr {
 	template<class AnyClass>
 	void System::addKeyFunction(Uint8 key, AnyClass *object, void (AnyClass::*func)() ) {
 		funcMapping[key] = std::bind(func, object);
-		//to call the function: (object->*func)();
 	}
 
 	extern System sys;

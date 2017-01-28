@@ -21,6 +21,10 @@
 using namespace std;
 using namespace mcDirr;
 
+void freeFunk(){
+	cout << "I am a free-range function!" << endl;
+}
+
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
@@ -86,6 +90,7 @@ int main(int argc, char** argv) {
 	ge.setFirstLevel(lvl1);
 
 	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipLevel);
+	sys.addKeyFunction(SDLK_f, &freeFunk);
 
 	ge.run();
 
