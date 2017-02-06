@@ -56,11 +56,8 @@ namespace mcDirr {
 	}
 
 	void GameEngine::setFirstLevel(Level* lvl) {
-		if(firstLevel != nullptr) {
-			firstLevel = lvl;
-			currentLevel = lvl;
-		}
-
+		firstLevel = lvl;
+		currentLevel = lvl;
 	}
 
 	GameEngine::~GameEngine() {
