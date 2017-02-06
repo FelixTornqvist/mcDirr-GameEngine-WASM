@@ -28,7 +28,7 @@ void freeFunk(){
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
-	SDL_Surface* cat = loader.loadSurface("media/cat.bmp");
+	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
 
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	Mix_PlayChannel(-1, BGmusic, -1);
@@ -52,40 +52,29 @@ int main(int argc, char** argv) {
 	lvl2->add(s21);
 
 
-	ImmobileSprite* s1 = ImmobileSprite::getInstance(cat, 200, 200, 0.5);
+	SDL_Surface* lvl1BGSurf = loader.loadSurface("media/level1BG.png");
+	SDL_Surface* santasheet = loader.loadSurface("media/santa-sheet.png");
+	SDL_Surface* grass = loader.loadSurface("media/grass.png");
+	SDL_Surface* slime = loader.loadSurface("media/slime.png");
+
+	VisualSprite* lvl1BG = VisualSprite::getInstance(lvl1BGSurf, 0, 0);
 	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
 	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
-	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(loader.loadSurface("media/santa-sheet.png"), 200, 0, 11, 10);
+	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(santasheet, 200, 0, 11, 10);
 
-	ImmobileSprite* s5 = ImmobileSprite::getInstance(cat, 200, 600, 0.5);
-	ImmobileSprite* s6 = ImmobileSprite::getInstance(cat, 300, 600, 0.5);
-	ImmobileSprite* s7 = ImmobileSprite::getInstance(cat, 400, 600, 0.5);
-	ImmobileSprite* s8 = ImmobileSprite::getInstance(loader.loadSurface("media/greencat.png"), 500, 600, 1.1);
-	ImmobileSprite* s9 = ImmobileSprite::getInstance(cat, 600, 600, 0.5);
-	ImmobileSprite* s10 = ImmobileSprite::getInstance(cat, 700, 600, 0.5);
-	ImmobileSprite* s11 = ImmobileSprite::getInstance(cat, 800, 600, 0.5);
-	ImmobileSprite* s12 = ImmobileSprite::getInstance(cat, 900, 600, 0.5);
-	ImmobileSprite* s13 = ImmobileSprite::getInstance(cat, 100, 600, 0.5);
-	ImmobileSprite* s14 = ImmobileSprite::getInstance(cat, 0, 600, 0.5);
+	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
+	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s4);
-	lvl1->add(s1);
 	lvl1->add(s2);
 	lvl1->add(s3);
 
 	lvl1->add(s5);
-	lvl1->add(s6);
-	lvl1->add(s7);
 	lvl1->add(s8);
-	lvl1->add(s9);
-	lvl1->add(s10);
-	lvl1->add(s11);
-	lvl1->add(s12);
-	lvl1->add(s13);
-	lvl1->add(s14);
+	lvl1->add(lvl1BG);
 
 	ge.setFirstLevel(lvl1);
 

@@ -31,13 +31,13 @@ namespace mcDirr {
 	}
 
 	void Level::draw() {
+		for(Sprite* curr : sprites)
+			curr->draw();
+
 		for (ImmobileSprite* curr : immobileSprites)
 			curr->draw();
 
 		for (MobileSprite* curr : mobileSprites)
-			curr->draw();
-
-		for(Sprite* curr : sprites)
 			curr->draw();
 	}
 
