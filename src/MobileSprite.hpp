@@ -25,7 +25,8 @@ namespace mcDirr {
 			MobileSprite(SDL_Surface* s, int x, int y);
 			void virtual checkCollision(ImmobileSprite* other);
 			void doPhysics(int millisPassed);
-
+			
+			bool yOutOfBounds();
 			float currentTime;
 			double yVel, xVel;
 			double yAccel, xAccel;

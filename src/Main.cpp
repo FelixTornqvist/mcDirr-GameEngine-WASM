@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
 	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(santasheet, 200, 0, 11, 10);
-	InteractionSprite* s5000 = new InteractionSprite(santasheet, 50, 50, -2, false, 1, 1);
+	// InteractionSprite* s5000 = new InteractionSprite(santasheet, 50, 50, -2, false, 1, 1);
 
 	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
 	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
