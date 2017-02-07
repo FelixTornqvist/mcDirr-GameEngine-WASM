@@ -74,15 +74,21 @@ void MobileSprite::checkBounds() {
 	
 	SDL_Window* window = sys.getWin();
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
-	std::cout << dest.x << " - " << winWidth << std::endl;
+	// std::cout << dest.x << " - " << winWidth << std::endl;
 
 	if (dest.y > winHeight) {
 		dest.x = 50;
 		dest.y = 50;
+		return;
 	}
 
 	if (dest.x <= 0) {
 		dest.x = 1;
+		return;
+	}
+
+	if (dest.x > winWidth) {
+		dest.x = 50;
 	}
 }
 
