@@ -26,7 +26,7 @@ namespace mcDirr {
 			void virtual checkCollision(ImmobileSprite* other);
 			void doPhysics(int millisPassed);
 			
-			bool yOutOfBounds();
+			virtual void checkBounds();
 			float currentTime;
 			double yVel, xVel;
 			double yAccel, xAccel;

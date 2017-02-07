@@ -47,10 +47,8 @@ void MobileSprite::doPhysics(int millisPassed) {
 }
 
 void MobileSprite::tick(int time) {
-	if (yOutOfBounds()) {
-		dest.x = 50;
-		dest.y = 50;
-	}
+	checkBounds();
+
 	// ~ temporary for controls: ~
 	if (sys.isKeyDown(SDLK_w) && onGround)
 		yVel -= 1;
@@ -70,20 +68,22 @@ void MobileSprite::tick(int time) {
 	}
 }
 
-bool MobileSprite::yOutOfBounds() {
-	// std::cout << dest.y << " - " << winHeight << std::endl;
-
+void MobileSprite::checkBounds() {
 	int winWidth = 0;
 	int winHeight = 0;
 	
 	SDL_Window* window = sys.getWin();
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
+	std::cout << dest.x << " - " << winWidth << std::endl;
 
 	if (dest.y > winHeight) {
-		// std::cout << " out of bounds " << std::endl;
-		return true;
+		dest.x = 50;
+		dest.y = 50;
 	}
-	return false;
+
+	if (dest.x <= 0) {
+		dest.x = 1;
+	}
 }
 
 void MobileSprite::checkCollisions(std::list<ImmobileSprite*>& others) {
