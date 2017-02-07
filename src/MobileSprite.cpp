@@ -47,7 +47,6 @@ void MobileSprite::doPhysics(int millisPassed) {
 }
 
 void MobileSprite::tick(int time) {
-	checkBounds();
 
 	// ~ temporary for controls: ~
 	if (sys.isKeyDown(SDLK_w) && onGround)
@@ -66,12 +65,13 @@ void MobileSprite::tick(int time) {
 		std::cout << "I've been killed by Q" << std::endl;
 		alive = false;
 	}
+	checkBounds();
 }
 
 void MobileSprite::checkBounds() {
 	int winWidth = 0;
 	int winHeight = 0;
-	
+
 	SDL_Window* window = sys.getWin();
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 	// std::cout << dest.x << " - " << winWidth << std::endl;
