@@ -95,7 +95,7 @@ void MobileSprite::checkBounds() {
 void MobileSprite::checkCollisions(std::list<ImmobileSprite*>& others) {
 	onGround = false;
 	for (std::list<ImmobileSprite*>::iterator immobile = others.begin(); immobile != others.end();) {
-		checkCollision(*immobile);
+		handleCollision(*immobile, checkCollision(*immobile));
 
 		if (!(*immobile)->isAlive())
 			immobile = others.erase(immobile);
@@ -104,9 +104,10 @@ void MobileSprite::checkCollisions(std::list<ImmobileSprite*>& others) {
 	}
 }
 
-void MobileSprite::checkCollision(ImmobileSprite* other) {
+int MobileSprite::checkCollision(Sprite* other) {
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (* other->getDestRect());
+	int side = 0;
 
 	if (SDL_IntersectRect(&dest, &oDest, &intersection)) {
 
@@ -117,37 +118,58 @@ void MobileSprite::checkCollision(ImmobileSprite* other) {
 
 		if (intersection.h > intersection.w) {
 			if (oX > myX) {
-				myX = oX - dest.w;
+				side = 4;
 			} else {
-				myX = oX + oDest.w;
+				side = 2;
 			}
-			xVel *= -other->getBounciness();
 		} else {
 			if (oY > myY) {
-				myY = oY - dest.h;
-				onGround = true;
+				side = 3;
 			} else {
-				myY = oY + oDest.h;
+				side = 1;
 			}
-			yVel *= -other->getBounciness();
-			xVel = 0;
+		}
+		return side;
+	}
 
+}
+
+void MobileSprite::handleCollision(ImmobileSprite* collidedWith, int side) {
+	if (side) {
+		SDL_Rect& oDest = (* collidedWith->getDestRect());
+		int& oX = oDest.x;
+		int& oY = oDest.y;
+		int& myX = dest.x;
+		int& myY = dest.y;
+
+		if(side == 1) {
+			myY = oY + oDest.h;
+		} else if (side == 3) {
+			myY = oY - dest.h;
+			onGround = true;
+		} else if (side == 2) {
+			myX = oX + oDest.w;
+		} else if (side == 4) {
+			myX = oX - dest.w;
+		}
+
+		if (side == 1 || side == 3) {
+			yVel *= -collidedWith->getBounciness();
+			xVel = 0;
+		}
+
+		if (side == 4 || side == 2) {
+			xVel *= -collidedWith->getBounciness();
 		}
 	}
 }
 
-/* to be implemented */
-bool MobileSprite::pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf) {
-	int tempX = tempRect->x;
-	int tempY = tempRect->y;
-
-	int xDiff = tempX - dest.x;
-	int yDiff = tempY - dest.y;
-	return false;
-}
-
 bool MobileSprite::isAlive() const {
 	return alive;
+}
+
+void MobileSprite::kill() {
+	alive = false;
 }
 
 SDL_Surface* MobileSprite::getSurface() const {

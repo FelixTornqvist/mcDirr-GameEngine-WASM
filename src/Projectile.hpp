@@ -6,7 +6,7 @@
 namespace mcDirr {
 	class Projectile : public InteractionSprite {
 		public:
-			Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, int Xvel, int Yvel);
+			Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel);
 
 			void handleCollision(MobileSprite* collidedWith, int side);
 

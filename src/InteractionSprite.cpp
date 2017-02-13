@@ -4,10 +4,10 @@
 
 
 namespace mcDirr {
-	InteractionSprite::InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, int Xvel, int Yvel):
+	InteractionSprite::InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel):
 		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), damage(_damage) {
 
-		if (affectedByGravity) {
+		if (!affectedByGravity) {
 			yAccel = 0;
 			xAccel = 0;
 		}
@@ -16,8 +16,8 @@ namespace mcDirr {
 
 	}
 
-	void InteractionSprite::checkCollision(ImmobileSprite* other) {
-		AnimatedMobileSprite::checkCollision(other);
+	int InteractionSprite::checkCollision(Sprite* other) {
+		return AnimatedMobileSprite::checkCollision(other);
 	}
 
 	void InteractionSprite::checkCollision(MobileSprite* other) {

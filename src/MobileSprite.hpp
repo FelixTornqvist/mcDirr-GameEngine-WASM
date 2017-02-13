@@ -16,16 +16,17 @@ namespace mcDirr {
 			void draw() const override;
 			void tick(int passedMillis) override;
 			void checkCollisions(std::list<ImmobileSprite*>& others);
-			bool pixelCollision(SDL_Rect* tempRect, SDL_Surface* otherSurf);
 			bool isAlive() const;
+			void kill();
 			SDL_Surface* getSurface() const;
 			virtual ~MobileSprite() {};
 
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y);
-			void virtual checkCollision(ImmobileSprite* other);
+			int virtual checkCollision(Sprite* other);
+			void handleCollision(ImmobileSprite* collidedWith, int side);
 			void doPhysics(int millisPassed);
-			
+
 			virtual void checkBounds();
 			float currentTime;
 			double yVel, xVel;

@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, true, 1, 0);
+	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, false, 0.3, 0);
 
 	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
 	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
@@ -67,8 +67,8 @@ int main(int argc, char** argv) {
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s4);
-//	lvl1->add(s2);
-//	lvl1->add(s3);
+	lvl1->add(s2);
+	lvl1->add(s3);
 
 	lvl1->add(s5);
 	lvl1->add(s8);
