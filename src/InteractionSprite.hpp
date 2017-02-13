@@ -7,15 +7,17 @@ namespace mcDirr {
 	class InteractionSprite : public AnimatedMobileSprite {
 		public:
 			int getDamage();
-			int checkCollision(Sprite* other) override;
-			void checkCollision(MobileSprite* other);
 
-			void virtual handleCollision(MobileSprite* collidedWith, int side) = 0;
+			void checkCollisions(std::list<MobileSprite*>& mobiles);
+			void checkCollision(MobileSprite* other);
+			void checkPixelCollission(MobileSprite* other, int side);
 
 			virtual ~InteractionSprite();
 
 		protected:
 			InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel);
+
+			void virtual handleCollision(MobileSprite* collidedWith, int side) = 0;
 
 		private:
 			int damage;

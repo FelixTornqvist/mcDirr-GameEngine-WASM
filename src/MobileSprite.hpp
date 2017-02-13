@@ -23,8 +23,8 @@ namespace mcDirr {
 
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y);
-			int virtual checkCollision(Sprite* other);
-			void handleCollision(ImmobileSprite* collidedWith, int side);
+			int checkCollision(Sprite* other) const;
+			void virtual handleCollision(ImmobileSprite* collidedWith, int side);
 			void doPhysics(int millisPassed);
 
 			virtual void checkBounds();

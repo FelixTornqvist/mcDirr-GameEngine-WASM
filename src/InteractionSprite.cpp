@@ -16,12 +16,23 @@ namespace mcDirr {
 
 	}
 
-	int InteractionSprite::checkCollision(Sprite* other) {
-		return AnimatedMobileSprite::checkCollision(other);
+	void InteractionSprite::checkCollisions(std::list<MobileSprite*>& mobiles) {
+		for (std::list<MobileSprite*>::iterator mobile = mobiles.begin(); mobile != mobiles.end();) {
+
+			int side = MobileSprite::checkCollision(*mobile);
+			if (side)
+				checkPixelCollission(*mobile, side);
+
+			if (!(*mobile)->isAlive())
+				mobile = mobiles.erase(mobile);
+			else
+				mobile++;
+		}
 	}
 
-	void InteractionSprite::checkCollision(MobileSprite* other) {
-
+	void InteractionSprite::checkPixelCollission(MobileSprite* other, int side) {
+		// if (pixelcollission) :
+		handleCollision(other, side);
 	}
 
 	int InteractionSprite::getDamage() {

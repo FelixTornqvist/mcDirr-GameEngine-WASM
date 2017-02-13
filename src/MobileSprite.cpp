@@ -104,17 +104,16 @@ void MobileSprite::checkCollisions(std::list<ImmobileSprite*>& others) {
 	}
 }
 
-int MobileSprite::checkCollision(Sprite* other) {
+int MobileSprite::checkCollision(Sprite* other) const{
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (* other->getDestRect());
 	int side = 0;
 
 	if (SDL_IntersectRect(&dest, &oDest, &intersection)) {
-
-		int& oX = oDest.x;
-		int& oY = oDest.y;
-		int& myX = dest.x;
-		int& myY = dest.y;
+		const int& oX = oDest.x;
+		const int& oY = oDest.y;
+		const int& myX = dest.x;
+		const int& myY = dest.y;
 
 		if (intersection.h > intersection.w) {
 			if (oX > myX) {
@@ -129,9 +128,8 @@ int MobileSprite::checkCollision(Sprite* other) {
 				side = 1;
 			}
 		}
-		return side;
 	}
-
+	return side;
 }
 
 void MobileSprite::handleCollision(ImmobileSprite* collidedWith, int side) {
