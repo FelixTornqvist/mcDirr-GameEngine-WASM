@@ -16,13 +16,14 @@ namespace mcDirr {
 		MobileSprite::tick(millisPassed);
 		AnimatedSprite::tick(millisPassed);
 
+		//temporary, should be in game implementation
 		if (xVel < 0) {
-			setStartFrame(2);
-			setEndFrame(59);
+			setStartFrame(0);
+			setEndFrame(3);
 			facingRight = false;
 		} else if (xVel > 0) {
-			setStartFrame(61);
-			setEndFrame(118);
+			setStartFrame(4);
+			setEndFrame(7);
 			facingRight = true;
 		} else {
 			if (!facingRight) {

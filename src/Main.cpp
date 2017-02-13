@@ -10,6 +10,7 @@
 #include "VisualSprite.hpp"
 #include "MobileSprite.hpp"
 #include "InteractionSprite.hpp"
+#include "Projectile.hpp"
 #include "Level.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
@@ -50,14 +51,15 @@ int main(int argc, char** argv) {
 
 	SDL_Surface* lvl1BGSurf = loader.loadSurface("media/level1BG.png");
 	SDL_Surface* santasheet = loader.loadSurface("media/santa-sheet.png");
+	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = VisualSprite::getInstance(lvl1BGSurf, 0, 0);
 	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
 	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
-	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(santasheet, 200, 0, 11, 10);
-	// InteractionSprite* s5000 = new InteractionSprite(santasheet, 50, 50, -2, false, 1, 1);
+//	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
+	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, true, 1, 0);
 
 	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
 	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
@@ -65,8 +67,8 @@ int main(int argc, char** argv) {
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	lvl1->add(s4);
-	lvl1->add(s2);
-	lvl1->add(s3);
+//	lvl1->add(s2);
+//	lvl1->add(s3);
 
 	lvl1->add(s5);
 	lvl1->add(s8);
