@@ -11,6 +11,8 @@ namespace mcDirr {
 		alive = false;
 	}
 
+	void Projectile::customTick()
+
 	Projectile::~Projectile() {
 		//dtor
 

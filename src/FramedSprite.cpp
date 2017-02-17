@@ -2,9 +2,6 @@
 #include "System.hpp"
 
 namespace mcDirr {
-	FramedSprite* FramedSprite::getInstance(SDL_Surface* s, int x, int y, int z) {
-		return new FramedSprite(s, x, y, z);
-	}
 
 	FramedSprite::FramedSprite(SDL_Surface* surf, int x, int y, int divs) :
 		Sprite(surf, x, y), spriteSheetDivs(divs) {
