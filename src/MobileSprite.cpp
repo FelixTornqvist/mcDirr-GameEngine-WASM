@@ -43,8 +43,6 @@ void MobileSprite::doPhysics(int millisPassed) {
 }
 
 void MobileSprite::tick(int time) {
-
-	customTick(time);
 	doPhysics(time);
 	checkBounds();
 }
