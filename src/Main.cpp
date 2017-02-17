@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-//	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, false, 0.3, 0);
+	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, -2, false, 0.3, 0);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);

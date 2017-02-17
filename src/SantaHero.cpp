@@ -29,7 +29,7 @@ void SantaHero::customTick(int timeDiff) {
 		facingRight = false;
 	} else if (xVel > 0) {
 		setStartFrame(61);
-		setEndFrame(121);
+		setEndFrame(120);
 		facingRight = true;
 	} else {
 		if (!facingRight) {

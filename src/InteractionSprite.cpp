@@ -4,8 +4,8 @@
 
 
 namespace mcDirr {
-	InteractionSprite::InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel):
-		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), damage(_damage) {
+	InteractionSprite::InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _healthImpact, bool affectedByGravity, double Xvel, double Yvel):
+		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), healthImpact(_healthImpact) {
 
 		if (!affectedByGravity) {
 			yAccel = 0;
@@ -35,8 +35,8 @@ namespace mcDirr {
 		handleCollision(other, side);
 	}
 
-	int InteractionSprite::getDamage() {
-		return damage;
+	int InteractionSprite::getHealthImpact() {
+		return healthImpact;
 	}
 
 	InteractionSprite::~InteractionSprite() {
