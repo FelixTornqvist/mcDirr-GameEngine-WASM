@@ -17,6 +17,7 @@
 #include "GameEngine.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
+#include "Background.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -56,7 +57,7 @@ int main(int argc, char** argv) {
 	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
-	VisualSprite* lvl1BG = VisualSprite::getInstance(lvl1BGSurf, 0, 0);
+	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
 	// MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
 	// MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 

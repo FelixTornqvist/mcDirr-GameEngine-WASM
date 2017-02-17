@@ -11,4 +11,4 @@ void EvilCat::customTick(int timeDiff) {
 	// move move
 }
 
-EvilCat::EvilCat(SDL_Surface* surface, int x, int y) : MobileSprite(surface, x, y) {}
+EvilCat::EvilCat(SDL_Surface* surface, int x, int y) : MobileSprite(surface, x, y), Sprite(surface, x, y) {}

@@ -12,7 +12,7 @@ namespace mcDirr {
 		~Obstacle();
 
 	protected:
-		void customTick(int timeDiff);
+		void customTick(int timeDiff) override;
 		Obstacle(SDL_Surface* s, int x, int y, float b);
 
 	};

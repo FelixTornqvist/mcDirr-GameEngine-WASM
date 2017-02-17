@@ -6,7 +6,7 @@
 
 
 namespace mcDirr {
-	class AnimatedMobileSprite : public MobileSprite, public AnimatedSprite{
+	class AnimatedMobileSprite : public MobileSprite, public AnimatedSprite {
 		public:
 			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame);
 
@@ -16,8 +16,10 @@ namespace mcDirr {
 
 			virtual ~AnimatedMobileSprite();
 
-		private:
+		protected:
 			bool facingRight;
+
+		private:
 	};
 }
 

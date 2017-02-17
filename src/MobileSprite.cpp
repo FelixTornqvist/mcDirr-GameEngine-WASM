@@ -8,10 +8,6 @@
 
 using namespace mcDirr;
 
-MobileSprite* MobileSprite::getInstance(SDL_Surface* surface, int x, int y) {
-	return new MobileSprite(surface, x, y);
-}
-
 MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y) : Sprite(surf, x, y) {
 	surface = surf;
 	currentTime = 0;

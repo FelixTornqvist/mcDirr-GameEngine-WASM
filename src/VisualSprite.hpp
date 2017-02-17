@@ -6,8 +6,6 @@
 namespace mcDirr {
 	class VisualSprite : public Sprite {
 	public:
-		static VisualSprite* getInstance(SDL_Surface*, int, int);
-
 		void tick(int passedTime) override;
 		void draw() const override;
 
