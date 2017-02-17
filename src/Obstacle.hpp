@@ -13,9 +13,6 @@ namespace mcDirr {
 
 	protected:
 		void customTick(int timeDiff);
-	
-
-	private:
 		Obstacle(SDL_Surface* s, int x, int y, float b);
 
 	};

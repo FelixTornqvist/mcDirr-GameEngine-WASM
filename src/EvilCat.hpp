@@ -12,8 +12,6 @@ namespace mcDirr {
 
 	protected:
 		void customTick(int timeDiff);
-
-	private:
 		EvilCat(SDL_Surface* s, int x, int y);
 
 	};
