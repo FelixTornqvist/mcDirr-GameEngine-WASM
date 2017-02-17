@@ -12,6 +12,7 @@
 #include "InteractionSprite.hpp"
 #include "Projectile.hpp"
 #include "SantaHero.hpp"
+#include "Obstacle.hpp"
 #include "Level.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
@@ -39,8 +40,8 @@ int main(int argc, char** argv) {
 
 	// MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200);
 	// MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200);
-	ImmobileSprite* s17 = ImmobileSprite::getInstance(grass, 400, 600, 0.2);
-	ImmobileSprite* s18 = ImmobileSprite::getInstance(grass, -500, 400, 0.2);
+	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
+	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
@@ -62,8 +63,8 @@ int main(int argc, char** argv) {
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
 	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, false, 0.3, 0);
 
-	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
-	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
+	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
+	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
 	SantaHero* santa = new SantaHero(santasheet, 50, 50, 11, 10);
 
