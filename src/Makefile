@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Loader.o Level.o
+OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o InteractionSprite.o Projectile.o Loader.o Level.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -22,7 +22,7 @@ FramedSprite.o : FramedSprite.hpp FramedSprite.cpp Sprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) FramedSprite.cpp
 
 AnimatedSprite.o : AnimatedSprite.hpp AnimatedSprite.cpp FramedSprite.hpp
-	$(CC) $(CFLAGS) $(COMPILERFLAG) AnimatedSprite.cpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) AnimatedSprite.cppw
 
 Sprite.o : Sprite.hpp Sprite.cpp Sprite.hpp System.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Sprite.cpp
@@ -47,6 +47,14 @@ Loader.o : Loader.hpp Loader.cpp System.hpp
 
 Level.o : Level.hpp Level.cpp Sprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Level.cpp
+
+InteractionSprite.o : InteractionSprite.hpp InteractionSprite.cpp AnimatedMobileSprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) InteractionSprite.cpp
+
+
+Projectile.o : Projectile.hpp Projectile.cpp InteractionSprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) Projectile.cpp
+
 
 
 clean:
