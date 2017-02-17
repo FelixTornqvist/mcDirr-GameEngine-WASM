@@ -17,7 +17,9 @@ namespace mcDirr {
 			Sprite(SDL_Surface* surf, int x, int y);
 			SDL_Rect dest;
 			SDL_Texture* texture;
+
 			virtual void customTick(int timeDiff) = 0;
+			friend class Level;
 
 
 		private:

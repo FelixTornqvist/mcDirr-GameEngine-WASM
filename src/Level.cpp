@@ -21,6 +21,7 @@ namespace mcDirr {
 
 		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
 			(*mob)->tick(timeDiff);
+			(*mob)->customTick(timeDiff);
 			(*mob)->checkCollisions(immobileSprites);
 
 			if (!(*mob)->isAlive()) {
