@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	SantaHero* santa = new SantaHero(santasheet, 50, 50, 11, 10);
+	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 

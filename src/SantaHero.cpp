@@ -4,6 +4,13 @@
 
 using namespace mcDirr;
 
+SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) {
+	return new SantaHero(surf, x, y, divs, millisPerFrame);
+}
+
+SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) : AnimatedMobileSprite(surf, x, y, divs, millisPerFrame) {
+}
+
 void SantaHero::customTick(int timeDiff) {
 
 	if (sys.isKeyDown(SDLK_w) && onGround)
