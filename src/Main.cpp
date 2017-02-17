@@ -72,15 +72,6 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-
-	if (santa == nullptr) {
-		cout << "Santa is null" << endl;
-	} else {
-		cout << "Santa is alive" << endl;
-	}
-
-
-
 //	lvl1->add(s4);
 	lvl1->add(s2);
 	lvl1->add(s3);
