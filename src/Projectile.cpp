@@ -8,6 +8,7 @@ namespace mcDirr {
 
 	void Projectile::handleCollision(MobileSprite *collidedWith, int side) {
 		collidedWith->kill();
+		alive = false;
 	}
 
 	Projectile::~Projectile() {

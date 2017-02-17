@@ -50,9 +50,9 @@ void MobileSprite::tick(int time) {
 
 	// ~ temporary for controls: ~
 	if (sys.isKeyDown(SDLK_w) && onGround)
-		yVel -= 1;
+		yVel -= 0.5;
 	else if (sys.isKeyDown(SDLK_s))
-		yVel = 1;
+		yVel = 0.5;
 	if (sys.isKeyDown(SDLK_a))
 		xVel = -0.5;
 	else if (sys.isKeyDown(SDLK_d))
