@@ -146,6 +146,7 @@ bool MobileSprite::isAlive() const {
 }
 
 void MobileSprite::kill() {
+	std::cout << "killed" << std::endl;
 	alive = false;
 }
 
