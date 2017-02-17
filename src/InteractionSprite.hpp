@@ -11,6 +11,7 @@ namespace mcDirr {
 			void checkCollisions(std::list<MobileSprite*>& mobiles);
 			void checkCollision(MobileSprite* other);
 			void checkPixelCollission(MobileSprite* other, int side);
+			int getHealthImpact();
 
 			virtual ~InteractionSprite();
 
@@ -20,7 +21,7 @@ namespace mcDirr {
 			void virtual handleCollision(MobileSprite* collidedWith, int side) = 0;
 
 		private:
-			int damage;
+			int healthImpact;
 	};
 }
 #endif // INTERACTIONSPRITE_HPP
