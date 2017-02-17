@@ -17,9 +17,6 @@ namespace mcDirr {
 		SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame);
 		void customTick(int timeDiff);
 
-
-	private:
-
 	};
 }
 
