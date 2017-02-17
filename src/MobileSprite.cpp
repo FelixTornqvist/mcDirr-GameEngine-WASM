@@ -8,6 +8,14 @@
 
 using namespace mcDirr;
 
+void MobileSprite::setHealth(int newHealth) {
+	health = newHealth;
+}
+
+void MobileSprite::changeHealth(int impact) {
+	health += impact;
+}
+
 MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y) : Sprite(surf, x, y) {
 	surface = surf;
 	currentTime = 0;

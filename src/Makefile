@@ -64,7 +64,7 @@ SantaHero.o : SantaHero.hpp SantaHero.cpp AnimatedMobileSprite.hpp
 Obstacle.o : Obstacle.hpp Obstacle.cpp ImmobileSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Obstacle.cpp
 
-EvilCat.o : EvilCat.hpp EvilCat.cpp MobileSprite.hpp
+EvilCat.o : EvilCat.hpp EvilCat.cpp InteractionSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) EvilCat.cpp
 
 

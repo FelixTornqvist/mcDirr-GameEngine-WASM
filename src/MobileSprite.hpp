@@ -19,6 +19,8 @@ namespace mcDirr {
 			void kill();
 			SDL_Surface* getSurface() const;
 			virtual ~MobileSprite() {};
+			void setHealth(int newHealth);
+			void changeHealth(int impact);
 
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y);
