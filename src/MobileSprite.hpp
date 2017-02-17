@@ -32,6 +32,7 @@ namespace mcDirr {
 			double yAccel, xAccel;
 			bool alive;
 			bool onGround;
+			int health;
 
 		private:
 			double debounceVel;

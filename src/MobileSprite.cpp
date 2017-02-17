@@ -14,6 +14,7 @@ MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y) : Sprite(surf, x, y)
 
 	onGround = false;
 	alive = true;
+	health = 1;
 
 	debounceVel = 0.15;
 	yVel = xVel = 0;

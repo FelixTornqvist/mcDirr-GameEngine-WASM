@@ -8,9 +8,9 @@ namespace mcDirr {
 		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), MobileSprite(surf,x,y), AnimatedSprite(surf,x,y,divs,millisPerFrame)  {
 	}
 
-    void AnimatedMobileSprite::draw() const{
-        AnimatedSprite::draw();
-    }
+	void AnimatedMobileSprite::draw() const{
+		AnimatedSprite::draw();
+	}
 
 	void AnimatedMobileSprite::tick(int millisPassed) {
 		MobileSprite::tick(millisPassed);
