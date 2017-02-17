@@ -11,12 +11,15 @@ namespace mcDirr {
 			void checkCollisions(std::list<MobileSprite*>& mobiles);
 			void checkCollision(MobileSprite* other);
 			void checkPixelCollission(MobileSprite* other, int side);
+
+			void setHealtImpact(int impact);
 			int getHealthImpact();
+			void setAffectedByGravity(bool affected);
 
 			virtual ~InteractionSprite();
 
 		protected:
-			InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel);
+			InteractionSprite(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym);
 
 			void virtual handleCollision(MobileSprite* collidedWith, int side) = 0;
 

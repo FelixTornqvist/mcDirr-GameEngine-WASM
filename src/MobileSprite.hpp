@@ -22,6 +22,9 @@ namespace mcDirr {
 			void setHealth(int newHealth);
 			void changeHealth(int impact);
 
+			void setXVel(double vel);
+			void setYVel(double vel);
+
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 			int checkCollision(Sprite* other) const;

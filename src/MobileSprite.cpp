@@ -154,6 +154,14 @@ void MobileSprite::handleCollision(ImmobileSprite* collidedWith, int side) {
 	}
 }
 
+void MobileSprite::setXVel(double vel) {
+	xVel = vel;
+}
+
+void MobileSprite::setYVel(double vel) {
+	yVel = vel;
+}
+
 bool MobileSprite::isAlive() const {
 	return alive;
 }

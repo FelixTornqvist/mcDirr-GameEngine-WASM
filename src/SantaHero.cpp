@@ -3,12 +3,12 @@
 
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) {
-	return new SantaHero(surf, x, y, divs, millisPerFrame);
+SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
+	return new SantaHero(surf, x, y, divs, millisPerFrame, healthSym);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame)
-	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame),
+SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
+	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym),
 	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y) {}
 
 void SantaHero::customTick(int timeDiff) {

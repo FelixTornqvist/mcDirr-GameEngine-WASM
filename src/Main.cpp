@@ -39,9 +39,10 @@ int main(int argc, char** argv) {
 
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
+	SDL_Texture* hearts = loader.loadTexture(cat);
 
-	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200);
-	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200);
+	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200, hearts);
+	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200, hearts);
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
@@ -59,16 +60,16 @@ int main(int argc, char** argv) {
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	EvilCat* s2 = EvilCat::getInstance(cat, 400, 200);
-	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200);
+	EvilCat* s2 = EvilCat::getInstance(cat, 400, 200, hearts);
+	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, -2, false, 0.3, 0);
+	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10);
+	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
