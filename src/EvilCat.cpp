@@ -11,6 +11,7 @@ void EvilCat::customTick(int timeDiff) {
 	// move move
 }
 
+EvilCat::EvilCat(SDL_Surface* surface, int x, int y) : MobileSprite(surface, x, y, nullptr), Sprite(surface, x, y) {}
 
 void EvilCat::handleCollision(MobileSprite* collidedWith, int side) {
 

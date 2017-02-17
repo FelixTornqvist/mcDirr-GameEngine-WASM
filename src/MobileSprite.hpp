@@ -23,10 +23,11 @@ namespace mcDirr {
 			void changeHealth(int impact);
 
 		protected:
-			MobileSprite(SDL_Surface* s, int x, int y);
+			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 			int checkCollision(Sprite* other) const;
 			void virtual handleCollision(ImmobileSprite* collidedWith, int side);
 			void doPhysics(int millisPassed);
+			void drawHealth() const;
 
 			virtual void checkBounds();
 			float currentTime;
@@ -39,6 +40,7 @@ namespace mcDirr {
 		private:
 			double debounceVel;
 			SDL_Surface* surface;
+			SDL_Texture* healthSymbol;
 	};
 }
 

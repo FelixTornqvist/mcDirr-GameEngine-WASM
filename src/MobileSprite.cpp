@@ -16,7 +16,7 @@ void MobileSprite::changeHealth(int impact) {
 	health += impact;
 }
 
-MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y) : Sprite(surf, x, y) {
+MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, SDL_Texture* healthSym) : Sprite(surf, x, y), healthSymbol(healthSym){
 	surface = surf;
 	currentTime = 0;
 
@@ -32,6 +32,10 @@ MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y) : Sprite(surf, x, y)
 
 void MobileSprite::draw() const {
 	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+}
+
+void MobileSprite::drawHealth() const {
+
 }
 
 void MobileSprite::doPhysics(int millisPassed) {
