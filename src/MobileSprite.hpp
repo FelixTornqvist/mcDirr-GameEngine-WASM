@@ -12,7 +12,6 @@ namespace mcDirr {
 	class MobileSprite : virtual public Sprite {
 
 		public:
-			static MobileSprite* getInstance(SDL_Surface* surface, int, int);
 			void draw() const override;
 			void tick(int passedMillis) override;
 			void checkCollisions(std::list<ImmobileSprite*>& others);
