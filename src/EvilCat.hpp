@@ -8,7 +8,7 @@ namespace mcDirr {
 
 
 	public:
-		EvilCat* getInstance(SDL_Surface* surface, int, int);
+		EvilCat* getInstance(SDL_Surface* surface, int x, int y);
 
 	protected:
 		void customTick(int timeDiff);
