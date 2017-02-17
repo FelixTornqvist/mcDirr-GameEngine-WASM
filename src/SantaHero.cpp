@@ -7,8 +7,9 @@ SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int
 	return new SantaHero(surf, x, y, divs, millisPerFrame);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) : AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), FramedSprite(surf, x, y, divs), Sprite(surf, x, y) {
-}
+SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) 
+	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), 
+	FramedSprite(surf, x, y, divs), Sprite(surf, x, y) {}
 
 void SantaHero::customTick(int timeDiff) {
 
