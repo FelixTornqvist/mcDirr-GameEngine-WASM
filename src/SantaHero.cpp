@@ -7,16 +7,16 @@ SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int
 	return new SantaHero(surf, x, y, divs, millisPerFrame);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame) 
-	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame), 
-	FramedSprite(surf, x, y, divs), Sprite(surf, x, y) {}
+SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame)
+	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame),
+	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y) {}
 
 void SantaHero::customTick(int timeDiff) {
 
 	if (sys.isKeyDown(SDLK_w) && onGround)
-		yVel -= 0.5;
+		yVel -= 1;
 	else if (sys.isKeyDown(SDLK_s))
-		yVel = 0.5;
+		yVel = 1;
 	if (sys.isKeyDown(SDLK_a))
 		xVel = -0.5;
 	else if (sys.isKeyDown(SDLK_d))
@@ -24,20 +24,20 @@ void SantaHero::customTick(int timeDiff) {
 
 
 	if (xVel < 0) {
+		setStartFrame(2);
+		setEndFrame(60);
+		facingRight = false;
+	} else if (xVel > 0) {
+		setStartFrame(61);
+		setEndFrame(121);
+		facingRight = true;
+	} else {
+		if (!facingRight) {
 			setStartFrame(0);
-			setEndFrame(3);
-			facingRight = false;
-		} else if (xVel > 0) {
-			setStartFrame(4);
-			setEndFrame(7);
-			facingRight = true;
+			setEndFrame(0);
 		} else {
-			if (!facingRight) {
-				setStartFrame(0);
-				setEndFrame(0);
-			} else {
-				setStartFrame(1);
-				setEndFrame(1);
-			}
+			setStartFrame(1);
+			setEndFrame(1);
 		}
+	}
 }
