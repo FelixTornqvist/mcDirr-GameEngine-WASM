@@ -48,23 +48,8 @@ void MobileSprite::doPhysics(int millisPassed) {
 
 void MobileSprite::tick(int time) {
 
-	// ~ temporary for controls: ~
-	if (sys.isKeyDown(SDLK_w) && onGround)
-		yVel -= 0.5;
-	else if (sys.isKeyDown(SDLK_s))
-		yVel = 0.5;
-	if (sys.isKeyDown(SDLK_a))
-		xVel = -0.5;
-	else if (sys.isKeyDown(SDLK_d))
-		xVel = 0.5;
-	// ~ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ~
-
+	customTick(time);
 	doPhysics(time);
-
-	if (sys.isKeyDown(SDLK_q)) {
-		std::cout << "I've been killed by Q" << std::endl;
-		alive = false;
-	}
 	checkBounds();
 }
 

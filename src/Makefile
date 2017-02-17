@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o InteractionSprite.o Projectile.o Loader.o Level.o
+OBJS = Main.o GameEngine.o Sprite.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o InteractionSprite.o Projectile.o SantaHero.o Loader.o Level.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -54,6 +54,9 @@ InteractionSprite.o : InteractionSprite.hpp InteractionSprite.cpp AnimatedMobile
 
 Projectile.o : Projectile.hpp Projectile.cpp InteractionSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Projectile.cpp
+
+SantaHero.o : SantaHero.hpp SantaHero.cpp AnimatedMobileSprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) SantaHero.cpp
 
 
 

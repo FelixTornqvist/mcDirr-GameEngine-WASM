@@ -12,10 +12,12 @@ namespace mcDirr {
 			virtual ~Sprite();
 			SDL_Rect* getDestRect();
 			SDL_Texture* getTexture() const;
+
 		protected:
 			Sprite(SDL_Surface* surf, int x, int y);
 			SDL_Rect dest;
 			SDL_Texture* texture;
+			virtual void customTick(int timeDiff) = 0;
 
 
 		private:

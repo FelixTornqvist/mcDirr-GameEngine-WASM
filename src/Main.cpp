@@ -11,6 +11,7 @@
 #include "MobileSprite.hpp"
 #include "InteractionSprite.hpp"
 #include "Projectile.hpp"
+#include "SantaHero.hpp"
 #include "Level.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
@@ -36,15 +37,15 @@ int main(int argc, char** argv) {
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
 
-	MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200);
-	MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200);
+	// MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200);
+	// MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200);
 	ImmobileSprite* s17 = ImmobileSprite::getInstance(grass, 400, 600, 0.2);
 	ImmobileSprite* s18 = ImmobileSprite::getInstance(grass, -500, 400, 0.2);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
-	lvl2->add(s15);
-	lvl2->add(s16);
+	// lvl2->add(s15);
+	// lvl2->add(s16);
 	lvl2->add(s17);
 	lvl2->add(s18);
 
@@ -55,8 +56,8 @@ int main(int argc, char** argv) {
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = VisualSprite::getInstance(lvl1BGSurf, 0, 0);
-	MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
-	MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
+	// MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
+	// MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
 	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, false, 0.3, 0);
@@ -64,11 +65,15 @@ int main(int argc, char** argv) {
 	ImmobileSprite* s5 = ImmobileSprite::getInstance(grass, 10, 600, 0.2);
 	ImmobileSprite* s8 = ImmobileSprite::getInstance(slime, 500, 510, 1.1);
 
+	SantaHero* santa = new SantaHero(santasheet, 50, 50, 11, 10);
+
 	Level* lvl1 = Level::getInstance(lvl2);
 
+	lvl1->add(santa);
+
 	lvl1->add(s4);
-	lvl1->add(s2);
-	lvl1->add(s3);
+	// lvl1->add(s2);
+	// lvl1->add(s3);
 
 	lvl1->add(s5);
 	lvl1->add(s8);
