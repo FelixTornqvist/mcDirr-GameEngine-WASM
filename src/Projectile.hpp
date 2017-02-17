@@ -9,6 +9,7 @@ namespace mcDirr {
 			Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, int _damage, bool affectedByGravity, double Xvel, double Yvel);
 
 			void handleCollision(MobileSprite* collidedWith, int side);
+			void customTick(int timeDiff);
 
 			virtual ~Projectile();
 

@@ -3,9 +3,6 @@
 #include "AnimatedSprite.hpp"
 
 namespace mcDirr {
-	AnimatedSprite* AnimatedSprite::getInstance(SDL_Surface* s, int x, int y, int divs, int _millisPerFrame) {
-		return new AnimatedSprite(s, x, y, divs, _millisPerFrame);
-	}
 
 	AnimatedSprite::AnimatedSprite(SDL_Surface* s, int x, int y, int divs, int _millisPerFrame) :
 		Sprite(s,x,y), FramedSprite(s, x, y, divs), millisPerFrame(_millisPerFrame) {
