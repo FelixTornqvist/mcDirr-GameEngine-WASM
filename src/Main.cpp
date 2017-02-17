@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-//	lvl1->add(s4);
+	lvl1->add(s4);
 	lvl1->add(s2);
 	lvl1->add(s3);
 
