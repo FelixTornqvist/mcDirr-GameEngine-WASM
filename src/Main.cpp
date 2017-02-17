@@ -13,6 +13,7 @@
 #include "Projectile.hpp"
 #include "SantaHero.hpp"
 #include "Obstacle.hpp"
+#include "EvilCat.hpp"
 #include "Level.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
@@ -39,15 +40,15 @@ int main(int argc, char** argv) {
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
 
-	// MobileSprite* s15 = MobileSprite::getInstance(cat, 600, 200);
-	// MobileSprite* s16 = MobileSprite::getInstance(cat, 800, 200);
+	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200);
+	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200);
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
 	Level* lvl2 = Level::getInstance(nullptr);
 
-	// lvl2->add(s15);
-	// lvl2->add(s16);
+	lvl2->add(s15);
+	lvl2->add(s16);
 	lvl2->add(s17);
 	lvl2->add(s18);
 
@@ -58,8 +59,8 @@ int main(int argc, char** argv) {
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	// MobileSprite* s2 = MobileSprite::getInstance(cat, 400, 200);
-	// MobileSprite* s3 = MobileSprite::getInstance(cat, 600, 200);
+	EvilCat* s2 = EvilCat::getInstance(cat, 400, 200);
+	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
 	InteractionSprite* s4 = new Projectile(fireballSheet, 50, 50, 3, 70, -2, false, 0.3, 0);
@@ -71,11 +72,20 @@ int main(int argc, char** argv) {
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-	lvl1->add(santa);
+
+	if (santa == nullptr) {
+		cout << "Santa is null" << endl;
+	} else {
+		cout << "Santa is alive" << endl;
+	}
+
+	
 
 	lvl1->add(s4);
-	// lvl1->add(s2);
-	// lvl1->add(s3);
+	lvl1->add(s2);
+	lvl1->add(s3);
+
+	lvl1->add(santa);
 
 	lvl1->add(s5);
 	lvl1->add(s8);
