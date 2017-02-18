@@ -19,6 +19,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 #include "Background.hpp"
+#include "TestClass.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -32,6 +33,7 @@ void freeFunk(){
 }
 
 int main(int argc, char** argv) {
+	TestClass t;
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
