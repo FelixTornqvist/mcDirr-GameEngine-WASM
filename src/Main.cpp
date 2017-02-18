@@ -66,14 +66,14 @@ int main(int argc, char** argv) {
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts);
+	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts, false, 0, true);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts);
-
 	Level* lvl1 = Level::getInstance(lvl2);
+
+	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts, lvl1);
 
 	lvl1->add(s4);
 	lvl1->add(s2);

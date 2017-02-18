@@ -1,18 +1,26 @@
 #include "Projectile.hpp"
 
 namespace mcDirr {
-	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym):
-		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), InteractionSprite(surf, x, y, divs, millisPerFrame, healthSym) {
+	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, bool friendly, int xVelo, bool direction):
+		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), InteractionSprite(surf, x, y, divs, millisPerFrame, healthSym), friendly(friendly) {
+		if (direction)
+			xVel = xVelo;
+		else
+			xVel = -xVelo;
 		//ctor
 	}
 
 	void Projectile::handleCollision(MobileSprite *collidedWith, int side) {
-		collidedWith->kill();
-		alive = false;
+		if (!friendly) {
+			collidedWith->kill();
+			alive = false;
+		}
 	}
 
 	void Projectile::customTick(int millisPassed) {
-
+		if (xVel == 0) {
+			alive = false;
+		}
 		if (xVel < 0) {
 			setStartFrame(0);
 			setEndFrame(3);

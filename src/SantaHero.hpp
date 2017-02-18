@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 #include "AnimatedMobileSprite.hpp"
+#include "Level.hpp"
+
 
 
 #include <iostream>
@@ -11,12 +13,14 @@ namespace mcDirr {
 	class SantaHero : public AnimatedMobileSprite {
 
 	public:
-		static SantaHero* getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym);
-
+		static SantaHero* getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, Level* lvl);
+		void setCurrentLevel(Level* newLevel);
 	protected:
-		SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym);
+		SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, Level* lvl);
 		void customTick(int timeDiff);
-
+	private:
+		Level* currentLevel;
+		int projCooldown = 0;
 	};
 }
 

@@ -34,7 +34,8 @@ namespace mcDirr {
 			(*intractv)->tick(timeDiff);
 			(*intractv)->MobileSprite::checkCollisions(immobileSprites);
 			(*intractv)->checkCollisions(mobileSprites);
-
+			if (dynamic_cast<InteractionSprite*>(*intractv))
+				(*intractv)->customTick(timeDiff);
 			if (!(*intractv)->isAlive()) {
 				intractv = interactionSprites.erase(intractv);
 			} else
@@ -108,6 +109,8 @@ namespace mcDirr {
 	}
 
 	Level* Level::getNextLevel() {
+		//add santa
+		//set new level on santa variable
 		return nextLevel;
 	}
 
