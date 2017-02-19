@@ -5,15 +5,20 @@
 
 #include <iostream>
 
+#define TEAM 1
+
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
-	return new SantaHero(surf, x, y, divs, millisPerFrame, healthSym);
+SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
+	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
-	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, 1),
-	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y){}
+SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
+	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM),
+	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y), firesheet(fireSheet){
+	spawnX = x;
+	spawnY = y;
+}
 
 
 void SantaHero::customTick(int timeDiff) {
@@ -30,11 +35,10 @@ void SantaHero::customTick(int timeDiff) {
 		xVel = 0.5;
 
 	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-		projCooldown = 5;
-		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
+		projCooldown = 10;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
-		AnimatedMobileSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+		AnimatedMobileSprite* sprite = new Projectile(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
 		sprite->setYAccel(0.1);
 
 		getSpriteOutbox()->push(sprite);
@@ -61,6 +65,14 @@ void SantaHero::customTick(int timeDiff) {
 }
 
 void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
-//	if (side && collidedWith->getTeam() != getTeam() && collidedWith->getTeam() != 3)
-//		collidedWith->kill();
+}
+
+void SantaHero::kill() {
+	if (health > 0) {
+		changeHealth(-1);
+		dest.x = spawnX;
+		dest.y = spawnY;
+	} else {
+		alive = false;
+	}
 }

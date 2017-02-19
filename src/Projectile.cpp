@@ -12,8 +12,10 @@ namespace mcDirr {
 	}
 
 	void Projectile::handleMobileCollision(MobileSprite *collidedWith, int side) {
-		if (side && collidedWith->getTeam() != TEAM && collidedWith->getTeam() != 1)
+		if (side && collidedWith->getTeam() != TEAM && collidedWith->getTeam() != 1) {
 			collidedWith->kill();
+			alive = false;
+		}
 	}
 
 	void Projectile::handleImmobileCollision(ImmobileSprite* collWith, int side) {

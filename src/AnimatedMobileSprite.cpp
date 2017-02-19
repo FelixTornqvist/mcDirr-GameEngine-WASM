@@ -10,6 +10,7 @@ namespace mcDirr {
 
 	void AnimatedMobileSprite::draw() const{
 		AnimatedSprite::draw();
+		MobileSprite::drawHealth();
 	}
 
 	void AnimatedMobileSprite::tick(int millisPassed) {

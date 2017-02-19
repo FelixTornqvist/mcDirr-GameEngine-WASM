@@ -18,7 +18,6 @@
 #include "System.hpp"
 #include "Loader.hpp"
 #include "Background.hpp"
-#include "TestClass.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -32,7 +31,6 @@ void freeFunk(){
 }
 
 int main(int argc, char** argv) {
-	TestClass t;
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
@@ -40,7 +38,7 @@ int main(int argc, char** argv) {
 
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
-	SDL_Texture* hearts = loader.loadTexture(cat);
+	SDL_Texture* hearts = loader.loadTexture("media/heart.png");
 
 	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200, hearts);
 	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200, hearts);
@@ -61,21 +59,21 @@ int main(int argc, char** argv) {
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	EvilCat* s2 = EvilCat::getInstance(cat, 100, 100, hearts); //changed to interactionSprite from evilCat. Change back if needed.
+	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
-
-//	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	AnimatedMobileSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts, 0, true);
+	s3->setHealth(8);
+	s3->showHealth(true);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts);
-	SantaHero* santa2 = SantaHero::getInstance(santasheet, 300, 300, 11, 10, hearts);
+	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts);
+	santa->setHealth(4);
+	santa->showHealth(true);
+	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
 
-	lvl1->add(s4);
 	lvl1->add(s2);
 	lvl1->add(s3);
 
