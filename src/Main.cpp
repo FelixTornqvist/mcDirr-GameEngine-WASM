@@ -18,7 +18,6 @@
 #include "System.hpp"
 #include "Loader.hpp"
 #include "Background.hpp"
-#include "TestClass.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -32,7 +31,6 @@ void freeFunk(){
 }
 
 int main(int argc, char** argv) {
-	TestClass t;
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
@@ -64,18 +62,14 @@ int main(int argc, char** argv) {
 	EvilCat* s2 = EvilCat::getInstance(cat, 100, 100, hearts); //changed to interactionSprite from evilCat. Change back if needed.
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 
-//	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	AnimatedMobileSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts, 0, true);
-
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts);
-	SantaHero* santa2 = SantaHero::getInstance(santasheet, 300, 300, 11, 10, hearts);
+	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts);
+	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
 
-	lvl1->add(s4);
 	lvl1->add(s2);
 	lvl1->add(s3);
 

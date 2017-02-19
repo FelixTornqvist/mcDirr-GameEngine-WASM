@@ -7,13 +7,13 @@
 
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
-	return new SantaHero(surf, x, y, divs, millisPerFrame, healthSym);
+SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
+	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
+SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
 	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, 1),
-	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y){}
+	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y), firesheet(fireSheet){}
 
 
 void SantaHero::customTick(int timeDiff) {
@@ -30,11 +30,10 @@ void SantaHero::customTick(int timeDiff) {
 		xVel = 0.5;
 
 	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-		projCooldown = 5;
-		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
+		projCooldown = 0;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
-		AnimatedMobileSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+		AnimatedMobileSprite* sprite = new Projectile(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
 		sprite->setYAccel(0.1);
 
 		getSpriteOutbox()->push(sprite);
