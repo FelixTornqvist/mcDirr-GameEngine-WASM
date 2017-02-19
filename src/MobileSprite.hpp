@@ -25,6 +25,13 @@ namespace mcDirr {
 			void setXVel(double vel);
 			void setYVel(double vel);
 
+			bool getFriendly() {
+				return friendly;
+			}
+			void setFriendly(bool friendl) {
+				friendly = friendl;
+			}
+
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 			int checkCollision(Sprite* other) const;
@@ -41,6 +48,7 @@ namespace mcDirr {
 			int health;
 
 		private:
+			bool friendly = true;
 			double debounceVel;
 			SDL_Surface* surface;
 			SDL_Texture* healthSymbol;

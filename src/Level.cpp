@@ -34,8 +34,7 @@ namespace mcDirr {
 			(*intractv)->tick(timeDiff);
 			(*intractv)->MobileSprite::checkCollisions(immobileSprites);
 			(*intractv)->checkCollisions(mobileSprites);
-			if (dynamic_cast<InteractionSprite*>(*intractv))
-				(*intractv)->customTick(timeDiff);
+			(*intractv)->customTick(timeDiff);
 			if (!(*intractv)->isAlive()) {
 				intractv = interactionSprites.erase(intractv);
 			} else

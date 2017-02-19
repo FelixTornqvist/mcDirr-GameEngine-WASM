@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	EvilCat* s2 = EvilCat::getInstance(cat, 400, 200, hearts);
+	EvilCat* s2 = EvilCat::getInstance(cat, 100, 100, hearts); //changed to interactionSprite from evilCat. Change back if needed.
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
@@ -74,12 +74,15 @@ int main(int argc, char** argv) {
 	Level* lvl1 = Level::getInstance(lvl2);
 
 	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts, lvl1);
+	SantaHero* santa2 = SantaHero::getInstance(santasheet, 300, 300, 11, 10, hearts, lvl1);
+	santa2->setFriendly(false);
 
 	lvl1->add(s4);
 	lvl1->add(s2);
 	lvl1->add(s3);
 
 	lvl1->add(santa);
+	lvl1->add(santa2);
 
 	lvl1->add(s5);
 	lvl1->add(s8);

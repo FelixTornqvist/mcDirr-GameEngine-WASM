@@ -12,7 +12,9 @@ void EvilCat::customTick(int timeDiff) {
 }
 
 EvilCat::EvilCat(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym) :
-	InteractionSprite(surface, x, y, 1, 100000, healthSym), FramedSprite(surface, 1, x, y), Sprite(surface, x, y) {}
+	InteractionSprite(surface, x, y, 1, 70, healthSym), FramedSprite(surface, x, y, 1), Sprite(surface, x, y) {
+	setFriendly(false);
+}
 
 void EvilCat::handleCollision(MobileSprite* collidedWith, int side) {
 

@@ -36,7 +36,7 @@ void SantaHero::customTick(int timeDiff) {
 		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
-		InteractionSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, hearts, true, 1, facingRight);
+		InteractionSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, hearts, getFriendly(), 1, facingRight);
 		currentLevel->add(sprite);
 	}
 

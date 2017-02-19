@@ -1,8 +1,9 @@
 #include "Projectile.hpp"
 
 namespace mcDirr {
-	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, bool friendly, int xVelo, bool direction):
-		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), InteractionSprite(surf, x, y, divs, millisPerFrame, healthSym), friendly(friendly) {
+	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, bool friendl, int xVelo, bool direction):
+		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), InteractionSprite(surf, x, y, divs, millisPerFrame, healthSym) {
+		setFriendly(friendl);
 		if (direction)
 			xVel = xVelo;
 		else
@@ -11,7 +12,7 @@ namespace mcDirr {
 	}
 
 	void Projectile::handleCollision(MobileSprite *collidedWith, int side) {
-		if (!friendly) {
+		if ((!getFriendly() && collidedWith->getFriendly()) || (getFriendly() && collidedWith->getFriendly() == false)) {
 			collidedWith->kill();
 			alive = false;
 		}

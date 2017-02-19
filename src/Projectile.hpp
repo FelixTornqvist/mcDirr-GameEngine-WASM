@@ -15,7 +15,7 @@ namespace mcDirr {
 		protected:
 
 		private:
-			bool friendly = false;
+		
 	};
 }
 #endif // PROJECTILE_HPP
