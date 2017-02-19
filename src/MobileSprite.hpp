@@ -5,10 +5,10 @@
 #include "ImmobileSprite.hpp"
 
 #include <list>
+#include <stack>
 
 
 namespace mcDirr {
-
 	class MobileSprite : virtual public Sprite {
 
 		public:
@@ -25,6 +25,8 @@ namespace mcDirr {
 
 			void setXVel(double vel);
 			void setYVel(double vel);
+			void setSpriteOutbox(std::stack<MobileSprite*>* ptr);
+			std::stack<MobileSprite*>* getSpriteOutbox() const;
 
 			virtual ~MobileSprite() {};
 		protected:
@@ -44,13 +46,14 @@ namespace mcDirr {
 			bool alive;
 			bool onGround;
 			int health;
+			SDL_Texture* healthSymbol;
 
 		private:
+			std::stack<MobileSprite*>* spriteOutbox;
 			int teamNO;
 
 			double debounceVel;
 			SDL_Surface* surface;
-			SDL_Texture* healthSymbol;
 	};
 }
 

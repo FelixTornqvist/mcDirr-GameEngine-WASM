@@ -2,6 +2,7 @@
 #define LEVEL_HPP
 
 #include <list>
+#include <stack>
 
 #include "Sprite.hpp"
 #include "MobileSprite.hpp"
@@ -15,15 +16,14 @@ namespace mcDirr {
 			void tick(int timeDiff);
 			void draw();
 
+
 			void add(Sprite* sprite);
 			void add(MobileSprite* sprite);
 			void add(ImmobileSprite* sprite);
-			void add(AnimatedMobileSprite* sprite);
 
 			void remove(Sprite* sprite);
 			void remove(MobileSprite* sprite);
 			void remove(ImmobileSprite* sprite);
-			void remove(AnimatedMobileSprite* sprite);
 
 			bool isComplete();
 			Level* getNextLevel();
@@ -34,8 +34,12 @@ namespace mcDirr {
 			Level(Level* nextLvl);
 
 		private:
+			void emptySpriteInbox();
+
 			bool complete = false;
 			Level* nextLevel;
+
+			std::stack<MobileSprite*> spriteInbox;
 
 			std::list<Sprite*> sprites;
 			std::list<MobileSprite*> mobileSprites;

@@ -3,6 +3,8 @@
 #include "Projectile.hpp"
 #include "Loader.hpp"
 
+#include <iostream>
+
 using namespace mcDirr;
 
 SantaHero* SantaHero::getInstance(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
@@ -27,16 +29,15 @@ void SantaHero::customTick(int timeDiff) {
 	else if (sys.isKeyDown(SDLK_d))
 		xVel = 0.5;
 
-//	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-//		projCooldown = 20;
-//		SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
-//		SDL_Texture* hearts = loader.loadTexture(cat);
-//		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
-//		SDL_Rect* rect = getDestRect();
-//		int projX = rect->x + 50;
-//		AnimatedMobileSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, hearts, 1, facingRight);
-//		currentLevel->add(sprite);
-//	}
+	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
+		projCooldown = 20;
+		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
+		SDL_Rect* rect = getDestRect();
+		int projX = rect->x + 50;
+		AnimatedMobileSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+
+		getSpriteOutbox()->push(sprite);
+	}
 
 
 	if (xVel < 0) {
@@ -59,6 +60,6 @@ void SantaHero::customTick(int timeDiff) {
 }
 
 void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
-	if (side && collidedWith->getTeam() != getTeam())
-		collidedWith->kill();
+//	if (side && collidedWith->getTeam() != getTeam() && collidedWith->getTeam() != 3)
+//		collidedWith->kill();
 }

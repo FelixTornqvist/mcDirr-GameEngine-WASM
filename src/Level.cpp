@@ -30,6 +30,8 @@ namespace mcDirr {
 				mob++;
 		}
 
+		emptySpriteInbox();
+
 		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
 			(*mob)->checkMobileCollisions(mobileSprites);
 
@@ -51,6 +53,13 @@ namespace mcDirr {
 			curr->draw();
 	}
 
+	void Level::emptySpriteInbox() {
+		while (!spriteInbox.empty()) {
+			add(spriteInbox.top());
+			spriteInbox.pop();
+		}
+	}
+
 
 	void Level::add(Sprite* sprite) {
 		sprites.push_back(sprite);
@@ -58,14 +67,11 @@ namespace mcDirr {
 
 	void Level::add(MobileSprite* sprite) {
 		mobileSprites.push_back(sprite);
+		sprite->setSpriteOutbox(&spriteInbox);
 	}
 
 	void Level::add(ImmobileSprite* sprite) {
 		immobileSprites.push_back(sprite);
-	}
-
-	void Level::add(AnimatedMobileSprite* sprite) {
-		mobileSprites.push_back(sprite);
 	}
 
 
@@ -81,11 +87,6 @@ namespace mcDirr {
 
 	void Level::remove(ImmobileSprite* sprite) {
 		immobileSprites.remove(sprite);
-		delete sprite;
-	}
-
-	void Level::remove(AnimatedMobileSprite* sprite){
-		mobileSprites.remove(sprite);
 		delete sprite;
 	}
 

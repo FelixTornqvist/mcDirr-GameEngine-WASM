@@ -97,13 +97,8 @@ void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
 }
 
 void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
-	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end();) {
+	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end(); mob++) {
 		handleMobileCollision(*mob, checkCollision(*mob));
-
-		if (!(*mob)->isAlive())
-			mob = others.erase(mob);
-		else
-			mob++;
 	}
 }
 
@@ -179,6 +174,14 @@ void MobileSprite::setYVel(double vel) {
 
 bool MobileSprite::isAlive() const {
 	return alive;
+}
+
+void MobileSprite::setSpriteOutbox(std::stack<MobileSprite*>* ptr) {
+	spriteOutbox = ptr;
+}
+
+std::stack<MobileSprite*>* MobileSprite::getSpriteOutbox() const {
+	return spriteOutbox;
 }
 
 void MobileSprite::kill() {

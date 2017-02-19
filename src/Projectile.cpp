@@ -12,14 +12,16 @@ namespace mcDirr {
 	}
 
 	void Projectile::handleMobileCollision(MobileSprite *collidedWith, int side) {
+		if (side && collidedWith->getTeam() != TEAM && collidedWith->getTeam() != 1)
 			collidedWith->kill();
+	}
+
+	void Projectile::handleImmobileCollision(ImmobileSprite* collWith, int side) {
+		if (side)
 			alive = false;
 	}
 
 	void Projectile::customTick(int millisPassed) {
-		if (xVel == 0) {
-			alive = false;
-		}
 		if (xVel < 0) {
 			setStartFrame(0);
 			setEndFrame(3);
@@ -40,7 +42,5 @@ namespace mcDirr {
 	}
 
 	Projectile::~Projectile() {
-		//dtor
-
 	}
 }
