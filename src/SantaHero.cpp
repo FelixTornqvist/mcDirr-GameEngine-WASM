@@ -30,11 +30,12 @@ void SantaHero::customTick(int timeDiff) {
 		xVel = 0.5;
 
 	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-		projCooldown = 20;
+		projCooldown = 5;
 		SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
 		AnimatedMobileSprite* sprite = new Projectile(fireballSheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+		sprite->setYAccel(0.1);
 
 		getSpriteOutbox()->push(sprite);
 	}

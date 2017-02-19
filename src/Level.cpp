@@ -19,15 +19,10 @@ namespace mcDirr {
 			curr->tick(timeDiff);
 		}
 
-		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
+		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end(); mob++) {
 			(*mob)->tick(timeDiff);
 			(*mob)->customTick(timeDiff);
 			(*mob)->checkImmobileCollisions(immobileSprites);
-
-			if (!(*mob)->isAlive()) {
-				mob = mobileSprites.erase(mob);
-			} else
-				mob++;
 		}
 
 		emptySpriteInbox();
