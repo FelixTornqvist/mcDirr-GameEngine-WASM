@@ -5,15 +5,12 @@
 #include "AnimatedMobileSprite.hpp"
 #include "Level.hpp"
 
-
-
-#include <iostream>
-
 namespace mcDirr {
 	class SantaHero : public AnimatedMobileSprite {
 
 		public:
 			static SantaHero* getInstance(SDL_Surface* santasheet, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym);
+			void kill() override;
 
 		protected:
 			SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet,int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym);
@@ -22,6 +19,7 @@ namespace mcDirr {
 		private:
 			void handleMobileCollision(MobileSprite* collidedWith, int side) override;
 
+			int spawnX, spawnY;
 			int projCooldown = 0;
 			SDL_Surface* firesheet;
 	};

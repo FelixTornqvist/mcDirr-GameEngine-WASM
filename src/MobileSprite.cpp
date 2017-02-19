@@ -17,7 +17,7 @@ void MobileSprite::changeHealth(int impact) {
 }
 
 MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, SDL_Texture* healthSym, int teamNum) :
-	Sprite(surf, x, y), healthSymbol(healthSym), teamNO(teamNum){
+	Sprite(surf, x, y), healthSymbol(healthSym), teamNO(teamNum) {
 	surface = surf;
 
 	onGround = false;
@@ -32,10 +32,23 @@ MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, SDL_Texture* healthS
 
 void MobileSprite::draw() const {
 	SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
+	drawHealth();
 }
 
 void MobileSprite::drawHealth() const {
+	if (renderHealth) {
+		int width;
+		int height;
+		SDL_QueryTexture(healthSymbol, NULL, NULL, &width, &height);
+		int startX = dest.x + dest.w/2 - (width * health) / 2;
+		SDL_Rect pos = { startX, dest.y-height, width, height };
 
+		for (int i = 0; i < health; i++) {
+			SDL_RenderCopy(sys.getRen(), healthSymbol, NULL, &pos);
+			pos.x += width;
+		}
+
+	}
 }
 
 void MobileSprite::doPhysics(int millisPassed) {
@@ -103,7 +116,7 @@ void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 	}
 }
 
-int MobileSprite::checkCollision(Sprite* other) const{
+int MobileSprite::checkCollision(Sprite* other) const {
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (* other->getDestRect());
 	int side = 0;
@@ -185,6 +198,10 @@ bool MobileSprite::isAlive() const {
 	return alive;
 }
 
+void MobileSprite::showHealth(bool onOff) {
+	renderHealth = onOff;
+}
+
 void MobileSprite::setSpriteOutbox(std::stack<MobileSprite*>* ptr) {
 	spriteOutbox = ptr;
 }
@@ -194,7 +211,6 @@ std::stack<MobileSprite*>* MobileSprite::getSpriteOutbox() const {
 }
 
 void MobileSprite::kill() {
-	std::cout << "killed" << std::endl;
 	alive = false;
 }
 

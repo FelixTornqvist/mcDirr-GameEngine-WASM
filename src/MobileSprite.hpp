@@ -17,11 +17,13 @@ namespace mcDirr {
 			void checkImmobileCollisions(std::list<ImmobileSprite*>& others);
 			void checkMobileCollisions(std::list<MobileSprite*>& others);
 			bool isAlive() const;
-			void kill();
 			SDL_Surface* getSurface() const;
+
+			int getTeam();
+			virtual void kill();
+			void showHealth(bool onOff);
 			void setHealth(int newHealth);
 			void changeHealth(int impact);
-			int getTeam();
 
 			void setXVel(double vel);
 			void setYVel(double vel);
@@ -41,13 +43,14 @@ namespace mcDirr {
 
 			void doPhysics(int millisPassed);
 			virtual void checkBounds();
-			void drawHealth() const;
+			virtual void drawHealth() const;
 
 
 			double yVel, xVel;
 			double yAccel, xAccel;
 			bool alive;
 			bool onGround;
+			bool renderHealth = false;
 			int health;
 			SDL_Texture* healthSymbol;
 
