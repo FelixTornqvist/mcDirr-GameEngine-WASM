@@ -1,21 +1,19 @@
 #include "Projectile.hpp"
 
+#define TEAM 3
+
 namespace mcDirr {
-	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, bool friendl, int xVelo, bool direction):
-		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), InteractionSprite(surf, x, y, divs, millisPerFrame, healthSym) {
-		setFriendly(friendl);
+	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVelo, bool direction):
+		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM) {
 		if (direction)
 			xVel = xVelo;
 		else
 			xVel = -xVelo;
-		//ctor
 	}
 
-	void Projectile::handleCollision(MobileSprite *collidedWith, int side) {
-		if ((!getFriendly() && collidedWith->getFriendly()) || (getFriendly() && collidedWith->getFriendly() == false)) {
+	void Projectile::handleMobileCollision(MobileSprite *collidedWith, int side) {
 			collidedWith->kill();
 			alive = false;
-		}
 	}
 
 	void Projectile::customTick(int millisPassed) {

@@ -1,10 +1,10 @@
 #ifndef EVILCAT_HPP
 #define EVILCAT_HPP
 
-#include "InteractionSprite.hpp"
+#include "AnimatedMobileSprite.hpp"
 
 namespace mcDirr {
-	class EvilCat : public InteractionSprite {
+	class EvilCat : public AnimatedMobileSprite {
 		public:
 			static EvilCat* getInstance(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym);
 
@@ -13,7 +13,7 @@ namespace mcDirr {
 			EvilCat(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 
 		private:
-			void handleCollision(MobileSprite* collidedWith, int side);
+			void handleMobileCollision(MobileSprite* collidedWith, int side) override;
 
 	};
 }

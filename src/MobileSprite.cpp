@@ -16,9 +16,9 @@ void MobileSprite::changeHealth(int impact) {
 	health += impact;
 }
 
-MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, SDL_Texture* healthSym) : Sprite(surf, x, y), healthSymbol(healthSym){
+MobileSprite::MobileSprite(SDL_Surface* surf, int x, int y, SDL_Texture* healthSym, int teamNum) :
+	Sprite(surf, x, y), healthSymbol(healthSym), teamNO(teamNum){
 	surface = surf;
-	currentTime = 0;
 
 	onGround = false;
 	alive = true;
@@ -84,15 +84,26 @@ void MobileSprite::checkBounds() {
 	}
 }
 
-void MobileSprite::checkCollisions(std::list<ImmobileSprite*>& others) {
+void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
 	onGround = false;
 	for (std::list<ImmobileSprite*>::iterator immobile = others.begin(); immobile != others.end();) {
-		handleCollision(*immobile, checkCollision(*immobile));
+		handleImmobileCollision(*immobile, checkCollision(*immobile));
 
 		if (!(*immobile)->isAlive())
 			immobile = others.erase(immobile);
 		else
 			immobile++;
+	}
+}
+
+void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
+	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end();) {
+		handleMobileCollision(*mob, checkCollision(*mob));
+
+		if (!(*mob)->isAlive())
+			mob = others.erase(mob);
+		else
+			mob++;
 	}
 }
 
@@ -124,7 +135,7 @@ int MobileSprite::checkCollision(Sprite* other) const{
 	return side;
 }
 
-void MobileSprite::handleCollision(ImmobileSprite* collidedWith, int side) {
+void MobileSprite::handleImmobileCollision(ImmobileSprite* collidedWith, int side) {
 	if (side) {
 		SDL_Rect& oDest = (* collidedWith->getDestRect());
 		int& oX = oDest.x;
@@ -152,6 +163,10 @@ void MobileSprite::handleCollision(ImmobileSprite* collidedWith, int side) {
 			xVel *= -collidedWith->getBounciness();
 		}
 	}
+}
+
+int MobileSprite::getTeam() {
+	return teamNO;
 }
 
 void MobileSprite::setXVel(double vel) {

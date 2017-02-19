@@ -9,7 +9,6 @@
 #include "AnimatedMobileSprite.hpp"
 #include "VisualSprite.hpp"
 #include "MobileSprite.hpp"
-#include "InteractionSprite.hpp"
 #include "Projectile.hpp"
 #include "SantaHero.hpp"
 #include "Obstacle.hpp"
@@ -66,16 +65,15 @@ int main(int argc, char** argv) {
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 
 //	AnimatedMobileSprite* s4 = new AnimatedMobileSprite(fireballSheet, 200, 0, 3, 70);
-	InteractionSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts, false, 0, true);
+	AnimatedMobileSprite* s4 = new Projectile(fireballSheet, 400, 50, 3, 70, hearts, 0, true);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
 	Level* lvl1 = Level::getInstance(lvl2);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts, lvl1);
-	SantaHero* santa2 = SantaHero::getInstance(santasheet, 300, 300, 11, 10, hearts, lvl1);
-	santa2->setFriendly(false);
+	SantaHero* santa = SantaHero::getInstance(santasheet, 50, 50, 11, 10, hearts);
+	SantaHero* santa2 = SantaHero::getInstance(santasheet, 300, 300, 11, 10, hearts);
 
 	lvl1->add(s4);
 	lvl1->add(s2);

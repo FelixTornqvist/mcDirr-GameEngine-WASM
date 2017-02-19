@@ -14,33 +14,31 @@ namespace mcDirr {
 		public:
 			void draw() const override;
 			void tick(int passedMillis) override;
-			void checkCollisions(std::list<ImmobileSprite*>& others);
+			void checkImmobileCollisions(std::list<ImmobileSprite*>& others);
+			void checkMobileCollisions(std::list<MobileSprite*>& others);
 			bool isAlive() const;
 			void kill();
 			SDL_Surface* getSurface() const;
-			virtual ~MobileSprite() {};
 			void setHealth(int newHealth);
 			void changeHealth(int impact);
+			int getTeam();
 
 			void setXVel(double vel);
 			void setYVel(double vel);
 
-			bool getFriendly() {
-				return friendly;
-			}
-			void setFriendly(bool friendl) {
-				friendly = friendl;
-			}
-
+			virtual ~MobileSprite() {};
 		protected:
-			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
+			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym, int teamNO);
+
+			void virtual handleImmobileCollision(ImmobileSprite* collidedWith, int side);
+			void virtual handleMobileCollision(MobileSprite* collidedWith, int side) = 0;
 			int checkCollision(Sprite* other) const;
-			void virtual handleCollision(ImmobileSprite* collidedWith, int side);
+
 			void doPhysics(int millisPassed);
+			virtual void checkBounds();
 			void drawHealth() const;
 
-			virtual void checkBounds();
-			float currentTime;
+
 			double yVel, xVel;
 			double yAccel, xAccel;
 			bool alive;
@@ -48,7 +46,8 @@ namespace mcDirr {
 			int health;
 
 		private:
-			bool friendly = true;
+			int teamNO;
+
 			double debounceVel;
 			SDL_Surface* surface;
 			SDL_Texture* healthSymbol;

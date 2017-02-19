@@ -22,7 +22,7 @@ namespace mcDirr {
 		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
 			(*mob)->tick(timeDiff);
 			(*mob)->customTick(timeDiff);
-			(*mob)->checkCollisions(immobileSprites);
+			(*mob)->checkImmobileCollisions(immobileSprites);
 
 			if (!(*mob)->isAlive()) {
 				mob = mobileSprites.erase(mob);
@@ -30,15 +30,13 @@ namespace mcDirr {
 				mob++;
 		}
 
-		for (std::list<InteractionSprite*>::iterator intractv = interactionSprites.begin(); intractv != interactionSprites.end();) {
-			(*intractv)->tick(timeDiff);
-			(*intractv)->MobileSprite::checkCollisions(immobileSprites);
-			(*intractv)->checkCollisions(mobileSprites);
-			(*intractv)->customTick(timeDiff);
-			if (!(*intractv)->isAlive()) {
-				intractv = interactionSprites.erase(intractv);
+		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
+			(*mob)->checkMobileCollisions(mobileSprites);
+
+			if (!(*mob)->isAlive()) {
+				mob = mobileSprites.erase(mob);
 			} else
-				intractv++;
+				mob++;
 		}
 	}
 
@@ -50,9 +48,6 @@ namespace mcDirr {
 			curr->draw();
 
 		for (MobileSprite* curr : mobileSprites)
-			curr->draw();
-
-		for (InteractionSprite* curr : interactionSprites)
 			curr->draw();
 	}
 
@@ -73,10 +68,6 @@ namespace mcDirr {
 		mobileSprites.push_back(sprite);
 	}
 
-	void Level::add(InteractionSprite* sprite) {
-		interactionSprites.push_back(sprite);
-	}
-
 
 	void Level::remove(Sprite* sprite) {
 		sprites.remove(sprite);
@@ -95,11 +86,6 @@ namespace mcDirr {
 
 	void Level::remove(AnimatedMobileSprite* sprite){
 		mobileSprites.remove(sprite);
-		delete sprite;
-	}
-
-	void Level::remove(InteractionSprite* sprite){
-		interactionSprites.remove(sprite);
 		delete sprite;
 	}
 
