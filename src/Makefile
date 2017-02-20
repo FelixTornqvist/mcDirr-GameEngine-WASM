@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Obstacle.o Loader.o Level.o
+OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Particle.o Obstacle.o Loader.o Level.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -62,6 +62,10 @@ Obstacle.o : Obstacle.hpp Obstacle.cpp AnimatedMobileSprite.hpp
 
 EvilCat.o : EvilCat.hpp EvilCat.cpp AnimatedMobileSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) EvilCat.cpp
+
+Particle.o : Particle.hpp Particle.cpp MobileSprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) Particle.cpp
+
 
 
 clean:
