@@ -18,6 +18,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 #include "Background.hpp"
+#include "TextSprite.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -26,14 +27,24 @@
 using namespace std;
 using namespace mcDirr;
 
-void freeFunk(){
+
+TextSprite* text;
+void freeFunk() {
+	static bool funkyState;
 	cout << "I am a free-range function!" << endl;
+	if(funkyState) {
+		text->setText("Yes indeed,");
+	} else {
+		text->setText("I am a free-range function!");
+	}
+	funkyState = !funkyState;
 }
 
 int main(int argc, char** argv) {
 	//test code
 	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
+	TTF_Font* ubuntuB = loader.loadFont("media/Ubuntu-B.ttf", 50);
 	Mix_PlayChannel(-1, BGmusic, -1);
 
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
@@ -74,6 +85,11 @@ int main(int argc, char** argv) {
 	santa->showHealth(true);
 	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
 
+	text = new TextSprite(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
+	SDL_Rect* dst = text->getDestRect();
+	dst->x = 100;
+	dst->y = 100;
+
 	lvl1->add(s2);
 	lvl1->add(s3);
 
@@ -83,6 +99,7 @@ int main(int argc, char** argv) {
 	lvl1->add(s5);
 	lvl1->add(s8);
 	lvl1->add(lvl1BG);
+	lvl1->add(text);
 
 	ge.setFirstLevel(lvl1);
 
