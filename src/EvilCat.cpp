@@ -47,6 +47,8 @@ void EvilCat::kill() {
 	changeHealth(-1);
 	dest.x = spawnX;
 	dest.y = spawnY;
+	xVel = 0;
+	yVel = 0;
 
 	if (health <= 0) {
 		alive = false;
