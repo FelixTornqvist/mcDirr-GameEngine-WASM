@@ -6,12 +6,12 @@
 
 namespace mcDirr {
 
-	Level* Level::getInstance(Level* nextLvl) {
-		return new Level(nextLvl);
+	Level* Level::getInstance(Screen* nextScreen) {
+		return new Level(nextScreen);
 	}
 
-	Level::Level(Level* nextLvl) {
-		nextLevel = nextLvl;
+	Level::Level(Screen* nextScrn) {
+		nextScreen = nextScrn;
 	}
 
 	void Level::tick(int timeDiff) {
@@ -85,18 +85,7 @@ namespace mcDirr {
 		delete sprite;
 	}
 
-	bool Level::isComplete() {
-		return complete;
-	}
-
-	Level* Level::getNextLevel() {
-		//add santa
-		//set new level on santa variable
-		return nextLevel;
-	}
-
 	Level::~Level() {
-		delete nextLevel;
 		for(Sprite* sprite : sprites)
 			delete sprite;
 	}

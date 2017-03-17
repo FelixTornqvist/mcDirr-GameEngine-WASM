@@ -23,17 +23,16 @@ namespace mcDirr {
 
 		running = true;
 		while(running) {
-			SDL_SetRenderDrawColor(sys.getRen(), 200, 255, 255, 255);   //TODO: temporary
 			nextTick = lastTick + MILLIS_PER_LOOP;
 
-			currentLevel->tick(nextTick - lastTick);
+			currentScreen->tick(nextTick - lastTick);
 
 			SDL_RenderClear(sys.getRen());
-			currentLevel->draw();
+			currentScreen->draw();
 			SDL_RenderPresent(sys.getRen());
 
-			if(currentLevel->isComplete()) {
-				skipLevel();
+			if(currentScreen->isFinished()) {
+				skipScreen();
 			}
 
 			sys.collectInputs();
@@ -43,9 +42,9 @@ namespace mcDirr {
 		}
 	}
 
-	void GameEngine::skipLevel() {
-		currentLevel = currentLevel->getNextLevel();
-		if(currentLevel == nullptr)
+	void GameEngine::skipScreen() {
+		currentScreen = currentScreen->getNextScreen();
+		if(currentScreen == nullptr)
 			running = false;
 	}
 
@@ -55,13 +54,13 @@ namespace mcDirr {
 			SDL_Delay(delay);
 	}
 
-	void GameEngine::setFirstLevel(Level* lvl) {
-		firstLevel = lvl;
-		currentLevel = lvl;
+	void GameEngine::setFirstScreen(Screen* lvl) {
+		firstScreen = lvl;
+		currentScreen = lvl;
 	}
 
 	GameEngine::~GameEngine() {
-		delete firstLevel;
+		delete firstScreen;
 
 		sys.Quit();
 	}

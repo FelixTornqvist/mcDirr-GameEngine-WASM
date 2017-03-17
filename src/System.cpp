@@ -19,6 +19,7 @@ namespace mcDirr {
 	}
 
 	void System::collectInputs() {
+		mouseButtonsChanged = false;
 		SDL_Event eve;
 		while (SDL_PollEvent(&eve)) {
 			switch (eve.type) {
@@ -26,11 +27,12 @@ namespace mcDirr {
 					quitRequested = true;
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					//mouse-button: eve.button.button
 					mouseButtons[eve.button.button] = true;
+					mouseButtonsChanged = true;
 					break;
 				case SDL_MOUSEBUTTONUP:
 					mouseButtons[eve.button.button] = false;
+					mouseButtonsChanged = true;
 					break;
 				case SDL_MOUSEMOTION:
 					mouseX = eve.motion.x;
@@ -60,6 +62,9 @@ namespace mcDirr {
 	}
 	bool System::isMouseButtonDown(Uint8 button) {
 		return mouseButtons[button];
+	}
+	bool System::haveMouseButtonsChanged() {
+		return mouseButtonsChanged;
 	}
 
 	Sint32 System::getMouseX() const {

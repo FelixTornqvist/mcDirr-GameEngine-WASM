@@ -19,6 +19,8 @@
 #include "Loader.hpp"
 #include "Background.hpp"
 #include "TextSprite.hpp"
+#include "GUIScreen.hpp"
+#include "GUIElement.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -101,9 +103,13 @@ int main(int argc, char** argv) {
 	lvl1->add(lvl1BG);
 	lvl1->add(text);
 
-	ge.setFirstLevel(lvl1);
+	GUIScreen* testGUI = new GUIScreen(lvl1);
+	GUIElement* testGuiEle = new GUIElement({100, 100, 150, 150});
+	testGUI->add(testGuiEle);
 
-	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipLevel);
+	ge.setFirstScreen(testGUI);
+
+	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipScreen);
 	sys.addKeyFunction(SDLK_f, &freeFunk);
 
 	ge.run();

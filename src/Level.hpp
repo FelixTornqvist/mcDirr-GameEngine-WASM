@@ -4,17 +4,18 @@
 #include <list>
 #include <stack>
 
+#include "Screen.hpp"
 #include "Sprite.hpp"
 #include "MobileSprite.hpp"
 #include "AnimatedMobileSprite.hpp"
 
 namespace mcDirr {
-	class Level {
+	class Level: public Screen {
 		public:
-			static Level* getInstance(Level* nextLvl);
+			static Level* getInstance(Screen* nextScreen);
 
-			void tick(int timeDiff);
-			void draw();
+			void tick(int timeDiff) override;
+			void draw() override;
 
 
 			void add(Sprite* sprite);
@@ -25,19 +26,13 @@ namespace mcDirr {
 			void remove(MobileSprite* sprite);
 			void remove(ImmobileSprite* sprite);
 
-			bool isComplete();
-			Level* getNextLevel();
-
 			virtual ~Level();
 
 		protected:
-			Level(Level* nextLvl);
+			Level(Screen* nextScreen);
 
 		private:
 			void emptySpriteInbox();
-
-			bool complete = false;
-			Level* nextLevel;
 
 			std::stack<MobileSprite*> spriteInbox;
 

@@ -4,15 +4,15 @@
 #include <vector>
 #include <string>
 
-#include "Level.hpp"
+#include "Screen.hpp"
 
 namespace mcDirr {
 	class GameEngine {
 		public:
 			GameEngine(std::string windowName, int w, int h, int _fps);
 			void run();
-			void setFirstLevel(Level* lvl);
-			void skipLevel();
+			void setFirstScreen(Screen* scrn);
+			void skipScreen();
 			virtual ~GameEngine();
 
 		protected:
@@ -20,8 +20,8 @@ namespace mcDirr {
 		private:
 			int fps;
 			bool running = false;
-			Level* currentLevel;
-			Level* firstLevel;
+			Screen* currentScreen;
+			Screen* firstScreen;
 
 			void delay(Uint32 nextTick) const;
 	};
