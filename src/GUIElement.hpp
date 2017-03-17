@@ -8,18 +8,17 @@ namespace mcDirr {
 		public:
 			GUIElement(SDL_Rect dest);
 
-			virtual void draw();
-			virtual void tick(int millisPassed);
-			virtual void mouseClick();
+			virtual void draw() = 0;
+			virtual void tick(int millisPassed) = 0;
+			virtual void mouseClick() = 0;
 			SDL_Rect getDest();
 
 			virtual ~GUIElement();
 
 		protected:
+			SDL_Rect dest;
 
 		private:
-			SDL_Rect dest;
-			bool clickTest;
 	};
 }
 

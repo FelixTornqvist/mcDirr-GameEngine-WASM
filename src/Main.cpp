@@ -20,7 +20,7 @@
 #include "Background.hpp"
 #include "TextSprite.hpp"
 #include "GUIScreen.hpp"
-#include "GUIElement.hpp"
+#include "GUIButton.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -30,7 +30,30 @@ using namespace std;
 using namespace mcDirr;
 
 
+GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
+Level* lvl2 = Level::getInstance(nullptr);
+Level* lvl1 = Level::getInstance(lvl2);
+GUIScreen* start;
 TextSprite* text;
+
+class StartGameButton : public GUIButton {
+	public:
+		StartGameButton(TTF_Font* fnt, SDL_Color colour, string labl, SDL_Rect dest):
+			GUIButton(fnt, colour, labl, dest) {
+		}
+
+		void mouseClick() override {
+			if (sys.isMouseButtonDown(SDL_BUTTON_LEFT)) {
+
+				ge.skipScreen();
+			}
+
+		}
+	protected:
+	private:
+
+};
+
 void freeFunk() {
 	static bool funkyState;
 	cout << "I am a free-range function!" << endl;
@@ -44,7 +67,6 @@ void freeFunk() {
 
 int main(int argc, char** argv) {
 	//test code
-	GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 	Mix_Chunk* BGmusic = loader.loadWAV("media/bgMusic.wav");
 	TTF_Font* ubuntuB = loader.loadFont("media/Ubuntu-B.ttf", 50);
 	Mix_PlayChannel(-1, BGmusic, -1);
@@ -58,7 +80,7 @@ int main(int argc, char** argv) {
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	Level* lvl2 = Level::getInstance(nullptr);
+	lvl2 = Level::getInstance(nullptr);
 
 	lvl2->add(s15);
 	lvl2->add(s16);
@@ -80,7 +102,7 @@ int main(int argc, char** argv) {
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	Level* lvl1 = Level::getInstance(lvl2);
+	lvl1 = Level::getInstance(lvl2);
 
 	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts);
 	santa->setHealth(4);
@@ -103,11 +125,11 @@ int main(int argc, char** argv) {
 	lvl1->add(lvl1BG);
 	lvl1->add(text);
 
-	GUIScreen* testGUI = new GUIScreen(lvl1);
-	GUIElement* testGuiEle = new GUIElement({100, 100, 150, 150});
-	testGUI->add(testGuiEle);
+	GUIScreen* start = new GUIScreen(lvl1);
+	GUIButton* testGuiEle = new StartGameButton(ubuntuB, {255,255,255}, "test button", {100, 100, 150, 150});
+	start->add(testGuiEle);
 
-	ge.setFirstScreen(testGUI);
+	ge.setFirstScreen(start);
 
 	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipScreen);
 	sys.addKeyFunction(SDLK_f, &freeFunk);
