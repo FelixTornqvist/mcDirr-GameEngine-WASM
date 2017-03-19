@@ -15,12 +15,14 @@ namespace mcDirr {
 			void draw() override;
 
 			void add(GUIElement* element);
+			void setBackground(SDL_Surface* bg);
 
 			virtual ~GUIScreen();
 
 		protected:
 
 		private:
+			SDL_Texture* background = nullptr;
 			std::list<GUIElement*> guiElements;
 
 			/** SDL_PointInRect only exist in newer versions of SDL :'( */

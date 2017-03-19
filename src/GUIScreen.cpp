@@ -3,6 +3,7 @@
 
 #include "GUIScreen.hpp"
 #include "System.hpp"
+#include "Loader.hpp"
 
 using namespace mcDirr;
 
@@ -39,6 +40,8 @@ bool GUIScreen::pointInRect(Sint32 px, Sint32 py, SDL_Rect rect) {
 
 
 void GUIScreen::draw() {
+	if (background)
+		SDL_RenderCopy(sys.getRen(), background, NULL, NULL);
 	for (GUIElement* ele : guiElements) {
 		ele->draw();
 	}
@@ -48,6 +51,10 @@ void GUIScreen::add(GUIElement* element) {
 	guiElements.push_back(element);
 }
 
+void GUIScreen::setBackground(SDL_Surface* bg) {
+	background = loader.loadTexture(bg);
+}
 
 GUIScreen::~GUIScreen() {
+	SDL_DestroyTexture(background);
 }

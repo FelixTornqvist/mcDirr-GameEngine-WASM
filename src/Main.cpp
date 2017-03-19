@@ -127,15 +127,16 @@ int main(int argc, char** argv) {
 
 	GUIScreen* start = new GUIScreen(lvl1);
 
-	GUIText* gameTitle = new GUIText(ubuntuB, {255,255,40}, "McDirr - The Gaem");
+	GUIText* gameTitle = new GUIText(ubuntuB, {10,90,5}, "McDirr - The Gaem");
 	gameTitle->setY(100);
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 
-	SDL_Surface* startBIMG = loader.loadSurface("media/startButton.png");
-	GUIButton* startB = new StartGameButton(startBIMG);
+	SDL_Surface* startBSurf = loader.loadSurface("media/startButton.png");
+	GUIButton* startB = new StartGameButton(startBSurf);
 	startB->setY(200);
 	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
 
+	start->setBackground(lvl1BGSurf);
 	start->add(startB);
 	start->add(gameTitle);
 
