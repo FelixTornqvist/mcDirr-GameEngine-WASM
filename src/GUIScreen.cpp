@@ -15,7 +15,7 @@ void GUIScreen::tick(int millisPassed) {
 		for (GUIElement* ele: guiElements) {
 			ele->tick(millisPassed);
 
-			if (pointInRect(sys.getMouseX(), sys.getMouseY(), ele->getDest())) {
+			if (pointInRect(sys.getMouseX(), sys.getMouseY(), *ele->getDestRect())) {
 				ele->mouseClick();
 				break;
 			}

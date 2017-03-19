@@ -5,18 +5,15 @@
 
 using namespace mcDirr;
 
-GUIButton::GUIButton(TTF_Font* fnt, SDL_Color colour, std::string labl, SDL_Rect dest): GUIElement(dest), label(labl) {
-}
+GUIButton::GUIButton(SDL_Surface* surface, int x, int y): GUIElement(surface,x,y) {
 
-void GUIButton::draw() {
-	if (clickTest) {
-		SDL_RenderFillRect(sys.getRen(), &dest);
-	} else {
-		SDL_RenderDrawRect(sys.getRen(), &dest);
-	}
 }
 
 void GUIButton::tick(int millisPassed) {
+
+}
+
+void GUIButton::customTick(int millisPassed) {
 
 }
 

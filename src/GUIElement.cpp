@@ -3,11 +3,7 @@
 
 using namespace mcDirr;
 
-GUIElement::GUIElement(SDL_Rect dst): dest(dst) {
-}
-
-SDL_Rect GUIElement::getDest() {
-	return dest;
+GUIElement::GUIElement(SDL_Surface* surf, int x, int y): Sprite(surf, x, y) {
 }
 
 GUIElement::~GUIElement() {

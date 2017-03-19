@@ -38,8 +38,8 @@ TextSprite* text;
 
 class StartGameButton : public GUIButton {
 	public:
-		StartGameButton(TTF_Font* fnt, SDL_Color colour, string labl, SDL_Rect dest):
-			GUIButton(fnt, colour, labl, dest) {
+		StartGameButton(SDL_Surface* bg, int x, int y):
+			GUIButton(bg, x,y) {
 		}
 
 		void mouseClick() override {
@@ -126,7 +126,8 @@ int main(int argc, char** argv) {
 	lvl1->add(text);
 
 	GUIScreen* start = new GUIScreen(lvl1);
-	GUIButton* testGuiEle = new StartGameButton(ubuntuB, {255,255,255}, "test button", {100, 100, 150, 150});
+	SDL_Surface* startB = loader.loadSurface("media/startButton.png");
+	GUIButton* testGuiEle = new StartGameButton(startB, 100, 100);
 	start->add(testGuiEle);
 
 	ge.setFirstScreen(start);
