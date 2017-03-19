@@ -29,6 +29,39 @@ namespace mcDirr {
 		SDL_RenderCopy(sys.getRen(), texture, NULL, &dest);
 	}
 
+	int Sprite::getX() const {
+		return dest.x;
+	}
+
+	int Sprite::getY() const {
+		return dest.y;
+	}
+
+	void Sprite::setX(int x) {
+		dest.x = x;
+	}
+
+	void Sprite::setY(int y) {
+		dest.y = y;
+	}
+
+
+	int Sprite::getWidth() const {
+		return dest.w;
+	}
+
+	int Sprite::getHeight() const {
+		return dest.h;
+	}
+
+	void Sprite::setWidth(int w) {
+		dest.w = w;
+	}
+
+	void Sprite::setHeight(int h) {
+		dest.h = h;
+	}
+
 	Sprite::~Sprite() {
 		SDL_DestroyTexture(texture);
 	}

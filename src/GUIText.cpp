@@ -1,23 +1,23 @@
-#include "TextSprite.hpp"
+#include "GUIText.hpp"
 #include "Loader.hpp"
 
 namespace mcDirr {
 
-	TextSprite::TextSprite(TTF_Font* fnt, SDL_Color colour, std::string txt):
-		VisualSprite(nullptr, 0,0), font(fnt), text(txt), color(colour) {
+	GUIText::GUIText(TTF_Font* fnt, SDL_Color colour, std::string txt):
+		GUIElement(nullptr), font(fnt), text(txt), color(colour) {
 		surf = TTF_RenderText_Solid(fnt, txt.c_str(), colour);
 		texture = loader.loadTexture(surf);
 		updateText();
 	}
 
-	void TextSprite::setText(std::string txt) {
+	void GUIText::setText(std::string txt) {
 		SDL_DestroyTexture(texture);
 		SDL_FreeSurface(surf);
 		text = txt;
 		updateText();
 	}
 
-	void TextSprite::updateText() {
+	void GUIText::updateText() {
 		surf = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = loader.loadTexture(surf);
 		int width;
@@ -27,11 +27,11 @@ namespace mcDirr {
 		dest.w = width;
 	}
 
-	std::string TextSprite::getText() {
+	std::string GUIText::getText() {
 		return text;
 	}
 
-	TextSprite::~TextSprite() {
+	GUIText::~GUIText() {
 		SDL_DestroyTexture(texture);
 		SDL_FreeSurface(surf);
 	}

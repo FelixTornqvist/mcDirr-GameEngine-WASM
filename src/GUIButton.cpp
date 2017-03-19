@@ -5,7 +5,7 @@
 
 using namespace mcDirr;
 
-GUIButton::GUIButton(SDL_Surface* surface, int x, int y): GUIElement(surface,x,y) {
+GUIButton::GUIButton(SDL_Surface* surface): GUIElement(surface) {
 
 }
 

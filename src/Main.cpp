@@ -18,7 +18,7 @@
 #include "System.hpp"
 #include "Loader.hpp"
 #include "Background.hpp"
-#include "TextSprite.hpp"
+#include "GUIText.hpp"
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
 
@@ -34,12 +34,12 @@ GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 Level* lvl2 = Level::getInstance(nullptr);
 Level* lvl1 = Level::getInstance(lvl2);
 GUIScreen* start;
-TextSprite* text;
+GUIText* text;
 
 class StartGameButton : public GUIButton {
 	public:
-		StartGameButton(SDL_Surface* bg, int x, int y):
-			GUIButton(bg, x,y) {
+		StartGameButton(SDL_Surface* bg):
+			GUIButton(bg) {
 		}
 
 		void mouseClick() override {
@@ -109,10 +109,9 @@ int main(int argc, char** argv) {
 	santa->showHealth(true);
 	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
 
-	text = new TextSprite(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
-	SDL_Rect* dst = text->getDestRect();
-	dst->x = 100;
-	dst->y = 100;
+	text = new GUIText(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
+	text->setX(100);
+	text->setY(100);
 
 	lvl1->add(s2);
 	lvl1->add(s3);
@@ -125,10 +124,20 @@ int main(int argc, char** argv) {
 	lvl1->add(lvl1BG);
 	lvl1->add(text);
 
+
 	GUIScreen* start = new GUIScreen(lvl1);
-	SDL_Surface* startB = loader.loadSurface("media/startButton.png");
-	GUIButton* testGuiEle = new StartGameButton(startB, 100, 100);
-	start->add(testGuiEle);
+
+	GUIText* gameTitle = new GUIText(ubuntuB, {255,255,40}, "McDirr - The Gaem");
+	gameTitle->setY(100);
+	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
+
+	SDL_Surface* startBIMG = loader.loadSurface("media/startButton.png");
+	GUIButton* startB = new StartGameButton(startBIMG);
+	startB->setY(200);
+	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
+
+	start->add(startB);
+	start->add(gameTitle);
 
 	ge.setFirstScreen(start);
 

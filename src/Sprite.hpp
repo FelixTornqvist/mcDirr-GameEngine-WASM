@@ -9,9 +9,20 @@ namespace mcDirr {
 			virtual void draw() const;
 			virtual void tick(int timediff) = 0;
 
-			virtual ~Sprite();
-			SDL_Rect* getDestRect();
 			SDL_Texture* getTexture() const;
+			SDL_Rect* getDestRect();
+
+			int getX() const;
+			int getY() const;
+			void setX(int x);
+			void setY(int y);
+
+			int getWidth() const;
+			int getHeight() const;
+			void setWidth(int w);
+			void setHeight(int h);
+
+			virtual ~Sprite();
 
 		protected:
 			Sprite(SDL_Surface* surf, int x, int y);

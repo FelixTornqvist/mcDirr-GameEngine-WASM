@@ -8,7 +8,7 @@
 namespace mcDirr {
 	class GUIButton : public GUIElement {
 		public:
-			GUIButton(SDL_Surface* surf, int x, int y);
+			GUIButton(SDL_Surface* surf);
 
 			virtual void tick(int millisPassed) override;
 			virtual void customTick(int millisPassed) override;

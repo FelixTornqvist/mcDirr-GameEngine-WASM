@@ -5,19 +5,21 @@
 
 #include <SDL_ttf.h>
 
-#include "VisualSprite.hpp"
+#include "GUIElement.hpp"
 
 namespace mcDirr {
 
-	class TextSprite : public VisualSprite {
+	class GUIText : public GUIElement {
 		public:
-			TextSprite(TTF_Font* font, SDL_Color colr, std::string txt);
+			GUIText(TTF_Font* font, SDL_Color colr, std::string txt);
+			void tick(int ) {};
 			void customTick(int ) {};
+			void mouseClick() {};
 
 			void setText(std::string txt);
 			std::string getText();
 
-			virtual ~TextSprite();
+			virtual ~GUIText();
 
 		protected:
 

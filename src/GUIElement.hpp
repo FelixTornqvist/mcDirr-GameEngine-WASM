@@ -8,7 +8,7 @@
 namespace mcDirr {
 	class GUIElement: public Sprite {
 		public:
-			GUIElement(SDL_Surface* surf, int x, int y);
+			GUIElement(SDL_Surface* surf);
 
 			virtual void mouseClick() = 0;
 

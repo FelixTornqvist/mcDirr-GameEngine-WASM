@@ -3,7 +3,7 @@
 
 using namespace mcDirr;
 
-GUIElement::GUIElement(SDL_Surface* surf, int x, int y): Sprite(surf, x, y) {
+GUIElement::GUIElement(SDL_Surface* surf): Sprite(surf, 0, 0) {
 }
 
 GUIElement::~GUIElement() {
