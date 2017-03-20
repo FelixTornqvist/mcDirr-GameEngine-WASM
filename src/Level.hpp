@@ -12,7 +12,7 @@
 namespace mcDirr {
 	class Level: public Screen {
 		public:
-			static Level* getInstance(Screen* nextScreen);
+			static Level* getInstance();
 
 			void tick(int timeDiff) override;
 			void draw() override;
@@ -29,7 +29,7 @@ namespace mcDirr {
 			virtual ~Level();
 
 		protected:
-			Level(Screen* nextScreen);
+			Level();
 
 		private:
 			void emptySpriteInbox();

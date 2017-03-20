@@ -10,13 +10,11 @@ namespace mcDirr {
 			virtual void draw() = 0;
 
 			bool isFinished();
-			Screen* getNextScreen();
 
 			virtual ~Screen();
 
 		protected:
 			bool finished = false;
-			Screen* nextScreen;
 
 		private:
 	};

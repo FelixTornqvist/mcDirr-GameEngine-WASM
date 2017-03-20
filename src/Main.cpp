@@ -31,27 +31,22 @@ using namespace mcDirr;
 
 
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
-Level* lvl2 = Level::getInstance(nullptr);
-Level* lvl1 = Level::getInstance(lvl2);
+Level* lvl2 = Level::getInstance();
+Level* lvl1 = Level::getInstance();
 GUIScreen* start;
 GUIText* text;
 
 class StartGameButton : public GUIButton {
 	public:
-		StartGameButton(SDL_Surface* bg):
-			GUIButton(bg) {
-		}
+		StartGameButton(SDL_Surface* bg): GUIButton(bg) {}
 
 		void mouseClick() override {
 			if (sys.isMouseButtonDown(SDL_BUTTON_LEFT)) {
-
 				ge.skipScreen();
+			} else if (sys.isMouseButtonDown(SDL_BUTTON_RIGHT)) {
+				ge.setScreen(2);
 			}
-
 		}
-	protected:
-	private:
-
 };
 
 void freeFunk() {
@@ -80,7 +75,7 @@ int main(int argc, char** argv) {
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	lvl2 = Level::getInstance(nullptr);
+	lvl2 = Level::getInstance();
 
 	lvl2->add(s15);
 	lvl2->add(s16);
@@ -102,7 +97,7 @@ int main(int argc, char** argv) {
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	lvl1 = Level::getInstance(lvl2);
+	lvl1 = Level::getInstance();
 
 	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts);
 	santa->setHealth(4);
@@ -125,7 +120,7 @@ int main(int argc, char** argv) {
 	lvl1->add(text);
 
 
-	GUIScreen* start = GUIScreen::getInstance(lvl1);
+	GUIScreen* start = GUIScreen::getInstance();
 
 	GUIText* gameTitle = GUIText::getInstance(ubuntuB, {10,90,5}, "McDirr - The Gaem");
 	gameTitle->setY(100);
@@ -140,7 +135,10 @@ int main(int argc, char** argv) {
 	start->add(startB);
 	start->add(gameTitle);
 
-	ge.setFirstScreen(start);
+	ge.addScreen(start);
+	ge.addScreen(lvl1);
+	ge.addScreen(lvl2);
+
 
 	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipScreen);
 	sys.addKeyFunction(SDLK_f, &freeFunk);

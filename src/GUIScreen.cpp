@@ -7,13 +7,11 @@
 
 using namespace mcDirr;
 
-GUIScreen* GUIScreen::getInstance(Screen* nxt) {
-	return new GUIScreen(nxt);
+GUIScreen* GUIScreen::getInstance() {
+	return new GUIScreen();
 }
 
-GUIScreen::GUIScreen(Screen* next) {
-	nextScreen = next;
-}
+GUIScreen::GUIScreen() {}
 
 void GUIScreen::tick(int millisPassed) {
 	if (sys.haveMouseButtonsChanged()) {

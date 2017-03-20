@@ -25,13 +25,13 @@ namespace mcDirr {
 		while(running) {
 			nextTick = lastTick + MILLIS_PER_LOOP;
 
-			currentScreen->tick(nextTick - lastTick);
+			screens[currentScreen]->tick(nextTick - lastTick);
 
 			SDL_RenderClear(sys.getRen());
-			currentScreen->draw();
+			screens[currentScreen]->draw();
 			SDL_RenderPresent(sys.getRen());
 
-			if(currentScreen->isFinished()) {
+			if(screens[currentScreen]->isFinished()) {
 				skipScreen();
 			}
 
@@ -42,10 +42,20 @@ namespace mcDirr {
 		}
 	}
 
-	void GameEngine::skipScreen() {
-		currentScreen = currentScreen->getNextScreen();
-		if(currentScreen == nullptr)
+	void GameEngine::setScreen(int screenIndex) {
+		currentScreen = screenIndex;
+		if (currentScreen >= screens.size())
 			running = false;
+	}
+
+	void GameEngine::skipScreen() {
+		currentScreen++;
+		if (currentScreen >= screens.size())
+			running = false;
+	}
+
+	void GameEngine::addScreen(Screen* newScreen) {
+		screens.push_back(newScreen);
 	}
 
 	void GameEngine::delay(Uint32 nextTick) const {
@@ -54,13 +64,9 @@ namespace mcDirr {
 			SDL_Delay(delay);
 	}
 
-	void GameEngine::setFirstScreen(Screen* lvl) {
-		firstScreen = lvl;
-		currentScreen = lvl;
-	}
-
 	GameEngine::~GameEngine() {
-		delete firstScreen;
+		for (Screen* screen : screens)
+			delete screen;
 
 		sys.Quit();
 	}

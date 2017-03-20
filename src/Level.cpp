@@ -6,12 +6,11 @@
 
 namespace mcDirr {
 
-	Level* Level::getInstance(Screen* nextScreen) {
-		return new Level(nextScreen);
+	Level* Level::getInstance() {
+		return new Level();
 	}
 
-	Level::Level(Screen* nextScrn) {
-		nextScreen = nextScrn;
+	Level::Level() {
 	}
 
 	void Level::tick(int timeDiff) {

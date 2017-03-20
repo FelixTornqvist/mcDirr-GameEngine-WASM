@@ -11,7 +11,8 @@ namespace mcDirr {
 		public:
 			GameEngine(std::string windowName, int w, int h, int _fps);
 			void run();
-			void setFirstScreen(Screen* scrn);
+			void addScreen(Screen* screen);
+			void setScreen(int screenIndex);
 			void skipScreen();
 			virtual ~GameEngine();
 
@@ -20,8 +21,8 @@ namespace mcDirr {
 		private:
 			int fps;
 			bool running = false;
-			Screen* currentScreen;
-			Screen* firstScreen;
+			int currentScreen;
+			std::vector<Screen*> screens;
 
 			void delay(Uint32 nextTick) const;
 	};
