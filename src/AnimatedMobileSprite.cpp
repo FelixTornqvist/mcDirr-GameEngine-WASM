@@ -16,13 +16,6 @@ namespace mcDirr {
 	void AnimatedMobileSprite::tick(int millisPassed) {
 		MobileSprite::tick(millisPassed);
 		AnimatedSprite::tick(millisPassed);
-
-		//temporary, should be in game implementation
-
-	}
-
-	bool AnimatedMobileSprite::isFacingRight() const {
-		return facingRight;
 	}
 
 	AnimatedMobileSprite::~AnimatedMobileSprite() {

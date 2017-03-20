@@ -22,6 +22,7 @@ namespace mcDirr {
 			int spawnX, spawnY;
 			int projCooldown = 0;
 			SDL_Surface* firesheet;
+			bool facingRight = true;
 	};
 }
 

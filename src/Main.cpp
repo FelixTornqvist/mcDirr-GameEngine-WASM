@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 	santa->showHealth(true);
 	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
 
-	text = new GUIText(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
+	text = GUIText::getInstance(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
 	text->setX(100);
 	text->setY(100);
 
@@ -125,9 +125,9 @@ int main(int argc, char** argv) {
 	lvl1->add(text);
 
 
-	GUIScreen* start = new GUIScreen(lvl1);
+	GUIScreen* start = GUIScreen::getInstance(lvl1);
 
-	GUIText* gameTitle = new GUIText(ubuntuB, {10,90,5}, "McDirr - The Gaem");
+	GUIText* gameTitle = GUIText::getInstance(ubuntuB, {10,90,5}, "McDirr - The Gaem");
 	gameTitle->setY(100);
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 

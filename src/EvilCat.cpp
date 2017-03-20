@@ -40,7 +40,7 @@ void EvilCat::kill() {
 		float xVel = sin( (i/amount) * 2.0 * M_PI) * velocity + rnd;
 		float yVel = cos( (i/amount) * 2.0 * M_PI) * velocity + rnd;
 
-		Particle* p = new Particle(getSurface(), dest.x, dest.y, xVel, yVel, duration);
+		Particle* p = Particle::getInstance(getSurface(), dest.x, dest.y, xVel, yVel, duration);
 		getSpriteOutbox()->push(p);
 	}
 

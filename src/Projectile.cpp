@@ -3,6 +3,10 @@
 #define TEAM 3
 
 namespace mcDirr {
+	Projectile* Projectile::getInstance(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVel, bool direction) {
+		return new Projectile(surf, x, y, divs, millisPerFrame, healthSym, xVel, direction);
+	}
+
 	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVelo, bool direction):
 		Sprite(surf, x, y), FramedSprite(surf, x, y, divs), AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM) {
 		if (direction)

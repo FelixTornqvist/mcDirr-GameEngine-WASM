@@ -9,7 +9,7 @@
 namespace mcDirr {
 	class GUIScreen : public Screen {
 		public:
-			GUIScreen(Screen* next);
+			static GUIScreen* getInstance(Screen* nxt);
 
 			void tick(int millisPassed) override;
 			void draw() override;
@@ -20,6 +20,7 @@ namespace mcDirr {
 			virtual ~GUIScreen();
 
 		protected:
+			GUIScreen(Screen* next);
 
 		private:
 			SDL_Texture* background = nullptr;

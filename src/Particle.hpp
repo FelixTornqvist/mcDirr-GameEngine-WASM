@@ -6,7 +6,7 @@
 namespace mcDirr {
 	class Particle : public MobileSprite {
 		public:
-			Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
+			static Particle* getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
 
 			void customTick(int timeDiff) override;
 			void handleMobileCollision(MobileSprite* collWith, int side) {}
@@ -15,6 +15,7 @@ namespace mcDirr {
 			virtual ~Particle();
 
 		protected:
+			Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
 
 		private:
 			int lifeTime, passedTime;

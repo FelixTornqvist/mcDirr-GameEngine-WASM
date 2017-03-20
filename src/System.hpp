@@ -10,12 +10,8 @@ namespace mcDirr {
 		public:
 			void initialize(std::string winName, int wWidth, int wHeight);
 
-			SDL_Renderer* getRen() {
-				return ren;
-			}
-			SDL_Window* getWin() {
-				return win;
-			}
+			SDL_Renderer* getRen();
+			SDL_Window* getWin();
 
 			/**reads all of the current inputs and saves them for later calculations for "this tick" */
 			void collectInputs();

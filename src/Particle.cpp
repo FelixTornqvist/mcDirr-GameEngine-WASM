@@ -5,6 +5,10 @@
 
 using namespace mcDirr;
 
+Particle* Particle::getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime) {
+	return new Particle(surf, x, y, xVel, yVel, lifetime);
+}
+
 Particle::Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime):
 	MobileSprite(surf, x, y, nullptr, -1), Sprite(surf, x, y), lifeTime(lifetime), passedTime(0){
 	int rnd = rand() % 15 + 10;

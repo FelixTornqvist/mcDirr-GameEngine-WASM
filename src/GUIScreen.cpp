@@ -7,6 +7,10 @@
 
 using namespace mcDirr;
 
+GUIScreen* GUIScreen::getInstance(Screen* nxt) {
+	return new GUIScreen(nxt);
+}
+
 GUIScreen::GUIScreen(Screen* next) {
 	nextScreen = next;
 }
@@ -52,9 +56,12 @@ void GUIScreen::add(GUIElement* element) {
 }
 
 void GUIScreen::setBackground(SDL_Surface* bg) {
+	if (background)
+		SDL_DestroyTexture(background);
 	background = loader.loadTexture(bg);
 }
 
 GUIScreen::~GUIScreen() {
-	SDL_DestroyTexture(background);
+	if (background)
+		SDL_DestroyTexture(background);
 }

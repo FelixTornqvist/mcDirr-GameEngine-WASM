@@ -79,6 +79,14 @@ namespace mcDirr {
 		return typed;
 	}
 
+	SDL_Renderer* System::getRen() {
+		return ren;
+	}
+
+	SDL_Window* System::getWin() {
+		return win;
+	}
+
 	void System::listenForTyping(bool listen) {
 		collectTyping = listen;
 		if(!listen)
