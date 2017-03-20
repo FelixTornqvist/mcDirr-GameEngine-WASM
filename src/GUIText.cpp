@@ -3,27 +3,26 @@
 
 namespace mcDirr {
 
-	GUIText* GUIText::getInstance(TTF_Font* font, SDL_Color colr, std::string txt) {
+	GUIText* GUIText::getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt) {
 		return new GUIText(font, colr, txt);
 	}
 
-	GUIText::GUIText(TTF_Font* fnt, SDL_Color colour, std::string txt):
+	GUIText::GUIText(TTF_Font* fnt, const SDL_Color& colour, std::string txt):
 		GUIElement(nullptr), font(fnt), text(txt), color(colour) {
-		surf = TTF_RenderText_Solid(fnt, txt.c_str(), colour);
-		texture = loader.loadTexture(surf);
 		updateText();
 	}
 
 	void GUIText::setText(std::string txt) {
 		SDL_DestroyTexture(texture);
-		SDL_FreeSurface(surf);
 		text = txt;
 		updateText();
 	}
 
 	void GUIText::updateText() {
-		surf = TTF_RenderText_Solid(font, text.c_str(), color);
+		SDL_Surface* surf = TTF_RenderText_Solid(font, text.c_str(), color);
 		texture = loader.loadTexture(surf);
+		SDL_FreeSurface(surf);
+
 		int width;
 		int height;
 		SDL_QueryTexture(texture, NULL, NULL, &width, &height);
@@ -35,8 +34,15 @@ namespace mcDirr {
 		return text;
 	}
 
+	SDL_Color GUIText::getColor() {
+		return color;
+	}
+
+	TTF_Font* GUIText::getFont() {
+		return font;
+	}
+
 	GUIText::~GUIText() {
 		SDL_DestroyTexture(texture);
-		SDL_FreeSurface(surf);
 	}
 }

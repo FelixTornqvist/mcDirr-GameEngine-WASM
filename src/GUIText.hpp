@@ -11,26 +11,27 @@ namespace mcDirr {
 
 	class GUIText : public GUIElement {
 		public:
-			static GUIText* getInstance(TTF_Font* font, SDL_Color colr, std::string txt);
+			static GUIText* getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt);
 
-			void tick(int ) {};
-			void customTick(int ) {};
-			void mouseClick() {};
+			virtual void tick(int ) {};
+			virtual void customTick(int ) {};
+			virtual void mouseClick() {};
 
 			void setText(std::string txt);
 			std::string getText();
+			SDL_Color getColor();
+			TTF_Font* getFont();
 
 			virtual ~GUIText();
 
 		protected:
-			GUIText(TTF_Font* font, SDL_Color colr, std::string txt);
+			GUIText(TTF_Font* font, const SDL_Color& colr, std::string txt);
+			virtual void updateText();
+			std::string text;
 
 		private:
-			void updateText();
-			std::string text;
 			TTF_Font* font;
 			SDL_Color color;
-			SDL_Surface* surf;
 	};
 
 }

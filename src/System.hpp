@@ -29,8 +29,9 @@ namespace mcDirr {
 			Sint32 getMouseX() const;
 			Sint32 getMouseY() const;
 
-			std::string getTypedString() const;
-			void listenForTyping(bool listen);
+			void startTyping();
+			void stopTyping();
+			char getTypedChar() const;
 
 			template<class AnyClass>
 			/** member functions*/
@@ -55,8 +56,8 @@ namespace mcDirr {
 
 			std::unordered_map<Uint8, std::function<void()>> funcMapping;
 
-			bool collectTyping = false;
-			std::string typed = " ";
+			int listeningForTyping = 0;
+			char typedChar = NULL;
 	};
 
 	/* implementation needed in header file because of the use of template*/

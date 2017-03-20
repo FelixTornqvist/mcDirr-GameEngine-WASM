@@ -10,9 +10,9 @@ PauseScreen::PauseScreen(GameEngine *_ge):GUIScreen(), ge(_ge){
 	bg = loader.loadSurface("media/pauseBG.png");
 	setBackground(bg);
 
-	continueSurf = loader.loadSurface("media/continueButton.png");
-	exitSurf = loader.loadSurface("media/exitButton.png");
-	restartSurf = loader.loadSurface("media/restartButton.png");
+	continueSurf = loader.loadSurface("media/button/continueButton.png");
+	exitSurf = loader.loadSurface("media/button/exitButton.png");
+	restartSurf = loader.loadSurface("media/button/restartButton.png");
     font = loader.loadFont("media/Ubuntu-B.ttf", 50);
     title = GUIText::getInstance(font, {0,0,0}, "Paused");
 

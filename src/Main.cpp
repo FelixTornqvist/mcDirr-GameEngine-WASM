@@ -16,6 +16,7 @@
 #include "GUIText.hpp"
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
+#include "GUITextField.hpp"
 
 #include "SantaHero.hpp"
 #include "Obstacle.hpp"
@@ -115,15 +116,24 @@ int main(int argc, char** argv) {
 	gameTitle->setY(100);
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 
-	SDL_Surface* startBSurf = loader.loadSurface("media/startButton.png");
+	SDL_Surface* startBSurf = loader.loadSurface("media/button/startButton.png");
 	GUIButton* startB = GUIButton::getInstance<GameEngine>(startBSurf, &ge,&GameEngine::skipScreen);
 	startB->setY(200);
 	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
 
+	TTF_Font* tfFont = loader.loadFont("media/Ubuntu-B.ttf", 15);
+	GUITextField* nameInput = GUITextField::getInstance(tfFont, {0,0,0}, 300);
+	nameInput->setX(100);
+	nameInput->setY(200);
+	GUITextField* nameInput2 = GUITextField::getInstance(tfFont, {0,0,0}, 300);
+	nameInput2->setX(100);
+	nameInput2->setY(250);
+
 	start->setBackground(lvl1BGSurf);
 	start->add(startB);
-	start->add(GUIButton::getInstance(startBSurf, &freeFunk));
 	start->add(gameTitle);
+	start->add(nameInput);
+	start->add(nameInput2);
 
 	ge.setPauseScreen(new PauseScreen(&ge));
 	ge.addScreen(start);
