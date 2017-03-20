@@ -1,4 +1,6 @@
-OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Particle.o Obstacle.o Loader.o Level.o
+OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Particle.o Obstacle.o Loader.o Level.o GUIText.o GUIScreen.o GUIElement.o GUIButton.o Screen.o 
+
+
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -I/usr/include/SDL2/
@@ -66,7 +68,20 @@ EvilCat.o : EvilCat.hpp EvilCat.cpp AnimatedMobileSprite.hpp
 Particle.o : Particle.hpp Particle.cpp MobileSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Particle.cpp
 
+GUIText.o : GUIText.hpp GUIText.cpp GUIElement.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) GUIText.cpp
 
+GUIScreen.o : GUIScreen.hpp GUIScreen.cpp Screen.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) GUIScreen.cpp
+
+GUIElement.o : GUIElement.hpp GUIElement.cpp Sprite.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) GUIElement.cpp
+
+GUIButton.o : GUIButton.hpp GUIButton.cpp GUIElement.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) GUIButton.cpp
+
+Screen.o : Screen.hpp Screen.cpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) Screen.cpp
 
 clean:
 	rm *.o
