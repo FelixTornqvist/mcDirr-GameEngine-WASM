@@ -9,18 +9,20 @@
 #include "AnimatedMobileSprite.hpp"
 #include "VisualSprite.hpp"
 #include "MobileSprite.hpp"
-#include "Projectile.hpp"
-#include "SantaHero.hpp"
-#include "Obstacle.hpp"
-#include "EvilCat.hpp"
 #include "Level.hpp"
 #include "GameEngine.hpp"
 #include "System.hpp"
 #include "Loader.hpp"
-#include "Background.hpp"
 #include "GUIText.hpp"
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
+
+#include "SantaHero.hpp"
+#include "Obstacle.hpp"
+#include "Background.hpp"
+#include "EvilCat.hpp"
+#include "Projectile.hpp"
+#include "PauseScreen.hpp"
 
 #define FPS 60
 #define W_WIDTH 1024
@@ -35,19 +37,6 @@ Level* lvl2 = Level::getInstance();
 Level* lvl1 = Level::getInstance();
 GUIScreen* start;
 GUIText* text;
-
-class StartGameButton : public GUIButton {
-	public:
-		StartGameButton(SDL_Surface* bg): GUIButton(bg) {}
-
-		void mouseClick() override {
-			if (sys.isMouseButtonDown(SDL_BUTTON_LEFT)) {
-				ge.skipScreen();
-			} else if (sys.isMouseButtonDown(SDL_BUTTON_RIGHT)) {
-				ge.setScreen(2);
-			}
-		}
-};
 
 void freeFunk() {
 	static bool funkyState;
@@ -127,14 +116,16 @@ int main(int argc, char** argv) {
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 
 	SDL_Surface* startBSurf = loader.loadSurface("media/startButton.png");
-	GUIButton* startB = new StartGameButton(startBSurf);
+	GUIButton* startB = GUIButton::getInstance<GameEngine>(startBSurf, &ge,&GameEngine::skipScreen);
 	startB->setY(200);
 	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
 
 	start->setBackground(lvl1BGSurf);
 	start->add(startB);
+	start->add(GUIButton::getInstance(startBSurf, &freeFunk));
 	start->add(gameTitle);
 
+	ge.setPauseScreen(new PauseScreen(&ge));
 	ge.addScreen(start);
 	ge.addScreen(lvl1);
 	ge.addScreen(lvl2);

@@ -25,18 +25,24 @@ namespace mcDirr {
 		while(running) {
 			nextTick = lastTick + MILLIS_PER_LOOP;
 
-			screens[currentScreen]->tick(nextTick - lastTick);
-
 			SDL_RenderClear(sys.getRen());
-			screens[currentScreen]->draw();
+				screens[currentScreen]->draw();
+				if (paused)
+					pauseScreen->draw();
 			SDL_RenderPresent(sys.getRen());
 
 			if(screens[currentScreen]->isFinished()) {
 				skipScreen();
 			}
+			if (paused){
+				pauseScreen->tick(nextTick - lastTick);
+			} else {
+				screens[currentScreen]->tick(nextTick - lastTick);
+			}
 
 			sys.collectInputs();
-			running &= !(sys.isQuitRequested() || sys.isKeyDown(SDLK_ESCAPE));
+			paused |= sys.isKeyDown(SDLK_ESCAPE);
+			running &= !(sys.isQuitRequested() || (paused && pauseScreen == nullptr));
 			delay(nextTick);
 			lastTick = nextTick;
 		}
@@ -56,6 +62,26 @@ namespace mcDirr {
 
 	void GameEngine::addScreen(Screen* newScreen) {
 		screens.push_back(newScreen);
+	}
+
+	void GameEngine::setPauseScreen(GUIScreen* screen) {
+		pauseScreen = screen;
+	}
+
+	void GameEngine::setPause(bool pause) {
+		paused = pause;
+	}
+
+	void GameEngine::pause() {
+		paused = true;
+	}
+
+	void GameEngine::unPause() {
+		paused = false;
+	}
+
+	void GameEngine::stop() {
+		running = false;
 	}
 
 	void GameEngine::delay(Uint32 nextTick) const {
