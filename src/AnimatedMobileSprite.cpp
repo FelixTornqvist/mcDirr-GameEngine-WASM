@@ -18,6 +18,20 @@ namespace mcDirr {
 		AnimatedSprite::tick(millisPassed);
 	}
 
+	bool AnimatedMobileSprite::isPixelColored(int x, int y) const {
+		SDL_Surface* tempsurf = getSurface();
+		int surfX = x - getX() + getSrcRect().x;
+		int surfY = y - getY() + getSrcRect().y;
+		SDL_LockSurface(tempsurf);
+		Uint32* pixels = static_cast<Uint32*>(tempsurf->pixels);
+		Uint32 pixel = pixels[surfY*tempsurf->w + surfX];
+		SDL_UnlockSurface(tempsurf);
+		if (pixel > 0)
+			return true;
+		else
+			return false;
+	}
+
 	AnimatedMobileSprite::~AnimatedMobileSprite() {
 		//dtor
 	}

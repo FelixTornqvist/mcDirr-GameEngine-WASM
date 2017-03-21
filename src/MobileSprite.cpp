@@ -115,10 +115,12 @@ void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 			handleMobileCollision(*mob, checkCollisionForMobile(*mob));
 	}
 }
-bool MobileSprite::isPixelColored(MobileSprite* other, int x, int y) const {
-	SDL_Surface* tempsurf = other->getSurface();
-	int surfX = x - other->getX();
-	int surfY = y - other->getY();
+
+
+bool MobileSprite::isPixelColored(int x, int y) const {
+	SDL_Surface* tempsurf = getSurface();
+	int surfX = x - getX();
+	int surfY = y - getY();
 	SDL_LockSurface(tempsurf);
 	Uint32* pixels = static_cast<Uint32*>(tempsurf->pixels);
 	Uint32 pixel = pixels[surfY*tempsurf->w + surfX];
@@ -143,12 +145,12 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 
 		if (intersection.h > intersection.w) {
 			bool found = false;
-			for (int i = 0; i < intersection.w; i = i + 1) {
+			for (int i = 0; i < intersection.w; i++) {
 				if (found) {
 					break;
 				}
-				for (int a = 0; a < intersection.h; a = a + 1) {
-					if (isPixelColored(other, intersection.x + i, intersection.y + a) && isPixelColored((MobileSprite*)this, intersection.x + i, intersection.y + a)) {
+				for (int a = 0; a < intersection.h; a++) {
+					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
 						//std::cout << "ja" << std::endl;
 						if (oX > myX) {
 							side = 4;
@@ -166,7 +168,7 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 		else {
 			for (int i = 0; i < intersection.w; i++) {
 				for (int a = 0; a < intersection.h; a++) {
-					if (isPixelColored(other, intersection.x, intersection.y) && isPixelColored((MobileSprite*)this, intersection.x, intersection.y)) {
+					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
 						if (oY > myY) {
 							side = 3;
 						}

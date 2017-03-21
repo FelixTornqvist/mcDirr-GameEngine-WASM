@@ -10,6 +10,7 @@ namespace mcDirr {
 		public:
 			void draw() const;
 			void tick(int millisPassed) override;
+			bool isPixelColored(int x, int y) const;
 
 			virtual ~AnimatedMobileSprite();
 
