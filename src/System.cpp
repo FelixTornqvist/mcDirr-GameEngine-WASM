@@ -20,6 +20,7 @@ namespace mcDirr {
 
 	void System::collectInputs() {
 		mouseButtonsChanged = false;
+		typed.assign("");
 		SDL_Event eve;
 		while (SDL_PollEvent(&eve)) {
 			switch (eve.type) {
@@ -42,12 +43,12 @@ namespace mcDirr {
 					keys[eve.key.keysym.sym] = true;
 					if (funcMapping.count(eve.key.keysym.sym))
 						funcMapping[eve.key.keysym.sym]();
-					if(collectTyping) {
-						typed += eve.key.keysym.sym;
-					}
 					break;
 				case SDL_KEYUP:
 					keys[eve.key.keysym.sym] = false;
+					break;
+				case SDL_TEXTINPUT:
+					typed.assign(eve.text.text);
 					break;
 			}
 		}
@@ -75,7 +76,22 @@ namespace mcDirr {
 		return mouseY;
 	}
 
-	std::string System::getTypedString() const {
+	void System::startTyping(){
+		listeningForTyping++;
+		if (listeningForTyping == 1) {
+			SDL_StartTextInput();
+		}
+	}
+
+	void System::stopTyping(){
+		listeningForTyping--;
+		if (listeningForTyping <= 0) {
+			SDL_StopTextInput();
+			listeningForTyping = 0;
+		}
+	}
+
+	std::string System::getTyped() const {
 		return typed;
 	}
 
@@ -85,12 +101,6 @@ namespace mcDirr {
 
 	SDL_Window* System::getWin() {
 		return win;
-	}
-
-	void System::listenForTyping(bool listen) {
-		collectTyping = listen;
-		if(!listen)
-			typed.clear();
 	}
 
 	void System::addKeyFunction(Uint8 key, void (*funk)()) {

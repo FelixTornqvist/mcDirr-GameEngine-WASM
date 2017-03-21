@@ -3,6 +3,7 @@
 
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
+#include "GUIText.hpp"
 #include "GameEngine.hpp"
 
 namespace mcDirr {
@@ -17,10 +18,12 @@ namespace mcDirr {
 			SDL_Surface *bg;
 			SDL_Surface *continueSurf, *restartSurf, *exitSurf;
 			GUIButton *continueB, *restartB, *exitB;
+			TTF_Font* font;
+			GUIText* title;
 
 			GameEngine *ge;
 			void restart();
-			void putOnXMiddle(GUIButton* btn);
+			void putOnXMiddle(GUIElement* btn);
 	};
 }
 #endif // PAUSESCREEN_HPP
