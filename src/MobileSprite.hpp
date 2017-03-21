@@ -39,6 +39,8 @@ namespace mcDirr {
 
 			void virtual handleImmobileCollision(ImmobileSprite* collidedWith, int side);
 			void virtual handleMobileCollision(MobileSprite* collidedWith, int side) = 0;
+			int checkCollisionForMobile(MobileSprite* other) const;
+			bool isPixelColored(MobileSprite* other, int x, int y) const;
 			int checkCollision(Sprite* other) const;
 
 			void doPhysics(int millisPassed);

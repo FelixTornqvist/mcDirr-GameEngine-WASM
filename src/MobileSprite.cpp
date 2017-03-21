@@ -112,7 +112,73 @@ void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
 void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end(); mob++) {
 		if (*mob != this)
-			handleMobileCollision(*mob, checkCollision(*mob));
+			handleMobileCollision(*mob, checkCollisionForMobile(*mob));
+	}
+}
+bool MobileSprite::isPixelColored(MobileSprite* other, int x, int y) const {
+	SDL_Surface* tempsurf = other->getSurface();
+	int surfX = x - other->getX();
+	int surfY = y - other->getY();
+	SDL_LockSurface(tempsurf);
+	Uint32* pixels = static_cast<Uint32*>(tempsurf->pixels);
+	Uint32 pixel = pixels[surfY*tempsurf->w + surfX];
+	SDL_UnlockSurface(tempsurf);
+	//std::cout << pixel << std::endl;
+	if (pixel > 0)
+		return true;
+	else
+		return false;
+}
+
+int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
+	SDL_Rect intersection;
+	SDL_Rect& oDest = (*other->getDestRect());
+	int side = 0;
+
+	if (SDL_IntersectRect(&dest, &oDest, &intersection)) {
+		const int& oX = oDest.x;
+		const int& oY = oDest.y;
+		const int& myX = dest.x;
+		const int& myY = dest.y;
+
+		if (intersection.h > intersection.w) {
+			bool found = false;
+			for (int i = 0; i < intersection.w; i = i + 1) {
+				if (found) {
+					break;
+				}
+				for (int a = 0; a < intersection.h; a = a + 1) {
+					if (isPixelColored(other, intersection.x + i, intersection.y + a) && isPixelColored((MobileSprite*)this, intersection.x + i, intersection.y + a)) {
+						//std::cout << "ja" << std::endl;
+						if (oX > myX) {
+							side = 4;
+						}
+						else {
+							side = 2;
+						}
+						found = true;
+						break;
+
+					}
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < intersection.w; i++) {
+				for (int a = 0; a < intersection.h; a++) {
+					if (isPixelColored(other, intersection.x, intersection.y) && isPixelColored((MobileSprite*)this, intersection.x, intersection.y)) {
+						if (oY > myY) {
+							side = 3;
+						}
+						else {
+							side = 1;
+						}
+						break;
+					}
+				}
+			}
+		}
+		return side;
 	}
 }
 
