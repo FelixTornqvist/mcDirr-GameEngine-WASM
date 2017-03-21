@@ -19,7 +19,7 @@ namespace mcDirr {
 	}
 
 	void GUIText::updateText() {
-		SDL_Surface* surf = TTF_RenderText_Solid(font, text.c_str(), color);
+		SDL_Surface* surf = TTF_RenderUTF8_Solid(font, text.c_str(), color);
 		texture = loader.loadTexture(surf);
 		SDL_FreeSurface(surf);
 

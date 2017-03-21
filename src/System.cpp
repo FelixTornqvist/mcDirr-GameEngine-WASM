@@ -20,7 +20,7 @@ namespace mcDirr {
 
 	void System::collectInputs() {
 		mouseButtonsChanged = false;
-		typedChar = NULL;
+		typed.assign("");
 		SDL_Event eve;
 		while (SDL_PollEvent(&eve)) {
 			switch (eve.type) {
@@ -48,7 +48,7 @@ namespace mcDirr {
 					keys[eve.key.keysym.sym] = false;
 					break;
 				case SDL_TEXTINPUT:
-					typedChar = *eve.text.text;
+					typed.assign(eve.text.text);
 					break;
 			}
 		}
@@ -91,8 +91,8 @@ namespace mcDirr {
 		}
 	}
 
-	char System::getTypedChar() const {
-		return typedChar;
+	std::string System::getTyped() const {
+		return typed;
 	}
 
 	SDL_Renderer* System::getRen() {

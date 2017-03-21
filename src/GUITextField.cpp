@@ -27,12 +27,11 @@ void GUITextField::draw() const {
 	SDL_SetRenderDrawColor(sys.getRen(), 0,0,0,255);
 	SDL_RenderDrawRect(sys.getRen(), &dest);
 
-	SDL_RenderDrawRect(sys.getRen(), &textDest);
 	SDL_RenderCopy(sys.getRen(), texture, NULL, &textDest);
 }
 
 void GUITextField::updateText() {
-	SDL_Surface* surf = TTF_RenderText_Solid(getFont(), getText().c_str(), getColor());
+	SDL_Surface* surf = TTF_RenderUTF8_Solid(getFont(), getText().c_str(), getColor());
 	texture = loader.loadTexture(surf);
 	SDL_FreeSurface(surf);
 
@@ -47,8 +46,8 @@ void GUITextField::updateText() {
 }
 
 void GUITextField::tick(int timeDiff) {
-	if (focus && sys.getTypedChar()){
-		text += sys.getTypedChar();
+	if (focus && sys.getTyped().size() > 0){
+		text += sys.getTyped();
 		updateText();
 	}
 }

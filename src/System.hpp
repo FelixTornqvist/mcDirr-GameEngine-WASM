@@ -31,7 +31,7 @@ namespace mcDirr {
 
 			void startTyping();
 			void stopTyping();
-			char getTypedChar() const;
+			std::string getTyped() const;
 
 			template<class AnyClass>
 			/** member functions*/
@@ -57,7 +57,7 @@ namespace mcDirr {
 			std::unordered_map<Uint8, std::function<void()>> funcMapping;
 
 			int listeningForTyping = 0;
-			char typedChar = NULL;
+			std::string typed;
 	};
 
 	/* implementation needed in header file because of the use of template*/
