@@ -40,15 +40,17 @@ namespace mcDirr {
 					mouseY = eve.motion.y;
 					break;
 				case SDL_KEYDOWN:
-					keys[eve.key.keysym.sym] = true;
-					if (funcMapping.count(eve.key.keysym.sym))
-						funcMapping[eve.key.keysym.sym]();
+					if (listeningForTyping <= 0) {
+						keys[eve.key.keysym.sym] = true;
+						if (funcMapping.count(eve.key.keysym.sym))
+							funcMapping[eve.key.keysym.sym]();
+					}
 					break;
 				case SDL_KEYUP:
 					keys[eve.key.keysym.sym] = false;
 					break;
 				case SDL_TEXTINPUT:
-					typed.assign(eve.text.text);
+					typed += eve.text.text;
 					break;
 			}
 		}
@@ -76,14 +78,14 @@ namespace mcDirr {
 		return mouseY;
 	}
 
-	void System::startTyping(){
+	void System::startTyping() {
 		listeningForTyping++;
 		if (listeningForTyping == 1) {
 			SDL_StartTextInput();
 		}
 	}
 
-	void System::stopTyping(){
+	void System::stopTyping() {
 		listeningForTyping--;
 		if (listeningForTyping <= 0) {
 			SDL_StopTextInput();
