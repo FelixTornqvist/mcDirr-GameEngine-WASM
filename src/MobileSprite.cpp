@@ -151,7 +151,6 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 				}
 				for (int a = 0; a < intersection.h; a++) {
 					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
-						//std::cout << "ja" << std::endl;
 						if (oX > myX) {
 							side = 4;
 						}
@@ -260,6 +259,14 @@ void MobileSprite::setXAccel(double acc) {
 
 void MobileSprite::setYAccel(double acc) {
 	yAccel = acc;
+}
+
+double MobileSprite::getXVel(double vel) const{
+	return xVel;
+}
+
+double MobileSprite::getYVel(double vel) const {
+	return yVel;
 }
 
 bool MobileSprite::isAlive() const {

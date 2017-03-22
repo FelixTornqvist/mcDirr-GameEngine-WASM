@@ -24,7 +24,26 @@ void EvilCat::customTick(int timeDiff) {
 
 void EvilCat::handleMobileCollision(MobileSprite* collidedWith, int side) {
 	if (side && collidedWith->getTeam() == 1) {
-		collidedWith->kill();
+		if(side == 1) {
+			yVel = 0.5;
+			collidedWith->setYVel(-0.5);
+		}
+		if(side == 2) {
+			xVel = 0.5;
+			yVel = -0.1;
+			collidedWith->setXVel(-0.5);
+			collidedWith->setYVel(-0.1);
+		}
+		if(side == 3) {
+			yVel = -0.5;
+			collidedWith->setYVel(0.5);
+		}
+		if (side == 4) {
+			xVel = -0.5;
+			yVel = -0.1;
+			collidedWith->setXVel(0.5);
+			collidedWith->setYVel(-0.1);
+		}
 	}
 }
 

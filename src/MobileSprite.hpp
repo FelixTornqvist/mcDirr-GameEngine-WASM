@@ -29,6 +29,8 @@ namespace mcDirr {
 			void setYVel(double vel);
 			void setXAccel(double acc);
 			void setYAccel(double acc);
+			double getXVel(double vel) const;
+			double getYVel(double vel) const;
 
 			void setSpriteOutbox(std::stack<MobileSprite*>* ptr);
 			std::stack<MobileSprite*>* getSpriteOutbox() const;

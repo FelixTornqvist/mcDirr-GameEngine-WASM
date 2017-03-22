@@ -35,7 +35,7 @@ void SantaHero::customTick(int timeDiff) {
 		xVel = 0.5;
 
 	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-		projCooldown = 10;
+		projCooldown = 30;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
 		AnimatedMobileSprite* sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
