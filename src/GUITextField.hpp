@@ -15,6 +15,7 @@ namespace mcDirr {
 			virtual void draw() const override;
 			virtual void tick(int ) override;
 			virtual void mouseClick() override;
+			void setFocused(bool focs);
 
 			virtual ~GUITextField();
 

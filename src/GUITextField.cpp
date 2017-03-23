@@ -58,12 +58,16 @@ void GUITextField::tick(int timeDiff) {
 
 void GUITextField::mouseClick() {
 	if (sys.isMouseButtonDown(SDL_BUTTON_LEFT)) {
-		focus = !focus;
-		if (focus)
-			sys.startTyping();
-		else
-			sys.stopTyping();
+		setFocused(!focus);
 	}
+}
+
+void GUITextField::setFocused(bool focs) {
+	focus = focs;
+	if (focus)
+		sys.startTyping();
+	else
+		sys.stopTyping();
 }
 
 GUITextField::~GUITextField() {

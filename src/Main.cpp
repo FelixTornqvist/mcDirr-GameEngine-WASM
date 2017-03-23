@@ -38,6 +38,7 @@ Level* lvl2 = Level::getInstance();
 Level* lvl1 = Level::getInstance();
 GUIScreen* start;
 GUIText* text;
+GUITextField *nameInput, *nameInput2;
 
 void freeFunk() {
 	static bool funkyState;
@@ -48,6 +49,16 @@ void freeFunk() {
 		text->setText("I am a free-range function!");
 	}
 	funkyState = !funkyState;
+}
+
+void startButton() {
+	cout << "start clicked" << endl;
+	cout << nameInput->getText() << endl;
+	nameInput->setText("");
+	nameInput2->setText("");
+	nameInput->setFocused(false);
+	nameInput2->setFocused(false);
+	ge.skipScreen();
 }
 
 int main(int argc, char** argv) {
@@ -117,15 +128,15 @@ int main(int argc, char** argv) {
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 
 	SDL_Surface* startBSurf = loader.loadSurface("media/button/startButton.png");
-	GUIButton* startB = GUIButton::getInstance<GameEngine>(startBSurf, &ge,&GameEngine::skipScreen);
+	GUIButton* startB = GUIButton::getInstance(startBSurf, &startButton);
 	startB->setY(200);
 	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
 
 	TTF_Font* tfFont = loader.loadFont("media/Ubuntu-B.ttf", 15);
-	GUITextField* nameInput = GUITextField::getInstance(tfFont, {0,0,0}, 300);
+	nameInput = GUITextField::getInstance(tfFont, {0,0,0}, 300);
 	nameInput->setX(100);
 	nameInput->setY(200);
-	GUITextField* nameInput2 = GUITextField::getInstance(tfFont, {0,0,0}, 300);
+	nameInput2 = GUITextField::getInstance(tfFont, {0,0,0}, 300);
 	nameInput2->setX(100);
 	nameInput2->setY(250);
 
