@@ -125,11 +125,13 @@ bool MobileSprite::isPixelColored(int x, int y) const {
 	Uint32* pixels = static_cast<Uint32*>(tempsurf->pixels);
 	Uint32 pixel = pixels[surfY*tempsurf->w + surfX];
 	SDL_UnlockSurface(tempsurf);
-	//std::cout << pixel << std::endl;
-	if (pixel > 0)
-		return true;
-	else
-		return false;
+
+	SDL_PixelFormat* pfm = tempsurf->format;
+	Uint8 r, g, b, alpha = 0;
+	SDL_GetRGBA(pixel, pfm, &r, &g, &b, &alpha);
+
+	// true if > 50% alpha
+	return alpha > 0x0F;
 }
 
 int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
@@ -153,8 +155,7 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
 						if (oX > myX) {
 							side = 4;
-						}
-						else {
+						} else {
 							side = 2;
 						}
 						found = true;
@@ -163,15 +164,13 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 					}
 				}
 			}
-		}
-		else {
+		} else {
 			for (int i = 0; i < intersection.w; i++) {
 				for (int a = 0; a < intersection.h; a++) {
 					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
 						if (oY > myY) {
 							side = 3;
-						}
-						else {
+						} else {
 							side = 1;
 						}
 						break;
@@ -261,7 +260,7 @@ void MobileSprite::setYAccel(double acc) {
 	yAccel = acc;
 }
 
-double MobileSprite::getXVel(double vel) const{
+double MobileSprite::getXVel(double vel) const {
 	return xVel;
 }
 

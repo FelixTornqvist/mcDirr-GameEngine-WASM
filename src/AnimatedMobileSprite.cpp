@@ -26,10 +26,13 @@ namespace mcDirr {
 		Uint32* pixels = static_cast<Uint32*>(tempsurf->pixels);
 		Uint32 pixel = pixels[surfY*tempsurf->w + surfX];
 		SDL_UnlockSurface(tempsurf);
-		if (pixel > 0)
-			return true;
-		else
-			return false;
+
+		SDL_PixelFormat* pfm = tempsurf->format;
+		Uint8 r, g, b, alpha = 0;
+		SDL_GetRGBA(pixel, pfm, &r, &g, &b, &alpha);
+
+		// true if > 50% alpha
+		return alpha > 0x0F;
 	}
 
 	AnimatedMobileSprite::~AnimatedMobileSprite() {
