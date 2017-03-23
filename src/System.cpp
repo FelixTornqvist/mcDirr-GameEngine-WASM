@@ -21,6 +21,7 @@ namespace mcDirr {
 	void System::collectInputs() {
 		mouseButtonsChanged = false;
 		typed.assign("");
+		backspaceDown = false;
 		SDL_Event eve;
 		while (SDL_PollEvent(&eve)) {
 			switch (eve.type) {
@@ -40,11 +41,12 @@ namespace mcDirr {
 					mouseY = eve.motion.y;
 					break;
 				case SDL_KEYDOWN:
-					if (listeningForTyping <= 0) {
+					if (listeningForTyping <= 0 || eve.key.keysym.sym == SDLK_ESCAPE) {
 						keys[eve.key.keysym.sym] = true;
 						if (funcMapping.count(eve.key.keysym.sym))
 							funcMapping[eve.key.keysym.sym]();
 					}
+					backspaceDown = eve.key.keysym.sym == SDLK_BACKSPACE;
 					break;
 				case SDL_KEYUP:
 					keys[eve.key.keysym.sym] = false;
@@ -95,6 +97,10 @@ namespace mcDirr {
 
 	std::string System::getTyped() const {
 		return typed;
+	}
+
+	bool System::isBackspaceDown() const {
+		return backspaceDown;
 	}
 
 	SDL_Renderer* System::getRen() {

@@ -32,6 +32,7 @@ namespace mcDirr {
 			void startTyping();
 			void stopTyping();
 			std::string getTyped() const;
+			bool isBackspaceDown() const;
 
 			template<class AnyClass>
 			/** member functions*/
@@ -57,6 +58,7 @@ namespace mcDirr {
 			std::unordered_map<Uint8, std::function<void()>> funcMapping;
 
 			int listeningForTyping = 0;
+			bool backspaceDown;
 			std::string typed;
 	};
 
