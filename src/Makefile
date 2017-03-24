@@ -17,7 +17,7 @@ game: $(OBJS)
 Main.o: Main.cpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Main.cpp
 
-GameEngine.o : GameEngine.hpp GameEngine.cpp System.hpp
+GameEngine.o : GameEngine.hpp GameEngine.cpp System.hpp Level.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) GameEngine.cpp
 
 FramedSprite.o : FramedSprite.hpp FramedSprite.cpp Sprite.hpp
@@ -56,7 +56,7 @@ Level.o : Level.hpp Level.cpp Sprite.hpp
 Projectile.o : Projectile.hpp Projectile.cpp AnimatedMobileSprite.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Projectile.cpp
 
-SantaHero.o : SantaHero.hpp SantaHero.cpp AnimatedMobileSprite.hpp
+SantaHero.o : SantaHero.hpp SantaHero.cpp AnimatedMobileSprite.hpp Level.hpp GameEngine.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) SantaHero.cpp
 
 Obstacle.o : Obstacle.hpp Obstacle.cpp AnimatedMobileSprite.hpp
