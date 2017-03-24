@@ -30,6 +30,7 @@ namespace mcDirr {
 			(*mob)->checkMobileCollisions(mobileSprites);
 
 			if (!(*mob)->isAlive()) {
+				delete (*mob);
 				mob = mobileSprites.erase(mob);
 			} else
 				mob++;
