@@ -10,18 +10,18 @@ Particle* Particle::getInstance(SDL_Surface* surf, int x, int y, double xVel, do
 }
 
 Particle::Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime):
-	MobileSprite(surf, x, y, nullptr, -1), Sprite(surf, x, y), lifeTime(lifetime), passedTime(0){
-	int rnd = rand() % 15 + 10;
-	src = dest;
-	src.x = rand() % (dest.w - rnd);
-	src.y = rand() % (dest.h - rnd);
-	src.h = src.w = rnd;
+	Sprite(surf, x, y), MobileSprite(surf, x, y, nullptr, -1), lifeTime(lifetime), passedTime(0) {
+		int rnd = rand() % 15 + 10;
+		src = dest;
+		src.x = rand() % (dest.w - rnd);
+		src.y = rand() % (dest.h - rnd);
+		src.h = src.w = rnd;
 
-	dest.w = rnd;
-	dest.h = rnd;
-	setXVel(xVel);
-	setYVel(yVel);
-	yAccel /= 1.6;
+		dest.w = rnd;
+		dest.h = rnd;
+		setXVel(xVel);
+		setYVel(yVel);
+		yAccel /= 1.6;
 }
 
 void Particle::customTick(int timeDiff) {
