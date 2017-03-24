@@ -36,6 +36,7 @@ using namespace mcDirr;
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 Level* lvl2;
 Level* lvl1;
+Level* lvl3;
 GUIScreen* start;
 GUIText* text;
 GUITextField *nameInput, *nameInput2;
@@ -77,20 +78,32 @@ int main(int argc, char** argv) {
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	lvl2 = Level::getInstance(10,190,800,500);
+	Obstacle* l3o1 = Obstacle::getInstance(grass, 400, 600, 0.2);
+	Obstacle* l3o2 = Obstacle::getInstance(grass, 500, 600, 0.2);
+	Obstacle* l3o3 = Obstacle::getInstance(grass, 1, 600, 0.2);
 
+	lvl1 = Level::getInstance(10, 400, 700, 400);
+	lvl2 = Level::getInstance(10,190,800,500);
+	lvl3 = Level::getInstance(10,190,800,500);
+
+	lvl3->add(l3o3);
+	lvl3->add(l3o3);
+	lvl3->add(l3o3);
 	lvl2->add(s15);
 	lvl2->add(s16);
 	lvl2->add(s17);
 	lvl2->add(s18);
 
-
+	SDL_Surface* lvl2BGSurf = loader.loadSurface("media/level1BG.png");
 	SDL_Surface* lvl1BGSurf = loader.loadSurface("media/level1BG.png");
 	SDL_Surface* santasheet = loader.loadSurface("media/santa-sheet.png");
 	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
+	VisualSprite* lvl2BG = Background::getInstance(lvl2BGSurf, 0, 0);
+	lvl2->add(lvl2BG);
+	lvl3->add(lvl2BG);
 	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 	s2->setHealth(40);
@@ -153,6 +166,7 @@ int main(int argc, char** argv) {
 	ge.addScreen(start);
 	ge.addScreen(lvl1);
 	ge.addScreen(lvl2);
+	ge.addScreen(lvl3);
 
 
 	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::nextScreen);
