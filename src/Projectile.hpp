@@ -18,6 +18,7 @@ namespace mcDirr {
 			bool facingRight = false;
 			void handleImmobileCollision(ImmobileSprite* collWith, int side) override;
 			void handleMobileCollision(MobileSprite* collidedWith, int side) override;
+			void checkBounds();
 
 	};
 }

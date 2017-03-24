@@ -1,3 +1,4 @@
+#include "System.hpp"
 #include "Projectile.hpp"
 
 #define TEAM 3
@@ -45,6 +46,18 @@ namespace mcDirr {
 				setEndFrame(1);
 			}
 		}
+		checkBounds();
+	}
+
+	void Projectile::checkBounds() {
+		int winWidth = 0;
+		int winHeight = 0;
+
+		SDL_Window* window = sys.getWin();
+		SDL_GetWindowSize(window, &winWidth, &winHeight);
+
+		if (getX() <= 0 || getX() >= winWidth || getY() <= 0 || getY() >= winHeight)
+			alive = false;
 	}
 
 	Projectile::~Projectile() {
