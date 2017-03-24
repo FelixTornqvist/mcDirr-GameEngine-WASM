@@ -32,6 +32,7 @@ void GUITextField::draw() const {
 
 void GUITextField::updateText() {
 	SDL_Surface* surf = TTF_RenderUTF8_Solid(getFont(), getText().c_str(), getColor());
+	SDL_DestroyTexture(texture);
 	texture = loader.loadTexture(surf);
 	SDL_FreeSurface(surf);
 
