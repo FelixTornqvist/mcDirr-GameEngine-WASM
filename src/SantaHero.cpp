@@ -9,16 +9,56 @@
 
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym) {
-	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym);
+SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
+	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek);
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
+SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek)
 	:
-	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
+	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), gameEnginePointer(GEpek),
 	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet) {
 	spawnX = x;
 	spawnY = y;
+}
+
+void SantaHero::checkBounds() {
+	int winWidth = 0;
+	int winHeight = 0;
+
+	SDL_Window* window = sys.getWin();
+	SDL_GetWindowSize(window, &winWidth, &winHeight);
+	// std::cout << dest.x << " - " << winWidth << std::endl;
+
+	if (dest.y > winHeight) {
+		alive = false;
+		return;
+	}
+	if (dest.x <= 0) {
+		dest.x = 1;
+		xVel = 0;
+		gameEnginePointer->previousScreen();
+		return;
+	}
+
+	if (dest.x > winWidth) {
+		dest.x = winWidth - 1;
+		xVel = 0;
+		gameEnginePointer->nextScreen();
+		
+		if (gameEnginePointer->getScreen() != nullptr) {
+			std::cout << "körs" << std::endl;
+			if (!gameEnginePointer->getScreen()->exists(this)) {
+				std::cout << "det här med!" << std::endl;
+				gameEnginePointer->getScreen()->add(this);
+			}
+			dest.x = 50;
+			dest.y = 50;
+			//dest.x = gameEnginePointer->getScreen()->getStartX();
+			//dest.y = gameEnginePointer->getScreen()->getStartY();
+			
+		}
+		
+	}
 }
 
 
@@ -41,6 +81,7 @@ void SantaHero::customTick(int timeDiff) {
 		int projX = rect->x + 50;
 		AnimatedMobileSprite* sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
 		sprite->setYAccel(0.1);
+		sprite->setBouncy(false);
 
 		getSpriteOutbox()->push(sprite);
 	}
@@ -63,6 +104,7 @@ void SantaHero::customTick(int timeDiff) {
 			setEndFrame(1);
 		}
 	}
+	checkBounds();
 }
 
 void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
@@ -71,9 +113,10 @@ void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
 void SantaHero::kill() {
 	if (health > 0) {
 		changeHealth(-1);
+	} else {
+		//alive = false;
+		health = 4;
 		dest.x = spawnX;
 		dest.y = spawnY;
-	} else {
-		alive = false;
 	}
 }

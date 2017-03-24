@@ -70,31 +70,6 @@ void MobileSprite::doPhysics(int millisPassed) {
 
 void MobileSprite::tick(int time) {
 	doPhysics(time);
-	checkBounds();
-}
-
-void MobileSprite::checkBounds() {
-	int winWidth = 0;
-	int winHeight = 0;
-
-	SDL_Window* window = sys.getWin();
-	SDL_GetWindowSize(window, &winWidth, &winHeight);
-	// std::cout << dest.x << " - " << winWidth << std::endl;
-
-	if (dest.y > winHeight) {
-		dest.x = 50;
-		dest.y = 50;
-		return;
-	}
-
-	if (dest.x <= 0) {
-		dest.x = 1;
-		return;
-	}
-
-	if (dest.x > winWidth) {
-		dest.x = 50;
-	}
 }
 
 void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
@@ -111,8 +86,43 @@ void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
 
 void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end(); mob++) {
-		if (*mob != this)
-			handleMobileCollision(*mob, checkCollisionForMobile(*mob));
+		if (*mob != this && canCollide && (*mob)->canCollide) {
+			int side = checkCollisionForMobile(*mob);
+			if ((*mob)->getTeam() != getTeam()) {
+				collisionBounce(*mob, side);
+			}
+			handleMobileCollision(*mob, side);
+		}
+	}
+}
+
+void MobileSprite::collisionBounce(MobileSprite* collidedWith, int side) {
+	if (bouncy && collidedWith->bouncy && side) {
+		float bounceForce = 0.3;
+		float upBounce = 0;
+		if (onGround) {
+			upBounce = 0.1;
+		}
+		if (side == 1) {
+			yVel = bounceForce;
+			collidedWith->setYVel(-bounceForce);
+		}
+		if (side == 2) {
+			xVel = bounceForce;
+			yVel = -upBounce;
+			collidedWith->setXVel(-bounceForce);				
+			collidedWith->setYVel(-bounceForce);
+		}
+		if (side == 3) {
+			yVel = -bounceForce;
+			collidedWith->setYVel(bounceForce);
+		}
+		if (side == 4) {
+			xVel = -bounceForce;
+			yVel = -upBounce;
+			collidedWith->setXVel(bounceForce);
+			collidedWith->setYVel(-0.1);
+		}
 	}
 }
 
@@ -238,6 +248,14 @@ void MobileSprite::handleImmobileCollision(ImmobileSprite* collidedWith, int sid
 			xVel *= -collidedWith->getBounciness();
 		}
 	}
+}
+
+void MobileSprite::setCanCollide(bool collide) {
+	canCollide = collide;
+}
+
+void MobileSprite::setBouncy(bool bounce) {
+	bouncy = bounce;
 }
 
 int MobileSprite::getTeam() {

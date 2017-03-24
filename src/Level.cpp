@@ -6,11 +6,11 @@
 
 namespace mcDirr {
 
-	Level* Level::getInstance() {
-		return new Level();
+	Level* Level::getInstance(int startX, int startY, int endX, int endY) {
+		return new Level(startX, startY, endX, endY);
 	}
 
-	Level::Level() {
+	Level::Level(int startX, int startY, int endX, int endY) {
 	}
 
 	void Level::tick(int timeDiff) {
@@ -55,6 +55,27 @@ namespace mcDirr {
 		}
 	}
 
+	bool Level::exists(MobileSprite* mob) {
+		for (MobileSprite* curr : mobileSprites) {
+			if (curr == mob) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	int Level::getStartX() {
+		return startX;
+	}
+	int Level::getStartY() {
+		return startY;
+	}
+	int Level::getEndY() {
+		return endY;
+	}
+	int Level::getEndX() {
+		return endX;
+	}
 
 	void Level::add(Sprite* sprite) {
 		sprites.push_back(sprite);

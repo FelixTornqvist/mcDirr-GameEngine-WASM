@@ -31,7 +31,8 @@ namespace mcDirr {
 			void setYAccel(double acc);
 			double getXVel(double vel) const;
 			double getYVel(double vel) const;
-
+			void setCanCollide(bool collide);
+			void setBouncy(bool set);
 			void setSpriteOutbox(std::stack<MobileSprite*>* ptr);
 			std::stack<MobileSprite*>* getSpriteOutbox() const;
 
@@ -46,7 +47,6 @@ namespace mcDirr {
 			int checkCollision(Sprite* other) const;
 
 			void doPhysics(int millisPassed);
-			virtual void checkBounds();
 			virtual void drawHealth() const;
 
 
@@ -54,6 +54,8 @@ namespace mcDirr {
 			double yAccel, xAccel;
 			bool alive;
 			bool onGround;
+			bool canCollide = true;
+			bool bouncy = true;
 			bool renderHealth = false;
 			int health;
 			SDL_Texture* healthSymbol;
@@ -64,6 +66,8 @@ namespace mcDirr {
 
 			double debounceVel;
 			SDL_Surface* surface;
+
+			void collisionBounce(MobileSprite* collidedWith, int side);
 	};
 }
 

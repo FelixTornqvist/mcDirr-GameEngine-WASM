@@ -16,7 +16,9 @@ namespace mcDirr {
 			void run();
 			void addScreen(Screen* screen);
 			void setScreen(Uint32 screenIndex);
-			void skipScreen();
+			Level* getScreen();
+			void nextScreen();
+			void previousScreen();
 
 			void setPauseScreen(GUIScreen* screen);
 			void setPause(bool pause);

@@ -34,8 +34,8 @@ using namespace mcDirr;
 
 
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
-Level* lvl2 = Level::getInstance();
-Level* lvl1 = Level::getInstance();
+Level* lvl2;
+Level* lvl1;
 GUIScreen* start;
 GUIText* text;
 GUITextField *nameInput, *nameInput2;
@@ -58,7 +58,7 @@ void startButton() {
 	nameInput2->setText("");
 	nameInput->setFocused(false);
 	nameInput2->setFocused(false);
-	ge.skipScreen();
+	ge.nextScreen();
 }
 
 int main(int argc, char** argv) {
@@ -73,10 +73,11 @@ int main(int argc, char** argv) {
 
 	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200, hearts);
 	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200, hearts);
+
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	lvl2 = Level::getInstance();
+	lvl2 = Level::getInstance(50,50,100,100);
 
 	lvl2->add(s15);
 	lvl2->add(s16);
@@ -92,18 +93,20 @@ int main(int argc, char** argv) {
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
 	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
+	s2->setHealth(40);
+	s3->setHealth(40);
 	s3->setHealth(8);
 	s3->showHealth(true);
 
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	lvl1 = Level::getInstance();
+	lvl1 = Level::getInstance(50,50,100,100);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts);
+	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts, &ge);
 	santa->setHealth(4);
 	santa->showHealth(true);
-	SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts);
+	//SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts, &ge);
 
 	text = GUIText::getInstance(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
 	text->setX(100);
@@ -113,7 +116,7 @@ int main(int argc, char** argv) {
 	lvl1->add(s3);
 
 	lvl1->add(santa);
-	lvl1->add(santa2);
+	//lvl1->add(santa2);
 
 	lvl1->add(s5);
 	lvl1->add(s8);
@@ -152,7 +155,7 @@ int main(int argc, char** argv) {
 	ge.addScreen(lvl2);
 
 
-	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::skipScreen);
+	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::nextScreen);
 	sys.addKeyFunction(SDLK_f, &freeFunk);
 
 	ge.run();

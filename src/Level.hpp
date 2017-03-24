@@ -12,7 +12,7 @@
 namespace mcDirr {
 	class Level: public Screen {
 		public:
-			static Level* getInstance();
+			static Level* getInstance(int startX, int startY, int endX, int endY);
 
 			void tick(int timeDiff) override;
 			void draw() override;
@@ -25,15 +25,25 @@ namespace mcDirr {
 			void remove(Sprite* sprite);
 			void remove(MobileSprite* sprite);
 			void remove(ImmobileSprite* sprite);
+			bool exists(MobileSprite* mob);
+			int getStartX();
+			int getStartY();
+			int getEndY();
+			int getEndX();
+
 
 			virtual ~Level();
 
 		protected:
-			Level();
+			Level(int startX, int startY, int endX, int endY);
 
 		private:
 			void emptySpriteInbox();
 
+			int startX;
+			int	startY;
+			int	endX;
+			int endY;
 			std::stack<MobileSprite*> spriteInbox;
 
 			std::list<Sprite*> sprites;

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include "Level.hpp"
 
 namespace mcDirr {
 
@@ -31,7 +32,7 @@ namespace mcDirr {
 			SDL_RenderPresent(sys.getRen());
 
 			if(screens[currentScreen]->isFinished()) {
-				skipScreen();
+				nextScreen();
 			}
 			if (paused){
 				pauseScreen->tick(nextTick - lastTick);
@@ -53,10 +54,19 @@ namespace mcDirr {
 			running = false;
 	}
 
-	void GameEngine::skipScreen() {
-		currentScreen++;
-		if (currentScreen >= screens.size())
-			running = false;
+	void GameEngine::nextScreen() {
+		if (currentScreen < screens.size() - 1)
+			currentScreen++;
+	}
+
+	void GameEngine::previousScreen() {
+		if(currentScreen > 0)
+			currentScreen--;
+	}
+
+	Level* GameEngine::getScreen() {
+		if(Level* v = dynamic_cast<Level*>(screens[currentScreen]))
+			return v;
 	}
 
 	void GameEngine::addScreen(Screen* newScreen) {

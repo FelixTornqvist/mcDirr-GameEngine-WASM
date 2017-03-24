@@ -23,35 +23,16 @@ void EvilCat::customTick(int timeDiff) {
 }
 
 void EvilCat::handleMobileCollision(MobileSprite* collidedWith, int side) {
-	if (side && collidedWith->getTeam() == 1) {
-		if(side == 1) {
-			yVel = 0.5;
-			collidedWith->setYVel(-0.5);
-		}
-		if(side == 2) {
-			xVel = 0.5;
-			yVel = -0.1;
-			collidedWith->setXVel(-0.5);
-			collidedWith->setYVel(-0.1);
-		}
-		if(side == 3) {
-			yVel = -0.5;
-			collidedWith->setYVel(0.5);
-		}
-		if (side == 4) {
-			xVel = -0.5;
-			yVel = -0.1;
-			collidedWith->setXVel(0.5);
-			collidedWith->setYVel(-0.1);
-		}
-	}
 }
 
 void EvilCat::kill() {
 	// splatter effect
 	srand(SDL_GetTicks());
-	float amount = 30.0;
+	float amount = 4.0;
 	float velocity = 0.7;
+	if (health == 1) {
+		amount = 30;
+	}
 
 	for (int i = 0; i < amount; i++) {
 		int duration = rand() % 1500 + 1500;
@@ -60,15 +41,18 @@ void EvilCat::kill() {
 		float yVel = cos( (i/amount) * 2.0 * M_PI) * velocity + rnd;
 
 		Particle* p = Particle::getInstance(getSurface(), dest.x, dest.y, xVel, yVel, duration);
+		p->setBouncy(false);
+		p->setCanCollide(false);
 		getSpriteOutbox()->push(p);
 	}
 
 	changeHealth(-1);
+	/*
 	dest.x = spawnX;
 	dest.y = spawnY;
 	xVel = 0;
 	yVel = 0;
-
+	*/
 	if (health <= 0) {
 		alive = false;
 	}
