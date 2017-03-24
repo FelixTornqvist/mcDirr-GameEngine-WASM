@@ -10,7 +10,7 @@ namespace mcDirr {
 		return new Level(startX, startY, endX, endY);
 	}
 
-	Level::Level(int startX, int startY, int endX, int endY) {
+	Level::Level(int sX, int sY, int eX, int eY) : startX(sX), startY(sY), endX(eX), endY(eY) {
 	}
 
 	void Level::tick(int timeDiff) {

@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
 	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
 	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	lvl2 = Level::getInstance(50,50,100,100);
+	lvl2 = Level::getInstance(10,190,800,500);
 
 	lvl2->add(s15);
 	lvl2->add(s16);
@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
 	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
 	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
-	lvl1 = Level::getInstance(50,50,100,100);
+	lvl1 = Level::getInstance(10,400,700,400);
 
 	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts, &ge);
 	santa->setHealth(4);

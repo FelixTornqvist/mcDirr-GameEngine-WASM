@@ -17,7 +17,8 @@ namespace mcDirr {
 			void run();
 			void addScreen(Screen* screen);
 			void setScreen(Uint32 screenIndex);
-			Level* getScreen();
+			Level* getLevel();
+			int getScreenIndex();
 			void nextScreen();
 			void previousScreen();
 

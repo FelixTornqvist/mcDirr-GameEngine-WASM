@@ -63,9 +63,12 @@ namespace mcDirr {
 			currentScreen--;
 	}
 
-	Level* GameEngine::getScreen() {
+	Level* GameEngine::getLevel() {
 		if(Level* v = dynamic_cast<Level*>(screens[currentScreen]))
 			return v;
+	}
+	int GameEngine::getScreenIndex() {
+		return currentScreen;
 	}
 
 	void GameEngine::addScreen(Screen* newScreen) {

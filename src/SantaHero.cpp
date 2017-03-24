@@ -34,9 +34,18 @@ void SantaHero::checkBounds() {
 		return;
 	}
 	if (dest.x <= 0) {
-		dest.x = 1;
-		xVel = 0;
-		gameEnginePointer->previousScreen();
+		if (gameEnginePointer->getScreenIndex() > 1) {
+			gameEnginePointer->previousScreen();
+			dest.x = gameEnginePointer->getLevel()->getEndX();
+			dest.y = gameEnginePointer->getLevel()->getEndY();
+			xVel = 0;
+		}
+		else {
+			dest.x = gameEnginePointer->getLevel()->getStartX();
+			dest.y = gameEnginePointer->getLevel()->getStartY();
+			xVel = 0;
+			gameEnginePointer->previousScreen();
+		}
 		return;
 	}
 
@@ -45,16 +54,15 @@ void SantaHero::checkBounds() {
 		xVel = 0;
 		gameEnginePointer->nextScreen();
 		
-		if (gameEnginePointer->getScreen() != nullptr) {
+		if (gameEnginePointer->getLevel() != nullptr) {
 			std::cout << "körs" << std::endl;
-			if (!gameEnginePointer->getScreen()->exists(this)) {
+			if (!gameEnginePointer->getLevel()->exists(this)) {
 				std::cout << "det här med!" << std::endl;
-				gameEnginePointer->getScreen()->add(this);
+				gameEnginePointer->getLevel()->add(this);
 			}
-			dest.x = 50;
-			dest.y = 50;
-			//dest.x = gameEnginePointer->getScreen()->getStartX();
-			//dest.y = gameEnginePointer->getScreen()->getStartY();
+
+			dest.x = gameEnginePointer->getLevel()->getStartX();
+			dest.y = gameEnginePointer->getLevel()->getStartY();
 			
 		}
 		
