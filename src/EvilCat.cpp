@@ -13,7 +13,7 @@ EvilCat* EvilCat::getInstance(SDL_Surface* surface, int x, int y, SDL_Texture* h
 }
 
 EvilCat::EvilCat(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym) :
-	MobileSprite(surface, x, y,healthSym, TEAM), Sprite(surface, x, y) {
+	Sprite(surface, x, y), MobileSprite(surface, x, y,healthSym, TEAM) {
 	spawnX = x;
 	spawnY = y;
 }
