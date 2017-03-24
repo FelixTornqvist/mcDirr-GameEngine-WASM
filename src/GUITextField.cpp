@@ -70,5 +70,25 @@ void GUITextField::setFocused(bool focs) {
 		sys.stopTyping();
 }
 
+void GUITextField::setX(int x) {
+	GUIText::setX(x);
+	updateText();
+}
+
+void GUITextField::setY(int y) {
+	GUIText::setY(y);
+	updateText();
+}
+
+void GUITextField::setWidth(int w) {
+	GUIText::setWidth(w);
+	updateText();
+}
+
+void GUITextField::setHeight(int h) {
+	GUIText::setHeight(h);
+	updateText();
+}
+
 GUITextField::~GUITextField() {
 }

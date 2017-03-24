@@ -23,6 +23,8 @@ namespace mcDirr {
 			void pause();
 			void unPause();
 			void stop();
+			void setFrameRate(int fps);
+			int getSetFrameRate() const;
 
 			virtual ~GameEngine();
 

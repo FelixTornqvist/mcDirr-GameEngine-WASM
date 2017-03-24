@@ -17,6 +17,11 @@ namespace mcDirr {
 			virtual void mouseClick() override;
 			void setFocused(bool focs);
 
+			void setX(int x) override;
+			void setY(int y) override;
+			void setWidth(int w) override;
+			void setHeight(int h) override;
+
 			virtual ~GUITextField();
 
 		protected:

@@ -17,13 +17,12 @@ namespace mcDirr {
 	}
 
 	void GameEngine::run() {
-		const Uint32 MILLIS_PER_LOOP = 1000 / fps;
 		Uint32 lastTick = SDL_GetTicks();
 		Uint32 nextTick;
 
 		running = true;
 		while(running) {
-			nextTick = lastTick + MILLIS_PER_LOOP;
+			nextTick = lastTick + 1000 / fps;
 
 			SDL_RenderClear(sys.getRen());
 				screens[currentScreen]->draw();
@@ -82,6 +81,17 @@ namespace mcDirr {
 
 	void GameEngine::stop() {
 		running = false;
+	}
+
+	void GameEngine::setFrameRate(int frameRate) {
+		if (frameRate <= 0)
+			throw std::invalid_argument("invalid framerate");
+		else
+			fps = frameRate;
+	}
+
+	int GameEngine::getSetFrameRate() const {
+		return fps;
 	}
 
 	void GameEngine::delay(Uint32 nextTick) const {

@@ -4,6 +4,7 @@
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
 #include "GUIText.hpp"
+#include "GUITextField.hpp"
 #include "GameEngine.hpp"
 
 namespace mcDirr {
@@ -16,13 +17,16 @@ namespace mcDirr {
 
 		private:
 			SDL_Surface *bg;
-			SDL_Surface *continueSurf, *restartSurf, *exitSurf;
-			GUIButton *continueB, *restartB, *exitB;
-			TTF_Font* font;
-			GUIText* title;
+			SDL_Surface *continueSurf, *restartSurf, *exitSurf, *updateSurf;
+			GUIButton *continueB, *restartB, *exitB, *updateB;
+			GUITextField* fpsInput;
+			TTF_Font *font, *tfFont;
+			GUIText *title, *fpsLabel;
 
 			GameEngine *ge;
 			void restart();
+			void setFrameRate();
+			void unPause();
 			void putOnXMiddle(GUIElement* btn);
 	};
 }

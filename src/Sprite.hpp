@@ -14,13 +14,13 @@ namespace mcDirr {
 
 			int getX() const;
 			int getY() const;
-			void setX(int x);
-			void setY(int y);
+			virtual void setX(int x);
+			virtual void setY(int y);
 
 			int getWidth() const;
 			int getHeight() const;
-			void setWidth(int w);
-			void setHeight(int h);
+			virtual void setWidth(int w);
+			virtual void setHeight(int h);
 
 			virtual ~Sprite();
 
