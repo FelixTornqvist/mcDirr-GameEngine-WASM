@@ -62,7 +62,6 @@ void PauseScreen::putOnXMiddle(GUIElement* btn) {
 	SDL_GetWindowSize(sys.getWin(), &w, nullptr);
 	int halfWindow = w / 2;
 	btn->setX(halfWindow - btn->getWidth() / 2);
-
 }
 
 void PauseScreen::restart() {
@@ -76,7 +75,7 @@ void PauseScreen::setFrameRate() {
 		int fps = std::stoi(fpsInput->getText());
 		ge->setFrameRate(fps);
 	} catch (const std::exception& e) {
-		fpsInput->setText("Not a valid FPS!");
+		fpsInput->setText(std::to_string(ge->getSetFrameRate()));
 	}
 	fpsInput->setFocused(false);
 }
