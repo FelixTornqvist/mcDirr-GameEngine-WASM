@@ -178,8 +178,8 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 				}
 			}
 		}
-		return side;
 	}
+	return side;
 }
 
 int MobileSprite::checkCollision(Sprite* other) const {
