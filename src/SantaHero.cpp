@@ -15,8 +15,8 @@ SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int
 
 SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek)
 	:
-	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), gameEnginePointer(GEpek),
-	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet) {
+	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
+	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet), gameEnginePointer(GEpek) {
 	spawnX = x;
 	spawnY = y;
 }
