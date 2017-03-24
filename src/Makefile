@@ -1,4 +1,4 @@
-OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Particle.o Obstacle.o Loader.o Level.o GUIText.o GUIScreen.o GUIElement.o GUIButton.o Screen.o 
+OBJS = Main.o GameEngine.o Sprite.o Background.o FramedSprite.o AnimatedSprite.o System.o VisualSprite.o MobileSprite.o AnimatedMobileSprite.o ImmobileSprite.o Projectile.o SantaHero.o EvilCat.o Particle.o Obstacle.o Loader.o Level.o GUIText.o GUITextField.o PauseScreen.o GUIScreen.o GUIElement.o GUIButton.o Screen.o 
 
 
 CC = g++
@@ -80,8 +80,15 @@ GUIElement.o : GUIElement.hpp GUIElement.cpp Sprite.hpp
 GUIButton.o : GUIButton.hpp GUIButton.cpp GUIElement.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) GUIButton.cpp
 
+GUITextField.o : GUITextField.hpp GUITextField.cpp GUIText.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) GUITextField.cpp
+
 Screen.o : Screen.hpp Screen.cpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Screen.cpp
+
+PauseScreen.o : PauseScreen.hpp PauseScreen.cpp GUIScreen.hpp GUIButton.hpp GUIText.hpp GameEngine.hpp
+	$(CC) $(CFLAGS) $(COMPILERFLAG) PauseScreen.cpp
+
 
 clean:
 	rm *.o
