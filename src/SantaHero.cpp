@@ -14,8 +14,9 @@ SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int
 }
 
 SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym)
-	: AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM),
-	  FramedSprite(surf, x, y, divs), Sprite(surf, x, y), firesheet(fireSheet){
+	:
+	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
+	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet) {
 	spawnX = x;
 	spawnY = y;
 }
