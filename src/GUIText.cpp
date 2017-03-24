@@ -8,7 +8,7 @@ namespace mcDirr {
 	}
 
 	GUIText::GUIText(TTF_Font* fnt, const SDL_Color& colour, std::string txt):
-		GUIElement(nullptr), font(fnt), text(txt), color(colour) {
+		GUIElement(nullptr),text(txt), font(fnt), color(colour) {
 		updateText();
 	}
 
