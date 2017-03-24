@@ -7,6 +7,7 @@
 
 #include "Screen.hpp"
 #include "GUIScreen.hpp"
+#include "Level.hpp"
 
 namespace mcDirr {
 	class GameEngine {
