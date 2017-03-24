@@ -111,7 +111,11 @@ namespace mcDirr {
 	}
 
 	Level::~Level() {
-		for(Sprite* sprite : sprites)
-			delete sprite;
+		for(Sprite* s : sprites)
+			delete s;
+		for (MobileSprite* s : mobileSprites)
+			delete s;
+		for (ImmobileSprite* s : immobileSprites)
+			delete s;
 	}
 }

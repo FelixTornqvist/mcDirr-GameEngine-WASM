@@ -34,12 +34,11 @@ using namespace mcDirr;
 
 
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
-Level* lvl2;
-Level* lvl1;
-Level* lvl3;
+Level *lvl1, *lvl2, *lvl3;
 GUIScreen* start;
 GUIText* text;
 GUITextField *nameInput, *nameInput2;
+SantaHero* santa;
 
 void freeFunk() {
 	static bool funkyState;
@@ -60,6 +59,12 @@ void startButton() {
 	nameInput->setFocused(false);
 	nameInput2->setFocused(false);
 	ge.nextScreen();
+
+	Level* lvl = ge.getLevel();
+	if (lvl != nullptr) {
+		santa->setX(lvl->getStartX());
+		santa->setY(lvl->getStartY());
+	}
 }
 
 int main(int argc, char** argv) {
@@ -116,7 +121,7 @@ int main(int argc, char** argv) {
 
 	lvl1 = Level::getInstance(10,400,700,400);
 
-	SantaHero* santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts, &ge);
+	santa = SantaHero::getInstance(santasheet, fireballSheet, 50, 50, 11, 10, hearts, &ge);
 	santa->setHealth(4);
 	santa->showHealth(true);
 	//SantaHero* santa2 = SantaHero::getInstance(santasheet, fireballSheet, 300, 300, 11, 10, hearts, &ge);
