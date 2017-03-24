@@ -47,7 +47,7 @@ namespace mcDirr {
 		}
 	}
 
-	void GameEngine::setScreen(uint screenIndex) {
+	void GameEngine::setScreen(Uint32 screenIndex) {
 		currentScreen = screenIndex;
 		if (currentScreen >= screens.size())
 			running = false;

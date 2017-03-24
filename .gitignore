@@ -50,3 +50,10 @@ Debug/
 /proj1.VC.VC.opendb
 /proj1.vcxproj
 /proj1.vcxproj.filters
+
+*.sln
+*.vcxproj
+.vs/
+mcDirr-GameEngine\.vcxproj
+
+mcDirr-GameEngine\.vcxproj\.filters
