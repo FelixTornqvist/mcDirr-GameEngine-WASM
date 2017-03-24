@@ -100,16 +100,20 @@ int main(int argc, char** argv) {
 	lvl2->add(s17);
 	lvl2->add(s18);
 
-	SDL_Surface* lvl2BGSurf = loader.loadSurface("media/level1BG.png");
 	SDL_Surface* lvl1BGSurf = loader.loadSurface("media/level1BG.png");
+	SDL_Surface* lvl2BGSurf = loader.loadSurface("media/level1BG.png");
+	SDL_Surface* lvl3BGSurf = loader.loadSurface("media/level1BG.png");
+
 	SDL_Surface* santasheet = loader.loadSurface("media/santa-sheet.png");
 	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
 	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
 	VisualSprite* lvl2BG = Background::getInstance(lvl2BGSurf, 0, 0);
+	VisualSprite* lvl3BG = Background::getInstance(lvl3BGSurf, 0, 0);
+
 	lvl2->add(lvl2BG);
-	lvl3->add(lvl2BG);
+	lvl3->add(lvl3BG);
 	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
 	EvilCat* l3ec1 = EvilCat::getInstance(evilCat, 600, 500, hearts);
