@@ -86,7 +86,7 @@ GUITextField.o : GUITextField.hpp GUITextField.cpp GUIText.hpp
 Screen.o : Screen.hpp Screen.cpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) Screen.cpp
 
-PauseScreen.o : PauseScreen.hpp PauseScreen.cpp GUIScreen.hpp GUIButton.hpp GUIText.hpp GameEngine.hpp
+PauseScreen.o : PauseScreen.hpp PauseScreen.cpp GUIScreen.hpp GUIButton.hpp GUIText.hpp GUITextField.hpp GameEngine.hpp
 	$(CC) $(CFLAGS) $(COMPILERFLAG) PauseScreen.cpp
 
 
