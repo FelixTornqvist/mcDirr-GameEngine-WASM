@@ -75,6 +75,7 @@ int main(int argc, char** argv) {
 
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
+	SDL_Surface* evilCat = loader.loadSurface("media/extraevilCat.png");
 	SDL_Texture* hearts = loader.loadTexture("media/heart.png");
 
 	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200, hearts);
@@ -111,6 +112,11 @@ int main(int argc, char** argv) {
 	lvl3->add(lvl2BG);
 	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
 	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
+	EvilCat* l3ec1 = EvilCat::getInstance(evilCat, 600, 500, hearts);
+	l3ec1->setHealth(20);
+	l3ec1->showHealth(true);
+	lvl3->add(l3ec1);
+
 	s2->setHealth(40);
 	s3->setHealth(40);
 	s3->setHealth(8);
