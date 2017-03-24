@@ -30,7 +30,9 @@ void SantaHero::checkBounds() {
 	// std::cout << dest.x << " - " << winWidth << std::endl;
 
 	if (dest.y > winHeight) {
-		alive = false;
+		dest.x = gameEnginePointer->getLevel()->getStartX();
+		dest.y = gameEnginePointer->getLevel()->getStartY();
+		gameEnginePointer->previousScreen();
 		return;
 	}
 	if (dest.x <= 0) {
@@ -42,9 +44,9 @@ void SantaHero::checkBounds() {
 		}
 		else {
 			dest.x = gameEnginePointer->getLevel()->getStartX();
-			dest.y = gameEnginePointer->getLevel()->getStartY();
+			//dest.y = gameEnginePointer->getLevel()->getStartY();
 			xVel = 0;
-			gameEnginePointer->previousScreen();
+			//gameEnginePointer->previousScreen();
 		}
 		return;
 	}
