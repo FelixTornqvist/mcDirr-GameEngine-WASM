@@ -86,6 +86,10 @@ namespace mcDirr {
 		sprite->setSpriteOutbox(&spriteInbox);
 	}
 
+	void Level::setSpriteOutBox(MobileSprite* sprite) {
+		sprite->setSpriteOutbox(&spriteInbox);
+	}
+
 	void Level::add(ImmobileSprite* sprite) {
 		immobileSprites.push_back(sprite);
 	}

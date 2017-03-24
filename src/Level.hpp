@@ -26,6 +26,7 @@ namespace mcDirr {
 			void remove(MobileSprite* sprite);
 			void remove(ImmobileSprite* sprite);
 			bool exists(MobileSprite* mob);
+			void setSpriteOutBox(MobileSprite* sprite);
 			int getStartX();
 			int getStartY();
 			int getEndY();

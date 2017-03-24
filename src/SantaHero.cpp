@@ -41,6 +41,7 @@ void SantaHero::checkBounds() {
 			dest.x = gameEnginePointer->getLevel()->getEndX();
 			dest.y = gameEnginePointer->getLevel()->getEndY();
 			xVel = 0;
+			gameEnginePointer->getLevel()->setSpriteOutBox(this);
 		}
 		else {
 			dest.x = gameEnginePointer->getLevel()->getStartX();
@@ -57,10 +58,11 @@ void SantaHero::checkBounds() {
 		gameEnginePointer->nextScreen();
 		
 		if (gameEnginePointer->getLevel() != nullptr) {
-			std::cout << "körs" << std::endl;
 			if (!gameEnginePointer->getLevel()->exists(this)) {
-				std::cout << "det här med!" << std::endl;
 				gameEnginePointer->getLevel()->add(this);
+			}
+			else {
+				gameEnginePointer->getLevel()->setSpriteOutBox(this);
 			}
 
 			dest.x = gameEnginePointer->getLevel()->getStartX();
