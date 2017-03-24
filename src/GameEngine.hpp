@@ -15,7 +15,7 @@ namespace mcDirr {
 
 			void run();
 			void addScreen(Screen* screen);
-			void setScreen(int screenIndex);
+			void setScreen(uint screenIndex);
 			void skipScreen();
 
 			void setPauseScreen(GUIScreen* screen);
@@ -33,7 +33,7 @@ namespace mcDirr {
 		private:
 			int fps;
 			bool running = false;
-			int currentScreen;
+			uint currentScreen;
 			std::vector<Screen*> screens;
 
 			bool paused = false;
