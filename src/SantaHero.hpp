@@ -27,7 +27,7 @@ namespace mcDirr {
 			int projCooldown = 0;
 			SDL_Surface* firesheet;
 			bool facingRight = true;
-			GameEngine* gameEnginePointer;
+			GameEngine* gameEngine;
 	};
 }
 

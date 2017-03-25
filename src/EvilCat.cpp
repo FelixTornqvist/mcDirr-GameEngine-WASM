@@ -28,10 +28,10 @@ void EvilCat::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, 
 void EvilCat::kill() {
 	// splatter effect
 	srand(SDL_GetTicks());
-	float amount = 4.0f;
+	float amount = 10;
 	float velocity = 0.7f;
 	if (health == 1) {
-		amount = 30;
+		amount = 50;
 	}
 
 	for (int i = 0; i < amount; i++) {
