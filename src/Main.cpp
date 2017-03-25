@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
 
 	lvl1 = Level::getInstance(10, 400, 700, 400);
 	lvl2 = Level::getInstance(10,190,800,500);
-	lvl3 = Level::getInstance(10,190,800,500);
+	lvl3 = Level::getInstance(200,100,800,500);
 
 	lvl3->add(l3o3);
 	lvl3->add(l3o3);
