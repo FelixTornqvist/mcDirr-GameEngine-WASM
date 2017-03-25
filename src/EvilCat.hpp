@@ -15,6 +15,7 @@ namespace mcDirr {
 			EvilCat(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 
 		private:
+			int damageCooldown = 0;
 			void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) override;
 			int spawnX, spawnY;
 

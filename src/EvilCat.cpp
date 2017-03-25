@@ -19,10 +19,15 @@ EvilCat::EvilCat(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym) :
 }
 
 void EvilCat::customTick(int timeDiff) {
-	// move move
+	damageCooldown -= timeDiff;
 }
 
 void EvilCat::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
+
+	if (side && collidedWith->getTeam() == 1 && damageCooldown <= 0) {
+		collidedWith->kill();
+		damageCooldown = 500;
+	}
 }
 
 void EvilCat::kill() {

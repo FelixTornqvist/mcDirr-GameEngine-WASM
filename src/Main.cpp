@@ -34,8 +34,8 @@ using namespace mcDirr;
 
 
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
-Level *lvl1, *lvl2, *lvl3, *lvl4;
 GUIScreen* start;
+Level *lvl1, *lvl2, *lvl3, *lvl4;
 std::shared_ptr<GUIText> text;
 std::shared_ptr<GUITextField> nameInput, nameInput2;
 std::shared_ptr<MobileSprite> santa;

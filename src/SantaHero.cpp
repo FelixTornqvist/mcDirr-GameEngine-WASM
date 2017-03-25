@@ -34,9 +34,7 @@ void SantaHero::checkBounds() {
 		Level* lvl = gameEngine->getLevel();
 		if (lvl != nullptr) {
 			dest.x = gameEngine->getLevel()->getStartX();
-			std::cout << dest.x << std::endl;
 			dest.y = gameEngine->getLevel()->getStartY();
-			std::cout << dest.y << std::endl;
 			yVel = 0;
 		}
 		return;
@@ -45,9 +43,7 @@ void SantaHero::checkBounds() {
 		if (gameEngine->getScreenIndex() > 1) {
 			gameEngine->previousScreen();
 			dest.x = gameEngine->getLevel()->getEndX();
-			std::cout << dest.x << std::endl;
 			dest.y = gameEngine->getLevel()->getEndY();
-			std::cout << dest.y << std::endl;
 			gameEngine->getLevel()->setSpriteOutBox(this);
 		} else {
 			dest.x = 1;
@@ -70,14 +66,10 @@ void SantaHero::checkBounds() {
 			} else {
 				lvl->setSpriteOutBox(this);
 			}
-			
+
 			yVel = 0;
 			dest.x = lvl->getStartX();
-			std::cout << dest.x << std::endl;
 			dest.y = lvl->getStartY();
-			std::cout << dest.y << std::endl;
-			
-
 		}
 
 	}
@@ -96,7 +88,6 @@ void SantaHero::customTick(int timeDiff) {
 		xVel = 0.5;
 
 	if (sys.isKeyDown(SDLK_SPACE) && projCooldown <= 0) {
-		std::cout << dest.x << " " << dest.y << std::endl;
 		projCooldown = 200;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
