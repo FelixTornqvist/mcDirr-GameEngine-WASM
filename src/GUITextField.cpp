@@ -47,13 +47,15 @@ void GUITextField::updateText() {
 }
 
 void GUITextField::tick(int timeDiff) {
-	if (focus && sys.getTyped().size() > 0) {
-		text += sys.getTyped();
-		updateText();
-	}
-	if (sys.isBackspaceDown() && text.size() > 0 ) {
-		text.pop_back();
-		updateText();
+	if (focus) {
+		if (sys.getTyped().size() > 0) {
+			text += sys.getTyped();
+			updateText();
+		}
+		if (sys.isBackspaceDown() && text.size() > 0 ) {
+			text.pop_back();
+			updateText();
+		}
 	}
 }
 
