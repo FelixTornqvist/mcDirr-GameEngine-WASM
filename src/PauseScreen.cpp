@@ -74,7 +74,7 @@ void PauseScreen::setFrameRate() {
 	try {
 		int fps = std::stoi(fpsInput->getText());
 		ge->setFrameRate(fps);
-	} catch (const std::exception& e) {
+	} catch (const std::exception&) {
 		fpsInput->setText(std::to_string(ge->getSetFrameRate()));
 	}
 	fpsInput->setFocused(false);

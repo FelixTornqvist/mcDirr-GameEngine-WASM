@@ -52,8 +52,6 @@ void freeFunk() {
 }
 
 void startButton() {
-	cout << "start clicked" << endl;
-	cout << nameInput->getText() << endl;
 	nameInput->setText("");
 	nameInput2->setText("");
 	nameInput->setFocused(false);
@@ -81,12 +79,12 @@ int main(int argc, char** argv) {
 	std::shared_ptr<MobileSprite> s15 = EvilCat::getInstance(cat, 600, 200, hearts);
 	std::shared_ptr<MobileSprite> s16 = EvilCat::getInstance(cat, 800, 200, hearts);
 
-	std::shared_ptr<ImmobileSprite> s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
-	std::shared_ptr<ImmobileSprite> s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
+	std::shared_ptr<ImmobileSprite> s17 = Obstacle::getInstance(grass, 400, 600, 0.2f);
+	std::shared_ptr<ImmobileSprite> s18 = Obstacle::getInstance(grass, -500, 400, 0.2f);
 
-	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(grass, 400, 600, 0.2);
-	std::shared_ptr<ImmobileSprite> l3o2 = Obstacle::getInstance(grass, 500, 600, 0.2);
-	std::shared_ptr<ImmobileSprite> l3o3 = Obstacle::getInstance(grass, 1, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(grass, 400, 600, 0.2f);
+	std::shared_ptr<ImmobileSprite> l3o2 = Obstacle::getInstance(grass, 500, 600, 0.2f);
+	std::shared_ptr<ImmobileSprite> l3o3 = Obstacle::getInstance(grass, 1, 600, 0.2f);
 
 	lvl1 = Level::getInstance(10, 400, 700, 400);
 	lvl2 = Level::getInstance(10,190,800,500);
@@ -128,8 +126,8 @@ int main(int argc, char** argv) {
 	s3->setHealth(8);
 	s3->showHealth(true);
 
-	std::shared_ptr<ImmobileSprite> s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
-	std::shared_ptr<ImmobileSprite> s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
+	std::shared_ptr<ImmobileSprite> s5 = Obstacle::getInstance(grass, 10, 600, 0.2f);
+	std::shared_ptr<ImmobileSprite> s8 = Obstacle::getInstance(slime, 500, 510, 1.1f);
 
 	lvl1 = Level::getInstance(10,400,700,400);
 

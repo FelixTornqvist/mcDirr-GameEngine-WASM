@@ -99,10 +99,10 @@ void MobileSprite::checkMobileCollisions(std::list<std::shared_ptr<MobileSprite>
 
 void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, int side) {
 	if (bouncy && collidedWith->bouncy && side) {
-		float bounceForce = 0.3;
+		float bounceForce = 0.3f;
 		float upBounce = 0;
 		if (onGround) {
-			upBounce = 0.1;
+			upBounce = 0.1f;
 		}
 
 		switch (side) {
