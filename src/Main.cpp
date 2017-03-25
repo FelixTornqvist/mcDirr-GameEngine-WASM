@@ -40,7 +40,7 @@ Level *lvl1, *lvl2, *lvl3, *lvl4;
 Mix_Chunk *BGmusic;
 TTF_Font *ubuntuB, *tfFont;
 SDL_Texture *hearts;
-SDL_Surface *grass, *deadgrass, *spacegrass, *slime, *cat, *evilCat, *santasheet, *fireballSheet, *startBSurf;
+SDL_Surface *grass, *deadgrass, *spacegrass, *slime, *cat, *evilCat, *santasheet, *fireballSheet, *startBSurf, *treeSurf;
 SDL_Surface *lvl1BGSurf, *lvl2BGSurf, *lvl3BGSurf, *lvl4BGSurf;
 
 std::shared_ptr<GUIText> l1FuncText, startTitle;
@@ -48,7 +48,7 @@ std::shared_ptr<GUITextField> startNameInput;
 std::shared_ptr<GUIButton> startB;
 std::shared_ptr<Sprite> lvl1BG, lvl2BG, lvl3BG, lvl4BG;
 std::shared_ptr<MobileSprite> santa, l1Cat1, l1Cat2, l3Cat1, l2Cat1, l2Cat2;
-std::shared_ptr<ImmobileSprite> l1Obst1, l1Obst2, l2Obst1, l2Obst2, l3Obst1, l4Obst1;
+std::shared_ptr<ImmobileSprite> l1Obst1, l1Obst2, l2Obst1, l2Obst2, l3Obst1, l4Obst1, l4Tree1;
 
 
 void freeFunk() {
@@ -86,6 +86,7 @@ void loadMedia() {
 	cat = loader.loadSurface("media/tinyCat.png");
 	evilCat = loader.loadSurface("media/extraevilCat.png");
 	hearts = loader.loadTexture("media/heart.png");
+	treeSurf = loader.loadSurface("media/pepperTree.png");
 
 	lvl1BGSurf = loader.loadSurface("media/level1BG.png");
 	lvl2BGSurf = loader.loadSurface("media/level2BG.png");
@@ -198,6 +199,7 @@ void makeObjects() {
 	lvl4 = Level::getInstance(30, 399, 10, 10);
 	lvl4BG = Background::getInstance(lvl4BGSurf, 0, 0);
 	l4Obst1 = Obstacle::getInstance(spacegrass, 30, 600, 0.2f);
+	l4Tree1 = Obstacle::getInstance(treeSurf, 600, 300, 0.1f);
 
 }
 
@@ -240,6 +242,7 @@ void addStaticObjects() {
 	// --level4--
 	lvl4->add(lvl4BG);
 	lvl4->add(l4Obst1);
+	lvl4->add(l4Tree1);
 }
 
 int main(int argc, char** argv) {
