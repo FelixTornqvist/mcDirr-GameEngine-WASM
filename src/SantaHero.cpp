@@ -35,6 +35,7 @@ void SantaHero::checkBounds() {
 		if (lvl != nullptr) {
 			dest.x = gameEngine->getLevel()->getStartX();
 			dest.y = gameEngine->getLevel()->getStartY();
+			yVel = 0;
 		}
 		return;
 	}
@@ -48,6 +49,7 @@ void SantaHero::checkBounds() {
 			dest.x = 1;
 		}
 		xVel = 0;
+		yVel = 0;
 		return;
 
 	} else if (dest.x > winWidth) {
@@ -64,9 +66,11 @@ void SantaHero::checkBounds() {
 			} else {
 				lvl->setSpriteOutBox(this);
 			}
-
+			
+			yVel = 0;
 			dest.x = lvl->getStartX();
 			dest.y = lvl->getStartY();
+			
 
 		}
 

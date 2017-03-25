@@ -69,11 +69,11 @@ namespace mcDirr {
 	int Level::getStartY() {
 		return startY;
 	}
-	int Level::getEndY() {
-		return endY;
-	}
 	int Level::getEndX() {
 		return endX;
+	}
+	int Level::getEndY() {
+		return endY;
 	}
 
 	void Level::add(std::shared_ptr<Sprite> sprite) {
