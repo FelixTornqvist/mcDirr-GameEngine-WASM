@@ -30,9 +30,12 @@ void SantaHero::checkBounds() {
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 
 	if (dest.y > winHeight) {
-		dest.x = gameEngine->getLevel()->getStartX();
-		dest.y = gameEngine->getLevel()->getStartY();
 		gameEngine->previousScreen();
+		Level* lvl = gameEngine->getLevel();
+		if (lvl != nullptr) {
+			dest.x = gameEngine->getLevel()->getStartX();
+			dest.y = gameEngine->getLevel()->getStartY();
+		}
 		return;
 	}
 	if (dest.x <= 0) {
@@ -40,28 +43,30 @@ void SantaHero::checkBounds() {
 			gameEngine->previousScreen();
 			dest.x = gameEngine->getLevel()->getEndX();
 			dest.y = gameEngine->getLevel()->getEndY();
-			xVel = 0;
 			gameEngine->getLevel()->setSpriteOutBox(this);
 		} else {
 			dest.x = 1;
-			xVel = 0;
 		}
+		xVel = 0;
 		return;
+
 	} else if (dest.x > winWidth) {
 		dest.x = winWidth - 1;
 		xVel = 0;
 		gameEngine->nextScreen();
 
-		if (gameEngine->getLevel() != nullptr) {
-			if (!gameEngine->getLevel()->exists(me)) {
+		Level* lvl = gameEngine->getLevel();
+
+		if (lvl != nullptr) {
+			if (!lvl->exists(me)) {
 				std::shared_ptr<MobileSprite> mobileMe = me;
-				gameEngine->getLevel()->add(mobileMe);
+				lvl->add(mobileMe);
 			} else {
-				gameEngine->getLevel()->setSpriteOutBox(this);
+				lvl->setSpriteOutBox(this);
 			}
 
-			dest.x = gameEngine->getLevel()->getStartX();
-			dest.y = gameEngine->getLevel()->getStartY();
+			dest.x = lvl->getStartX();
+			dest.y = lvl->getStartY();
 
 		}
 
