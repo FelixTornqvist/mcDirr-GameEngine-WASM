@@ -1,25 +1,23 @@
+#include <functional>
+
 #include "SantaHero.hpp"
 #include "System.hpp"
 #include "Projectile.hpp"
 #include "Loader.hpp"
 
-#include <iostream>
-
 #define TEAM 1
 
 using namespace mcDirr;
 
-std::shared_ptr<SantaHero> SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
-	std::shared_ptr<SantaHero> newMe( new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek) );
+std::shared_ptr<SantaHero> SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, SDL_Texture* healthSym, GameEngine* GEpek, void (*resetFunk)()) {
+	std::shared_ptr<SantaHero> newMe( new SantaHero(surf, fireSheet, healthSym, GEpek, resetFunk) );
 	newMe->me = newMe;
 	return newMe;
 }
 
-SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek)
-	: Sprite(surf, x, y), FramedSprite(surf, x, y, divs),
-	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet), gameEngine(GEpek) {
-	spawnX = x;
-	spawnY = y;
+SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, SDL_Texture* healthSym, GameEngine* GEpek, void (*resetFunk)())
+	: Sprite(surf, 0, 0), FramedSprite(surf, 0, 0, 11), AnimatedMobileSprite(surf, 0, 0, 11, 10, healthSym, TEAM),
+	firesheet(fireSheet), gameEngine(GEpek), resetFunc(resetFunk) {
 }
 
 void SantaHero::checkBounds() {
@@ -126,9 +124,7 @@ void SantaHero::kill() {
 	if (health > 0) {
 		changeHealth(-1);
 	} else {
-		//alive = false;
-		health = 4;
-		dest.x = spawnX;
-		dest.y = spawnY;
+		gameEngine->setScreen(1);
+		resetFunc();
 	}
 }

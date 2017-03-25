@@ -8,14 +8,12 @@
 
 using namespace mcDirr;
 
-std::shared_ptr<EvilCat> EvilCat::getInstance(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym) {
-	return std::shared_ptr<EvilCat>(new EvilCat(surface, x, y, healthSym) );
+std::shared_ptr<EvilCat> EvilCat::getInstance(SDL_Surface* surface, SDL_Texture* healthSym) {
+	return std::shared_ptr<EvilCat>(new EvilCat(surface, healthSym) );
 }
 
-EvilCat::EvilCat(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym) :
-	Sprite(surface, x, y), MobileSprite(surface, x, y,healthSym, TEAM) {
-	spawnX = x;
-	spawnY = y;
+EvilCat::EvilCat(SDL_Surface* surface, SDL_Texture* healthSym) :
+	Sprite(surface, 0, 0), MobileSprite(surface, 0, 0, healthSym, TEAM) {
 }
 
 void EvilCat::customTick(int timeDiff) {

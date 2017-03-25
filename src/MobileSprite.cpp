@@ -127,7 +127,7 @@ void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, i
 			collidedWith->setYVel(-0.1);
 			break;
 		}
-		
+
 	}
 }
 
@@ -293,6 +293,10 @@ double MobileSprite::getYVel(double vel) const {
 
 bool MobileSprite::isAlive() const {
 	return alive;
+}
+
+void MobileSprite::setAlive(bool live) {
+	alive = live;
 }
 
 void MobileSprite::showHealth(bool onOff) {

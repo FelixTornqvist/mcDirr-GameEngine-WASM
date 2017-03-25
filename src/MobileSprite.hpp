@@ -18,6 +18,7 @@ namespace mcDirr {
 			void checkImmobileCollisions(std::list<std::shared_ptr<ImmobileSprite>>& others);
 			void checkMobileCollisions(std::list<std::shared_ptr<MobileSprite>>& others);
 			bool isAlive() const;
+			void setAlive(bool live);
 			SDL_Surface* getSurface() const;
 
 			int getTeam();

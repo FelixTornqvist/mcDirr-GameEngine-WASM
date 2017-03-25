@@ -12,7 +12,7 @@
 namespace mcDirr {
 	class PauseScreen : public GUIScreen {
 		public:
-			PauseScreen(GameEngine *ge);
+			PauseScreen(GameEngine *ge, void (*resetFunk)());
 			virtual ~PauseScreen();
 
 		protected:
@@ -26,6 +26,7 @@ namespace mcDirr {
 			std::shared_ptr<GUIText> title, fpsLabel;
 
 			GameEngine *ge;
+			std::function<void()> resetFunc;
 			void restart();
 			void setFrameRate();
 			void unPause();

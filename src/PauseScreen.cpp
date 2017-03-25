@@ -8,7 +8,7 @@
 
 using namespace mcDirr;
 
-PauseScreen::PauseScreen(GameEngine *_ge):GUIScreen(), ge(_ge) {
+PauseScreen::PauseScreen(GameEngine *_ge, void (*resetFunk)()):GUIScreen(), ge(_ge), resetFunc(resetFunk) {
 	bg = loader.loadSurface("media/pauseBG.png");
 	setBackground(bg);
 
@@ -67,6 +67,7 @@ void PauseScreen::restart() {
 	fpsInput->setFocused(false);
 	ge->setScreen(0);
 	ge->unPause();
+	resetFunc();
 }
 
 void PauseScreen::setFrameRate() {
