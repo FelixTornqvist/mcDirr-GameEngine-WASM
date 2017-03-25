@@ -72,14 +72,18 @@ int main(int argc, char** argv) {
 	Mix_PlayChannel(-1, BGmusic, -1);
 
 	SDL_Surface* grass = loader.loadSurface("media/grass.png");
+	SDL_Surface* spaceGrass = loader.loadSurface("media/spacegrass.png");
+	SDL_Surface* deadGrass = loader.loadSurface("media/deadgrass.png");
 	SDL_Surface* cat = loader.loadSurface("media/tinyCat.png");
 	SDL_Surface* evilCat = loader.loadSurface("media/extraevilCat.png");
+	SDL_Surface* pepperTree = loader.loadSurface("media/pepperTree.png");
 	SDL_Texture* hearts = loader.loadTexture("media/heart.png");
 
+
 	SDL_Surface* lvl1BGSurf = loader.loadSurface("media/level1BG.png");
-	SDL_Surface* lvl2BGSurf = loader.loadSurface("media/level1BG.png");
-	SDL_Surface* lvl3BGSurf = loader.loadSurface("media/level1BG.png");
-	SDL_Surface* lvl4BGSurf = loader.loadSurface("media/level1BG.png");
+	SDL_Surface* lvl2BGSurf = loader.loadSurface("media/background2.jpg");
+	SDL_Surface* lvl3BGSurf = loader.loadSurface("media/background3.png");
+	SDL_Surface* lvl4BGSurf = loader.loadSurface("media/background4.jpg");
 
 	SDL_Surface* santasheet = loader.loadSurface("media/santa-sheet.png");
 	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
@@ -93,20 +97,22 @@ int main(int argc, char** argv) {
 	std::shared_ptr<MobileSprite> s16 = EvilCat::getInstance(cat, 800, 200, hearts);
 
 	std::shared_ptr<ImmobileSprite> s17 = Obstacle::getInstance(grass, 400, 600, 0.2f);
-	std::shared_ptr<ImmobileSprite> s18 = Obstacle::getInstance(grass, -500, 400, 0.2f);
+	std::shared_ptr<ImmobileSprite> s18 = Obstacle::getInstance(grass, -500, 350, 0.2f);
 
-	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(grass, -100, 400, 0.2f);
+	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(deadGrass, -100, 450, 0.2f);
 
-	std::shared_ptr<ImmobileSprite> l4o1 = Obstacle::getInstance(grass, 30, 400, 0.2f);
+	std::shared_ptr<ImmobileSprite> l4o1 = Obstacle::getInstance(spaceGrass, 30, 450, 0.2f);
+	std::shared_ptr<ImmobileSprite> l4o2 = Obstacle::getInstance(pepperTree, 550, 150, 0.2f);
 
-	lvl1 = Level::getInstance(10, 400, 700, 400);
+	lvl1 = Level::getInstance(1, 400, 700, 400);
 	lvl2 = Level::getInstance(1, 190, 900, 500);
-	lvl3 = Level::getInstance(1, 190, 600, 299);
-	lvl4 = Level::getInstance(30, 190, 10, 10);
+	lvl3 = Level::getInstance(1, l3o1->getY() - santa->getHeight() - 1, 600, 240);
+	lvl4 = Level::getInstance(1, l4o1->getY() - santa->getHeight() - 1, 10, 10);
 
 	lvl3->add(l3o1);
 
 	lvl4->add(l4o1);
+	lvl4->add(l4o2);
 
 	lvl2->add(s15);
 	lvl2->add(s16);

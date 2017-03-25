@@ -20,8 +20,11 @@ namespace mcDirr {
 
 		for (std::list<std::shared_ptr<MobileSprite>>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end(); mob++) {
 			(*mob)->tick(timeDiff);
-			(*mob)->customTick(timeDiff);
 			(*mob)->checkImmobileCollisions(immobileSprites);
+			(*mob)->customTick(timeDiff);
+			
+		
+			
 		}
 
 		emptySpriteInbox();
