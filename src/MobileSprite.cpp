@@ -98,7 +98,7 @@ void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 
 void MobileSprite::collisionBounce(MobileSprite* collidedWith, int side) {
 	if (bouncy && collidedWith->bouncy && side) {
-		float bounceForce = 0.3;
+		float bounceForce = 0.6;
 		float upBounce = 0;
 		if (onGround) {
 			upBounce = 0.1;

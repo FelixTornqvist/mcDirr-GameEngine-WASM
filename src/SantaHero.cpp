@@ -80,8 +80,6 @@ void SantaHero::customTick(int timeDiff) {
 
 	if (sys.isKeyDown(SDLK_w) && onGround)
 		yVel -= 1;
-	else if (sys.isKeyDown(SDLK_s))
-		yVel = 1;
 	if (sys.isKeyDown(SDLK_a))
 		xVel = -0.5;
 	else if (sys.isKeyDown(SDLK_d))
