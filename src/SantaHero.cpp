@@ -66,12 +66,10 @@ void SantaHero::checkBounds() {
 			} else {
 				lvl->setSpriteOutBox(this);
 			}
-			
+
 			yVel = 0;
 			dest.x = lvl->getStartX();
 			dest.y = lvl->getStartY();
-			
-
 		}
 
 	}
