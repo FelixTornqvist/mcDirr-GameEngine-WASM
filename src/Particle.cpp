@@ -5,8 +5,8 @@
 
 using namespace mcDirr;
 
-Particle* Particle::getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime) {
-	return new Particle(surf, x, y, xVel, yVel, lifetime);
+std::shared_ptr<Particle> Particle::getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime) {
+	return std::shared_ptr<Particle>( new Particle(surf, x, y, xVel, yVel, lifetime) );
 }
 
 Particle::Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime):

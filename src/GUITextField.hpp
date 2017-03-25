@@ -1,7 +1,9 @@
 #ifndef GUITEXTFIELD_HPP
 #define GUITEXTFIELD_HPP
 
+#include <memory>
 #include <string>
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -10,7 +12,7 @@
 namespace mcDirr {
 	class GUITextField : public GUIText {
 		public:
-			static GUITextField* getInstance(TTF_Font* font, const SDL_Color& color, int width);
+			static std::shared_ptr<GUITextField> getInstance(TTF_Font* font, const SDL_Color& color, int width);
 
 			virtual void draw() const override;
 			virtual void tick(int ) override;

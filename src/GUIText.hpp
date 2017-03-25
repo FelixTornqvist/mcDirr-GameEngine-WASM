@@ -2,6 +2,7 @@
 #define TEXTSPRITE_HPP
 
 #include <string>
+#include <memory>
 
 #include <SDL_ttf.h>
 
@@ -11,7 +12,7 @@ namespace mcDirr {
 
 	class GUIText : public GUIElement {
 		public:
-			static GUIText* getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt);
+			static std::shared_ptr<GUIText> getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt);
 
 			virtual void tick(int ) {};
 			virtual void customTick(int ) {};

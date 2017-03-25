@@ -57,7 +57,7 @@ PauseScreen::PauseScreen(GameEngine *_ge):GUIScreen(), ge(_ge) {
 	fpsLabel->setY(fpsInput->getY());
 }
 
-void PauseScreen::putOnXMiddle(GUIElement* btn) {
+void PauseScreen::putOnXMiddle(std::shared_ptr<GUIElement> btn) {
 	int w;
 	SDL_GetWindowSize(sys.getWin(), &w, nullptr);
 	int halfWindow = w / 2;
@@ -87,13 +87,6 @@ void PauseScreen::unPause() {
 
 PauseScreen::~PauseScreen() {
 	SDL_FreeSurface(bg);
-	delete continueB;
-	delete exitB;
-	delete restartB;
-	delete updateB;
-	delete fpsInput;
-	delete fpsLabel;
-	delete title;
 	delete font;
 	delete tfFont;
 

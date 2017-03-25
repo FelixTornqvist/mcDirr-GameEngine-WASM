@@ -3,6 +3,7 @@
 
 #include <list>
 #include <stack>
+#include <memory>
 
 #include "Screen.hpp"
 #include "Sprite.hpp"
@@ -18,14 +19,15 @@ namespace mcDirr {
 			void draw() override;
 
 
-			void add(Sprite* sprite);
-			void add(MobileSprite* sprite);
-			void add(ImmobileSprite* sprite);
+			void add(std::shared_ptr<Sprite> sprite);
+			void add(std::shared_ptr<MobileSprite> sprite);
+			void add(std::shared_ptr<ImmobileSprite> sprite);
 
-			void remove(Sprite* sprite);
-			void remove(MobileSprite* sprite);
-			void remove(ImmobileSprite* sprite);
-			bool exists(MobileSprite* mob);
+			void remove(std::shared_ptr<Sprite> sprite);
+			void remove(std::shared_ptr<MobileSprite> sprite);
+			void remove(std::shared_ptr<ImmobileSprite> sprite);
+
+			bool exists(std::shared_ptr<MobileSprite> mob);
 			void setSpriteOutBox(MobileSprite* sprite);
 			int getStartX();
 			int getStartY();
@@ -45,11 +47,11 @@ namespace mcDirr {
 			int	startY;
 			int	endX;
 			int endY;
-			std::stack<MobileSprite*> spriteInbox;
+			std::stack<std::shared_ptr<MobileSprite>> spriteInbox;
 
-			std::list<Sprite*> sprites;
-			std::list<MobileSprite*> mobileSprites;
-			std::list<ImmobileSprite*> immobileSprites;
+			std::list<std::shared_ptr<Sprite>> sprites;
+			std::list<std::shared_ptr<MobileSprite>> mobileSprites;
+			std::list<std::shared_ptr<ImmobileSprite>> immobileSprites;
 	};
 }
 

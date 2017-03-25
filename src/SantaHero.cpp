@@ -9,13 +9,14 @@
 
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
-	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek);
+std::shared_ptr<SantaHero> SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
+	std::shared_ptr<SantaHero> newMe( new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek) );
+	newMe->me = newMe;
+	return newMe;
 }
 
 SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek)
-	:
-	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
+	: Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
 	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet), gameEnginePointer(GEpek) {
 	spawnX = x;
 	spawnY = y;
@@ -58,8 +59,9 @@ void SantaHero::checkBounds() {
 		gameEnginePointer->nextScreen();
 		
 		if (gameEnginePointer->getLevel() != nullptr) {
-			if (!gameEnginePointer->getLevel()->exists(this)) {
-				gameEnginePointer->getLevel()->add(this);
+			if (!gameEnginePointer->getLevel()->exists(me)) {
+				std::shared_ptr<MobileSprite> mobileMe = me;
+				gameEnginePointer->getLevel()->add(mobileMe);
 			}
 			else {
 				gameEnginePointer->getLevel()->setSpriteOutBox(this);
@@ -91,7 +93,7 @@ void SantaHero::customTick(int timeDiff) {
 		projCooldown = 30;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
-		AnimatedMobileSprite* sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+		std::shared_ptr<MobileSprite> sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
 		sprite->setYAccel(0.1);
 		sprite->setBouncy(false);
 
@@ -119,7 +121,7 @@ void SantaHero::customTick(int timeDiff) {
 	checkBounds();
 }
 
-void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
+void SantaHero::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
 }
 
 void SantaHero::kill() {

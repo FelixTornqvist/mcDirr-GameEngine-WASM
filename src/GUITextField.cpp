@@ -8,8 +8,8 @@
 
 using namespace mcDirr;
 
-GUITextField* GUITextField::getInstance(TTF_Font* font, const SDL_Color& color, int width) {
-	return new GUITextField(font, color, width);
+std::shared_ptr<GUITextField> GUITextField::getInstance(TTF_Font* font, const SDL_Color& color, int width) {
+	return std::shared_ptr<GUITextField>( new GUITextField(font, color, width) );
 }
 
 GUITextField::GUITextField(TTF_Font* font, const SDL_Color& colr, int width): GUIText(font, colr, "") {

@@ -72,9 +72,9 @@ void MobileSprite::tick(int time) {
 	doPhysics(time);
 }
 
-void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
+void MobileSprite::checkImmobileCollisions(std::list<std::shared_ptr<ImmobileSprite>>& others) {
 	onGround = false;
-	for (std::list<ImmobileSprite*>::iterator immobile = others.begin(); immobile != others.end();) {
+	for (std::list<std::shared_ptr<ImmobileSprite>>::iterator immobile = others.begin(); immobile != others.end();) {
 		handleImmobileCollision(*immobile, checkCollision(*immobile));
 
 		if (!(*immobile)->isAlive())
@@ -84,9 +84,10 @@ void MobileSprite::checkImmobileCollisions(std::list<ImmobileSprite*>& others) {
 	}
 }
 
-void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
-	for (std::list<MobileSprite*>::iterator mob = others.begin(); mob != others.end(); mob++) {
-		if (*mob != this && canCollide && (*mob)->canCollide) {
+void MobileSprite::checkMobileCollisions(std::list<std::shared_ptr<MobileSprite>>& others) {
+	for (std::list<std::shared_ptr<MobileSprite>>::iterator mob = others.begin(); mob != others.end(); mob++) {
+		if ((*mob).get() != this && canCollide && (*mob)->canCollide) {
+
 			int side = checkCollisionForMobile(*mob);
 			if ((*mob)->getTeam() != getTeam()) {
 				collisionBounce(*mob, side);
@@ -96,33 +97,37 @@ void MobileSprite::checkMobileCollisions(std::list<MobileSprite*>& others) {
 	}
 }
 
-void MobileSprite::collisionBounce(MobileSprite* collidedWith, int side) {
+void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, int side) {
 	if (bouncy && collidedWith->bouncy && side) {
 		float bounceForce = 0.3;
 		float upBounce = 0;
 		if (onGround) {
 			upBounce = 0.1;
 		}
-		if (side == 1) {
+
+		switch (side) {
+		case 1:
 			yVel = bounceForce;
 			collidedWith->setYVel(-bounceForce);
-		}
-		if (side == 2) {
+			break;
+		case 2:
 			xVel = bounceForce;
 			yVel = -upBounce;
-			collidedWith->setXVel(-bounceForce);				
+			collidedWith->setXVel(-bounceForce);
 			collidedWith->setYVel(-bounceForce);
-		}
-		if (side == 3) {
+			break;
+		case 3:
 			yVel = -bounceForce;
 			collidedWith->setYVel(bounceForce);
-		}
-		if (side == 4) {
+			break;
+		case 4:
 			xVel = -bounceForce;
 			yVel = -upBounce;
 			collidedWith->setXVel(bounceForce);
 			collidedWith->setYVel(-0.1);
+			break;
 		}
+		
 	}
 }
 
@@ -144,7 +149,7 @@ bool MobileSprite::isPixelColored(int x, int y) const {
 	return alpha > 0x0F;
 }
 
-int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
+int MobileSprite::checkCollisionForMobile(std::shared_ptr<MobileSprite> other) const {
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (*other->getDestRect());
 	int side = 0;
@@ -192,7 +197,7 @@ int MobileSprite::checkCollisionForMobile(MobileSprite* other) const {
 	return side;
 }
 
-int MobileSprite::checkCollision(Sprite* other) const {
+int MobileSprite::checkCollision(std::shared_ptr<Sprite> other) const {
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (* other->getDestRect());
 	int side = 0;
@@ -220,7 +225,7 @@ int MobileSprite::checkCollision(Sprite* other) const {
 	return side;
 }
 
-void MobileSprite::handleImmobileCollision(ImmobileSprite* collidedWith, int side) {
+void MobileSprite::handleImmobileCollision(std::shared_ptr<ImmobileSprite> collidedWith, int side) {
 	if (side) {
 		SDL_Rect& oDest = (* collidedWith->getDestRect());
 		int& oX = oDest.x;
@@ -294,11 +299,11 @@ void MobileSprite::showHealth(bool onOff) {
 	renderHealth = onOff;
 }
 
-void MobileSprite::setSpriteOutbox(std::stack<MobileSprite*>* ptr) {
+void MobileSprite::setSpriteOutbox(std::stack<std::shared_ptr<MobileSprite>>* ptr) {
 	spriteOutbox = ptr;
 }
 
-std::stack<MobileSprite*>* MobileSprite::getSpriteOutbox() const {
+std::stack<std::shared_ptr<MobileSprite>>* MobileSprite::getSpriteOutbox() const {
 	return spriteOutbox;
 }
 

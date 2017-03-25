@@ -1,15 +1,16 @@
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
 
+#include <memory>
 #include "MobileSprite.hpp"
 
 namespace mcDirr {
 	class Particle : public MobileSprite {
 		public:
-			static Particle* getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
+			static std::shared_ptr<Particle> getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
 
 			void customTick(int timeDiff) override;
-			void handleMobileCollision(MobileSprite* collWith, int side) {}
+			void handleMobileCollision(std::shared_ptr<MobileSprite> collWith, int side) {}
 			void draw() const override;
 
 			virtual ~Particle();

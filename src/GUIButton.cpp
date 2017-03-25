@@ -5,8 +5,8 @@
 
 using namespace mcDirr;
 
-GUIButton* GUIButton::getInstance(SDL_Surface* surf, void (*func)() ) {
-	return new GUIButton(surf, func);
+std::shared_ptr<GUIButton> GUIButton::getInstance(SDL_Surface* surf, void (*func)() ) {
+	return std::shared_ptr<GUIButton>( new GUIButton(surf, func) );
 }
 
 GUIButton::GUIButton(SDL_Surface* surface, std::function<void()> act): GUIElement(surface), action(act) {}

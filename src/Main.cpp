@@ -36,9 +36,9 @@ using namespace mcDirr;
 GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 Level *lvl1, *lvl2, *lvl3;
 GUIScreen* start;
-GUIText* text;
-GUITextField *nameInput, *nameInput2;
-SantaHero* santa;
+std::shared_ptr<GUIText> text;
+std::shared_ptr<GUITextField> nameInput, nameInput2;
+std::shared_ptr<MobileSprite> santa;
 
 void freeFunk() {
 	static bool funkyState;
@@ -78,15 +78,15 @@ int main(int argc, char** argv) {
 	SDL_Surface* evilCat = loader.loadSurface("media/extraevilCat.png");
 	SDL_Texture* hearts = loader.loadTexture("media/heart.png");
 
-	EvilCat* s15 = EvilCat::getInstance(cat, 600, 200, hearts);
-	EvilCat* s16 = EvilCat::getInstance(cat, 800, 200, hearts);
+	std::shared_ptr<MobileSprite> s15 = EvilCat::getInstance(cat, 600, 200, hearts);
+	std::shared_ptr<MobileSprite> s16 = EvilCat::getInstance(cat, 800, 200, hearts);
 
-	Obstacle* s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
-	Obstacle* s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
+	std::shared_ptr<ImmobileSprite> s17 = Obstacle::getInstance(grass, 400, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> s18 = Obstacle::getInstance(grass, -500, 400, 0.2);
 
-	Obstacle* l3o1 = Obstacle::getInstance(grass, 400, 600, 0.2);
-	Obstacle* l3o2 = Obstacle::getInstance(grass, 500, 600, 0.2);
-	Obstacle* l3o3 = Obstacle::getInstance(grass, 1, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(grass, 400, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> l3o2 = Obstacle::getInstance(grass, 500, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> l3o3 = Obstacle::getInstance(grass, 1, 600, 0.2);
 
 	lvl1 = Level::getInstance(10, 400, 700, 400);
 	lvl2 = Level::getInstance(10,190,800,500);
@@ -108,15 +108,17 @@ int main(int argc, char** argv) {
 	SDL_Surface* fireballSheet = loader.loadSurface("media/fireball.png");
 	SDL_Surface* slime = loader.loadSurface("media/slime.png");
 
-	VisualSprite* lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	VisualSprite* lvl2BG = Background::getInstance(lvl2BGSurf, 0, 0);
-	VisualSprite* lvl3BG = Background::getInstance(lvl3BGSurf, 0, 0);
+	std::shared_ptr<Sprite> lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
+	std::shared_ptr<Sprite> lvl2BG = Background::getInstance(lvl2BGSurf, 0, 0);
+	std::shared_ptr<Sprite> lvl3BG = Background::getInstance(lvl3BGSurf, 0, 0);
 
 	lvl2->add(lvl2BG);
 	lvl3->add(lvl3BG);
-	EvilCat* s2 = EvilCat::getInstance(cat, 200, 100, hearts);
-	EvilCat* s3 = EvilCat::getInstance(cat, 600, 200, hearts);
-	EvilCat* l3ec1 = EvilCat::getInstance(evilCat, 600, 500, hearts);
+
+	std::shared_ptr<MobileSprite> s2 = EvilCat::getInstance(cat, 200, 100, hearts);
+	std::shared_ptr<MobileSprite> s3 = EvilCat::getInstance(cat, 600, 200, hearts);
+	std::shared_ptr<MobileSprite> l3ec1 = EvilCat::getInstance(evilCat, 600, 500, hearts);
+
 	l3ec1->setHealth(20);
 	l3ec1->showHealth(true);
 	lvl3->add(l3ec1);
@@ -126,8 +128,8 @@ int main(int argc, char** argv) {
 	s3->setHealth(8);
 	s3->showHealth(true);
 
-	Obstacle* s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
-	Obstacle* s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
+	std::shared_ptr<ImmobileSprite> s5 = Obstacle::getInstance(grass, 10, 600, 0.2);
+	std::shared_ptr<ImmobileSprite> s8 = Obstacle::getInstance(slime, 500, 510, 1.1);
 
 	lvl1 = Level::getInstance(10,400,700,400);
 
@@ -154,12 +156,12 @@ int main(int argc, char** argv) {
 
 	GUIScreen* start = GUIScreen::getInstance();
 
-	GUIText* gameTitle = GUIText::getInstance(ubuntuB, {10,90,5}, "McDirr - The Gaem");
+	std::shared_ptr<GUIText> gameTitle = GUIText::getInstance(ubuntuB, {10,90,5}, "McDirr - The Gaem");
 	gameTitle->setY(100);
 	gameTitle->setX(W_WIDTH/2 - gameTitle->getWidth() / 2);
 
 	SDL_Surface* startBSurf = loader.loadSurface("media/button/startButton.png");
-	GUIButton* startB = GUIButton::getInstance(startBSurf, &startButton);
+	std::shared_ptr<GUIButton> startB = GUIButton::getInstance(startBSurf, &startButton);
 	startB->setY(200);
 	startB->setX(W_WIDTH/2 - startB->getWidth()/2);
 
