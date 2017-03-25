@@ -2,8 +2,8 @@
 
 using namespace mcDirr;
 
-Background* Background::getInstance(SDL_Surface* s, int x, int y){
-	return new Background(s, x, y);
+std::shared_ptr<Background> Background::getInstance(SDL_Surface* s, int x, int y){
+	return std::shared_ptr<Background>( new Background(s, x, y) );
 }
 
 Background::Background(SDL_Surface* s, int x, int y): VisualSprite(s, x, y) {

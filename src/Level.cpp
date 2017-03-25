@@ -14,11 +14,11 @@ namespace mcDirr {
 	}
 
 	void Level::tick(int timeDiff) {
-		for (Sprite* curr : sprites) {
+		for (std::shared_ptr<Sprite> curr : sprites) {
 			curr->tick(timeDiff);
 		}
 
-		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end(); mob++) {
+		for (std::list<std::shared_ptr<MobileSprite>>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end(); mob++) {
 			(*mob)->tick(timeDiff);
 			(*mob)->customTick(timeDiff);
 			(*mob)->checkImmobileCollisions(immobileSprites);
@@ -26,11 +26,10 @@ namespace mcDirr {
 
 		emptySpriteInbox();
 
-		for (std::list<MobileSprite*>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
+		for (std::list<std::shared_ptr<MobileSprite>>::iterator mob = mobileSprites.begin(); mob != mobileSprites.end();) {
 			(*mob)->checkMobileCollisions(mobileSprites);
 
 			if (!(*mob)->isAlive()) {
-				delete *mob;
 				mob = mobileSprites.erase(mob);
 			} else
 				mob++;
@@ -38,13 +37,13 @@ namespace mcDirr {
 	}
 
 	void Level::draw() {
-		for(Sprite* curr : sprites)
+		for(std::shared_ptr<Sprite> curr : sprites)
 			curr->draw();
 
-		for (ImmobileSprite* curr : immobileSprites)
+		for (std::shared_ptr<ImmobileSprite> curr : immobileSprites)
 			curr->draw();
 
-		for (MobileSprite* curr : mobileSprites)
+		for (std::shared_ptr<MobileSprite> curr : mobileSprites)
 			curr->draw();
 	}
 
@@ -55,8 +54,8 @@ namespace mcDirr {
 		}
 	}
 
-	bool Level::exists(MobileSprite* mob) {
-		for (MobileSprite* curr : mobileSprites) {
+	bool Level::exists(std::shared_ptr<MobileSprite> mob) {
+		for (std::shared_ptr<MobileSprite> curr : mobileSprites) {
 			if (curr == mob) {
 				return true;
 			}
@@ -77,11 +76,11 @@ namespace mcDirr {
 		return endX;
 	}
 
-	void Level::add(Sprite* sprite) {
+	void Level::add(std::shared_ptr<Sprite> sprite) {
 		sprites.push_back(sprite);
 	}
 
-	void Level::add(MobileSprite* sprite) {
+	void Level::add(std::shared_ptr<MobileSprite> sprite) {
 		mobileSprites.push_back(sprite);
 		sprite->setSpriteOutbox(&spriteInbox);
 	}
@@ -90,28 +89,23 @@ namespace mcDirr {
 		sprite->setSpriteOutbox(&spriteInbox);
 	}
 
-	void Level::add(ImmobileSprite* sprite) {
+	void Level::add(std::shared_ptr<ImmobileSprite> sprite) {
 		immobileSprites.push_back(sprite);
 	}
 
 
-	void Level::remove(Sprite* sprite) {
+	void Level::remove(std::shared_ptr<Sprite> sprite) {
 		sprites.remove(sprite);
-		delete sprite;
 	}
 
-	void Level::remove(MobileSprite* sprite) {
+	void Level::remove(std::shared_ptr<MobileSprite> sprite) {
 		mobileSprites.remove(sprite);
-		delete sprite;
 	}
 
-	void Level::remove(ImmobileSprite* sprite) {
+	void Level::remove(std::shared_ptr<ImmobileSprite> sprite) {
 		immobileSprites.remove(sprite);
-		delete sprite;
 	}
 
 	Level::~Level() {
-		for(Sprite* sprite : sprites)
-			delete sprite;
 	}
 }

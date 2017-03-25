@@ -116,7 +116,7 @@ namespace mcDirr {
 	GameEngine::~GameEngine() {
 		for (Screen* screen : screens)
 			delete screen;
-
+		delete pauseScreen;
 		sys.Quit();
 	}
 }

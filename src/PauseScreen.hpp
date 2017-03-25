@@ -1,6 +1,8 @@
 #ifndef PAUSESCREEN_HPP
 #define PAUSESCREEN_HPP
 
+#include <memory>
+
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"
 #include "GUIText.hpp"
@@ -18,16 +20,16 @@ namespace mcDirr {
 		private:
 			SDL_Surface *bg;
 			SDL_Surface *continueSurf, *restartSurf, *exitSurf, *updateSurf;
-			GUIButton *continueB, *restartB, *exitB, *updateB;
-			GUITextField* fpsInput;
 			TTF_Font *font, *tfFont;
-			GUIText *title, *fpsLabel;
+			std::shared_ptr<GUIButton> continueB, restartB, exitB, updateB;
+			std::shared_ptr<GUITextField> fpsInput;
+			std::shared_ptr<GUIText> title, fpsLabel;
 
 			GameEngine *ge;
 			void restart();
 			void setFrameRate();
 			void unPause();
-			void putOnXMiddle(GUIElement* btn);
+			void putOnXMiddle(std::shared_ptr<GUIElement> btn);
 	};
 }
 #endif // PAUSESCREEN_HPP

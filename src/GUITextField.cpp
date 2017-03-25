@@ -8,8 +8,8 @@
 
 using namespace mcDirr;
 
-GUITextField* GUITextField::getInstance(TTF_Font* font, const SDL_Color& color, int width) {
-	return new GUITextField(font, color, width);
+std::shared_ptr<GUITextField> GUITextField::getInstance(TTF_Font* font, const SDL_Color& color, int width) {
+	return std::shared_ptr<GUITextField>( new GUITextField(font, color, width) );
 }
 
 GUITextField::GUITextField(TTF_Font* font, const SDL_Color& colr, int width): GUIText(font, colr, "") {
@@ -47,13 +47,15 @@ void GUITextField::updateText() {
 }
 
 void GUITextField::tick(int timeDiff) {
-	if (focus && sys.getTyped().size() > 0) {
-		text += sys.getTyped();
-		updateText();
-	}
-	if (sys.isBackspaceDown() && text.size() > 0 ) {
-		text.pop_back();
-		updateText();
+	if (focus) {
+		if (sys.getTyped().size() > 0) {
+			text += sys.getTyped();
+			updateText();
+		}
+		if (sys.isBackspaceDown() && text.size() > 0 ) {
+			text.pop_back();
+			updateText();
+		}
 	}
 }
 

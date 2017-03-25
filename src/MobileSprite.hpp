@@ -1,11 +1,12 @@
 #ifndef PhysicalSprite_hpp
 #define PhysicalSprite_hpp
 
-#include "Sprite.hpp"
-#include "ImmobileSprite.hpp"
-
+#include <memory>
 #include <list>
 #include <stack>
+
+#include "Sprite.hpp"
+#include "ImmobileSprite.hpp"
 
 
 namespace mcDirr {
@@ -14,8 +15,8 @@ namespace mcDirr {
 		public:
 			void draw() const override;
 			void tick(int passedMillis) override;
-			void checkImmobileCollisions(std::list<ImmobileSprite*>& others);
-			void checkMobileCollisions(std::list<MobileSprite*>& others);
+			void checkImmobileCollisions(std::list<std::shared_ptr<ImmobileSprite>>& others);
+			void checkMobileCollisions(std::list<std::shared_ptr<MobileSprite>>& others);
 			bool isAlive() const;
 			SDL_Surface* getSurface() const;
 
@@ -33,18 +34,18 @@ namespace mcDirr {
 			double getYVel(double vel) const;
 			void setCanCollide(bool collide);
 			void setBouncy(bool set);
-			void setSpriteOutbox(std::stack<MobileSprite*>* ptr);
-			std::stack<MobileSprite*>* getSpriteOutbox() const;
+			void setSpriteOutbox(std::stack<std::shared_ptr<MobileSprite>>* ptr);
+			std::stack<std::shared_ptr<MobileSprite>>* getSpriteOutbox() const;
 
 			virtual ~MobileSprite() {};
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym, int teamNO);
 
-			void virtual handleImmobileCollision(ImmobileSprite* collidedWith, int side);
-			void virtual handleMobileCollision(MobileSprite* collidedWith, int side) = 0;
-			int checkCollisionForMobile(MobileSprite* other) const;
+			void virtual handleImmobileCollision(std::shared_ptr<ImmobileSprite> collidedWith, int side);
+			void virtual handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) = 0;
+			int checkCollisionForMobile(std::shared_ptr<MobileSprite> other) const;
 			virtual bool isPixelColored(int x, int y) const;
-			int checkCollision(Sprite* other) const;
+			int checkCollision(std::shared_ptr<Sprite> other) const;
 
 			void doPhysics(int millisPassed);
 			virtual void drawHealth() const;
@@ -61,13 +62,13 @@ namespace mcDirr {
 			SDL_Texture* healthSymbol;
 
 		private:
-			std::stack<MobileSprite*>* spriteOutbox;
+			std::stack<std::shared_ptr<MobileSprite>>* spriteOutbox;
 			int teamNO;
 
 			double debounceVel;
 			SDL_Surface* surface;
 
-			void collisionBounce(MobileSprite* collidedWith, int side);
+			void collisionBounce(std::shared_ptr<MobileSprite> collidedWith, int side);
 	};
 }
 

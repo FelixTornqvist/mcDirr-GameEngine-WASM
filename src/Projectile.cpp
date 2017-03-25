@@ -4,8 +4,8 @@
 #define TEAM 3
 
 namespace mcDirr {
-	Projectile* Projectile::getInstance(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVel, bool direction) {
-		return new Projectile(surf, x, y, divs, millisPerFrame, healthSym, xVel, direction);
+	std::shared_ptr<Projectile> Projectile::getInstance(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVel, bool direction) {
+		return std::shared_ptr<Projectile>( new Projectile(surf, x, y, divs, millisPerFrame, healthSym, xVel, direction) );
 	}
 
 	Projectile::Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVelo, bool direction):
@@ -16,14 +16,14 @@ namespace mcDirr {
 			xVel = -xVelo;
 	}
 
-	void Projectile::handleMobileCollision(MobileSprite *collidedWith, int side) {
+	void Projectile::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
 		if (side && collidedWith->getTeam() != TEAM && collidedWith->getTeam() != 1) {
 			collidedWith->kill();
 			alive = false;
 		}
 	}
 
-	void Projectile::handleImmobileCollision(ImmobileSprite* collWith, int side) {
+	void Projectile::handleImmobileCollision(std::shared_ptr<ImmobileSprite> collWith, int side) {
 		if (side)
 			alive = false;
 	}

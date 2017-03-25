@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <SDL.h>
+#include <memory>
 
 #include "GUIElement.hpp"
 
@@ -10,8 +11,8 @@ namespace mcDirr {
 	class GUIButton : public GUIElement {
 		public:
 			template<class AnyClass>
-			static GUIButton* getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() );
-			static GUIButton* getInstance(SDL_Surface* surf, void (*funk)());
+			static std::shared_ptr<GUIButton> getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() );
+			static std::shared_ptr<GUIButton> getInstance(SDL_Surface* surf, void (*funk)());
 
 			virtual void tick(int millisPassed) override;
 			virtual void customTick(int millisPassed) override;
@@ -27,8 +28,8 @@ namespace mcDirr {
 	};
 
 	template<class AnyClass>
-	GUIButton* GUIButton::getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() ) {
-		return new GUIButton(surf, std::bind(func, object));
+	std::shared_ptr<GUIButton> GUIButton::getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() ) {
+		return std::shared_ptr<GUIButton>( new GUIButton(surf, std::bind(func, object)) );
 	}
 }
 

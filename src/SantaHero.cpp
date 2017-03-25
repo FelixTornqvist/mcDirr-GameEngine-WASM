@@ -9,14 +9,15 @@
 
 using namespace mcDirr;
 
-SantaHero* SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
-	return new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek);
+std::shared_ptr<SantaHero> SantaHero::getInstance(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek) {
+	std::shared_ptr<SantaHero> newMe( new SantaHero(surf, fireSheet, x, y, divs, millisPerFrame, healthSym, GEpek) );
+	newMe->me = newMe;
+	return newMe;
 }
 
 SantaHero::SantaHero(SDL_Surface* surf, SDL_Surface* fireSheet, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, GameEngine* GEpek)
-	:
-	  Sprite(surf, x, y), FramedSprite(surf, x, y, divs), 
-	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet), gameEnginePointer(GEpek) {
+	: Sprite(surf, x, y), FramedSprite(surf, x, y, divs),
+	  AnimatedMobileSprite(surf, x, y, divs, millisPerFrame, healthSym, TEAM), firesheet(fireSheet), gameEngine(GEpek) {
 	spawnX = x;
 	spawnY = y;
 }
@@ -27,56 +28,50 @@ void SantaHero::checkBounds() {
 
 	SDL_Window* window = sys.getWin();
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
-	// std::cout << dest.x << " - " << winWidth << std::endl;
 
 	if (dest.y > winHeight) {
-		dest.x = gameEnginePointer->getLevel()->getStartX();
-		dest.y = gameEnginePointer->getLevel()->getStartY();
-		gameEnginePointer->previousScreen();
+		dest.x = gameEngine->getLevel()->getStartX();
+		dest.y = gameEngine->getLevel()->getStartY();
+		gameEngine->previousScreen();
 		return;
 	}
 	if (dest.x <= 0) {
-		if (gameEnginePointer->getScreenIndex() > 1) {
-			gameEnginePointer->previousScreen();
-			dest.x = gameEnginePointer->getLevel()->getEndX();
-			dest.y = gameEnginePointer->getLevel()->getEndY();
+		if (gameEngine->getScreenIndex() > 1) {
+			gameEngine->previousScreen();
+			dest.x = gameEngine->getLevel()->getEndX();
+			dest.y = gameEngine->getLevel()->getEndY();
 			xVel = 0;
-			gameEnginePointer->getLevel()->setSpriteOutBox(this);
-		}
-		else {
-			dest.x = gameEnginePointer->getLevel()->getStartX();
-			//dest.y = gameEnginePointer->getLevel()->getStartY();
+			gameEngine->getLevel()->setSpriteOutBox(this);
+		} else {
+			dest.x = 1;
 			xVel = 0;
-			//gameEnginePointer->previousScreen();
 		}
 		return;
-	}
-
-	if (dest.x > winWidth) {
+	} else if (dest.x > winWidth) {
 		dest.x = winWidth - 1;
 		xVel = 0;
-		gameEnginePointer->nextScreen();
-		
-		if (gameEnginePointer->getLevel() != nullptr) {
-			if (!gameEnginePointer->getLevel()->exists(this)) {
-				gameEnginePointer->getLevel()->add(this);
-			}
-			else {
-				gameEnginePointer->getLevel()->setSpriteOutBox(this);
+		gameEngine->nextScreen();
+
+		if (gameEngine->getLevel() != nullptr) {
+			if (!gameEngine->getLevel()->exists(me)) {
+				std::shared_ptr<MobileSprite> mobileMe = me;
+				gameEngine->getLevel()->add(mobileMe);
+			} else {
+				gameEngine->getLevel()->setSpriteOutBox(this);
 			}
 
-			dest.x = gameEnginePointer->getLevel()->getStartX();
-			dest.y = gameEnginePointer->getLevel()->getStartY();
-			
+			dest.x = gameEngine->getLevel()->getStartX();
+			dest.y = gameEngine->getLevel()->getStartY();
+
 		}
-		
+
 	}
 }
 
 
 void SantaHero::customTick(int timeDiff) {
 	if(projCooldown > 0)
-		projCooldown--;
+		projCooldown -= timeDiff;
 
 	if (sys.isKeyDown(SDLK_w) && onGround)
 		yVel -= 1;
@@ -85,11 +80,11 @@ void SantaHero::customTick(int timeDiff) {
 	else if (sys.isKeyDown(SDLK_d))
 		xVel = 0.5;
 
-	if (sys.isKeyDown(SDLK_SPACE) && projCooldown == 0) {
-		projCooldown = 30;
+	if (sys.isKeyDown(SDLK_SPACE) && projCooldown <= 0) {
+		projCooldown = 200;
 		SDL_Rect* rect = getDestRect();
 		int projX = rect->x + 50;
-		AnimatedMobileSprite* sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
+		std::shared_ptr<MobileSprite> sprite = Projectile::getInstance(firesheet, projX, rect->y, 3, 70, healthSymbol, 1, facingRight);
 		sprite->setYAccel(0.1);
 		sprite->setBouncy(false);
 
@@ -117,7 +112,7 @@ void SantaHero::customTick(int timeDiff) {
 	checkBounds();
 }
 
-void SantaHero::handleMobileCollision(MobileSprite* collidedWith, int side) {
+void SantaHero::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
 }
 
 void SantaHero::kill() {

@@ -1,6 +1,7 @@
 #ifndef OBSTACLE_HPP
 #define OBSTACLE_HPP
 
+#include <memory>
 #include "ImmobileSprite.hpp"
 
 namespace mcDirr {
@@ -8,7 +9,7 @@ namespace mcDirr {
 	class Obstacle : public ImmobileSprite {
 
 	public:
-		static Obstacle* getInstance(SDL_Surface* s, int x, int y, float b);
+		static std::shared_ptr<Obstacle> getInstance(SDL_Surface* s, int x, int y, float b);
 		~Obstacle();
 
 	protected:

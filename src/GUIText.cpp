@@ -3,8 +3,8 @@
 
 namespace mcDirr {
 
-	GUIText* GUIText::getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt) {
-		return new GUIText(font, colr, txt);
+	std::shared_ptr<GUIText> GUIText::getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt) {
+		return std::shared_ptr<GUIText>( new GUIText(font, colr, txt) );
 	}
 
 	GUIText::GUIText(TTF_Font* fnt, const SDL_Color& colour, std::string txt):

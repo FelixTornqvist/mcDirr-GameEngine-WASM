@@ -1,12 +1,13 @@
 #ifndef EVILCAT_HPP
 #define EVILCAT_HPP
 
+#include <memory>
 #include "MobileSprite.hpp"
 
 namespace mcDirr {
 	class EvilCat : public MobileSprite {
 		public:
-			static EvilCat* getInstance(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym);
+			static std::shared_ptr<EvilCat> getInstance(SDL_Surface* surface, int x, int y, SDL_Texture* healthSym);
 			void kill() override;
 
 		protected:
@@ -14,7 +15,7 @@ namespace mcDirr {
 			EvilCat(SDL_Surface* s, int x, int y, SDL_Texture* healthSym);
 
 		private:
-			void handleMobileCollision(MobileSprite* collidedWith, int side) override;
+			void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) override;
 			int spawnX, spawnY;
 
 	};

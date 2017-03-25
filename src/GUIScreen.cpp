@@ -1,5 +1,4 @@
 #include <SDL.h>
-#include <iostream>
 
 #include "GUIScreen.hpp"
 #include "System.hpp"
@@ -15,7 +14,7 @@ GUIScreen::GUIScreen() {}
 
 void GUIScreen::tick(int millisPassed) {
 	if (sys.haveMouseButtonsChanged()) {
-		for (GUIElement* ele: guiElements) {
+		for (std::shared_ptr<GUIElement> ele: guiElements) {
 			ele->tick(millisPassed);
 
 			if (pointInRect(sys.getMouseX(), sys.getMouseY(), *ele->getDestRect())) {
@@ -24,7 +23,7 @@ void GUIScreen::tick(int millisPassed) {
 			}
 		}
 	} else {
-		for (GUIElement* ele: guiElements) {
+		for (std::shared_ptr<GUIElement> ele: guiElements) {
 			ele->tick(millisPassed);
 		}
 	}
@@ -44,12 +43,12 @@ bool GUIScreen::pointInRect(Sint32 px, Sint32 py, SDL_Rect rect) {
 void GUIScreen::draw() {
 	if (background)
 		SDL_RenderCopy(sys.getRen(), background, NULL, NULL);
-	for (GUIElement* ele : guiElements) {
+	for (std::shared_ptr<GUIElement> ele : guiElements) {
 		ele->draw();
 	}
 }
 
-void GUIScreen::add(GUIElement* element) {
+void GUIScreen::add(std::shared_ptr<GUIElement> element) {
 	guiElements.push_back(element);
 }
 
