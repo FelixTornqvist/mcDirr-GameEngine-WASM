@@ -1,4 +1,3 @@
-#include <iostream>
 #include <exception>
 
 #include "Loader.hpp"
@@ -87,8 +86,8 @@ void PauseScreen::unPause() {
 
 PauseScreen::~PauseScreen() {
 	SDL_FreeSurface(bg);
-	delete font;
-	delete tfFont;
+	TTF_CloseFont(font);
+	TTF_CloseFont(tfFont);
 
 	SDL_FreeSurface(continueSurf);
 	SDL_FreeSurface(exitSurf);

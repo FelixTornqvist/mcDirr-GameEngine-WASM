@@ -1,5 +1,4 @@
 #include <SDL.h>
-#include <iostream>
 
 #include "GUIScreen.hpp"
 #include "System.hpp"
