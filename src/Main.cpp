@@ -97,12 +97,12 @@ int main(int argc, char** argv) {
 
 	std::shared_ptr<ImmobileSprite> l3o1 = Obstacle::getInstance(grass, -100, 400, 0.2f);
 
-	std::shared_ptr<ImmobileSprite> l4o1 = Obstacle::getInstance(grass, 30, 600, 0.2f);
+	std::shared_ptr<ImmobileSprite> l4o1 = Obstacle::getInstance(grass, 30, 400, 0.2f);
 
 	lvl1 = Level::getInstance(10, 400, 700, 400);
-	lvl2 = Level::getInstance(1,190,900,500);
-	lvl3 = Level::getInstance(1,190,600,299);
-	lvl4 = Level::getInstance(30, 399, 10, 10);
+	lvl2 = Level::getInstance(1, 190, 900, 500);
+	lvl3 = Level::getInstance(1, 190, 600, 299);
+	lvl4 = Level::getInstance(30, 190, 10, 10);
 
 	lvl3->add(l3o1);
 
