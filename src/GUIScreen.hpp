@@ -23,7 +23,7 @@ namespace mcDirr {
 			virtual ~GUIScreen();
 
 		protected:
-			GUIScreen();
+			GUIScreen() {}
 
 		private:
 			SDL_Texture* background = nullptr;

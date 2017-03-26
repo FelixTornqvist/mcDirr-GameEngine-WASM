@@ -34,7 +34,4 @@ namespace mcDirr {
 		// true if > 50% alpha
 		return alpha > 0x0F;
 	}
-
-	AnimatedMobileSprite::~AnimatedMobileSprite() {
-	}
 }

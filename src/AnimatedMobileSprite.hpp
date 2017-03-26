@@ -13,7 +13,7 @@ namespace mcDirr {
 			void tick(int millisPassed) override;
 			bool isPixelColored(int x, int y) const;
 
-			virtual ~AnimatedMobileSprite();
+			virtual ~AnimatedMobileSprite() {}
 
 		protected:
 			AnimatedMobileSprite(SDL_Surface* surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int teamNo);

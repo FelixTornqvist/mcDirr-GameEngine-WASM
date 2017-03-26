@@ -10,7 +10,6 @@ GUIScreen* GUIScreen::getInstance() {
 	return new GUIScreen();
 }
 
-GUIScreen::GUIScreen() {}
 
 void GUIScreen::tick(int millisPassed) {
 	if (sys.haveMouseButtonsChanged()) {

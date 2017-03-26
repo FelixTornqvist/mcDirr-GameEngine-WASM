@@ -10,7 +10,7 @@
 #include "GameEngine.hpp"
 
 namespace mcDirr {
-	
+
 	class SantaHero : public AnimatedMobileSprite {
 
 		public:
@@ -23,7 +23,7 @@ namespace mcDirr {
 
 		private:
 			std::shared_ptr<SantaHero> me;
-			void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) override;
+			void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) override {}
 			void checkBounds();
 			int projCooldown = 0;
 			SDL_Surface* firesheet;
