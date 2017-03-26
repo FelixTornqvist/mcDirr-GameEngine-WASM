@@ -49,7 +49,7 @@ std::shared_ptr<GUIText> l1FuncText, startTitle;
 std::shared_ptr<GUITextField> startNameInput;
 std::shared_ptr<GUIButton> startB;
 std::shared_ptr<Sprite> lvl1BG, lvl2BG, lvl3BG, lvl4BG;
-std::shared_ptr<MobileSprite> santa, l1Cat1, l1Cat2, l3Cat1, l2Cat1, l2Cat2;
+std::shared_ptr<MobileSprite> santa, l1Cat1, l1Cat2, l3BossCat1, l2Cat1, l2Cat2;
 std::shared_ptr<ImmobileSprite> l1Obst1, l1Obst2, l2Obst1, l2Obst2, l3Obst1, l4Obst1, l4Tree1;
 
 
@@ -149,11 +149,11 @@ void reset() {
 
 
 	// --level3--
-	add(lvl3, l3Cat1);
-	l3Cat1->setHealth(20);
-	l3Cat1->showHealth(true);
-	setXY(l3Cat1, 600, 300);
-	zeroVel(l3Cat1);
+	add(lvl3, l3BossCat1);
+	l3BossCat1->setHealth(20);
+	l3BossCat1->showHealth(true);
+	setXY(l3BossCat1, 500, 300);
+	zeroVel(l3BossCat1);
 }
 
 void makeObjects() {
@@ -193,7 +193,7 @@ void makeObjects() {
 	lvl3 = Level::getInstance(1,190,600,299);
 	lvl3BG = Background::getInstance(lvl3BGSurf, 0, 0);
 	l3Obst1 = Obstacle::getInstance(deadgrass, -100, 400, 0.2f);
-	l3Cat1 = EvilCat::getInstance(evilCat, hearts);
+	l3BossCat1 = EvilCat::getInstance(evilCat, hearts);
 
 
 
