@@ -58,22 +58,22 @@ public:
 	static std::shared_ptr<BlackBall> getInstance(SDL_Surface* surface) {
 		return std::shared_ptr<BlackBall>(new BlackBall(surface));
 	}
-	
+
 	BlackBall(SDL_Surface* s) : Sprite(s, 0, 0), MobileSprite(s, 0, 0, nullptr, TEAM) {
 	}
-	
 
-	void BlackBall::customTick(int timeDiff) {
+
+	void customTick(int timeDiff) {
 	}
 
-	void BlackBall::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
+	void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
 	}
 };
 
 void freeFunk() {
 	static bool funkyState;
 	cout << "I am a free-range function!" << endl;
-	
+
 	if (funkyState) {
 		l1FuncText->setText("Yes indeed,");
 	} else {
@@ -88,7 +88,7 @@ void startButton() {
 	startNameInput->setFocused(false);
 	ge.nextScreen();
 	Level* lvl = ge.getLevel();
-	
+
 	if (lvl != nullptr) {
 		santa->setX(lvl->getStartX());
 		santa->setY(lvl->getStartY());
