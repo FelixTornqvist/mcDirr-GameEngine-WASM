@@ -21,7 +21,7 @@ namespace mcDirr {
 		Uint32 nextTick;
 
 		running = true;
-		while(running) {
+		while (running) {
 			nextTick = lastTick + 1000 / fps;
 
 			SDL_RenderClear(sys.getRen());
@@ -59,12 +59,12 @@ namespace mcDirr {
 	}
 
 	void GameEngine::previousScreen() {
-		if(currentScreen > 0)
+		if (currentScreen > 0)
 			currentScreen--;
 	}
 
 	Level* GameEngine::getLevel() {
-		if(Level* v = dynamic_cast<Level*>(screens[currentScreen]))
+		if (Level* v = dynamic_cast<Level*>(screens[currentScreen]))
 			return v;
 		return nullptr;
 	}
@@ -98,10 +98,13 @@ namespace mcDirr {
 	}
 
 	void GameEngine::setFrameRate(int frameRate) {
-		if (frameRate <= 0)
+
+		if (frameRate <= 0) {
 			throw std::invalid_argument("invalid framerate");
-		else
+
+		} else {
 			fps = frameRate;
+		}
 	}
 
 	int GameEngine::getSetFrameRate() const {
@@ -110,13 +113,17 @@ namespace mcDirr {
 
 	void GameEngine::delay(Uint32 nextTick) const {
 		int delay = nextTick - SDL_GetTicks();
-		if (delay > 0)
+
+		if (delay > 0) {
 			SDL_Delay(delay);
+		}
 	}
 
 	GameEngine::~GameEngine() {
-		for (Screen* screen : screens)
+		for (Screen* screen : screens) {
 			delete screen;
+		}
+
 		delete pauseScreen;
 		sys.Quit();
 	}

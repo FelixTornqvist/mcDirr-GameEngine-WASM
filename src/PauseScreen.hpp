@@ -11,12 +11,12 @@
 #include "GameEngine.hpp"
 
 namespace mcDirr {
+
 	class PauseScreen : public GUIScreen {
+
 		public:
 			PauseScreen(GameEngine *ge, void (*resetFunk)());
 			virtual ~PauseScreen();
-
-		protected:
 
 		private:
 			SDL_Surface *bg;
@@ -34,4 +34,5 @@ namespace mcDirr {
 			void putOnXMiddle(std::shared_ptr<GUIElement> btn);
 	};
 }
+
 #endif // PAUSESCREEN_HPP

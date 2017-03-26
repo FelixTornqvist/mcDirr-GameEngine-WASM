@@ -5,7 +5,9 @@
 #include "Sprite.hpp"
 
 namespace mcDirr {
+
 	class VisualSprite : public Sprite {
+
 	public:
 		void tick(int passedTime) override;
 		void draw() const override;
@@ -14,8 +16,10 @@ namespace mcDirr {
 
 	protected:
 		VisualSprite(SDL_Surface* s, int x, int y);
+
 	private:
 		SDL_Rect srcRect;
 	};
 }
+
 #endif

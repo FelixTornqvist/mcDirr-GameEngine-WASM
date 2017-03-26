@@ -6,19 +6,19 @@
 
 namespace mcDirr {
 	class FramedSprite : virtual public Sprite {
+
 		public:
 			static FramedSprite* getInstance(SDL_Surface*, int, int, int);
-
 			void tick(int millisPassed) {}
 			void draw() const override;
 			void setCurrentFrame(int frame);
 			int getFramesAmt() const;
 			SDL_Rect getSrcRect() const;
-
 			virtual ~FramedSprite();
 
 		protected:
 			FramedSprite(SDL_Surface* surf, int x, int y, int divs);
+
 		private:
 			int frames;
 			int spriteSheetDivs;

@@ -2,7 +2,9 @@
 #define SCREEN_HPP
 
 namespace mcDirr {
+
 	class Screen {
+
 		public:
 			Screen();
 
@@ -15,8 +17,7 @@ namespace mcDirr {
 
 		protected:
 			bool finished = false;
-
-		private:
 	};
 }
+
 #endif // SCREEN_HPP

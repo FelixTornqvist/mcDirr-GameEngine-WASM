@@ -8,7 +8,9 @@
 #include "GUIElement.hpp"
 
 namespace mcDirr {
+
 	class GUIButton : public GUIElement {
+		
 		public:
 			template<class AnyClass>
 			static std::shared_ptr<GUIButton> getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() );

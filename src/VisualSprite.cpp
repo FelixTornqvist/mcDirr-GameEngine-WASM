@@ -2,6 +2,7 @@
 #include "System.hpp"
 
 namespace mcDirr {
+	
 	VisualSprite::VisualSprite(SDL_Surface* s, int x, int y) :
 		Sprite(s, x, y) {
 	}

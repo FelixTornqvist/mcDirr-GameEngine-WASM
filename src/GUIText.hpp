@@ -11,6 +11,7 @@
 namespace mcDirr {
 
 	class GUIText : public GUIElement {
+
 		public:
 			static std::shared_ptr<GUIText> getInstance(TTF_Font* font, const SDL_Color& colr, std::string txt);
 
@@ -34,7 +35,6 @@ namespace mcDirr {
 			TTF_Font* font;
 			SDL_Color color;
 	};
-
 }
 
 #endif // TEXTSPRITE_HPP

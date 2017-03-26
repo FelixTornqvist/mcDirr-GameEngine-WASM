@@ -10,6 +10,7 @@
 #include "GameEngine.hpp"
 
 namespace mcDirr {
+	
 	class SantaHero : public AnimatedMobileSprite {
 
 		public:

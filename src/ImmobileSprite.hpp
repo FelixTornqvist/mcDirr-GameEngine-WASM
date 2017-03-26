@@ -4,7 +4,9 @@
 #include "Sprite.hpp"
 
 namespace mcDirr {
+
 	class ImmobileSprite : public Sprite {
+		
 		public:
 			void tick(int timeDiff) override {};
 			bool isAlive();

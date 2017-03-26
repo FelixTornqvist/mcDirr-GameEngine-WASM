@@ -10,7 +10,9 @@
 #include "GUIText.hpp"
 
 namespace mcDirr {
+
 	class GUITextField : public GUIText {
+
 		public:
 			static std::shared_ptr<GUITextField> getInstance(TTF_Font* font, const SDL_Color& color, int width);
 

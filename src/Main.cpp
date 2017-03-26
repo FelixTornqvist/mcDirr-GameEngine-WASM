@@ -56,11 +56,13 @@ std::shared_ptr<ImmobileSprite> l1Obst1, l1Obst2, l2Obst1, l2Obst2, l3Obst1, l4O
 void freeFunk() {
 	static bool funkyState;
 	cout << "I am a free-range function!" << endl;
-	if(funkyState) {
+	
+	if (funkyState) {
 		l1FuncText->setText("Yes indeed,");
 	} else {
 		l1FuncText->setText("I am a free-range function!");
 	}
+
 	funkyState = !funkyState;
 }
 
@@ -68,8 +70,8 @@ void startButton() {
 	startNameInput->setText("");
 	startNameInput->setFocused(false);
 	ge.nextScreen();
-
 	Level* lvl = ge.getLevel();
+	
 	if (lvl != nullptr) {
 		santa->setX(lvl->getStartX());
 		santa->setY(lvl->getStartY());
@@ -102,7 +104,7 @@ void loadMedia() {
 }
 
 inline void add(Level* lvl, std::shared_ptr<MobileSprite> sprite) {
-	if(!lvl->exists(sprite)) {
+	if (!lvl->exists(sprite)) {
 		sprite->setAlive(true);
 		lvl->add(sprite);
 	}
@@ -165,7 +167,6 @@ void makeObjects() {
 	startNameInput = GUITextField::getInstance(tfFont, {0,0,0}, 300);
 
 
-
 	/** -- LEVELS -- **/
 	santa = SantaHero::getInstance(santasheet, fireballSheet, hearts, &ge, &reset);
 
@@ -188,7 +189,6 @@ void makeObjects() {
 	l2Obst2 = Obstacle::getInstance(grass, -500, 400, 0.2f);
 
 
-
 	// --level 3--
 	lvl3 = Level::getInstance(1,190,600,299);
 	lvl3BG = Background::getInstance(lvl3BGSurf, 0, 0);
@@ -196,13 +196,11 @@ void makeObjects() {
 	l3BossCat1 = EvilCat::getInstance(evilCat, hearts);
 
 
-
 	// --level 4--
 	lvl4 = Level::getInstance(30, 399, 10, 10);
 	lvl4BG = Background::getInstance(lvl4BGSurf, 0, 0);
 	l4Obst1 = Obstacle::getInstance(spacegrass, 30, 600, 0.2f);
 	l4Tree1 = Obstacle::getInstance(treeSurf, 600, 300, 0.1f);
-
 }
 
 void addStaticObjects() {

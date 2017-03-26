@@ -5,7 +5,9 @@
 #include "MobileSprite.hpp"
 
 namespace mcDirr {
+
 	class EvilCat : public MobileSprite {
+		
 		public:
 			static std::shared_ptr<EvilCat> getInstance(SDL_Surface* surface, SDL_Texture* healthSym);
 			void kill() override;

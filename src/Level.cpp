@@ -1,7 +1,6 @@
 #include "Level.hpp"
 #include "System.hpp"
 
-
 namespace mcDirr {
 
 	Level* Level::getInstance(int startX, int startY, int endX, int endY) {
@@ -12,6 +11,7 @@ namespace mcDirr {
 	}
 
 	void Level::tick(int timeDiff) {
+		
 		for (std::shared_ptr<Sprite> curr : sprites) {
 			curr->tick(timeDiff);
 		}
@@ -29,13 +29,15 @@ namespace mcDirr {
 
 			if (!(*mob)->isAlive()) {
 				mob = mobileSprites.erase(mob);
-			} else
+
+			} else {
 				mob++;
+			}
 		}
 	}
 
 	void Level::draw() {
-		for(std::shared_ptr<Sprite> curr : sprites)
+		for (std::shared_ptr<Sprite> curr : sprites)
 			curr->draw();
 
 		for (std::shared_ptr<ImmobileSprite> curr : immobileSprites)

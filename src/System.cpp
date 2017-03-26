@@ -22,6 +22,7 @@ namespace mcDirr {
 		typed.assign("");
 		backspaceDown = false;
 		SDL_Event eve;
+
 		while (SDL_PollEvent(&eve)) {
 			switch (eve.type) {
 				case SDL_QUIT:
@@ -64,9 +65,11 @@ namespace mcDirr {
 	bool System::isKeyDown(Uint8 key) {
 		return keys[key];
 	}
+
 	bool System::isMouseButtonDown(Uint8 button) {
 		return mouseButtons[button];
 	}
+	
 	bool System::haveMouseButtonsChanged() {
 		return mouseButtonsChanged;
 	}

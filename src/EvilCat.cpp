@@ -35,6 +35,7 @@ void EvilCat::kill() {
 	int origY = dest.y + dest.h / 2;
 	float amount = 10;
 	float velocity = 0.7f;
+
 	if (health == 1) {
 		amount = 50;
 	}
@@ -52,6 +53,7 @@ void EvilCat::kill() {
 	}
 
 	changeHealth(-1);
+	
 	if (health <= 0) {
 		alive = false;
 	}

@@ -8,8 +8,8 @@
 #include "Sprite.hpp"
 #include "ImmobileSprite.hpp"
 
-
 namespace mcDirr {
+	
 	class MobileSprite : virtual public Sprite {
 
 		public:
@@ -39,6 +39,7 @@ namespace mcDirr {
 			std::stack<std::shared_ptr<MobileSprite>>* getSpriteOutbox() const;
 
 			virtual ~MobileSprite() {};
+
 		protected:
 			MobileSprite(SDL_Surface* s, int x, int y, SDL_Texture* healthSym, int teamNO);
 
@@ -50,7 +51,6 @@ namespace mcDirr {
 
 			void doPhysics(int millisPassed);
 			virtual void drawHealth() const;
-
 
 			double yVel, xVel;
 			double yAccel, xAccel;

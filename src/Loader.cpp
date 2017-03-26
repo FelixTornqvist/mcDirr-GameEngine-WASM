@@ -23,6 +23,7 @@ namespace mcDirr {
 
 	SDL_Surface* Loader::loadSurface(std::string path) {
 		SDL_Surface* surface = IMG_Load(path.c_str());
+
 		if (surface == nullptr)
 			throw std::runtime_error(std::string("Could not load texture: ") + SDL_GetError());
 		return surface;
@@ -30,6 +31,7 @@ namespace mcDirr {
 
 	TTF_Font* Loader::loadFont(std::string path, int ptSize) {
 		TTF_Font* font = TTF_OpenFont(path.c_str(), ptSize);
+
 		if (font == nullptr)
 			throw std::runtime_error(std::string("Could not load font: ") + SDL_GetError());
 		return font;
@@ -37,6 +39,7 @@ namespace mcDirr {
 
 	Mix_Chunk* Loader::loadWAV(std::string path) {
 		Mix_Chunk* sound = Mix_LoadWAV(path.c_str());
+
 		if (sound == nullptr)
 			throw std::runtime_error(std::string("Could not load WAV file: ") + SDL_GetError());
 		return sound;

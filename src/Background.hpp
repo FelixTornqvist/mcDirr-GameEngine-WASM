@@ -5,7 +5,9 @@
 #include "VisualSprite.hpp"
 
 namespace mcDirr {
+
 	class Background : public VisualSprite {
+		
 		public:
 			static std::shared_ptr<Background> getInstance(SDL_Surface* s, int x, int y);
 			virtual ~Background();

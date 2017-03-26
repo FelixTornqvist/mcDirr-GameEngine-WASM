@@ -5,7 +5,9 @@
 #include "MobileSprite.hpp"
 
 namespace mcDirr {
+
 	class Particle : public MobileSprite {
+
 		public:
 			static std::shared_ptr<Particle> getInstance(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);
 
@@ -23,4 +25,5 @@ namespace mcDirr {
 			SDL_Rect src;
 	};
 }
+
 #endif // PARTICLE_HPP

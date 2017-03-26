@@ -11,13 +11,14 @@
 #include "AnimatedMobileSprite.hpp"
 
 namespace mcDirr {
+	
 	class Level: public Screen {
+
 		public:
 			static Level* getInstance(int startX, int startY, int endX, int endY);
 
 			void tick(int timeDiff) override;
 			void draw() override;
-
 
 			void add(std::shared_ptr<Sprite> sprite);
 			void add(std::shared_ptr<MobileSprite> sprite);
@@ -34,7 +35,6 @@ namespace mcDirr {
 			int getEndY();
 			int getEndX();
 
-
 			virtual ~Level();
 
 		protected:
@@ -47,8 +47,8 @@ namespace mcDirr {
 			int	startY;
 			int	endX;
 			int endY;
-			std::stack<std::shared_ptr<MobileSprite>> spriteInbox;
 
+			std::stack<std::shared_ptr<MobileSprite>> spriteInbox;
 			std::list<std::shared_ptr<Sprite>> sprites;
 			std::list<std::shared_ptr<MobileSprite>> mobileSprites;
 			std::list<std::shared_ptr<ImmobileSprite>> immobileSprites;

@@ -8,7 +8,9 @@
 #include "GUIElement.hpp"
 
 namespace mcDirr {
+
 	class GUIScreen : public Screen {
+
 		public:
 			static GUIScreen* getInstance();
 
@@ -31,4 +33,5 @@ namespace mcDirr {
 			bool pointInRect(Sint32 px, Sint32 py, SDL_Rect rect);
 	};
 }
+
 #endif // GUISCREEN_HPP

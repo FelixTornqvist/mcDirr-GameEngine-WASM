@@ -55,10 +55,14 @@ void MobileSprite::doPhysics(int millisPassed) {
 		xVel += xAccel * secsPassed;
 		yVel += yAccel * secsPassed;
 	} else {
-		if (fabs(xVel) <= debounceVel)
+
+		if (fabs(xVel) <= debounceVel) {
 			xVel = 0;
-		if (fabs(yVel) <= debounceVel)
+		}
+
+		if (fabs(yVel) <= debounceVel) {
 			yVel = 0;
+		}
 	}
 
 	dest.x += xVel * millisPassed;
@@ -71,13 +75,15 @@ void MobileSprite::tick(int time) {
 
 void MobileSprite::checkImmobileCollisions(std::list<std::shared_ptr<ImmobileSprite>>& others) {
 	onGround = false;
+	
 	for (std::list<std::shared_ptr<ImmobileSprite>>::iterator immobile = others.begin(); immobile != others.end();) {
 		handleImmobileCollision(*immobile, checkCollision(*immobile));
 
-		if (!(*immobile)->isAlive())
+		if (!(*immobile)->isAlive()) {
 			immobile = others.erase(immobile);
-		else
+		} else {
 			immobile++;
+		}
 	}
 }
 
@@ -98,6 +104,7 @@ void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, i
 	if (bouncy && collidedWith->bouncy && side) {
 		float bounceForce = 0.3f;
 		float upBounce = 0;
+
 		if (onGround) {
 			upBounce = 0.1f;
 		}
@@ -124,7 +131,6 @@ void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, i
 				collidedWith->setYVel(-0.1);
 				break;
 		}
-
 	}
 }
 
@@ -168,13 +174,13 @@ int MobileSprite::checkCollisionForMobile(std::shared_ptr<MobileSprite> other) c
 							return 2;
 						}
 					} else {
+
 						if (oY > myY) {
 							return 3;
 						} else {
 							return 1;
 						}
 					}
-
 				}
 			}
 		}

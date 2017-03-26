@@ -42,7 +42,6 @@ namespace mcDirr {
 		dest.y = y;
 	}
 
-
 	int Sprite::getWidth() const {
 		return dest.w;
 	}

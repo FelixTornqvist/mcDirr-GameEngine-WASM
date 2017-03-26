@@ -10,7 +10,9 @@
 #include "Level.hpp"
 
 namespace mcDirr {
+
 	class GameEngine {
+		
 		public:
 			GameEngine(std::string windowName, int w, int h, int _fps);
 
@@ -32,8 +34,6 @@ namespace mcDirr {
 
 			virtual ~GameEngine();
 
-		protected:
-
 		private:
 			int fps;
 			bool running = false;
@@ -46,4 +46,5 @@ namespace mcDirr {
 			void delay(Uint32 nextTick) const;
 	};
 }
+
 #endif // FRAME_H

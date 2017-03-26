@@ -6,17 +6,13 @@
 #include "Sprite.hpp"
 
 namespace mcDirr {
+
 	class GUIElement: public Sprite {
+
 		public:
 			GUIElement(SDL_Surface* surf);
-
 			virtual void mouseClick() = 0;
-
 			virtual ~GUIElement();
-
-		protected:
-
-		private:
 	};
 }
 

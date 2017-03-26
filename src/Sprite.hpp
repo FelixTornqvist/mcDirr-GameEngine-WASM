@@ -4,7 +4,9 @@
 #include <SDL.h>
 
 namespace mcDirr {
+
 	class Sprite {
+
 		public:
 			virtual void draw() const;
 			virtual void tick(int timediff) = 0;
@@ -32,12 +34,9 @@ namespace mcDirr {
 			virtual void customTick(int timeDiff) = 0;
 			friend class Level;
 
-
 		private:
 			const Sprite& operator=(const Sprite& rhs) = delete;
 			Sprite(const Sprite& other) = delete;
-
-
 	};
 }
 

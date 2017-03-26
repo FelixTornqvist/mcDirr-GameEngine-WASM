@@ -36,6 +36,7 @@ void SantaHero::checkBounds() {
 		}
 		return;
 	}
+
 	if (dest.x <= 0) {
 		if (gameEngine->getScreenIndex() > 1) {
 			gameEngine->previousScreen();
@@ -68,19 +69,20 @@ void SantaHero::checkBounds() {
 			dest.x = lvl->getStartX();
 			dest.y = lvl->getStartY();
 		}
-
 	}
 }
 
 
 void SantaHero::customTick(int timeDiff) {
-	if(projCooldown > 0)
+	if (projCooldown > 0)
 		projCooldown -= timeDiff;
 
 	if (sys.isKeyDown(SDLK_w) && onGround)
 		yVel -= 1;
+
 	if (sys.isKeyDown(SDLK_a))
 		xVel = -0.5;
+
 	else if (sys.isKeyDown(SDLK_d))
 		xVel = 0.5;
 
@@ -94,7 +96,6 @@ void SantaHero::customTick(int timeDiff) {
 
 		getSpriteOutbox()->push(sprite);
 	}
-
 
 	if (xVel < 0) {
 		setStartFrame(2);

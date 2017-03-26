@@ -7,7 +7,9 @@
 #include <SDL.h>
 
 namespace mcDirr {
+
 	class System {
+
 		public:
 			void initialize(std::string winName, int wWidth, int wHeight);
 
@@ -44,8 +46,6 @@ namespace mcDirr {
 
 			void Quit();
 
-		protected:
-
 		private:
 			SDL_Renderer* ren;
 			SDL_Window* win;
@@ -71,4 +71,5 @@ namespace mcDirr {
 
 	extern System sys;
 }
+
 #endif // SYSTEM_H
