@@ -42,16 +42,33 @@ Level *lvl1, *lvl2, *lvl3, *lvl4;
 Mix_Chunk *BGmusic;
 TTF_Font *ubuntuB, *tfFont;
 SDL_Texture *hearts;
-SDL_Surface *grass, *deadgrass, *spacegrass, *slime, *cat, *evilCat, *santasheet, *fireballSheet, *startBSurf, *treeSurf;
+SDL_Surface *grass, *deadgrass, *spacegrass, *slime, *cat, *evilCat, *santasheet, *fireballSheet, *startBSurf, *treeSurf, *ball;
 SDL_Surface *lvl1BGSurf, *lvl2BGSurf, *lvl3BGSurf, *lvl4BGSurf;
 
 std::shared_ptr<GUIText> l1FuncText, startTitle;
 std::shared_ptr<GUITextField> startNameInput;
 std::shared_ptr<GUIButton> startB;
 std::shared_ptr<Sprite> lvl1BG, lvl2BG, lvl3BG, lvl4BG;
-std::shared_ptr<MobileSprite> santa, l1Cat1, l1Cat2, l3BossCat1, l2Cat1, l2Cat2;
+std::shared_ptr<MobileSprite> santa, l1Ball1, l1Cat2, l3BossCat1, l2Cat1, l2Cat2;
 std::shared_ptr<ImmobileSprite> l1Obst1, l1Obst2, l2Obst1, l2Obst2, l3Obst1, l4Obst1, l4Tree1;
 
+class BlackBall : public MobileSprite {
+	#define TEAM 2
+public:
+	static std::shared_ptr<BlackBall> getInstance(SDL_Surface* surface) {
+		return std::shared_ptr<BlackBall>(new BlackBall(surface));
+	}
+	
+	BlackBall(SDL_Surface* s) : Sprite(s, 0, 0), MobileSprite(s, 0, 0, nullptr, TEAM) {
+	}
+	
+
+	void BlackBall::customTick(int timeDiff) {
+	}
+
+	void BlackBall::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
+	}
+};
 
 void freeFunk() {
 	static bool funkyState;
@@ -88,6 +105,7 @@ void loadMedia() {
 	spacegrass = loader.loadSurface("media/spacegrass.png");
 	slime = loader.loadSurface("media/slime.png");
 	cat = loader.loadSurface("media/tinyCat.png");
+	ball = loader.loadSurface("media/blackBall.png");
 	evilCat = loader.loadSurface("media/extraevilCat.png");
 	hearts = loader.loadTexture("media/heart.png");
 	treeSurf = loader.loadSurface("media/pepperTree.png");
@@ -129,10 +147,10 @@ void reset() {
 	setXY(santa, lvl1->getStartX(), lvl1->getStartY());
 	zeroVel(santa);
 
-	add(lvl1, l1Cat1);
-	l1Cat1->setHealth(40);
-	setXY(l1Cat1, 200, 100);
-	zeroVel(l1Cat1);
+	add(lvl1, l1Ball1);
+	l1Ball1->setHealth(40);
+	setXY(l1Ball1, 200, 100);
+	zeroVel(l1Ball1);
 
 	add(lvl1, l1Cat2);
 	l1Cat2->setHealth(2);
@@ -173,7 +191,7 @@ void makeObjects() {
 	// --level 1--
 	lvl1 = Level::getInstance(10, 400, 700, 400);
 	lvl1BG = Background::getInstance(lvl1BGSurf, 0, 0);
-	l1Cat1 = EvilCat::getInstance(cat, hearts);
+	l1Ball1 = BlackBall::getInstance(ball);
 	l1Cat2 = EvilCat::getInstance(cat, hearts);
 	l1Obst1 = Obstacle::getInstance(grass, 10, 600, 0.2f);
 	l1Obst2 = Obstacle::getInstance(slime, 500, 510, 0.92f);

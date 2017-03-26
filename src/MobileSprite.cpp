@@ -102,33 +102,32 @@ void MobileSprite::checkMobileCollisions(std::list<std::shared_ptr<MobileSprite>
 
 void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, int side) {
 	if (bouncy && collidedWith->bouncy && side) {
-		float bounceForce = 0.3f;
 		float upBounce = 0;
 
 		if (onGround) {
-			upBounce = 0.1f;
+			upBounce = 0.2f;
 		}
 
 		switch (side) {
 			case 1:
-				yVel = bounceForce;
-				collidedWith->setYVel(-bounceForce);
+				yVel = bounce;
+				collidedWith->setYVel(-bounce);
 				break;
 			case 2:
-				xVel = bounceForce;
+				xVel = bounce;
 				yVel = -upBounce;
-				collidedWith->setXVel(-bounceForce);
-				collidedWith->setYVel(-bounceForce);
+				collidedWith->setXVel(-bounce);
+				collidedWith->setYVel(-upBounce);
 				break;
 			case 3:
-				yVel = -bounceForce;
-				collidedWith->setYVel(bounceForce);
+				yVel = -bounce;
+				collidedWith->setYVel(bounce);
 				break;
 			case 4:
-				xVel = -bounceForce;
+				xVel = -bounce;
 				yVel = -upBounce;
-				collidedWith->setXVel(bounceForce);
-				collidedWith->setYVel(-0.1);
+				collidedWith->setXVel(bounce);
+				collidedWith->setYVel(-upBounce);
 				break;
 		}
 	}
@@ -244,6 +243,10 @@ void MobileSprite::handleImmobileCollision(std::shared_ptr<ImmobileSprite> colli
 			xVel *= -collidedWith->getBounciness();
 		}
 	}
+}
+
+void MobileSprite::setBounce(float boun) {
+	bounce = boun;
 }
 
 void MobileSprite::setCanCollide(bool collide) {

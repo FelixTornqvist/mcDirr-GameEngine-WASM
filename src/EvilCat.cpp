@@ -22,7 +22,7 @@ void EvilCat::customTick(int timeDiff) {
 
 void EvilCat::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
 
-	if (side && collidedWith->getTeam() == 1 && damageCooldown <= 0) {
+	if (side && collidedWith->getTeam() == 1 && damageCooldown <= 0 ) {
 		collidedWith->kill();
 		damageCooldown = 500;
 	}

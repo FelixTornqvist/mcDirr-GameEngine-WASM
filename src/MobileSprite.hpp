@@ -35,6 +35,7 @@ namespace mcDirr {
 			double getYVel(double vel) const;
 			void setCanCollide(bool collide);
 			void setBouncy(bool set);
+			void setBounce(float bounce);
 			void setSpriteOutbox(std::stack<std::shared_ptr<MobileSprite>>* ptr);
 			std::stack<std::shared_ptr<MobileSprite>>* getSpriteOutbox() const;
 
@@ -65,6 +66,8 @@ namespace mcDirr {
 		private:
 			std::stack<std::shared_ptr<MobileSprite>>* spriteOutbox;
 			int teamNO;
+
+			float bounce = 0.6f;
 
 			double debounceVel;
 			SDL_Surface* surface;
