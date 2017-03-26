@@ -117,9 +117,6 @@ void SantaHero::customTick(int timeDiff) {
 	checkBounds();
 }
 
-void SantaHero::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) {
-}
-
 void SantaHero::kill() {
 	if (health > 0) {
 		changeHealth(-1);
