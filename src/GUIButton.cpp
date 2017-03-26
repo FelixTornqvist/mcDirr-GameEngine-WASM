@@ -1,4 +1,4 @@
-B#include "System.hpp"
+#include "System.hpp"
 #include "GUIButton.hpp"
 
 #include <iostream>
