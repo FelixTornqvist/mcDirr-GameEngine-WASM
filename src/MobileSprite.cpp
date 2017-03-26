@@ -106,26 +106,26 @@ void MobileSprite::collisionBounce(std::shared_ptr<MobileSprite> collidedWith, i
 		}
 
 		switch (side) {
-		case 1:
-			yVel = bounceForce;
-			collidedWith->setYVel(-bounceForce);
-			break;
-		case 2:
-			xVel = bounceForce;
-			yVel = -upBounce;
-			collidedWith->setXVel(-bounceForce);
-			collidedWith->setYVel(-bounceForce);
-			break;
-		case 3:
-			yVel = -bounceForce;
-			collidedWith->setYVel(bounceForce);
-			break;
-		case 4:
-			xVel = -bounceForce;
-			yVel = -upBounce;
-			collidedWith->setXVel(bounceForce);
-			collidedWith->setYVel(-0.1);
-			break;
+			case 1:
+				yVel = bounceForce;
+				collidedWith->setYVel(-bounceForce);
+				break;
+			case 2:
+				xVel = bounceForce;
+				yVel = -upBounce;
+				collidedWith->setXVel(-bounceForce);
+				collidedWith->setYVel(-bounceForce);
+				break;
+			case 3:
+				yVel = -bounceForce;
+				collidedWith->setYVel(bounceForce);
+				break;
+			case 4:
+				xVel = -bounceForce;
+				yVel = -upBounce;
+				collidedWith->setXVel(bounceForce);
+				collidedWith->setYVel(-0.1);
+				break;
 		}
 
 	}
@@ -149,10 +149,10 @@ bool MobileSprite::isPixelColored(int x, int y) const {
 	return alpha > 0x0F;
 }
 
+/** returns the side that the other sprite collided with. 0:none, 1:top, 2:right, 3:bottom, 4:left */
 int MobileSprite::checkCollisionForMobile(std::shared_ptr<MobileSprite> other) const {
 	SDL_Rect intersection;
 	SDL_Rect& oDest = (*other->getDestRect());
-	int side = 0;
 
 	if (SDL_IntersectRect(&dest, &oDest, &intersection)) {
 		const int& oX = oDest.x;
@@ -160,41 +160,29 @@ int MobileSprite::checkCollisionForMobile(std::shared_ptr<MobileSprite> other) c
 		const int& myX = dest.x;
 		const int& myY = dest.y;
 
-		if (intersection.h > intersection.w) {
-			bool found = false;
-			for (int i = 0; i < intersection.w; i++) {
-				if (found) {
-					break;
-				}
-				for (int a = 0; a < intersection.h; a++) {
-					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
-						if (oX > myX) {
-							side = 4;
-						} else {
-							side = 2;
-						}
-						found = true;
-						break;
+		for (int i = 0; i < intersection.w; i++) {
+			for (int a = 0; a < intersection.h; a++) {
+				if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
 
-					}
-				}
-			}
-		} else {
-			for (int i = 0; i < intersection.w; i++) {
-				for (int a = 0; a < intersection.h; a++) {
-					if (other->isPixelColored(intersection.x + i, intersection.y + a) && isPixelColored(intersection.x + i, intersection.y + a)) {
-						if (oY > myY) {
-							side = 3;
+					if (intersection.h > intersection.w) {
+						if (oX > myX) {
+							return 4;
 						} else {
-							side = 1;
+							return 2;
 						}
-						break;
+					} else {
+						if (oY > myY) {
+							return 3;
+						} else {
+							return 1;
+						}
 					}
+
 				}
 			}
 		}
 	}
-	return side;
+	return 0;
 }
 
 int MobileSprite::checkCollision(std::shared_ptr<Sprite> other) const {
