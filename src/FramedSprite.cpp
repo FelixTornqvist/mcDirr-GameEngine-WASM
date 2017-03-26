@@ -36,8 +36,6 @@ namespace mcDirr {
 		SDL_RenderCopy(sys.getRen(), texture, &srcRect, &dest);
 	}
 
-
 	FramedSprite::~FramedSprite() {
-		//dtor
 	}
 }

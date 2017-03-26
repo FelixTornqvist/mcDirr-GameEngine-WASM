@@ -50,6 +50,5 @@ namespace mcDirr {
 
 
 	AnimatedSprite::~AnimatedSprite() {
-		//dtor
 	}
 }

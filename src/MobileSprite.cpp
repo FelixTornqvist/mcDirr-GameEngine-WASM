@@ -3,9 +3,6 @@
 #include "System.hpp"
 #include "Loader.hpp"
 
-#include <iostream>
-#include <math.h>
-
 using namespace mcDirr;
 
 void MobileSprite::setHealth(int newHealth) {

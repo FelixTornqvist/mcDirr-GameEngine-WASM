@@ -17,7 +17,6 @@ namespace mcDirr {
 		private:
 			int damageCooldown = 0;
 			void handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, int side) override;
-
 	};
 }
 

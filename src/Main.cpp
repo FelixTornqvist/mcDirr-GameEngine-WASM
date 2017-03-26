@@ -1,9 +1,10 @@
+#include <iostream>
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <iostream>
-#include <math.h>
 
+// Game engine
 #include "Sprite.hpp"
 #include "AnimatedSprite.hpp"
 #include "AnimatedMobileSprite.hpp"
@@ -18,6 +19,7 @@
 #include "GUIButton.hpp"
 #include "GUITextField.hpp"
 
+// Game implementation
 #include "SantaHero.hpp"
 #include "Obstacle.hpp"
 #include "Background.hpp"

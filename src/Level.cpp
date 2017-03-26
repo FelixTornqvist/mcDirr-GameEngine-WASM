@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Level.hpp"
 #include "System.hpp"
 
@@ -22,9 +20,6 @@ namespace mcDirr {
 			(*mob)->tick(timeDiff);
 			(*mob)->checkImmobileCollisions(immobileSprites);
 			(*mob)->customTick(timeDiff);
-			
-		
-			
 		}
 
 		emptySpriteInbox();

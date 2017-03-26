@@ -36,6 +36,5 @@ namespace mcDirr {
 	}
 
 	AnimatedMobileSprite::~AnimatedMobileSprite() {
-		//dtor
 	}
 }
