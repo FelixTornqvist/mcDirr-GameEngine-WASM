@@ -176,7 +176,7 @@ void makeObjects() {
 	l1Cat1 = EvilCat::getInstance(cat, hearts);
 	l1Cat2 = EvilCat::getInstance(cat, hearts);
 	l1Obst1 = Obstacle::getInstance(grass, 10, 600, 0.2f);
-	l1Obst2 = Obstacle::getInstance(slime, 500, 510, 1.1f);
+	l1Obst2 = Obstacle::getInstance(slime, 500, 510, 0.92f);
 	l1FuncText = GUIText::getInstance(ubuntuB, {0,0,0}, "McDirr - the Gaem!");
 
 
