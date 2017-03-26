@@ -31,6 +31,8 @@ void EvilCat::handleMobileCollision(std::shared_ptr<MobileSprite> collidedWith, 
 void EvilCat::kill() {
 	// splatter effect
 	srand(SDL_GetTicks());
+	int origX = dest.x + dest.w / 2;
+	int origY = dest.y + dest.h / 2;
 	float amount = 10;
 	float velocity = 0.7f;
 	if (health == 1) {
@@ -43,7 +45,7 @@ void EvilCat::kill() {
 		float xVel = sin( (i/amount) * 2.0f * M_PI) * velocity + rnd;
 		float yVel = cos( (i/amount) * 2.0f * M_PI) * velocity + rnd;
 
-		std::shared_ptr<Particle> p = Particle::getInstance(getSurface(), dest.x, dest.y, xVel, yVel, duration);
+		std::shared_ptr<Particle> p = Particle::getInstance(getSurface(), origX, origY, xVel, yVel, duration);
 		p->setBouncy(false);
 		p->setCanCollide(false);
 		getSpriteOutbox()->push(p);
