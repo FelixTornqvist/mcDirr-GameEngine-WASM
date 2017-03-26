@@ -1,6 +1,7 @@
 #ifndef SANTAHERO_HPP
 #define SANTAHERO_HPP
 
+#include <functional>
 #include <memory>
 #include <SDL.h>
 

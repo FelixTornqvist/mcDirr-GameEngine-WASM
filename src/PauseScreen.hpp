@@ -2,6 +2,7 @@
 #define PAUSESCREEN_HPP
 
 #include <memory>
+#include <functional>
 
 #include "GUIScreen.hpp"
 #include "GUIButton.hpp"

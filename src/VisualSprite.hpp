@@ -1,5 +1,6 @@
 #ifndef VISUALSPRITE_H
 #define VISUALSPRITE_H
+
 #include <SDL.h>
 #include "Sprite.hpp"
 

@@ -1,7 +1,4 @@
 #include <SDL.h>
-#include <SDL_image.h>
-#include <string>
-#include <stdexcept>
 
 #include "Sprite.hpp"
 #include "System.hpp"

@@ -1,8 +1,6 @@
-#include <functional>
 #include "SantaHero.hpp"
 #include "System.hpp"
 #include "Projectile.hpp"
-#include "Loader.hpp"
 
 #define TEAM 1
 
@@ -27,8 +25,6 @@ void SantaHero::checkBounds() {
 	SDL_GetWindowSize(window, &winWidth, &winHeight);
 
 	if (dest.y > winHeight) {
-		// gameEngine->previousScreen();
-
 		gameEngine->setScreen(1);
 		resetFunc();
 

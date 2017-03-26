@@ -1,9 +1,10 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
-#include <SDL.h>
+
 #include <string>
 #include <unordered_map>
 #include <functional>
+#include <SDL.h>
 
 namespace mcDirr {
 	class System {

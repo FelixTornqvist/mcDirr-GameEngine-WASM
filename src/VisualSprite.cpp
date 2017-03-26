@@ -14,6 +14,5 @@ namespace mcDirr {
 	}
 
 	VisualSprite::~VisualSprite() {
-		//dtor
 	}
 }
