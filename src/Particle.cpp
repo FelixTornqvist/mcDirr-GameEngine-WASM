@@ -33,6 +33,3 @@ void Particle::customTick(int timeDiff) {
 void Particle::draw() const {
 	SDL_RenderCopy(sys.getRen(), texture, &src, &dest);
 }
-
-Particle::~Particle() {
-}

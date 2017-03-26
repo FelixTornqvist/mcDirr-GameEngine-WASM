@@ -16,14 +16,3 @@ void GUIButton::mouseClick() {
 		action();
 	}
 }
-
-void GUIButton::tick(int millisPassed) {
-
-}
-
-void GUIButton::customTick(int millisPassed) {
-
-}
-
-GUIButton::~GUIButton() {
-}

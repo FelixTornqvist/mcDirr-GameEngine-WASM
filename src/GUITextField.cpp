@@ -92,6 +92,3 @@ void GUITextField::setHeight(int h) {
 	GUIText::setHeight(h);
 	updateText();
 }
-
-GUITextField::~GUITextField() {
-}

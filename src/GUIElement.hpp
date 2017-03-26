@@ -12,7 +12,7 @@ namespace mcDirr {
 		public:
 			GUIElement(SDL_Surface* surf);
 			virtual void mouseClick() = 0;
-			virtual ~GUIElement();
+			virtual ~GUIElement() {}
 	};
 }
 

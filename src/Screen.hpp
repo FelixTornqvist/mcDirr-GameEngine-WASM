@@ -13,7 +13,7 @@ namespace mcDirr {
 
 			bool isFinished();
 
-			virtual ~Screen();
+			virtual ~Screen() {}
 
 		protected:
 			bool finished = false;

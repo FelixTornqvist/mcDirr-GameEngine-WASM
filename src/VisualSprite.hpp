@@ -12,7 +12,7 @@ namespace mcDirr {
 		void tick(int passedTime) override;
 		void draw() const override;
 
-		virtual ~VisualSprite();
+		virtual ~VisualSprite() {}
 
 	protected:
 		VisualSprite(SDL_Surface* s, int x, int y);

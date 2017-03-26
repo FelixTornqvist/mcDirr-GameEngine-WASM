@@ -6,13 +6,13 @@
 namespace mcDirr {
 
 	class ImmobileSprite : public Sprite {
-		
+
 		public:
 			void tick(int timeDiff) override {};
 			bool isAlive();
 			void setBounciness(float bounciness);
 			float getBounciness();
-			virtual ~ImmobileSprite();
+			virtual ~ImmobileSprite() {}
 
 		protected:
 			ImmobileSprite(SDL_Surface* s, int x, int y, float b);

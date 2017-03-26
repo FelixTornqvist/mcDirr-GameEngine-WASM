@@ -10,10 +10,10 @@ namespace mcDirr {
 
 	public:
 		static std::shared_ptr<Obstacle> getInstance(SDL_Surface* s, int x, int y, float b);
-		~Obstacle();
+		~Obstacle() {}
 
 	protected:
-		void customTick(int timeDiff) override;
+		void customTick(int timeDiff) override {}
 		Obstacle(SDL_Surface* s, int x, int y, float b);
 
 	};

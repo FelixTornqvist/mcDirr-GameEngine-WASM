@@ -11,7 +11,7 @@ namespace mcDirr {
 		public:
 			static std::shared_ptr<Projectile> getInstance(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVel, bool direction);
 			void customTick(int timeDiff);
-			virtual ~Projectile();
+			virtual ~Projectile() {}
 
 		protected:
 			Projectile(SDL_Surface *surf, int x, int y, int divs, int millisPerFrame, SDL_Texture* healthSym, int xVel, bool direction);

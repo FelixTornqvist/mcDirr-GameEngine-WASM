@@ -8,6 +8,3 @@ Screen::Screen() {
 bool Screen::isFinished() {
 	return finished;
 }
-
-Screen::~Screen() {
-}

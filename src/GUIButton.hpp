@@ -10,17 +10,17 @@
 namespace mcDirr {
 
 	class GUIButton : public GUIElement {
-		
+
 		public:
 			template<class AnyClass>
 			static std::shared_ptr<GUIButton> getInstance(SDL_Surface* surf, AnyClass *object, void (AnyClass::*func)() );
 			static std::shared_ptr<GUIButton> getInstance(SDL_Surface* surf, void (*funk)());
 
-			virtual void tick(int millisPassed) override;
-			virtual void customTick(int millisPassed) override;
+			virtual void tick(int millisPassed) override {}
+			virtual void customTick(int millisPassed) override {}
 			virtual void mouseClick() override;
 
-			virtual ~GUIButton();
+			virtual ~GUIButton() {}
 
 		protected:
 			GUIButton(SDL_Surface* surf, std::function<void()> action);

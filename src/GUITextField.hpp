@@ -26,7 +26,7 @@ namespace mcDirr {
 			void setWidth(int w) override;
 			void setHeight(int h) override;
 
-			virtual ~GUITextField();
+			virtual ~GUITextField() {}
 
 		protected:
 			GUITextField(TTF_Font* font, const SDL_Color& color, int width);

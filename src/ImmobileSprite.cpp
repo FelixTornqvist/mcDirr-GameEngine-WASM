@@ -16,6 +16,4 @@ namespace mcDirr {
 	float ImmobileSprite::getBounciness() {
 		return bounciness;
 	}
-
-	ImmobileSprite::~ImmobileSprite() {}
 }

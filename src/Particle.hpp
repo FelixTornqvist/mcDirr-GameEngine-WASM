@@ -15,7 +15,7 @@ namespace mcDirr {
 			void handleMobileCollision(std::shared_ptr<MobileSprite> collWith, int side) {}
 			void draw() const override;
 
-			virtual ~Particle();
+			virtual ~Particle() {}
 
 		protected:
 			Particle(SDL_Surface* surf, int x, int y, double xVel, double yVel, int lifetime);

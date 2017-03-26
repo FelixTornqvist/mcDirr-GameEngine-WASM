@@ -59,7 +59,4 @@ namespace mcDirr {
 		if (getX() <= 0 || getX() >= winWidth || getY() <= 0 || getY() >= winHeight)
 			alive = false;
 	}
-
-	Projectile::~Projectile() {
-	}
 }
