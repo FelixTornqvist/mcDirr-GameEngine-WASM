@@ -39,7 +39,7 @@ GameEngine ge = GameEngine("mcDirr - The gaem", W_WIDTH, W_HEIGHT, FPS);
 GUIScreen* start;
 Level *lvl1, *lvl2, *lvl3, *lvl4;
 
-Mix_Chunk *BGmusic;
+//Mix_Chunk *BGmusic;
 TTF_Font *ubuntuB, *tfFont;
 SDL_Texture *hearts;
 SDL_Surface *grass, *deadgrass, *spacegrass, *slime, *cat, *evilCat, *santasheet, *fireballSheet, *startBSurf, *treeSurf, *ball;
@@ -96,10 +96,12 @@ void startButton() {
 }
 
 void loadMedia() {
-	BGmusic = loader.loadWAV("media/bgMusic.wav");
+//	BGmusic = loader.loadWAV("media/bgMusic.wav");
+	std::cout << "loading font" << std::endl;
 	ubuntuB = loader.loadFont("media/Ubuntu-B.ttf", 50);
 	tfFont = loader.loadFont("media/Ubuntu-B.ttf", 15);
 
+	std::cout << "loading images" << std::endl;
 	grass = loader.loadSurface("media/grass.png");
 	deadgrass = loader.loadSurface("media/deadgrass.png");
 	spacegrass = loader.loadSurface("media/spacegrass.png");
@@ -264,7 +266,9 @@ void addStaticObjects() {
 }
 
 int main(int argc, char** argv) {
+	std::cout << "HELLO WOORLD!" << std::endl;
 	loadMedia();
+	std::cout << "Loaded media" << std::endl;
 	makeObjects();
 	addStaticObjects();
 	reset();
@@ -279,7 +283,7 @@ int main(int argc, char** argv) {
 	sys.addKeyFunction<GameEngine>(SDLK_l, &ge, &GameEngine::nextScreen);
 	sys.addKeyFunction(SDLK_f, &freeFunk);
 
-	Mix_PlayChannel(-1, BGmusic, -1);
+//	Mix_PlayChannel(-1, BGmusic, -1);
 	ge.run();
 
 	return 0;

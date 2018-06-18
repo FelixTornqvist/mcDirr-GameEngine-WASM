@@ -29,6 +29,9 @@
 *.app
 /src/Game
 
+# Temporary files
+*~
+
 
 codeBlocks_workspace/
 .xcodeproj/
