@@ -17,7 +17,10 @@ namespace mcDirr {
 		sys.initialize(windowName, wWidth, wHeight);
 	}
 
-	void GameEngine::tick(long timePassed) {
+	void GameEngine::tick() {
+		nextTick = lastTick + 1000 / fps;
+		long timePassed = nextTick - lastTick;
+
 		SDL_RenderClear(sys.getRen());
 			screens[currentScreen]->draw();
 			if (paused)
@@ -36,30 +39,27 @@ namespace mcDirr {
 		sys.collectInputs();
 		paused |= sys.isKeyDown(SDLK_ESCAPE);
 		running &= !(sys.isQuitRequested() || (paused && pauseScreen == nullptr));
+
+#ifndef __EMSCRIPTEN__
+		delay(nextTick);
+#endif
+		lastTick = SDL_GetTicks();
 	}
 
 	void GameEngine::tickWrap(void* g) {
 		GameEngine* ge = static_cast<GameEngine*>(g);
-		ge->tick(100);
+		ge->tick();
 	}
 	
 	void GameEngine::run() {
 		running = true;
+		lastTick = SDL_GetTicks();
 
 #ifdef __EMSCRIPTEN__
-		//std::function<void(long)> tiick = std::bind(&GameEngine::tick, this, std::placeholders::_1);
 		emscripten_set_main_loop_arg(&GameEngine::tickWrap, this, 60, 1);
-
 #else
-		Uint32 lastTick = SDL_GetTicks();
-		Uint32 nextTick;
-
 		while (running) {
-			nextTick = lastTick + 1000 / fps;
-			tick(nextTick - lastTick);
-
-			delay(nextTick);
-			lastTick = nextTick;
+			tick();
 		}
 #endif
 	}

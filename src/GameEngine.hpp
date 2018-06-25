@@ -36,6 +36,7 @@ namespace mcDirr {
 
 		private:
 			int fps;
+			Uint32 lastTick, nextTick;
 			bool running = false;
 			Uint32 currentScreen;
 			std::vector<Screen*> screens;
@@ -43,7 +44,7 @@ namespace mcDirr {
 			bool paused = false;
 			GUIScreen* pauseScreen = nullptr;
 
-			void tick(long timePassed);
+			void tick();
 			static void tickWrap(void* ge);
 			void delay(Uint32 nextTick) const;
 	};
