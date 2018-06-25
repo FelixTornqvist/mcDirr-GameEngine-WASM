@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <SDL_mixer.h>
+//#include <SDL_mixer.h>
 
 #include "System.hpp"
 
@@ -11,7 +11,7 @@ namespace mcDirr {
 		SDL_Init(SDL_INIT_EVERYTHING);
 		IMG_Init(0);
 		TTF_Init();
-		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
+//		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
 
 		win = SDL_CreateWindow(winName.c_str(), 100, 100, wWidth, wHeight, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
@@ -120,7 +120,7 @@ namespace mcDirr {
 	void System::Quit() {
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
-		Mix_Quit();
+//		Mix_Quit();
 		TTF_Quit();
 		IMG_Quit();
 		SDL_Quit();
