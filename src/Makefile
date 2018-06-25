@@ -3,4 +3,4 @@ SOURCES = Main.cpp GameEngine.cpp Sprite.cpp Background.cpp FramedSprite.cpp Ani
 CC = emcc
 
 game: 
-	$(CC) $(SOURCES) -Wall -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -std=c++11 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s USE_SDL_TTF=2 -O3 -o index.js --preload-file ..@/media/ --use-preload-plugins
+	$(CC) $(SOURCES) -Wall -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -std=c++11 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s USE_SDL_TTF=2 -O3 -o index.js --preload-file ../media/ --use-preload-plugins

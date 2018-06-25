@@ -43,6 +43,8 @@ namespace mcDirr {
 			bool paused = false;
 			GUIScreen* pauseScreen = nullptr;
 
+			void tick(long timePassed);
+			static void tickWrap(void* ge);
 			void delay(Uint32 nextTick) const;
 	};
 }
