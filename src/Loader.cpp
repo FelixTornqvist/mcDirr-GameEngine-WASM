@@ -23,23 +23,18 @@ namespace mcDirr {
 	}
 
 	SDL_Surface* Loader::loadSurface(std::string path) {
-		std::cout << "LoadSurface" << std::endl;
 		SDL_Surface* surface = IMG_Load(path.c_str());
 
 		if (surface == nullptr) {
-			std::cout << "surface error" << SDL_GetError() << std::endl;
 			throw std::runtime_error(std::string("Could not load texture: ") + SDL_GetError());
 		}
 		return surface;
 	}
 
 	TTF_Font* Loader::loadFont(std::string path, int ptSize) {
-		std::cout << "openFont" << std::endl;
 		TTF_Font* font = TTF_OpenFont(path.c_str(), ptSize);
 
-		std::cout << "font opened" << std::endl;
 		if (font == nullptr) {
-			std::cout << "font error" << SDL_GetError() << std::endl;
 			throw std::runtime_error(std::string("Could not load font: ") + SDL_GetError());
 		}
 		return font;

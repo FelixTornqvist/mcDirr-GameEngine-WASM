@@ -97,11 +97,9 @@ void startButton() {
 
 void loadMedia() {
 //	BGmusic = loader.loadWAV("media/bgMusic.wav");
-	std::cout << "loading font" << std::endl;
 	ubuntuB = loader.loadFont("media/Ubuntu-B.ttf", 50);
 	tfFont = loader.loadFont("media/Ubuntu-B.ttf", 15);
 
-	std::cout << "loading images" << std::endl;
 	grass = loader.loadSurface("media/grass.png");
 	deadgrass = loader.loadSurface("media/deadgrass.png");
 	spacegrass = loader.loadSurface("media/spacegrass.png");
@@ -266,9 +264,7 @@ void addStaticObjects() {
 }
 
 int main(int argc, char** argv) {
-	std::cout << "HELLO WOORLD!" << std::endl;
 	loadMedia();
-	std::cout << "Loaded media" << std::endl;
 	makeObjects();
 	addStaticObjects();
 	reset();

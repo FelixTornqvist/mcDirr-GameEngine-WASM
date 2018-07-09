@@ -9,7 +9,10 @@
 #include <vector>
 #include <list>
 #include <functional>
+
+#ifdef __EMSCRIPTEN__
 #include <emscripten.h>
+#endif
 
 namespace mcDirr {
 
