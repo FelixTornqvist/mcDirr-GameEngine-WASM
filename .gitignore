@@ -3,6 +3,7 @@
 *.lo
 *.o
 *.obj
+build
 
 # Precompiled Headers
 *.gch
@@ -27,12 +28,11 @@
 *.exe
 *.out
 *.app
-/src/Game
 
 # Temporary files
 *~
 *.swp
-
+.depend
 
 codeBlocks_workspace/
 .xcodeproj/
