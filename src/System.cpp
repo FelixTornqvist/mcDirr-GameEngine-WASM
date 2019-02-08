@@ -8,7 +8,7 @@
 namespace mcDirr {
 
 	void System::initialize(std::string winName, int wWidth, int wHeight) {
-		SDL_Init(SDL_INIT_EVERYTHING);
+		SDL_Init(SDL_INIT_VIDEO);
 		IMG_Init(0);
 		TTF_Init();
 //		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
