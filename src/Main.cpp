@@ -1,4 +1,5 @@
 #include <iostream>
+#include <emscripten/bind.h>
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -283,5 +284,18 @@ int main(int argc, char** argv) {
 	ge.run();
 
 	return 0;
+}
+
+void pauseGame() {
+	ge.pause();
+}
+
+void setFrameRate(int fps) {
+	ge.setFrameRate(fps);
+}
+
+EMSCRIPTEN_BINDINGS(my_module){
+	emscripten::function("pauseGame", &pauseGame);
+	emscripten::function("setFramerate", &setFrameRate);
 }
 

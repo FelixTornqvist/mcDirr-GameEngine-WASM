@@ -13,7 +13,7 @@ OBJ = $(patsubst src/%.cpp,build/%.o,$(SRC))
 all: native wasm
 
 wasm: 
-	emcc $(SRC) -Wall -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -std=c++11 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s USE_SDL_TTF=2 -O3 -o index.js --preload-file media/ --use-preload-plugins
+	emcc $(SRC) -Wall --bind -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -std=c++11 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s USE_SDL_TTF=2 -O3 -o index.js --preload-file media/ --use-preload-plugins
 
 native: build/Game
 
